@@ -22,6 +22,7 @@
   - iPad / Tablet (640px - 1024px): 2-3 คอลัมน์ กระจายเต็มขอบจอทั้งแนวตั้งและแนวนอน
   - Desktop (> 1024px): ขยายเต็มตา 100% ไร้ขอบว่างด้านข้าง
 - **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar
+- **Mandatory Git Discipline**: นอกจากบันทึก `handover.md` แล้ว **ต้องทำ Git Commit ทุกครั้ง** หลังจบแต่ละขั้นตอนหรือ Milestone โดยห้ามละเลยเด็ดขาด
 
 ## 3. Architecture & File Structure
 ```

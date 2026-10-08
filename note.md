@@ -37,3 +37,4 @@
 2. **Handover Protocol**: Every agent must read `handover.md` upon taking over the workspace, and update it upon milestone completion.
 3. **Language Boundary**: Both backend and frontend must stay in JavaScript (`.js` and `.jsx`). Do not convert to TypeScript unless explicitly authorized by the user.
 4. **Scope Discipline**: Do NOT create unrequested tables or speculative UI pages unless explicitly instructed by the user. Always keep implementations minimal, cohesive, and directly aligned with the user's prompt.
+5. **Mandatory Git Commit Discipline**: นอกจากอัปเดต `handover.md` แล้ว **ต้องทำ `git commit` ทุกครั้ง** หลังเสร็จสิ้นแต่ละขั้นตอนหรือ Milestone โดยใช้ Commit message ที่ชัดเจนและอธิบายงานที่เปลี่ยน ห้ามละเลยเด็ดขาด เพื่อความต่อเนื่องและปลอดภัยของโค้ดเมื่อมี Agent ตัวอื่นเข้ามาทำงานร่วมต่อ
