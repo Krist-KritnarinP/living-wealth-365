@@ -5,17 +5,23 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed Full Screen, Universal Responsive (Mobile / iPad / Desktop), and All-Ages Accessible Typography implementation in `App.jsx`.
+- **Status**: Completed True 100% Full-Screen Edge-to-Edge UI Layout and Default A++ Extra Large Typography enforcement across the entire website.
 
-## 2. Core UI / UX Implementation in App.jsx
-- **Full Screen UI Layout**: โครงสร้างแบบเต็มหน้าจอ (`min-h-screen w-full flex flex-col justify-between`) สวยงาม สบายตา
+## 2. Core UI / UX Implementation in App.jsx & index.css
+- **100% True Full-Screen & Edge-to-Edge Layout**:
+  - ตัดข้อจำกัด `max-w-7xl` และ `max-w-6xl` ออกทั้งหมด เพื่อไม่ให้เหลือพื้นที่ว่างด้านซ้ายและขวา
+  - Navbar, Hero, Services Grid, Values Ribbon, Contact และ Footer ขยายเต็มขอบหน้าจอ (`w-full px-4 sm:px-8 lg:px-12 xl:px-16`)
+- **Default A++ Typography Scale Across Entire Website**:
+  - ปรับขนาดฟอนต์เริ่มต้นของทั้งเว็บเป็นระดับ **A++ (ขนาดใหญ่พิเศษ)**
+  - Base html font-size: 19px, Body: 1.15rem (~22px)
+  - Headings: `text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black`
+  - Subheadings & Paragraphs: `text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed`
+  - Badges & Buttons: `text-lg sm:text-2xl font-black min-h-[56px] px-8 py-3`
+  - ออกแบบให้อ่านง่าย สบายตา ชัดเจนเป็นพิเศษสำหรับผู้รับบริการทุกเพศ ทุกวัย (รวมถึงผู้สูงอายุ)
 - **Universal Responsiveness**:
-  - Smartphone (< 640px): เลย์เอาต์แนวตั้ง กะทัดรัด ตัวหนังสืออ่านง่าย ไม่ล้นหน้าจอ ปุ่มกดไม่ต่ำกว่า 48px
-  - iPad / Tablet (640px - 1024px): 3 คอลัมน์สมดุลย์ รองรับทั้งแนวตั้งและแนวนอน
-  - Desktop (> 1024px): ขยายเต็มตา พร้อม Zen Glass effect และ Backdrop blur
-- **All-Ages Typography & Real-time Font Scaling**:
-  - ตัวอักษรขนาดใหญ่ อ่านง่าย สบายตาทุกเพศ ทุกวัย
-  - **มีปุ่มกดปรับขนาดตัวอักษรสดบน Navbar**: ปรับได้ 3 ระดับ (ปกติ A -> สบายตา A+ -> ขนาดใหญ่พิเศษ A++) อำนวยความสะดวกสำหรับผู้สูงวัย
+  - Smartphone (< 640px): เลย์เอาต์แนวตั้ง เต็มหน้าจอ ไม่ล้นด้านข้าง ตัวหนังสือใหญ่ชัดเจน
+  - iPad / Tablet (640px - 1024px): 2-3 คอลัมน์ กระจายเต็มขอบจอทั้งแนวตั้งและแนวนอน
+  - Desktop (> 1024px): ขยายเต็มตา 100% ไร้ขอบว่างด้านข้าง
 - **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar
 
 ## 3. Architecture & File Structure
@@ -35,9 +41,9 @@ living wealth 365/
 │   ├── note/
 │   │   └── guidelines.md              # Engineering rules copy for frontend
 │   └── src/
-│       ├── App.jsx                    # Full Screen, Universal Responsive & Accessible UI
+│       ├── App.jsx                    # True 100% Full-Screen & A++ Typography UI
 │       ├── api.js                     # Base Axios client
-│       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5
+│       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5 + A++ Base
 │       └── main.jsx
 │
 └── living wealth 365_backend/         # Pure Node.js + Express (ES Modules, no TypeScript)

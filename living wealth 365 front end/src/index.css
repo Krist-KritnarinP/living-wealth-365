@@ -5,8 +5,8 @@
  * Cards: class="card zen-surface"; header: class="navbar zen-surface".
  * Main action: btn btn-primary; highlight: badge badge-secondary.
  * Urgent action: btn btn-accent; failures: alert alert-error.
- * White space: sections py-16 md:py-24, container max-w-6xl mx-auto px-6.
- * Keep text areas opaque; glass belongs on selected cards and navigation.
+ * Full screen layout: 100% edge-to-edge width across all devices.
+ * A++ Typography: Extra large, high legibility for all ages and demographics.
  */
 @import "tailwindcss";
 @plugin "daisyui" { themes: false; }
@@ -36,18 +36,18 @@
   --color-warning-content: #332100;
   --color-error: #B62B1C;
   --color-error-content: #FFFFFF;
-  --radius-selector: 0.5rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.35rem;
+  --size-field: 0.35rem;
   --border: 1px;
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
-  --zen-glass: rgb(255 255 255 / 86%);
-  --zen-shadow: 0 1px 3px rgb(24 40 59 / 6%);
-  --zen-muted: #506176;
+  --zen-glass: rgb(255 255 255 / 90%);
+  --zen-shadow: 0 4px 20px rgb(24 40 59 / 8%);
+  --zen-muted: #415367;
   --zen-field-border: #75879C;
 }
 
@@ -76,29 +76,41 @@
   --color-warning-content: #332100;
   --color-error: #FF9184;
   --color-error-content: #46140E;
-  --radius-selector: 0.5rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
+  --radius-selector: 0.75rem;
+  --radius-field: 0.75rem;
+  --radius-box: 1rem;
+  --size-selector: 0.35rem;
+  --size-field: 0.35rem;
   --border: 1px;
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
-  --zen-glass: rgb(25 35 47 / 90%);
-  --zen-shadow: 0 1px 3px rgb(0 0 0 / 20%);
-  --zen-muted: #A8B8CB;
+  --zen-glass: rgb(25 35 47 / 92%);
+  --zen-shadow: 0 4px 20px rgb(0 0 0 / 25%);
+  --zen-muted: #B8C7D8;
   --zen-field-border: #788DA5;
 }
 
 @layer base {
+  html {
+    font-size: 19px; /* Baseline scaling for A++ font size */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
   body {
     background: var(--color-base-100);
     color: var(--color-base-content);
-    line-height: 1.65;
+    line-height: 1.75;
+    font-size: 1.15rem; /* ~22px base size for ultimate clarity across all ages */
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
   }
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-    outline: 2px solid var(--color-primary);
+    outline: 3px solid var(--color-primary);
     outline-offset: 3px;
   }
 }
@@ -113,15 +125,18 @@
   .zen-muted { color: var(--zen-muted); }
   :where(.input, .select, .textarea) {
     background: var(--zen-surface);
-    border: 1px solid var(--zen-field-border);
+    border: 1.5px solid var(--zen-field-border);
+    font-size: 1.1rem;
+    min-height: 3.25rem;
   }
   .btn {
-    min-height: 2.75rem;
+    min-height: 3.25rem;
     box-shadow: none;
-    transition-property: background-color, border-color, color;
-    transition-duration: 140ms;
+    transition-property: background-color, border-color, color, transform;
+    transition-duration: 150ms;
+    font-size: 1.1rem;
   }
-  .btn:active:not(:disabled) { transform: none; }
+  .btn:active:not(:disabled) { transform: scale(0.98); }
   @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
     .zen-surface {
       background: var(--zen-glass);
