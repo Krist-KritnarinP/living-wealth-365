@@ -28,8 +28,8 @@
   - Port: 5173
 - **Backend Directory**: `living wealth 365_backend/`
   - Tech Stack: Node.js, Express.js (ES Modules JavaScript) — **Strictly NO TypeScript (.ts)** per client instruction.
-  - Database & ORM: SQLite (Local development) + Prisma ORM (`prisma`, `@prisma/client`)
-  - Schema Policy: รอตารางและ business models ตามคำสั่งของผู้ใช้ ห้ามคิดโครงสร้างตารางหรือโมเดลล่วงหน้าเอง
+  - Database & ORM: PostgreSQL / MySQL + Prisma ORM (`prisma`, `@prisma/client`)
+  - Official Models: `Admin`, `Lead`, `Post`, `Product` and Enum `LeadStatus` (NEW, CONTACTED, CLOSED, CANCELLED)
   - Port: 5001
 
 ## Multi-Agent Collaboration Protocol

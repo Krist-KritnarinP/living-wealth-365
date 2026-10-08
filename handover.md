@@ -47,11 +47,11 @@ living wealth 365/
 │
 └── living wealth 365_backend/         # Pure Node.js + Express (ES Modules, no TypeScript)
     ├── package.json                   # Express, Prisma, Zod, Helmet, Cors, Morgan
-    ├── .env / .env.example            # Port 5001, DATABASE_URL="file:./dev.db"
+    ├── .env / .env.example            # Port 5001, DATABASE_URL (PostgreSQL / MySQL)
     ├── note/
     │   └── guidelines.md              # Engineering rules copy for backend
     ├── prisma/
-    │   └── schema.prisma              # Clean base schema (generator & datasource, ready for user models)
+    │   └── schema.prisma              # Official models: Admin, Lead, Post, Product, LeadStatus enum
     └── src/
         ├── index.js                   # Base Express server entry point
         ├── lib/

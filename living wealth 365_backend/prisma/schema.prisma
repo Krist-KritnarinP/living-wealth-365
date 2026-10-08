@@ -1,11 +1,79 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// schema.prisma
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql" // เปลี่ยนเป็น "mysql" ได้หากใช้ MySQL บน Atom
   url      = env("DATABASE_URL")
+}
+
+// ==========================================
+// Enum Definitions
+// ==========================================
+enum LeadStatus {
+  NEW
+  CONTACTED
+  CLOSED
+  CANCELLED
+}
+
+// ==========================================
+// Models
+// ==========================================
+
+// 1. ผู้ดูแลระบบ
+model Admin {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String   // ควรเข้ารหัส (Hash) ก่อนบันทึกเสมอ
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  posts     Post[]   // ความสัมพันธ์ 1:N กับบทความ (ใครเป็นคนเขียน)
+}
+
+// 2. ข้อมูลลูกค้าที่กรอกฟอร์มเข้ามา (Lead Capture)
+model Lead {
+  id            String     @id @default(uuid())
+  name          String
+  phone         String
+  interest      String     // เช่น "ประกันชีวิต AIA", "วางแผนภาษี", "หินมงคล"
+  preferredTime String?    // เช่น "ช่วงเช้า 09:00 - 12:00"
+  status        LeadStatus @default(NEW)
+  notes         String?    @db.Text // สำหรับให้แอดมินบันทึกข้อมูลเพิ่มเติมหลังโทรคุย
+  
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+// 3. บทความความรู้การเงิน/ภาษี
+model Post {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique // URL ของบทความ เช่น /blog/tax-planning-2024
+  content     String   @db.Text
+  excerpt     String?  // คำโปรยสั้นๆ สำหรับหน้า Grid
+  imageUrl    String?  // ลิงก์รูปภาพ Thumbnail
+  published   Boolean  @default(false)
+  
+  authorId    String
+  author      Admin    @relation(fields: [authorId], references: [id])
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 4. สินค้าสายมู / วัตถุมงคล
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String   @db.Text
+  imageUrl    String?
+  isActive    Boolean  @default(true) // สำหรับเปิด/ปิดการแสดงผลหน้าเว็บ
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
