@@ -7,7 +7,19 @@
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
 - **Status**: Setup & packages installed cleanly. No unrequested tables or speculative UI pages. Ready for custom requirements.
 
-## 2. Architecture & File Structure
+## 2. Core UI / UX Requirements (Mandate)
+- **Full Screen UI Layout**: การจัดวางหน้าเว็บทุกหน้าต้องเป็นแบบเต็มหน้าจอ (Full Screen) เพื่อให้เห็นข้อมูลชัดเจน เต็มพื้นที่
+- **Cross-Device Responsiveness**: รองรับ Responsive สมบูรณ์แบบ 100%:
+  - สมาร์ทโฟนทุกรุ่น (Smartphone)
+  - ไอแพดและแท็บเล็ตทุกขนาด (iPad / Tablet ทั้งแนวตั้งและแนวนอน)
+  - หน้าจอคอมพิวเตอร์ (Desktop / Laptop)
+- **Accessible Typography & Readability**:
+  - ตัวอักษรต้องมีขนาดที่อ่านง่าย สบายตา (High Legibility & Comfort)
+  - เหมาะสำหรับทุกเพศ ทุกวัย (All genders & All age groups ครอบคลุมผู้สูงอายุ)
+  - Contrast ระหว่างพื้นหลังและตัวหนังสือต้องชัดเจนตามเกณฑ์ Accessibility
+- **Design System**: Zen Glass (Tailwind CSS 4 + daisyUI 5, `zen-light` และ `zen-dark`)
+
+## 3. Architecture & File Structure
 ```
 living wealth 365/
 ├── CI.jpg                             # Brand Corporate Identity reference
@@ -45,11 +57,6 @@ living wealth 365/
         └── routes/
             └── health.js              # GET /api/health
 ```
-
-## 3. UI Theme
-- **Zen Glass**: Tailwind CSS 4 + daisyUI 5
-- Configured in `src/index.css` with `zen-light` and `zen-dark` themes.
-- Classes: `navbar zen-surface`, `card zen-surface`, `btn btn-primary`, `badge badge-secondary`.
 
 ## 4. How to Run
 ### Backend:

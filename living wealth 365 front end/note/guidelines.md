@@ -18,6 +18,10 @@ Use clear names, explicit data flow, small focused functions, and the simplest i
 
 ## 3. UI Quality: Avoid Generic AI Output
 Start from the user's audience, task, content, brand, and references. Establish a coherent visual direction before substantial UI work: typography, spacing, color, layout, density, interaction, and responsive behavior.
+- **Client Mandate on UI Layout & Accessibility**:
+  - **Full Screen UI**: ออกแบบและจัดวาง UI แบบเต็มหน้าจอ (Full Screen Layout) ให้ใช้งานได้อย่างเต็มประสิทธิภาพ
+  - **Universal Responsiveness**: ต้องรองรับ Responsive อย่างสมบูรณ์แบบ ทั้ง Smartphone (มือถือทุกขนาด), iPad / Tablet (ทั้งแนวตั้งและแนวนอน), และ Desktop
+  - **Typography & Readability**: ขนาดตัวอักษรต้องอ่านง่าย ชัดเจน สบายตา เหมาะสำหรับผู้ใช้งานทุกเพศและทุกวัย (All genders, All age groups รวมถึงกลุ่มผู้สูงอายุ) โดยคำนึงถึง Contrast และ Hierarchy
 Do not default to purple gradients, excessive glass effects, oversized hero sections, uniform card grids, decorative icons, generic illustrations, or filler copy. Use any of these only when the product or reference justifies them. Every visual choice must support hierarchy, comprehension, or the intended brand.
 Design with realistic content, clear primary actions, and deliberate spacing. Include loading, empty, error, success, disabled, validation, and permission states where relevant. Preserve user input after recoverable failures. Keep controls consistent and labels understandable.
 Use semantic HTML, accessible labels, keyboard operation, visible focus, sufficient contrast, reduced-motion support, and touch-friendly controls. Inspect actual rendered screens at relevant desktop and mobile sizes. Check overflow, long text, zoom, and interaction states. Report if browser or visual verification could not be performed; never imply it happened.

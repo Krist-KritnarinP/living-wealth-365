@@ -9,31 +9,31 @@
   - Passion / Protection: Crimson Red `#B62B1C`
   - Background / Canvas: Off-White `#F5F7FA`
 
+## UI / UX Design Mandate (Core Requirement)
+- **Full Screen UI**: ออกแบบและจัดวาง Layout แบบเต็มหน้าจอ (Full Screen Experience) เพื่อการมองเห็นและใช้งานที่เต็มตา ชัดเจน
+- **Full Responsive**: รองรับการแสดงผลทุกหน้าจออย่างสมบูรณ์แบบ ทั้ง:
+  - สมาร์ทโฟน (Smartphones ทุกขนาดหน้าจอ)
+  - แท็บเล็ตและไอแพด (iPad / Tablets ทั้งแนวตั้งและแนวนอน)
+  - แล็ปท็อปและคอมพิวเตอร์ตั้งโต๊ะ (Desktop Screens)
+- **Typography & Accessibility for All Ages & Genders**:
+  - ตัวอักษรขนาดใหญ่ อ่านง่าย สบายตา (High Legibility & Readability)
+  - เหมาะสำหรับผู้ใช้งานทุกเพศ ทุกวัย (All genders, All age groups รวมถึงผู้สูงวัย)
+  - รักษาระดับ Contrast ที่ชัดเจน ไม่ใช้ฟอนต์บางหรือเล็กเกินไป
+- **Design System**: Zen Glass (Tailwind CSS 4 + daisyUI 5) พร้อมรองรับ `zen-light` และ `zen-dark`
+
 ## Project Structure & Architecture
 - **Root Directory**: `/Users/kritnarinp/Desktop/living wealth 365/`
 - **Frontend Directory**: `living wealth 365 front end/`
-  - Tech Stack: Pure React.js (JavaScript, JSX, Vite, Tailwind CSS, Lucide React, Axios) — **Strictly NO TypeScript (.ts/.tsx)** per client instruction.
+  - Tech Stack: Pure React.js (JavaScript, JSX, Vite, Tailwind CSS 4, daisyUI 5, Lucide React, Axios) — **Strictly NO TypeScript (.ts/.tsx)** per client instruction.
   - Port: 5173
 - **Backend Directory**: `living wealth 365_backend/`
   - Tech Stack: Node.js, Express.js (ES Modules JavaScript) — **Strictly NO TypeScript (.ts)** per client instruction.
   - Database & ORM: SQLite (Local development) + Prisma ORM (`prisma`, `@prisma/client`)
-  - Security & Utilities: Helmet, CORS, Morgan, Dotenv, Zod (runtime validation)
+  - Schema Policy: รอตารางและ business models ตามคำสั่งของผู้ใช้ ห้ามคิดโครงสร้างตารางหรือโมเดลล่วงหน้าเอง
   - Port: 5001
 
 ## Multi-Agent Collaboration Protocol
 1. **Rule Enforcement**: All agents must strictly read and observe `note/guidelines.md` (located in root, backend, and frontend).
 2. **Handover Protocol**: Every agent must read `handover.md` upon taking over the workspace, and update it upon milestone completion.
 3. **Language Boundary**: Both backend and frontend must stay in JavaScript (`.js` and `.jsx`). Do not convert to TypeScript unless explicitly authorized by the user.
-4. **Data Contract**:
-   - Backend API base URL: `http://localhost:5001/api`
-   - Core API endpoints:
-     - `GET /api/health` — Service status check
-     - `GET /api/services` — Financial & insurance service listings
-     - `GET /api/consultations` — List consultation leads
-     - `POST /api/consultations` — Submit consultation booking
-     - `GET /api/plans` — List financial plans
-     - `POST /api/plans` — Create financial plan
-5. **Prisma Operations**:
-   - Schema file: `living wealth 365_backend/prisma/schema.prisma`
-   - To regenerate Prisma Client: `npm run prisma:generate` (inside backend)
-   - To inspect database in GUI: `npm run prisma:studio` (inside backend)
+4. **Scope Discipline**: Do NOT create unrequested tables or speculative UI pages unless explicitly instructed by the user. Always keep implementations minimal, cohesive, and directly aligned with the user's prompt.
