@@ -5,21 +5,20 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed True 100% Full-Screen Edge-to-Edge UI Layout and Default A++ Extra Large Typography enforcement across the entire website.
+- **Status**: Completed Balanced Typography Scale (reduced ~30% for ideal comfort) while preserving True 100% Full-Screen Edge-to-Edge UI Layout.
 
 ## 2. Core UI / UX Implementation in App.jsx & index.css
 - **100% True Full-Screen & Edge-to-Edge Layout**:
   - ตัดข้อจำกัด `max-w-7xl` และ `max-w-6xl` ออกทั้งหมด เพื่อไม่ให้เหลือพื้นที่ว่างด้านซ้ายและขวา
   - Navbar, Hero, Services Grid, Values Ribbon, Contact และ Footer ขยายเต็มขอบหน้าจอ (`w-full px-4 sm:px-8 lg:px-12 xl:px-16`)
-- **Default A++ Typography Scale Across Entire Website**:
-  - ปรับขนาดฟอนต์เริ่มต้นของทั้งเว็บเป็นระดับ **A++ (ขนาดใหญ่พิเศษ)**
-  - Base html font-size: 19px, Body: 1.15rem (~22px)
-  - Headings: `text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black`
-  - Subheadings & Paragraphs: `text-xl sm:text-2xl lg:text-3xl font-medium leading-relaxed`
-  - Badges & Buttons: `text-lg sm:text-2xl font-black min-h-[56px] px-8 py-3`
-  - ออกแบบให้อ่านง่าย สบายตา ชัดเจนเป็นพิเศษสำหรับผู้รับบริการทุกเพศ ทุกวัย (รวมถึงผู้สูงอายุ)
+- **Balanced & Readable Typography Scale (ลดลง ~30% สบายตาทุกช่วงวัย)**:
+  - Base html font-size: 16px, Body: 1rem (จากเดิม 19px / 1.15rem)
+  - Headings: `text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black`
+  - Subheadings & Paragraphs: `text-base sm:text-lg lg:text-xl font-normal leading-relaxed`
+  - Badges & Buttons: `text-sm sm:text-base font-bold min-h-[44px] px-6 py-2.5`
+  - สัดส่วนสวยงาม สมดุลย์ อ่านง่าย ชัดเจน ไม่เทอะทะ
 - **Universal Responsiveness**:
-  - Smartphone (< 640px): เลย์เอาต์แนวตั้ง เต็มหน้าจอ ไม่ล้นด้านข้าง ตัวหนังสือใหญ่ชัดเจน
+  - Smartphone (< 640px): เลย์เอาต์แนวตั้ง เต็มหน้าจอ ไม่ล้นด้านข้าง สัมผัสง่าย
   - iPad / Tablet (640px - 1024px): 2-3 คอลัมน์ กระจายเต็มขอบจอทั้งแนวตั้งและแนวนอน
   - Desktop (> 1024px): ขยายเต็มตา 100% ไร้ขอบว่างด้านข้าง
 - **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar

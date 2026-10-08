@@ -6,7 +6,7 @@
  * Main action: btn btn-primary; highlight: badge badge-secondary.
  * Urgent action: btn btn-accent; failures: alert alert-error.
  * Full screen layout: 100% edge-to-edge width across all devices.
- * A++ Typography: Extra large, high legibility for all ages and demographics.
+ * Balanced typography: comfortable, clear, easy to read for all ages.
  */
 @import "tailwindcss";
 @plugin "daisyui" { themes: false; }
@@ -36,18 +36,18 @@
   --color-warning-content: #332100;
   --color-error: #B62B1C;
   --color-error-content: #FFFFFF;
-  --radius-selector: 0.75rem;
-  --radius-field: 0.75rem;
-  --radius-box: 1rem;
-  --size-selector: 0.35rem;
-  --size-field: 0.35rem;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
   --zen-glass: rgb(255 255 255 / 90%);
-  --zen-shadow: 0 4px 20px rgb(24 40 59 / 8%);
-  --zen-muted: #415367;
+  --zen-shadow: 0 4px 16px rgb(24 40 59 / 7%);
+  --zen-muted: #4B5E73;
   --zen-field-border: #75879C;
 }
 
@@ -76,24 +76,24 @@
   --color-warning-content: #332100;
   --color-error: #FF9184;
   --color-error-content: #46140E;
-  --radius-selector: 0.75rem;
-  --radius-field: 0.75rem;
-  --radius-box: 1rem;
-  --size-selector: 0.35rem;
-  --size-field: 0.35rem;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
   --border: 1px;
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
   --zen-glass: rgb(25 35 47 / 92%);
-  --zen-shadow: 0 4px 20px rgb(0 0 0 / 25%);
-  --zen-muted: #B8C7D8;
+  --zen-shadow: 0 4px 16px rgb(0 0 0 / 22%);
+  --zen-muted: #B0C0D2;
   --zen-field-border: #788DA5;
 }
 
 @layer base {
   html {
-    font-size: 19px; /* Baseline scaling for A++ font size */
+    font-size: 16px; /* Reduced by ~30% from 19px for comfortable, well-balanced readability */
     width: 100%;
     margin: 0;
     padding: 0;
@@ -101,8 +101,8 @@
   body {
     background: var(--color-base-100);
     color: var(--color-base-content);
-    line-height: 1.75;
-    font-size: 1.15rem; /* ~22px base size for ultimate clarity across all ages */
+    line-height: 1.65;
+    font-size: 1rem; /* ~16px-17px clean readable base text */
     width: 100%;
     min-height: 100vh;
     margin: 0;
@@ -110,8 +110,8 @@
     overflow-x: hidden;
   }
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-    outline: 3px solid var(--color-primary);
-    outline-offset: 3px;
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
   }
 }
 
@@ -125,16 +125,16 @@
   .zen-muted { color: var(--zen-muted); }
   :where(.input, .select, .textarea) {
     background: var(--zen-surface);
-    border: 1.5px solid var(--zen-field-border);
-    font-size: 1.1rem;
-    min-height: 3.25rem;
+    border: 1px solid var(--zen-field-border);
+    font-size: 0.95rem;
+    min-height: 2.75rem;
   }
   .btn {
-    min-height: 3.25rem;
+    min-height: 2.75rem;
     box-shadow: none;
     transition-property: background-color, border-color, color, transform;
     transition-duration: 150ms;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
   .btn:active:not(:disabled) { transform: scale(0.98); }
   @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
