@@ -2,8 +2,8 @@
 
 ## 1. Project Objective & Scope
 - **Project**: Living Wealth 365 (Financial & Insurance Advisor)
-- **Objective**: Scaffolding two distinct decoupled projects — Frontend (React.js pure JavaScript with Vite & Tailwind CSS) and Backend (Node.js Express with Prisma ORM in pure JavaScript), without TypeScript (`.ts` / `.tsx`), tailored for financial and insurance advisory services according to brand CI guidelines (`CI.jpg` and `Logo.jpg`).
-- **Status**: Completed Initial Project Scaffolding, Package Installation, Prisma Schema Setup & Verification.
+- **Objective**: Scaffolding two distinct decoupled projects — Frontend (React.js pure JavaScript with Vite & Tailwind CSS 4 + daisyUI 5 Zen Glass theme) and Backend (Node.js Express with Prisma ORM in pure JavaScript), without TypeScript (`.ts` / `.tsx`), tailored for financial and insurance advisory services according to brand CI guidelines (`CI.jpg` and `Logo.jpg`).
+- **Status**: Completed Initial Project Scaffolding, Package Installation, Prisma Schema Setup & Verification, daisyUI 5 Installation & Zen Glass Theme Integration.
 
 ## 2. Architecture & File Structure
 ```
@@ -16,18 +16,18 @@ living wealth 365/
 │   └── guidelines.md                  # Project rules & engineering philosophy
 │
 ├── living wealth 365 front end/       # Pure React.js (Vite + JSX, no TypeScript)
-│   ├── index.html
+│   ├── index.html                     # Configured with data-theme="zen-light"
 │   ├── vite.config.js                 # Vite config with @tailwindcss/vite
-│   ├── package.json                   # React 19, Lucide React, Axios, Tailwind CSS
+│   ├── package.json                   # React 19, daisyUI 5.7.47, Tailwind 4, Lucide React, Axios
 │   ├── note/
 │   │   └── guidelines.md              # Engineering rules copy for frontend
 │   ├── public/
 │   │   ├── logo.jpg                   # Copied brand logo
 │   │   └── ci.jpg                     # Copied brand CI
 │   └── src/
-│       ├── App.jsx                    # Landing page + Consultation booking + Brand UI
+│       ├── App.jsx                    # Landing page + Zen Glass classes (navbar zen-surface, card zen-surface, theme toggle)
 │       ├── api.js                     # Axios API client pointing to backend (port 5001)
-│       ├── index.css                  # Tailwind CSS import & brand theme colors
+│       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5 plugin definitions
 │       └── main.jsx
 │
 └── living wealth 365_backend/         # Pure Node.js + Express (ES Modules, no TypeScript)
@@ -51,12 +51,15 @@ living wealth 365/
             └── plans.js               # GET /api/plans, POST /api/plans
 ```
 
-## 3. Brand Identity Reference
-- **Brand Colors**:
-  - Deep Blue: `#023E8D` (Professionalism, Trust, Security)
-  - Warm Gold: `#FFB53B` (Wealth, Opportunity, Prosperity)
-  - Crimson Red: `#B62B1C` (Life, Protection, Action)
-  - Background: `#F5F7FA` (Calm canvas)
+## 3. Brand Identity & UI Theme Reference
+- **Theme**: Zen Glass (Tailwind CSS 4 + daisyUI 5)
+  - Light theme: `zen-light` (default)
+  - Dark theme: `zen-dark`
+  - Cards: `card zen-surface`
+  - Header: `navbar zen-surface`
+  - Buttons: `btn btn-primary` (Deep Blue `#023E8D`), `badge badge-secondary` (Warm Gold `#FFB53B`), `btn btn-accent` (Crimson Red `#B62B1C`)
+  - Alerts: `alert alert-success`, `alert alert-error`
+  - Whitespace: sections `py-16 md:py-24`, container `max-w-6xl mx-auto px-6`
 - **Tagline**: "มั่นคง • มั่งคั่ง • ยั่งยืน" (Life, Wealth, Health, Freedom, Happiness, Forever)
 
 ## 4. Key Contracts & API Endpoints
@@ -72,7 +75,7 @@ living wealth 365/
 ## 5. Verification Commands and Results
 - **Frontend Verification**:
   - Command: `npm run build` inside `living wealth 365 front end`
-  - Result: **Passed** (Vite built client bundle in 1.52s, 0 errors).
+  - Result: **Passed** (Built with daisyUI 5.7.47 in 579ms, 0 errors).
 - **Backend Verification**:
   - Command: `npx prisma generate` && `npx prisma db push`
   - Result: **Passed** (Prisma client generated, SQLite `dev.db` synchronized).

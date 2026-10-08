@@ -1,19 +1,136 @@
+/* Zen Glass — Tailwind CSS 4 + daisyUI 5.
+ * Use as your main CSS entry; do not duplicate the imports in another entry.
+ * Light: <html data-theme="zen-light">; dark: data-theme="zen-dark".
+ * Omit data-theme to follow the system preference.
+ * Cards: class="card zen-surface"; header: class="navbar zen-surface".
+ * Main action: btn btn-primary; highlight: badge badge-secondary.
+ * Urgent action: btn btn-accent; failures: alert alert-error.
+ * White space: sections py-16 md:py-24, container max-w-6xl mx-auto px-6.
+ * Keep text areas opaque; glass belongs on selected cards and navigation.
+ */
 @import "tailwindcss";
+@plugin "daisyui" { themes: false; }
 
-@theme {
-  --color-brand-blue: #023E8D;
-  --color-brand-blue-dark: #01285C;
-  --color-brand-blue-light: #EBF3FC;
-  --color-brand-gold: #FFB53B;
-  --color-brand-gold-hover: #EAA025;
-  --color-brand-red: #B62B1C;
-  --color-brand-bg: #F5F7FA;
+@plugin "daisyui/theme" {
+  name: "zen-light";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;
+  --color-base-100: #F5F7FA;
+  --color-base-200: #EAF0F6;
+  --color-base-300: #CDD7E3;
+  --color-base-content: #18283B;
+  --color-primary: #023E8D;
+  --color-primary-content: #FFFFFF;
+  --color-secondary: #FFB53B;
+  --color-secondary-content: #332100;
+  --color-accent: #B62B1C;
+  --color-accent-content: #FFFFFF;
+  --color-neutral: #22354B;
+  --color-neutral-content: #FFFFFF;
+  --color-info: #023E8D;
+  --color-info-content: #FFFFFF;
+  --color-success: #236449;
+  --color-success-content: #FFFFFF;
+  --color-warning: #FFB53B;
+  --color-warning-content: #332100;
+  --color-error: #B62B1C;
+  --color-error-content: #FFFFFF;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --zen-surface: #FFFFFF;
+  --zen-glass: rgb(255 255 255 / 86%);
+  --zen-shadow: 0 1px 3px rgb(24 40 59 / 6%);
+  --zen-muted: #506176;
+  --zen-field-border: #75879C;
 }
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Thai', 'Helvetica Neue', Arial, sans-serif;
-  background-color: var(--color-brand-bg);
-  color: #1F2937;
-  -webkit-font-smoothing: antialiased;
+@plugin "daisyui/theme" {
+  name: "zen-dark";
+  default: false;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #101820;
+  --color-base-200: #19232F;
+  --color-base-300: #354557;
+  --color-base-content: #E8EDF4;
+  --color-primary: #8AB8FF;
+  --color-primary-content: #10284A;
+  --color-secondary: #FFB53B;
+  --color-secondary-content: #332100;
+  --color-accent: #FF9184;
+  --color-accent-content: #46140E;
+  --color-neutral: #354557;
+  --color-neutral-content: #E8EDF4;
+  --color-info: #8AB8FF;
+  --color-info-content: #10284A;
+  --color-success: #8DD7B2;
+  --color-success-content: #163629;
+  --color-warning: #FFB53B;
+  --color-warning-content: #332100;
+  --color-error: #FF9184;
+  --color-error-content: #46140E;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+  --zen-surface: #19232F;
+  --zen-glass: rgb(25 35 47 / 90%);
+  --zen-shadow: 0 1px 3px rgb(0 0 0 / 20%);
+  --zen-muted: #A8B8CB;
+  --zen-field-border: #788DA5;
+}
+
+@layer base {
+  body {
+    background: var(--color-base-100);
+    color: var(--color-base-content);
+    line-height: 1.65;
+  }
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .zen-surface {
+    background: var(--zen-surface);
+    border: 0;
+    border-radius: var(--radius-box);
+    box-shadow: var(--zen-shadow);
+  }
+  .zen-muted { color: var(--zen-muted); }
+  :where(.input, .select, .textarea) {
+    background: var(--zen-surface);
+    border: 1px solid var(--zen-field-border);
+  }
+  .btn {
+    min-height: 2.75rem;
+    box-shadow: none;
+    transition-property: background-color, border-color, color;
+    transition-duration: 140ms;
+  }
+  .btn:active:not(:disabled) { transform: none; }
+  @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+    .zen-surface {
+      background: var(--zen-glass);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn { transition: none; }
 }
