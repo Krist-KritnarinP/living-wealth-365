@@ -5,19 +5,18 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Setup & packages installed cleanly. No unrequested tables or speculative UI pages. Ready for custom requirements.
+- **Status**: Completed Full Screen, Universal Responsive (Mobile / iPad / Desktop), and All-Ages Accessible Typography implementation in `App.jsx`.
 
-## 2. Core UI / UX Requirements (Mandate)
-- **Full Screen UI Layout**: การจัดวางหน้าเว็บทุกหน้าต้องเป็นแบบเต็มหน้าจอ (Full Screen) เพื่อให้เห็นข้อมูลชัดเจน เต็มพื้นที่
-- **Cross-Device Responsiveness**: รองรับ Responsive สมบูรณ์แบบ 100%:
-  - สมาร์ทโฟนทุกรุ่น (Smartphone)
-  - ไอแพดและแท็บเล็ตทุกขนาด (iPad / Tablet ทั้งแนวตั้งและแนวนอน)
-  - หน้าจอคอมพิวเตอร์ (Desktop / Laptop)
-- **Accessible Typography & Readability**:
-  - ตัวอักษรต้องมีขนาดที่อ่านง่าย สบายตา (High Legibility & Comfort)
-  - เหมาะสำหรับทุกเพศ ทุกวัย (All genders & All age groups ครอบคลุมผู้สูงอายุ)
-  - Contrast ระหว่างพื้นหลังและตัวหนังสือต้องชัดเจนตามเกณฑ์ Accessibility
-- **Design System**: Zen Glass (Tailwind CSS 4 + daisyUI 5, `zen-light` และ `zen-dark`)
+## 2. Core UI / UX Implementation in App.jsx
+- **Full Screen UI Layout**: โครงสร้างแบบเต็มหน้าจอ (`min-h-screen w-full flex flex-col justify-between`) สวยงาม สบายตา
+- **Universal Responsiveness**:
+  - Smartphone (< 640px): เลย์เอาต์แนวตั้ง กะทัดรัด ตัวหนังสืออ่านง่าย ไม่ล้นหน้าจอ ปุ่มกดไม่ต่ำกว่า 48px
+  - iPad / Tablet (640px - 1024px): 3 คอลัมน์สมดุลย์ รองรับทั้งแนวตั้งและแนวนอน
+  - Desktop (> 1024px): ขยายเต็มตา พร้อม Zen Glass effect และ Backdrop blur
+- **All-Ages Typography & Real-time Font Scaling**:
+  - ตัวอักษรขนาดใหญ่ อ่านง่าย สบายตาทุกเพศ ทุกวัย
+  - **มีปุ่มกดปรับขนาดตัวอักษรสดบน Navbar**: ปรับได้ 3 ระดับ (ปกติ A -> สบายตา A+ -> ขนาดใหญ่พิเศษ A++) อำนวยความสะดวกสำหรับผู้สูงวัย
+- **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar
 
 ## 3. Architecture & File Structure
 ```
@@ -36,7 +35,7 @@ living wealth 365/
 │   ├── note/
 │   │   └── guidelines.md              # Engineering rules copy for frontend
 │   └── src/
-│       ├── App.jsx                    # Clean starter template demonstrating Zen Glass theme
+│       ├── App.jsx                    # Full Screen, Universal Responsive & Accessible UI
 │       ├── api.js                     # Base Axios client
 │       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5
 │       └── main.jsx
