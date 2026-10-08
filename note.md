@@ -10,16 +10,28 @@
   - Background / Canvas: Off-White `#F5F7FA`
 
 ## UI / UX Design Mandate (Core Requirement)
-- **Full Screen UI**: ออกแบบและจัดวาง Layout แบบเต็มหน้าจอ (Full Screen Experience) เพื่อการมองเห็นและใช้งานที่เต็มตา ชัดเจน
+- **Full Screen UI**: ออกแบบและจัดวาง Layout แบบเต็มหน้าจอ (Full Screen Experience 100% Edge-to-Edge) ไม่เหลือขอบว่างซ้าย-ขวา
 - **Full Responsive**: รองรับการแสดงผลทุกหน้าจออย่างสมบูรณ์แบบ ทั้ง:
   - สมาร์ทโฟน (Smartphones ทุกขนาดหน้าจอ)
   - แท็บเล็ตและไอแพด (iPad / Tablets ทั้งแนวตั้งและแนวนอน)
   - แล็ปท็อปและคอมพิวเตอร์ตั้งโต๊ะ (Desktop Screens)
 - **Typography & Accessibility for All Ages & Genders**:
-  - ตัวอักษรขนาดใหญ่ อ่านง่าย สบายตา (High Legibility & Readability)
+  - ตัวอักษรขนาดพอดี สบายตา สมดุลย์ ชัดเจน (High Legibility & Comfort)
   - เหมาะสำหรับผู้ใช้งานทุกเพศ ทุกวัย (All genders, All age groups รวมถึงผู้สูงวัย)
   - รักษาระดับ Contrast ที่ชัดเจน ไม่ใช้ฟอนต์บางหรือเล็กเกินไป
 - **Design System**: Zen Glass (Tailwind CSS 4 + daisyUI 5) พร้อมรองรับ `zen-light` และ `zen-dark`
+
+## Stitch MCP Integration
+- **Server Name**: `stitch` (MCP Server เชื่อมต่อพร้อมใช้งานใน Antigravity)
+- **Connected Project**: **Living Wealth 365 Platform** (Project ID: `12978997839434193186`)
+- **Design System in Stitch**: "Serene Prosperity" (Theme matching brand CI)
+- **Screens Available in Stitch**:
+  1. `b4852686845247e1bfce03b97551ebc4`: Admin Dashboard - จัดการ Leads & ลูกค้า
+  2. `783b9a1f41484fc7853dec4f0360842a`: Living Wealth 365 - หน้าแรก (Home)
+  3. `1f458d8adfaa47c4b984ef45d97b380d`: ประกันชีวิต & สุขภาพ AIA และวางแผนภาษี
+  4. `a631268e4e574f628c966b1ad88c4571`: คลังความรู้การเงินและวางแผนภาษี (Knowledge Hub)
+  5. `db380ae3a1324a90bff3bd85629c708f`: สรุปสิทธิลดหย่อนภาษี 2567-2568 ฉบับสมบูรณ์ (Single Article)
+  6. `28838cf132844eb7b36f55a420edfc63`: แคตตาล็อกสายมู & หินมงคล (Mu-Tae-Lu)
 
 ## Project Structure & Architecture
 - **Root Directory**: `/Users/kritnarinp/Desktop/living wealth 365/`

@@ -24,7 +24,19 @@
 - **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar
 - **Mandatory Git Discipline**: นอกจากบันทึก `handover.md` แล้ว **ต้องทำ Git Commit ทุกครั้ง** หลังจบแต่ละขั้นตอนหรือ Milestone โดยห้ามละเลยเด็ดขาด
 
-## 3. Architecture & File Structure
+## 3. Stitch MCP Integration Status
+- **Status**: Connected & Active via MCP Server `stitch`
+- **Active Stitch Project**: **Living Wealth 365 Platform** (ID: `12978997839434193186`)
+- **Design System**: "Serene Prosperity"
+- **Screens Ready in Stitch**:
+  1. `b4852686845247e1bfce03b97551ebc4`: Admin Dashboard - จัดการ Leads & ลูกค้า
+  2. `783b9a1f41484fc7853dec4f0360842a`: Living Wealth 365 - หน้าแรก (Home)
+  3. `1f458d8adfaa47c4b984ef45d97b380d`: ประกันชีวิต & สุขภาพ AIA และวางแผนภาษี
+  4. `a631268e4e574f628c966b1ad88c4571`: คลังความรู้การเงินและวางแผนภาษี (Knowledge Hub)
+  5. `db380ae3a1324a90bff3bd85629c708f`: สรุปสิทธิลดหย่อนภาษี 2567-2568 ฉบับสมบูรณ์ (Single Article)
+  6. `28838cf132844eb7b36f55a420edfc63`: แคตตาล็อกสายมู & หินมงคล (Mu-Tae-Lu)
+
+## 4. Architecture & File Structure
 ```
 living wealth 365/
 ├── CI.jpg                             # Brand Corporate Identity reference
