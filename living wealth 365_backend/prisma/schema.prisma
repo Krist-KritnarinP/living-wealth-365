@@ -1,0 +1,103 @@
+// Prisma schema for Living Wealth 365 (JavaScript / Node.js)
+// Learn more: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String                @id @default(uuid())
+  email         String                @unique
+  name          String
+  phone         String?
+  role          String                @default("CLIENT") // ADMIN, ADVISOR, CLIENT
+  advisor       AdvisorProfile?
+  consultations ConsultationRequest[]
+  plans         FinancialPlan[]
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+
+  @@map("users")
+}
+
+model AdvisorProfile {
+  id              String   @id @default(uuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title           String   // e.g. "Senior Financial & Insurance Advisor"
+  licenseNo       String?  // OIC / SEC License ID
+  bio             String?
+  specialties     String   // e.g. "Life, Health, Retirement, Tax"
+  experienceYears Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("advisor_profiles")
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  category    String   // LIFE_INSURANCE, HEALTH_INSURANCE, RETIREMENT_PLANNING, TAX_PLANNING, INVESTMENT_ADVISORY, WEALTH_TRANSFER
+  iconName    String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("services")
+}
+
+model ConsultationRequest {
+  id              String    @id @default(uuid())
+  clientName      String
+  clientPhone     String
+  clientEmail     String
+  serviceCategory String    // Category of interest
+  preferredDate   DateTime?
+  monthlyBudget   Float?
+  notes           String?
+  status          String    @default("PENDING") // PENDING, CONTACTED, SCHEDULED, COMPLETED, CANCELLED
+  advisorId       String?
+  advisor         User?     @relation(fields: [advisorId], references: [id], onDelete: SetNull)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("consultation_requests")
+}
+
+model FinancialPlan {
+  id             String   @id @default(uuid())
+  title          String
+  clientName     String
+  clientEmail    String
+  targetGoal     String   // e.g. "Retirement at 55", "Legacy Transfer"
+  targetAmount   Float
+  targetYears    Int
+  monthlySavings Float
+  riskLevel      String   @default("MODERATE") // CONSERVATIVE, MODERATE, AGGRESSIVE
+  advisorId      String?
+  advisor        User?    @relation(fields: [advisorId], references: [id], onDelete: SetNull)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("financial_plans")
+}
+
+model ContactMessage {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String?
+  subject   String?
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}

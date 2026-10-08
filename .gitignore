@@ -1,0 +1,30 @@
+# Node modules
+node_modules/
+*/node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+*/.env
+*/.env.local
+
+# Build artifacts
+dist/
+build/
+*/dist/
+*/build/
+
+# Database
+*.db
+*.db-journal
+*/dev.db
+*/dev.db-journal
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-blue: #023E8D;
+  --color-brand-blue-dark: #01285C;
+  --color-brand-blue-light: #EBF3FC;
+  --color-brand-gold: #FFB53B;
+  --color-brand-gold-hover: #EAA025;
+  --color-brand-red: #B62B1C;
+  --color-brand-bg: #F5F7FA;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Thai', 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--color-brand-bg);
+  color: #1F2937;
+  -webkit-font-smoothing: antialiased;
+}
