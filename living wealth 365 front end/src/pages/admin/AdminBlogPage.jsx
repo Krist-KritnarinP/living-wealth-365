@@ -166,10 +166,8 @@ export default function AdminBlogPage() {
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
               <h3 className="font-bold text-lg text-primary">เขียนบทความความรู้ใหม่</h3>
               <form onSubmit={handleCreate} className="space-y-4 mt-4 text-xs sm:text-sm">
-                <div className="form-control">
-                  <label className="label py-1">
-                    <span className="label-text font-bold">ชื่อหัวข้อบทความ</span>
-                  </label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">ชื่อหัวข้อบทความ</label>
                   <input
                     type="text"
                     required
@@ -180,11 +178,9 @@ export default function AdminBlogPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">หมวดหมู่</span>
-                    </label>
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่</label>
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
@@ -196,10 +192,8 @@ export default function AdminBlogPage() {
                     </select>
                   </div>
 
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">เวลาที่ใช้อ่าน</span>
-                    </label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">เวลาที่ใช้อ่าน</label>
                     <input
                       type="text"
                       value={formData.readTime}
@@ -209,30 +203,26 @@ export default function AdminBlogPage() {
                   </div>
                 </div>
 
-                <div className="form-control">
-                  <label className="label py-1">
-                    <span className="label-text font-bold">คำโปรยสั้นๆ (Excerpt)</span>
-                  </label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">คำโปรยสั้นๆ (Excerpt)</label>
                   <textarea
-                    rows="2"
+                    rows={2}
                     required
                     value={formData.excerpt}
                     onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                    className="textarea textarea-bordered w-full rounded-xl bg-base-100"
+                    className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
 
-                <div className="form-control">
-                  <label className="label py-1">
-                    <span className="label-text font-bold">เนื้อหาบทความ</span>
-                  </label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">เนื้อหาบทความ</label>
                   <textarea
-                    rows="6"
+                    rows={6}
                     required
                     placeholder="พิมพ์เนื้อหาบทความ..."
                     value={formData.content}
                     onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    className="textarea textarea-bordered w-full rounded-xl bg-base-100"
+                    className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
 

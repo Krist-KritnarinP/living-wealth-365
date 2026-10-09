@@ -166,11 +166,9 @@ export default function AdminProductsPage() {
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
               <h3 className="font-bold text-lg text-primary">เพิ่มสินค้าหินมงคลใหม่</h3>
               <form onSubmit={handleCreate} className="space-y-4 mt-4 text-xs sm:text-sm">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">ชื่อหินมงคล</span>
-                    </label>
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ชื่อหินมงคล</label>
                     <input
                       type="text"
                       required
@@ -181,10 +179,8 @@ export default function AdminProductsPage() {
                     />
                   </div>
 
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">ราคาบูชา (บาท)</span>
-                    </label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ราคาบูชา (บาท)</label>
                     <input
                       type="text"
                       required
@@ -196,11 +192,9 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">หมวดหมู่เสริมดวง</span>
-                    </label>
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่เสริมดวง</label>
                     <input
                       type="text"
                       value={formData.category}
@@ -209,10 +203,8 @@ export default function AdminProductsPage() {
                     />
                   </div>
 
-                  <div className="form-control">
-                    <label className="label py-1">
-                      <span className="label-text font-bold">เหมาะกับวันเกิด</span>
-                    </label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">เหมาะกับวันเกิด</label>
                     <input
                       type="text"
                       value={formData.dayMatch}
@@ -222,17 +214,15 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
 
-                <div className="form-control">
-                  <label className="label py-1">
-                    <span className="label-text font-bold">คำอธิบายพลังและคุณสมบัติ</span>
-                  </label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">คำอธิบายพลังและคุณสมบัติ</label>
                   <textarea
-                    rows="3"
+                    rows={3}
                     required
                     placeholder="เช่น หินแห่งการดึงดูดทรัพย์ เสริมโชคลาภ..."
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="textarea textarea-bordered w-full rounded-xl bg-base-100"
+                    className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
 

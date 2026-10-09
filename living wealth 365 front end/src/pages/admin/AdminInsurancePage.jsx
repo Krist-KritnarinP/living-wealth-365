@@ -333,14 +333,14 @@ export default function AdminInsurancePage() {
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                   {/* Type */}
-                  <div className="form-control">
-                    <label className="label py-1 text-xs font-bold">ประเภทประกัน</label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ประเภทประกัน</label>
                     <select
                       value={formData.type}
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                      className="select select-bordered rounded-xl text-sm"
+                      className="select select-bordered w-full rounded-xl text-sm bg-base-100"
                     >
                       <option value="LIFE">ชีวิต, สุขภาพ, โรคร้าย & เกษียณ (Life)</option>
                       <option value="NON_LIFE">วินาศภัย รถยนต์ & ทรัพย์สิน (Non-Life)</option>
@@ -348,22 +348,22 @@ export default function AdminInsurancePage() {
                   </div>
 
                   {/* Category Name */}
-                  <div className="form-control">
-                    <label className="label py-1 text-xs font-bold">ชื่อหมวดหมู่ที่แสดง</label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ชื่อหมวดหมู่ที่แสดง</label>
                     <input
                       type="text"
                       required
                       placeholder="เช่น ประกันสุขภาพเหมาจ่าย"
                       value={formData.categoryName}
                       onChange={(e) => setFormData({ ...formData, categoryName: e.target.value })}
-                      className="input input-bordered rounded-xl text-sm"
+                      className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                     />
                   </div>
                 </div>
 
                 {/* Plan Name */}
-                <div className="form-control">
-                  <label className="label py-1 text-xs font-bold">
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">
                     ชื่อแผนประกัน <span className="text-error">*</span>
                   </label>
                   <input
@@ -372,51 +372,51 @@ export default function AdminInsurancePage() {
                     placeholder="เช่น AIA Health Happy เหมาเบิ้ลคุ้ม"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="input input-bordered rounded-xl text-sm"
+                    className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                   />
                 </div>
 
                 {/* Tagline */}
-                <div className="form-control">
-                  <label className="label py-1 text-xs font-bold">คำโปรย / จุดขายสั้นๆ</label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">คำโปรย / จุดขายสั้นๆ</label>
                   <input
                     type="text"
                     placeholder="เช่น เหมาจ่ายค่ารักษาพยาบาลสูงสุด 25 ล้านบาท/ปี"
                     value={formData.tagline}
                     onChange={(e) => setFormData({ ...formData, tagline: e.target.value })}
-                    className="input input-bordered rounded-xl text-sm"
+                    className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                   />
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                   {/* Coverage */}
-                  <div className="form-control">
-                    <label className="label py-1 text-xs font-bold">วงเงินความคุ้มครอง</label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">วงเงินความคุ้มครอง</label>
                     <input
                       type="text"
                       placeholder="เช่น สูงสุด 25,000,000 บาท/ปี"
                       value={formData.coverageAmount}
                       onChange={(e) => setFormData({ ...formData, coverageAmount: e.target.value })}
-                      className="input input-bordered rounded-xl text-sm"
+                      className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                     />
                   </div>
 
                   {/* Price */}
-                  <div className="form-control">
-                    <label className="label py-1 text-xs font-bold">ราคาเริ่มต้น</label>
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ราคาเริ่มต้น</label>
                     <input
                       type="text"
                       placeholder="เช่น เริ่มต้น 1,850 บ./เดือน"
                       value={formData.startingPrice}
                       onChange={(e) => setFormData({ ...formData, startingPrice: e.target.value })}
-                      className="input input-bordered rounded-xl text-sm"
+                      className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                     />
                   </div>
                 </div>
 
                 {/* Features (Multi-line) */}
-                <div className="form-control">
-                  <label className="label py-1 text-xs font-bold">
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">
                     จุดเด่นความคุ้มครอง (พิมพ์ 1 ข้อต่อ 1 บรรทัด)
                   </label>
                   <textarea
@@ -424,44 +424,44 @@ export default function AdminInsurancePage() {
                     placeholder="เหมาจ่ายค่ารักษาพยาบาล IPD ตามจริง&#10;เบิ้ลวงเงินเป็น 2 เท่าเมื่อพบโรคร้ายแรง&#10;ลดหย่อนภาษีได้สูงสุด 25,000 บาท"
                     value={formData.features}
                     onChange={(e) => setFormData({ ...formData, features: e.target.value })}
-                    className="textarea textarea-bordered rounded-xl text-sm"
+                    className="textarea textarea-bordered w-full rounded-xl text-sm bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
 
                 {/* Recommended For */}
-                <div className="form-control">
-                  <label className="label py-1 text-xs font-bold">เหมาะสำหรับใคร</label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">เหมาะสำหรับใคร</label>
                   <input
                     type="text"
                     placeholder="เช่น คนวัยทำงาน, เจ้าของธุรกิจ, หัวหน้าครอบครัว"
                     value={formData.recommendedFor}
                     onChange={(e) => setFormData({ ...formData, recommendedFor: e.target.value })}
-                    className="input input-bordered rounded-xl text-sm"
+                    className="input input-bordered w-full rounded-xl text-sm bg-base-100"
                   />
                 </div>
 
                 {/* Description */}
-                <div className="form-control">
-                  <label className="label py-1 text-xs font-bold">รายละเอียดเชิงลึก</label>
+                <div className="flex flex-col gap-1.5 w-full">
+                  <label className="text-xs font-bold text-base-content/80">รายละเอียดเชิงลึก</label>
                   <textarea
                     rows={3}
                     placeholder="รายละเอียดเงื่อนไข สิทธิประโยชน์ หรือข้อยกเว้นทั่วไป"
                     value={formData.description}
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                    className="textarea textarea-bordered rounded-xl text-sm"
+                    className="textarea textarea-bordered w-full rounded-xl text-sm bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
 
                 {/* Status Toggle */}
-                <div className="form-control">
-                  <label className="label cursor-pointer justify-start gap-3 py-1">
+                <div className="pt-2">
+                  <label className="inline-flex items-center gap-3 cursor-pointer select-none">
                     <input
                       type="checkbox"
                       checked={formData.isActive}
                       onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
-                      className="checkbox checkbox-primary"
+                      className="checkbox checkbox-primary rounded-lg"
                     />
-                    <span className="label-text text-sm font-bold">
+                    <span className="text-sm font-bold text-base-content">
                       เปิดใช้งานแผนนี้บนหน้าเว็บไซต์
                     </span>
                   </label>
