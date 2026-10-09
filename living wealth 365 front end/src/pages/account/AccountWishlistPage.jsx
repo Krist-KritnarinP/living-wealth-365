@@ -34,7 +34,7 @@ export default function AccountWishlistPage() {
 
   return (
     <DashboardLayout type="customer">
-      <div className="space-y-8 max-w-6xl">
+      <div className="space-y-8 w-full">
         {/* Header */}
         <div className="border-b border-base-300/60 pb-4">
           <span className="text-xs font-bold uppercase tracking-wider text-secondary">

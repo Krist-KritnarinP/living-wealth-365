@@ -82,7 +82,7 @@ export default function AdminDashboardPage() {
 
   return (
     <DashboardLayout type="admin">
-      <div className="space-y-8 max-w-7xl">
+      <div className="space-y-8 w-full">
         {/* Header Title & Overview */}
         <div className="border-b border-base-300/60 pb-5">
           <div className="flex items-center gap-2 mb-1">

@@ -56,7 +56,7 @@ export default function AdminBlogPage() {
 
   return (
     <DashboardLayout type="admin">
-      <div className="space-y-8 max-w-7xl">
+      <div className="space-y-8 w-full">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-base-300/60 pb-4">
           <div>
