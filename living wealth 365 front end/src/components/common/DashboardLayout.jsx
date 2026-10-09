@@ -20,6 +20,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import { ROUTES } from '../../constants/routes';
+import BrandLogo from './BrandLogo';
 
 export default function DashboardLayout({ children, type = 'customer' }) {
   const { currentUser, logout, theme, toggleTheme, wishlist, leads, posts, products } = useAuth();
@@ -82,7 +83,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       path: ROUTES.ADMIN_DASHBOARD,
       icon: Users,
       badge: newLeadsCount > 0 ? `${newLeadsCount} New` : null,
-      badgeColor: 'badge-warning',
+      badgeColor: 'badge-warning text-warning-content font-bold',
     },
     {
       title: t('cmsBlog'),
@@ -108,45 +109,56 @@ export default function DashboardLayout({ children, type = 'customer' }) {
     <div className="min-h-screen w-full flex bg-base-100 text-base-content antialiased">
       {/* 1. DESKTOP COLLAPSIBLE SIDEBAR */}
       <aside
-        className={`hidden lg:flex flex-col border-r border-base-300/60 zen-surface sticky top-0 h-screen transition-all duration-300 z-30 ${
-          collapsed ? 'w-20' : 'w-64'
+        className={`hidden lg:flex flex-col border-r border-base-300/60 zen-surface sticky top-0 h-screen transition-all duration-300 z-30 shrink-0 ${
+          collapsed ? 'w-20' : 'w-72'
         }`}
       >
-        {/* Sidebar Header with Brand */}
-        <div className="p-4 flex items-center justify-between border-b border-base-300/60 min-h-[70px]">
-          <Link to={ROUTES.HOME} className="flex items-center gap-2.5 overflow-hidden">
-            <img
-              src="/logo.jpg"
-              alt="Logo"
-              className="h-9 w-auto rounded-lg shrink-0"
-              onError={(e) => {
-                e.target.style.display = 'none';
-              }}
-            />
-            {!collapsed && (
-              <div className="flex flex-col leading-tight animate-fadeIn">
-                <span className="font-black text-primary text-base whitespace-nowrap">
+        {/* Sidebar Header with Brand Logo */}
+        {collapsed ? (
+          /* COLLAPSED HEADER: Perfect Center Alignment */
+          <div className="py-4 px-2 flex flex-col items-center justify-center border-b border-base-300/60 min-h-[76px] gap-2">
+            <Link
+              to={ROUTES.HOME}
+              className="flex items-center justify-center p-1 hover:scale-105 transition-transform"
+              title="Living Wealth 365"
+            >
+              <BrandLogo collapsed={true} size="sm" />
+            </Link>
+            <button
+              onClick={() => setCollapsed(false)}
+              className="btn btn-ghost btn-circle btn-xs hover:bg-base-200 text-base-content/70"
+              title={t('expandSidebar')}
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        ) : (
+          /* EXPANDED HEADER: Spacious, no clipping, graceful breathing room */
+          <div className="px-4 py-3.5 flex items-center justify-between border-b border-base-300/60 min-h-[76px]">
+            <Link to={ROUTES.HOME} className="flex items-center gap-3 min-w-0 flex-1 group">
+              <BrandLogo collapsed={false} size="md" className="shrink-0 group-hover:scale-105 transition-transform" />
+              <div className="flex flex-col leading-tight min-w-0">
+                <span className="font-black text-primary text-base whitespace-nowrap tracking-tight">
                   Living Wealth <span className="text-secondary">365</span>
                 </span>
                 <span className="text-[10px] font-bold text-secondary uppercase tracking-wider">
                   {type === 'admin' ? 'Advisor CRM' : 'VIP Member'}
                 </span>
               </div>
-            )}
-          </Link>
+            </Link>
 
-          {/* Collapse Toggle Button */}
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            className="btn btn-ghost btn-circle btn-xs hover:bg-base-200"
-            title={collapsed ? t('expandSidebar') : t('collapseSidebar')}
-          >
-            {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-          </button>
-        </div>
+            <button
+              onClick={() => setCollapsed(true)}
+              className="btn btn-ghost btn-circle btn-xs hover:bg-base-200 shrink-0 text-base-content/70"
+              title={t('collapseSidebar')}
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
         {/* Sidebar Navigation Menu */}
-        <div className="flex-1 py-4 px-2 space-y-1 overflow-y-auto">
+        <div className="flex-1 py-4 px-3 space-y-1.5 overflow-y-auto">
           {currentNav.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -155,11 +167,11 @@ export default function DashboardLayout({ children, type = 'customer' }) {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl font-bold text-sm transition-all duration-200 group relative ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-2xl font-bold text-sm transition-all duration-200 group relative ${
                   active
-                    ? 'bg-primary text-white shadow-xs'
+                    ? 'bg-primary text-white shadow-md'
                     : 'text-base-content/75 hover:bg-base-200/70 hover:text-primary'
-                } ${collapsed ? 'justify-center' : ''}`}
+                } ${collapsed ? 'justify-center px-0' : ''}`}
                 title={collapsed ? item.title : undefined}
               >
                 <Icon className={`w-5 h-5 shrink-0 ${active ? 'text-white' : 'text-primary'}`} />
@@ -167,7 +179,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                   <span className="flex-1 truncate">{item.title}</span>
                 )}
                 {!collapsed && item.badge && (
-                  <span className={`badge badge-xs font-bold ${item.badgeColor}`}>
+                  <span className={`badge badge-sm font-bold shadow-xs ${item.badgeColor}`}>
                     {item.badge}
                   </span>
                 )}
@@ -178,8 +190,8 @@ export default function DashboardLayout({ children, type = 'customer' }) {
           <div className="pt-4 mt-4 border-t border-base-300/50">
             <Link
               to={ROUTES.HOME}
-              className={`flex items-center gap-3 px-3 py-2 rounded-2xl text-xs font-semibold text-base-content/60 hover:text-primary hover:bg-base-200/50 transition-colors ${
-                collapsed ? 'justify-center' : ''
+              className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-xs font-semibold text-base-content/60 hover:text-primary hover:bg-base-200/50 transition-colors ${
+                collapsed ? 'justify-center px-0' : ''
               }`}
               title={collapsed ? t('backToWebsite') : undefined}
             >
@@ -231,8 +243,8 @@ export default function DashboardLayout({ children, type = 'customer' }) {
           <aside className="relative w-72 max-w-[80vw] h-full zen-surface border-r border-base-300 p-4 flex flex-col justify-between shadow-2xl z-10 animate-fadeIn">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-base-300">
-                <div className="flex items-center gap-2">
-                  <img src="/logo.jpg" alt="Logo" className="h-8 w-auto rounded-lg" />
+                <div className="flex items-center gap-2.5">
+                  <BrandLogo size="sm" />
                   <span className="font-black text-primary text-sm">
                     Living Wealth <span className="text-secondary">365</span>
                   </span>
@@ -245,7 +257,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                 </button>
               </div>
 
-              <div className="py-4 space-y-1">
+              <div className="py-4 space-y-1.5">
                 {currentNav.map((item) => {
                   const Icon = item.icon;
                   const active = isActive(item.path);
@@ -255,9 +267,9 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileDrawerOpen(false)}
-                      className={`flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-sm ${
+                      className={`flex items-center justify-between px-3.5 py-3 rounded-2xl font-bold text-sm ${
                         active
-                          ? 'bg-primary text-white'
+                          ? 'bg-primary text-white shadow-md'
                           : 'text-base-content/80 hover:bg-base-200'
                       }`}
                     >
@@ -266,7 +278,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                         <span>{item.title}</span>
                       </div>
                       {item.badge && (
-                        <span className={`badge badge-xs font-bold ${item.badgeColor}`}>
+                        <span className={`badge badge-sm font-bold ${item.badgeColor}`}>
                           {item.badge}
                         </span>
                       )}
@@ -318,7 +330,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                 {type === 'admin' ? 'CRM ADVISOR' : 'MEMBER PORTAL'}
               </span>
               <span className="hidden sm:inline text-base-content/40">•</span>
-              <span className="hidden sm:inline text-base-content/80">
+              <span className="hidden sm:inline text-base-content/80 font-semibold">
                 {type === 'admin' ? 'Living Wealth 365 Management' : 'Personal Wealth & Wisdom Flow'}
               </span>
             </div>

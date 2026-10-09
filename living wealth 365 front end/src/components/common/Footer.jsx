@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, ShieldCheck, HeartHandshake } from 'lucide-react';
 import { ROUTES } from '../../constants/routes';
+import BrandLogo from './BrandLogo';
 
 export default function Footer() {
   return (
@@ -10,14 +11,7 @@ export default function Footer() {
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img
-                src="/logo.jpg"
-                alt="Living Wealth 365 Logo"
-                className="h-10 w-auto rounded-lg"
-                onError={(e) => {
-                  e.target.style.display = 'none';
-                }}
-              />
+              <BrandLogo size="md" />
               <span className="text-xl font-black text-primary">
                 Living Wealth <span className="text-secondary">365</span>
               </span>

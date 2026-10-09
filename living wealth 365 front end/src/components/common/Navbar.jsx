@@ -4,6 +4,7 @@ import { Sun, Moon, Heart, Menu, X, User, Shield, LogIn, Globe } from 'lucide-re
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { ROUTES } from '../../constants/routes';
+import BrandLogo from './BrandLogo';
 
 export default function Navbar() {
   const { theme, toggleTheme, currentUser, wishlist } = useAuth();
@@ -29,14 +30,7 @@ export default function Navbar() {
       <nav className="zen-surface w-full px-4 sm:px-6 py-3 rounded-2xl shadow-xs flex items-center justify-between border border-base-300/50">
         {/* Logo & Brand Identity */}
         <Link to={ROUTES.HOME} className="flex items-center gap-3 group">
-          <img
-            src="/logo.jpg"
-            alt="Living Wealth 365 Logo"
-            className="h-10 sm:h-12 w-auto object-contain rounded-lg transition-transform group-hover:scale-105"
-            onError={(e) => {
-              e.target.style.display = 'none';
-            }}
-          />
+          <BrandLogo size="lg" className="group-hover:scale-105 transition-transform" />
           <div className="flex flex-col">
             <span className="text-lg sm:text-xl lg:text-2xl font-black tracking-tight text-primary leading-tight">
               Living Wealth <span className="text-secondary">365</span>

@@ -132,7 +132,22 @@ living wealth 365/
   - Replaced browser `alert` in article sharing with `showToast`.
 - **Verification**: Verified via `npm run build` in 654ms with zero errors. Pure React JS (no TypeScript).
 
-## 8. How to Run
+## 8. Dark Theme Logo, Sidebar Balance, and Admin Status Modernization
+- **Dark Theme Transparent Logo**:
+  - Extracted transparent assets: `logo-light.png`, `logo-dark.png` (radiant royal blue, luminous gold, and vivid red dot without white rectangular background), and square icon variants `logo-icon-light.png`, `logo-icon-dark.png`.
+  - Created reusable `<BrandLogo />` component that automatically switches logo assets based on active theme (`zen-light` vs `zen-dark`) and collapsed state.
+  - Replaced legacy `/logo.jpg` across `Navbar.jsx`, `DashboardLayout.jsx`, and `Footer.jsx`.
+- **Sidebar Header Sizing & Balance (ตอนกาง & ตอนพับ)**:
+  - Expanded Sidebar (`!collapsed`): Width upgraded from `w-64` to `w-72` (288px) to eliminate text clipping of "Living Wealth 365" and give generous padding to the collapse toggle button.
+  - Collapsed Sidebar (`collapsed`): Perfectly centered the logo icon using `logo-icon-*.png` with a clean expand handle button centered below it.
+- **Admin Status & Table Modernization (แก้ความเบียด & ดีไซน์ล้าสมัย)**:
+  - `StatusBadge.jsx`: Redesigned as Modern Glass Glow Pills with soft ambient glow borders and animated pinging dots.
+  - Status Changer: Replaced crude form `<select>` with an Interactive Dropdown Pill (`ChevronDown`), allowing 1-click status updating directly on the badge.
+  - Table Layout: Combined customer avatar + name + phone, giving spacious padding (`py-4 pl-4`) and removing the duplicate status column.
+  - Top KPI Cards: Upgraded to modern SaaS stat cards with large bold metrics, trend indicators, and glowing icon containers.
+- **Verification**: Verified via `npm run build` in 998ms with zero errors.
+
+## 9. How to Run
 ### Frontend:
 ```bash
 cd "living wealth 365 front end"
@@ -146,6 +161,7 @@ cd "living wealth 365_backend"
 npm run dev
 # Server runs on http://localhost:5001 (Health check: /api/health)
 ```
+
 
 
 
