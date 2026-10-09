@@ -1,38 +1,131 @@
-import { useState, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import HeroSection from './components/HeroSection';
-import CoreValues from './components/CoreValues';
-import PillarsSection from './components/PillarsSection';
-import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
+import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { ROUTES } from './constants/routes';
+
+// Common Components
+import Navbar from './components/common/Navbar';
+import Footer from './components/common/Footer';
+import RoleSwitcher from './components/common/RoleSwitcher';
+import ProtectedRoute from './components/common/ProtectedRoute';
+
+// Public Pages
+import HomePage from './pages/public/HomePage';
+import LifeInsurancePage from './pages/public/LifeInsurancePage';
+import NonLifeInsurancePage from './pages/public/NonLifeInsurancePage';
+import MuteluPage from './pages/public/MuteluPage';
+import BlogPage from './pages/public/BlogPage';
+import BlogDetailPage from './pages/public/BlogDetailPage';
+import LoginPage from './pages/public/LoginPage';
+import RegisterPage from './pages/public/RegisterPage';
+import ThankYouPage from './pages/public/ThankYouPage';
+
+// Customer Pages
+import AccountDashboardPage from './pages/account/AccountDashboardPage';
+import AccountHistoryPage from './pages/account/AccountHistoryPage';
+import AccountWishlistPage from './pages/account/AccountWishlistPage';
+
+// Admin Pages
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminBlogPage from './pages/admin/AdminBlogPage';
+import AdminProductsPage from './pages/admin/AdminProductsPage';
+
+// Helper to scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
-  const [theme, setTheme] = useState('zen-light');
-  const [selectedPillar, setSelectedPillar] = useState(0);
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'zen-light' ? 'zen-dark' : 'zen-light'));
-  };
-
   return (
-    <div className="min-h-screen w-full flex flex-col justify-between font-sans transition-colors duration-200 bg-base-100">
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <div className="min-h-screen w-full flex flex-col bg-base-100 text-base-content antialiased selection:bg-secondary/30 selection:text-secondary">
+          {/* Universal Full-screen Navbar */}
+          <Navbar />
 
-      <main className="flex-1 w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-6 sm:py-8 flex flex-col justify-center space-y-10 sm:space-y-12">
-        <HeroSection />
-        <CoreValues />
-        <PillarsSection
-          selectedIndex={selectedPillar}
-          onSelectPillar={setSelectedPillar}
-        />
-        <ContactSection />
-      </main>
+          {/* Main Viewport Content - 100% Full Width Edge-to-Edge */}
+          <main className="flex-1 w-full">
+            <Routes>
+              {/* 🌐 1. Public Routes */}
+              <Route path={ROUTES.HOME} element={<HomePage />} />
+              <Route path={ROUTES.INSURANCE_LIFE} element={<LifeInsurancePage />} />
+              <Route path={ROUTES.INSURANCE_NON_LIFE} element={<NonLifeInsurancePage />} />
+              <Route path={ROUTES.MUTELU} element={<MuteluPage />} />
+              <Route path={ROUTES.BLOG} element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogDetailPage />} />
+              <Route path={ROUTES.LOGIN} element={<LoginPage />} />
+              <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
+              <Route path={ROUTES.THANK_YOU} element={<ThankYouPage />} />
 
-      <Footer />
-    </div>
+              {/* 👤 2. Customer Routes (Role: CUSTOMER) */}
+              <Route
+                path={ROUTES.ACCOUNT}
+                element={
+                  <ProtectedRoute requiredRole="CUSTOMER">
+                    <AccountDashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.ACCOUNT_HISTORY}
+                element={
+                  <ProtectedRoute requiredRole="CUSTOMER">
+                    <AccountHistoryPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.ACCOUNT_WISHLIST}
+                element={
+                  <ProtectedRoute requiredRole="CUSTOMER">
+                    <AccountWishlistPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* 🔒 3. Admin Routes (Role: ADMIN) */}
+              <Route
+                path={ROUTES.ADMIN_DASHBOARD}
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    <AdminDashboardPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.ADMIN_BLOG}
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    <AdminBlogPage />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path={ROUTES.ADMIN_PRODUCTS}
+                element={
+                  <ProtectedRoute requiredRole="ADMIN">
+                    <AdminProductsPage />
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Fallback to Home */}
+              <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
+            </Routes>
+          </main>
+
+          {/* Universal Full-screen Footer */}
+          <Footer />
+
+          {/* Interactive Role Switcher Toolbar for Visual Review & Testing */}
+          <RoleSwitcher />
+        </div>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
