@@ -147,7 +147,15 @@ living wealth 365/
   - Top KPI Cards: Upgraded to modern SaaS stat cards with large bold metrics, trend indicators, and glowing icon containers.
 - **Verification**: Verified via `npm run build` in 998ms with zero errors.
 
-## 9. How to Run
+## 9. Registration Form Confirm Password & Real-Time Validation
+- **Added Confirm Password**:
+  - Updated `RegisterPage.jsx` with dedicated `confirmPassword` input.
+  - Implemented real-time password matching status: displays green `CheckCircle2` with "ตรงกัน" badge when matched, red badge "ไม่ตรงกัน" when mismatched.
+  - Dynamic input border states: `input-success` on match, `input-error` on mismatch.
+  - Form validation: checks password minimum length (>= 6 chars) with toast warning, and password match validation before customer login.
+- **Verification**: Verified via `npm run build` in 940ms with zero errors.
+
+## 10. How to Run
 ### Frontend:
 ```bash
 cd "living wealth 365 front end"
@@ -161,6 +169,7 @@ cd "living wealth 365_backend"
 npm run dev
 # Server runs on http://localhost:5001 (Health check: /api/health)
 ```
+
 
 
 
