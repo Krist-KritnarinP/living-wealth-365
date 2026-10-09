@@ -388,6 +388,27 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - All 10 project tests passing cleanly (`npm test`).
   - Production build successful (`npm run build`).
 
+## 21. Spectacular Birthday Stone Calculator Visual FX & 3D Gemstone Display
+- **Visual Design & FX Engine (`src/components/mutelu/StoneCalculator.jsx`)**:
+  - **Dynamic Ambient Backdrop Glow**: Large soft blurred radial-gradient halo placed behind the Zen Glass container that morphs colors and pulses (`animate-pulse-glow`) in real time according to the active day.
+  - **Celestial Day Selector Tabs**:
+    - Complete cosmic palette for all 7 days with astrological symbols (☀️ 🌙 🌸 🌿 👑 💎 🪐) and dual-tone sacred color dots.
+    - Active tab elevates with scaled size (`scale-105`), glowing ring, and day-specific vibrant gradient.
+    - Inactive tabs feature responsive hover glows matching the day's auspicious color.
+  - **3D Gemstone Crystal Orb Display**:
+    - Floating gemstone sphere (`animate-float-gem`) with realistic radial gradients reflecting the authentic gemstone color (Ruby Gold, Tiger Eye Amber, Rose Quartz Pink, Emerald Malachite, Imperial Golden Topaz, Sapphire Cyan, Cosmic Amethyst Violet).
+    - High-gloss specular highlight arc, rotating dashed outer halo ring (`animate-aura-spin-slow`), counter-rotating glow circle, and 4 floating twinkling stars (`animate-sparkle-twinkle`).
+    - Genuine product thumbnail integration with real pricing when matched from database products.
+  - **The Epic Shimmer CTA Button**:
+    - Full-width day-themed glowing gradient button.
+    - Continuous light streak sweep animation (`animate-shimmer-sweep`) with hover scaling (`hover:scale-[1.01]`).
+- **Animation Suite in `src/index.css`**:
+  - Added keyframes and utility classes: `animate-shimmer-sweep`, `animate-pulse-glow`, `animate-float-gem`, `animate-sparkle-twinkle`, and `animate-aura-spin-slow`.
+- **Verification**:
+  - All 10 test suites passed (`npm test`).
+  - Production build cleanly succeeded in 781ms (`npm run build`).
+
+
 
 
 
