@@ -155,7 +155,17 @@ living wealth 365/
   - Form validation: checks password minimum length (>= 6 chars) with toast warning, and password match validation before customer login.
 - **Verification**: Verified via `npm run build` in 940ms with zero errors.
 
-## 10. How to Run
+## 10. Development Roadmap Documentation (roadmap.md)
+- **Created Roadmap Specification**: `roadmap.md` placed in root directory documenting the 6 strategic development phases of Living Wealth 365.
+- **Progress Tracking**:
+  - Phase 1 (Discovery & Planning): Completed (Requirements, Tech Stack, Hosting Architecture, Schema, Notification strategy).
+  - Phase 2 (UI/UX Design & Theming): Completed (CI Colors, Zen Glass theme, Wireframes, Screen layouts, Light/Dark logos).
+  - Phase 3 (Frontend Development): Completed (Pure React JS, 100% Full-Screen, CRM Collapsible Sidebar, Bilingual, daisyUI Toasts/Modals, Confirm Password, Interactive Prototypes).
+  - Phase 4 (Backend & API Integration): Next planned phase (Database setup, JWT Auth, Lead API, Webhook notifications).
+  - Phase 5 (Testing & QA): Pending Phase 4 completion.
+  - Phase 6 (Deployment & Launch): Pending Phase 5 completion.
+
+## 11. How to Run
 ### Frontend:
 ```bash
 cd "living wealth 365 front end"
