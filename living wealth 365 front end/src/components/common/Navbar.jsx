@@ -32,7 +32,6 @@ export default function Navbar() {
     { label: t('home'), path: ROUTES.HOME },
     { label: t('insuranceLife'), path: ROUTES.INSURANCE_LIFE },
     { label: t('insuranceNonLife'), path: ROUTES.INSURANCE_NON_LIFE },
-    { label: t('taxCalculator'), path: ROUTES.TAX_CALCULATOR },
     { label: t('mutelu'), path: ROUTES.MUTELU },
     { label: t('blog'), path: ROUTES.BLOG },
   ];

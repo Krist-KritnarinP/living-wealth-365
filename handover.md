@@ -408,6 +408,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - All 10 test suites passed (`npm test`).
   - Production build cleanly succeeded in 781ms (`npm run build`).
 
+## 22. Integration of Tax Calculator into Knowledge Hub & Refinement of Stone Calculator
+- **Consolidation of Tax Calculator into Knowledge Hub (`/blog`)**:
+  - Extracted tax computation engine and UI into reusable component [`src/components/tax/TaxCalculator.jsx`].
+  - Transformed [`src/pages/public/BlogPage.jsx`] into an All-in-One Hub with Feature Switcher:
+    - 📰 **คลังบทความความรู้ (Knowledge Articles)**: Category filter, search, and cross-feature tax banner.
+    - 🧮 **โปรแกรมคำนวณภาษี ภ.ง.ด. 90/91 (Tax Calculator)**: Interactive tax calculator with progressive brackets and AIA lead capture consultation modal.
+    - Supports URL query parameter: `/blog?tab=calculator` switches directly to the tax calculator.
+  - Streamlined Navbar: Consolidated under "คลังความรู้ & ภาษี" (`/blog`), keeping top menu uncluttered.
+  - Redirect: `/tax-calculator` smoothly navigates to `/blog?tab=calculator`.
+- **Refinement of Birthday Stone Calculator (`StoneCalculator.jsx`)**:
+  - **Compact Dimensions**: Reduced nested redundant box containers; unified into a balanced, well-proportioned `max-w-4xl` frame with comfortable padding.
+  - **Dynamic Theme Gradient Background**: Replaced plain white background with tailored multi-color gradients shifting in real-time according to the selected day's sacred palette (e.g., warm amber-orange for Thursday, emerald-jade for Wednesday, rose-quartz for Tuesday).
+  - **Zero Overflow Guarantee**: Contained sparkles inside bounds, shortened and beautified CTA button label (`truncate max-w-[85%]`), ensuring clean responsive wrapping on all screen sizes.
+- **Verification**:
+  - All 10 test suites passed (`npm test`).
+  - Production build successful (`npm run build` completed in 767ms).
+
 
 
 

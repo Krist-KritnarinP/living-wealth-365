@@ -21,7 +21,6 @@ import BlogDetailPage from './pages/public/BlogDetailPage';
 import LoginPage from './pages/public/LoginPage';
 import RegisterPage from './pages/public/RegisterPage';
 import ThankYouPage from './pages/public/ThankYouPage';
-import TaxCalculatorPage from './pages/public/TaxCalculatorPage';
 
 // Customer Pages
 import AccountDashboardPage from './pages/account/AccountDashboardPage';
@@ -68,7 +67,7 @@ function AppShell() {
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.THANK_YOU} element={<ThankYouPage />} />
-          <Route path={ROUTES.TAX_CALCULATOR} element={<TaxCalculatorPage />} />
+          <Route path="/tax-calculator" element={<Navigate to="/blog?tab=calculator" replace />} />
 
           {/* 👤 2. Customer Routes (Role: CUSTOMER) */}
           <Route
