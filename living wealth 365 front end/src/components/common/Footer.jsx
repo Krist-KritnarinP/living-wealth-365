@@ -12,8 +12,8 @@ export default function Footer() {
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <BrandLogo size="md" />
-              <span className="text-xl font-black text-primary">
-                Living Wealth <span className="text-secondary">365</span>
+              <span className="text-xl font-black text-primary notranslate" translate="no">
+                Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
               </span>
             </div>
             <p className="text-sm text-base-content/70 leading-relaxed">

@@ -54,11 +54,11 @@ export default function Navbar() {
           aria-label="Living Wealth 365 หน้าแรก"
         >
           <BrandLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
-          <div className="flex flex-col min-w-0">
-            <span className="text-base sm:text-xl lg:text-2xl font-black tracking-tight text-primary leading-tight truncate">
-              Living Wealth <span className="text-secondary">365</span>
+          <div className="flex flex-col min-w-0 notranslate" translate="no">
+            <span className="text-base sm:text-xl lg:text-2xl font-black tracking-tight text-primary leading-tight truncate notranslate" translate="no">
+              Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
             </span>
-            <span className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wide zen-muted truncate">
+            <span className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wide zen-muted truncate notranslate" translate="no">
               FINANCIAL & WEALTH ADVISORY
             </span>
           </div>

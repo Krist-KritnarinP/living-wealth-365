@@ -119,17 +119,67 @@ export const TRANSLATIONS = {
   },
 };
 
+// Helper to apply Google Translate programmatically
+function triggerGoogleTranslate(targetLang) {
+  if (typeof window === 'undefined') return;
+
+  const hostname = window.location.hostname;
+  if (targetLang === 'en') {
+    document.cookie = 'googtrans=/th/en; path=/;';
+    if (hostname && hostname !== 'localhost') {
+      document.cookie = `googtrans=/th/en; path=/; domain=.${hostname};`;
+    }
+  } else {
+    document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'googtrans=/th/th; path=/;';
+    if (hostname && hostname !== 'localhost') {
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${hostname};`;
+      document.cookie = `googtrans=/th/th; path=/; domain=.${hostname};`;
+    }
+  }
+
+  const fireChange = () => {
+    const combo = document.querySelector('.goog-te-combo');
+    if (combo) {
+      combo.value = targetLang;
+      combo.dispatchEvent(new Event('change'));
+      return true;
+    }
+    return false;
+  };
+
+  if (!fireChange()) {
+    let retries = 0;
+    const interval = setInterval(() => {
+      retries++;
+      if (fireChange() || retries >= 15) {
+        clearInterval(interval);
+      }
+    }, 200);
+  }
+}
+
 export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(() => {
+  const [language, setLanguageState] = useState(() => {
     return localStorage.getItem('lw365_lang') || 'th';
   });
 
+  // Apply on mount if user had previously chosen 'en'
   useEffect(() => {
-    localStorage.setItem('lw365_lang', language);
-  }, [language]);
+    if (language === 'en') {
+      triggerGoogleTranslate('en');
+    }
+  }, []);
+
+  const setLanguage = (newLang) => {
+    setLanguageState(newLang);
+    localStorage.setItem('lw365_lang', newLang);
+    triggerGoogleTranslate(newLang);
+  };
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === 'th' ? 'en' : 'th'));
+    const nextLang = language === 'th' ? 'en' : 'th';
+    setLanguage(nextLang);
   };
 
   const t = (key) => {
