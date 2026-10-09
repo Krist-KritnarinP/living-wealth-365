@@ -265,6 +265,11 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Fixed squished/wrapped badges across `AdminInsurancePage`, `AdminProductsPage`, `AdminBlogPage`, and `StatusBadge`.
   - Applied `whitespace-nowrap`, comfortable padding (`px-3 py-1.5`), and minimum column widths to prevent Thai words (e.g. "เปิดใช้งาน", "วางแผนเกษียณ & บำนาญ") from wrapping into multiple overlapping lines.
   - Implemented cohesive Zen Glass semi-transparent pill style with matching theme colors.
+- **Full-Width Modal Form Layout (`AdminInsurancePage`, `AdminProductsPage`, `AdminBlogPage`)**:
+  - Replaced legacy `.form-control` and `.label` inline-flex behaviors which caused labels and input boxes to sit awkwardly side-by-side with half-empty widths.
+  - Upgraded all modal fields to modern `flex flex-col gap-1.5 w-full` with `w-full` inputs and textareas.
+  - Labels now sit cleanly on top of each field, and every input/select/textarea stretches 100% full-width across the container.
 - **Verification**:
   - All 6 unit tests passing (`npm test`).
-  - Production build clean (`npm run build` passed in 756ms).
+  - Production build clean (`npm run build` passed in 711ms).
+
