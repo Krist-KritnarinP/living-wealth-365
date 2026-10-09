@@ -269,7 +269,20 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Replaced legacy `.form-control` and `.label` inline-flex behaviors which caused labels and input boxes to sit awkwardly side-by-side with half-empty widths.
   - Upgraded all modal fields to modern `flex flex-col gap-1.5 w-full` with `w-full` inputs and textareas.
   - Labels now sit cleanly on top of each field, and every input/select/textarea stretches 100% full-width across the container.
+## 15. Google Translate Engine Integration & Brand Term Protection
+- **Whole-Website Automatic Translation Integration**:
+  - Embedded Google Translate Engine via `index.html` with callback `googleTranslateElementInit`.
+  - Tied directly to the existing `toggleLanguage()` button in `LanguageContext.jsx` and `Navbar.jsx`.
+  - Clicking `🇹🇭 TH` / `🇬🇧 EN` automatically translates **all paragraphs, cards, descriptions, blog posts, and dynamic content on the entire website on-the-fly** via Google Neural Machine Translation (NMT).
+- **React Virtual DOM Crash Prevention**:
+  - Added safe DOM node patch (`Node.prototype.removeChild` and `Node.prototype.insertBefore`) in `index.html` to eliminate any potential React virtual DOM desynchronization issues caused by Google Translate text node mutations.
+- **Clean Zen UI Preservation**:
+  - Applied CSS overrides in `index.css` to hide Google's default iframe banner, popups, and highlight tooltips.
+  - Ensures the layout never shifts (`top: 0px !important`) and maintains the sleek Zen Glass navigation aesthetic.
+- **Brand Name & Key Terms Protection (`notranslate`)**:
+  - Added `notranslate` class and `translate="no"` attributes to "Living Wealth 365" brand identity in `Navbar.jsx` and `Footer.jsx` to prevent the brand name from being translated or mangled.
 - **Verification**:
   - All 6 unit tests passing (`npm test`).
-  - Production build clean (`npm run build` passed in 711ms).
+  - Production build clean (`npm run build` passed in 841ms).
+
 
