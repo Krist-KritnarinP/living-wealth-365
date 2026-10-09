@@ -251,13 +251,20 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Frontend Live API & Graceful Offline Fallback**:
   - `AuthContext.jsx` connects to live backend on mount (`http://localhost:5001/api/...`).
   - Utilizes `Promise.allSettled` to guarantee the application never crashes or shows white screens if the backend or database is restarting.
+## 14. UI/UX Polishing: Custom Contact & Call Modal and Table Pill Badges
+- **Custom Contact & Call Modal (`AdminDashboardPage.jsx`)**:
+  - Replaced the raw `<a href="tel:...">` which triggered the browser's native popup alert (`Open Phone?`) on desktop browsers with an interactive **Custom Contact Modal**.
+  - **Features**:
+    - Displays full customer details: Name, Lead ID, Topic/Interest, Convenient time, and current Status badge.
+    - Large phone number display with **1-Click Copy** (`คัดลอกเบอร์โทร`) providing immediate clipboard copy and visual feedback without browser popups.
+    - Deliberate "โทรออก (tel:)" button for mobile or desktop softphone users.
+    - 1-Click shortcut to transition status from `NEW` to `CONTACTED` ("ปรับเป็น 'กำลังคุยแผน'").
+    - Shortcut to open the consultation note modal directly ("จดบันทึกการคุย").
+    - Closes gracefully via backdrop click, top-right close button, or ESC key.
+- **Table Status & Category Pill Badges (Anti-Squish Fix)**:
+  - Fixed squished/wrapped badges across `AdminInsurancePage`, `AdminProductsPage`, `AdminBlogPage`, and `StatusBadge`.
+  - Applied `whitespace-nowrap`, comfortable padding (`px-3 py-1.5`), and minimum column widths to prevent Thai words (e.g. "เปิดใช้งาน", "วางแผนเกษียณ & บำนาญ") from wrapping into multiple overlapping lines.
+  - Implemented cohesive Zen Glass semi-transparent pill style with matching theme colors.
 - **Verification**:
   - All 6 unit tests passing (`npm test`).
-  - Vite production build clean (`npm run build` completed in < 1s).
-  - API endpoint verified via curl (`GET http://localhost:5001/api/insurance-plans` returning 200 OK with seeded plans).
-
-
-
-
-
-
+  - Production build clean (`npm run build` passed in 756ms).
