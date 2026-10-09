@@ -118,7 +118,21 @@ living wealth 365/
   - `RoleSwitcher.jsx`: Floating toolbar to test between Guest 👁️, Customer 👤, and Admin 🔒 in 1 click.
   - Build verified cleanly via `npm run build` with zero errors.
 
-## 7. How to Run
+## 7. Professional CRM Dashboard, Bilingual Support, daisyUI Toast & Modal
+- **Dashboard Layout with Collapsible Left Sidebar**:
+  - Created `DashboardLayout.jsx` specifically for `/account/*` and `/admin/*` routes.
+  - Collapsible Sidebar with smooth desktop expand/collapse rail (persisted in `localStorage`), mobile off-canvas drawer, badge counters, and direct user profile/logout footer.
+  - Clean separation: Marketing `Navbar` and `Footer` are hidden inside `/account` and `/admin`, giving a pure professional SaaS CRM experience.
+- **Bilingual Support (🇹🇭 TH / 🇬🇧 EN)**:
+  - Created `LanguageContext.jsx` with instant translation switching across navigation, buttons, roles, and status messages.
+  - Language switcher button placed on marketing `Navbar` and Dashboard `Topbar`.
+- **daisyUI Toast & Modal System (Replaced `window.alert` & `window.confirm`)**:
+  - Created `ToastContext.jsx` (`showToast(msg, type)`): Renders elegant floating alerts (`toast toast-top toast-end z-50`).
+  - Created `ConfirmModal.jsx`: Reusable daisyUI modal replacing destructive `window.confirm` dialogs.
+  - Replaced browser `alert` in article sharing with `showToast`.
+- **Verification**: Verified via `npm run build` in 654ms with zero errors. Pure React JS (no TypeScript).
+
+## 8. How to Run
 ### Frontend:
 ```bash
 cd "living wealth 365 front end"
@@ -132,5 +146,6 @@ cd "living wealth 365_backend"
 npm run dev
 # Server runs on http://localhost:5001 (Health check: /api/health)
 ```
+
 
 

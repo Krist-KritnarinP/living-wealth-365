@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Sun, Moon, Heart, Menu, X, User, Shield, LogIn } from 'lucide-react';
+import { Sun, Moon, Heart, Menu, X, User, Shield, LogIn, Globe } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { ROUTES } from '../../constants/routes';
 
 export default function Navbar() {
   const { theme, toggleTheme, currentUser, wishlist } = useAuth();
+  const { language, toggleLanguage, t } = useLanguage();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: 'หน้าหลัก', path: ROUTES.HOME },
-    { label: 'ประกันชีวิต & สุขภาพ', path: ROUTES.INSURANCE_LIFE },
-    { label: 'ประกันวินาศภัย', path: ROUTES.INSURANCE_NON_LIFE },
-    { label: 'วัตถุมงคลสายมู', path: ROUTES.MUTELU },
-    { label: 'คลังความรู้ & ภาษี', path: ROUTES.BLOG },
+    { label: t('home'), path: ROUTES.HOME },
+    { label: t('insuranceLife'), path: ROUTES.INSURANCE_LIFE },
+    { label: t('insuranceNonLife'), path: ROUTES.INSURANCE_NON_LIFE },
+    { label: t('mutelu'), path: ROUTES.MUTELU },
+    { label: t('blog'), path: ROUTES.BLOG },
   ];
 
   const isActive = (path) => {
@@ -68,7 +70,7 @@ export default function Navbar() {
           <Link
             to={currentUser ? ROUTES.ACCOUNT_WISHLIST : ROUTES.MUTELU}
             className="btn btn-ghost btn-circle btn-sm sm:btn-md relative"
-            title="รายการของมงคลที่สนใจ"
+            title={t('savedWishlist')}
           >
             <Heart
               className={`w-5 h-5 ${
@@ -81,6 +83,18 @@ export default function Navbar() {
               </span>
             )}
           </Link>
+
+          {/* Bilingual Switcher (TH / EN) */}
+          <button
+            onClick={toggleLanguage}
+            className="btn btn-ghost btn-sm rounded-xl font-bold gap-1 px-2.5 border border-base-300/40"
+            title="สลับภาษา / Switch Language"
+          >
+            <Globe className="w-4 h-4 text-primary" />
+            <span className="text-xs uppercase font-black text-secondary">
+              {language === 'th' ? '🇹🇭 TH' : '🇬🇧 EN'}
+            </span>
+          </button>
 
           {/* Theme Toggle */}
           <button
@@ -104,8 +118,8 @@ export default function Navbar() {
                 className="btn btn-secondary btn-sm sm:btn-md text-white font-bold gap-1.5 px-3 sm:px-5 rounded-xl shadow-xs"
               >
                 <Shield className="w-4 h-4" />
-                <span className="hidden sm:inline">ระบบจัดการแอดมิน</span>
-                <span className="sm:hidden">แอดมิน</span>
+                <span className="hidden sm:inline">{t('adminCrm')}</span>
+                <span className="sm:hidden">CRM</span>
               </Link>
             ) : (
               <Link
@@ -113,8 +127,8 @@ export default function Navbar() {
                 className="btn btn-primary btn-outline btn-sm sm:btn-md font-bold gap-1.5 px-3 sm:px-5 rounded-xl"
               >
                 <User className="w-4 h-4" />
-                <span className="hidden sm:inline">{currentUser.name}</span>
-                <span className="sm:hidden">บัญชี</span>
+                <span className="hidden sm:inline">{currentUser.name || t('account')}</span>
+                <span className="sm:hidden">{t('account')}</span>
               </Link>
             )
           ) : (
@@ -123,7 +137,7 @@ export default function Navbar() {
               className="btn btn-primary btn-sm sm:btn-md font-bold gap-1.5 px-3 sm:px-5 rounded-xl shadow-xs"
             >
               <LogIn className="w-4 h-4" />
-              <span>เข้าสู่ระบบ</span>
+              <span>{t('login')}</span>
             </Link>
           )}
 
@@ -164,21 +178,21 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="px-4 py-2 rounded-xl text-sm font-semibold hover:bg-base-200"
                   >
-                    👤 ข้อมูลส่วนตัว
+                    👤 {t('profileOverview')}
                   </Link>
                   <Link
                     to={ROUTES.ACCOUNT_HISTORY}
                     onClick={() => setMobileMenuOpen(false)}
                     className="px-4 py-2 rounded-xl text-sm font-semibold hover:bg-base-200"
                   >
-                    📋 ประวัติการปรึกษา
+                    📋 {t('consultationHistory')}
                   </Link>
                   <Link
                     to={ROUTES.ACCOUNT_WISHLIST}
                     onClick={() => setMobileMenuOpen(false)}
                     className="px-4 py-2 rounded-xl text-sm font-semibold hover:bg-base-200"
                   >
-                    ❤️ ของมงคลที่บันทึกไว้
+                    ❤️ {t('savedWishlist')}
                   </Link>
                 </>
               )}

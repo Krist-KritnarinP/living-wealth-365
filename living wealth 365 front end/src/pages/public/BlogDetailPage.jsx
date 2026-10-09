@@ -1,12 +1,14 @@
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Clock, User, Share2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import { ROUTES } from '../../constants/routes';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 
 export default function BlogDetailPage() {
   const { slug } = useParams();
   const { posts } = useAuth();
+  const { showToast } = useToast();
 
   const post = posts.find((p) => p.slug === slug) || posts[0];
 
@@ -128,7 +130,7 @@ export default function BlogDetailPage() {
                 navigator.share({ title: post.title, url: window.location.href });
               } else {
                 navigator.clipboard.writeText(window.location.href);
-                alert('คัดลอกลิงก์บทความเรียบร้อยแล้ว!');
+                showToast('คัดลอกลิงก์บทความเรียบร้อยแล้ว!', 'success');
               }
             }}
             className="btn btn-outline btn-sm rounded-xl font-bold"

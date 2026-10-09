@@ -1,4 +1,4 @@
-import { ShieldCheck, HeartPulse, CheckCircle2, Award, Zap, PhoneCall } from 'lucide-react';
+import { ShieldCheck, CheckCircle2, Award, PhoneCall } from 'lucide-react';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 
 export default function LifeInsurancePage() {
