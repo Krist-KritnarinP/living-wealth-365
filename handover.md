@@ -281,8 +281,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Ensures the layout never shifts (`top: 0px !important`) and maintains the sleek Zen Glass navigation aesthetic.
 - **Brand Name & Key Terms Protection (`notranslate`)**:
   - Added `notranslate` class and `translate="no"` attributes to "Living Wealth 365" brand identity in `Navbar.jsx` and `Footer.jsx` to prevent the brand name from being translated or mangled.
+## 16. Bug Fix: Blog Author Object Rendering Resolution
+- **Issue**:
+  - Accessing `http://localhost:5173/admin/cms/blog` triggered React Error: `Uncaught Error: Objects are not valid as a React child (found: object with keys {name, username})`.
+- **Root Cause**:
+  - The live backend MySQL API (`GET /api/posts`) includes author relation as an object: `author: { name: '...', username: '...' }`.
+  - Frontend was directly attempting to render `{post.author}` as a child in JSX table cells and blog cards without checking for object type.
+- **Solution**:
+  - Normalized `author` and `publishedAt` in `AuthContext.jsx` upon fetching from API.
+  - Added safe fallback extraction (`typeof post.author === 'object' ? post.author?.name || post.author?.username : post.author`) across:
+    - `AdminBlogPage.jsx`
+    - `BlogPage.jsx`
+    - `BlogDetailPage.jsx`
 - **Verification**:
   - All 6 unit tests passing (`npm test`).
-  - Production build clean (`npm run build` passed in 841ms).
+  - Production build clean (`npm run build` passed in 1.57s).
+
 
 
