@@ -212,10 +212,50 @@ npm run dev   # Runs on http://localhost:5173
 ### Backend:
 ```bash
 cd "living wealth 365_backend"
-# กรอกรหัสผ่าน MySQL ใน .env ที่ DATABASE_URL ก่อนรัน npx prisma db push
-npm run dev
-# Server runs on http://localhost:5001 (Health check: /api/health)
+npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 ```
+
+## 13. Live MySQL Backend Integration & Insurance Plan CMS (Latest Milestone)
+- **Local MySQL Workbench & Prisma Synchronization**:
+  - Connected backend to local MySQL (`mysql://root:***@localhost:3306/living_wealth_365`).
+  - Added `InsurancePlan` model in `schema.prisma` with fields: `id`, `type` (LIFE / NON_LIFE), `category`, `categoryName`, `name`, `slug`, `tagline`, `coverageAmount`, `startingPrice`, `features` (JSON string array), `recommendedFor`, `description`, `isActive`, `sortOrder`, `createdAt`, `updatedAt`.
+  - Executed `npx prisma db push` to generate and apply database tables cleanly.
+- **Comprehensive Database Seeding (`seed.js`)**:
+  - **Admin User**: `admin_lw` (`admin@livingwealth365.com` / `Admin@365Living!`)
+  - **Customer User**: `somchai_lw` (`somchai@example.com` / `Customer@123`)
+  - **7 Insurance Plans Seeded**:
+    1. *AIA Health Happy เหมาเบิ้ลคุ้ม* (HEALTH) - วงเงิน 5-25 ล้านบาท
+    2. *AIA Multi-Pay CI โรคร้ายเจอจ่ายหลายรอบ* (CRITICAL_ILLNESS) - วงเงิน 1-5 ล้านบาท
+    3. *AIA Annuity Fix วางแผนเกษียณมีเงินใช้* (RETIREMENT) - วงเงินคืนปีละ 12-24%
+    4. *AIA Super Care คุ้มครองตลอดชีพ* (LIFE) - วงเงิน 1-10 ล้านบาท
+    5. *ประกันรถยนต์ชั้น 1 ซ่อมห้าง* (MOTOR) - วงเงิน 2,000,000 บาท
+    6. *ประกันอัคคีภัย & ทรัพย์สิน Home Safety 365* (PROPERTY) - วงเงิน 5,000,000 บาท
+    7. *ประกันอุบัติเหตุส่วนบุคคล PA Plus* (PA) - วงเงิน 1,000,000 บาท
+  - **Mu-Tae-Lu Stone Products**: 6 auspicious bracelets and stones with full descriptions, prices, and stock.
+  - **Knowledge Articles**: 3 financial and tax planning blog articles.
+  - **Sample Leads & Customer Wishlist**: Pre-seeded for immediate testing in Admin CRM and Customer Account.
+- **Backend API Endpoints (`/api/insurance-plans`)**:
+  - `GET /api/insurance-plans`: Public endpoint to query active insurance plans with optional `?type=LIFE|NON_LIFE` and `?category=...` filters.
+  - `GET /api/insurance-plans/:slug`: Public endpoint to fetch single plan details.
+  - `POST /api/insurance-plans`: Admin-only endpoint to create new plans.
+  - `PATCH /api/insurance-plans/:id`: Admin-only endpoint to update plan details, pricing, coverage, or toggle `isActive`.
+  - `DELETE /api/insurance-plans/:id`: Admin-only endpoint to remove plans.
+- **Frontend Plan Comparison & Lead Capture**:
+  - Created `PlanCard.jsx` displaying coverage highlights, price per year, bullet features, and "ดูรายละเอียด" modal.
+  - "ขอรับข้อเสนอแผนนี้" button passes the chosen plan into `LeadCaptureForm.jsx` as an active selection card.
+  - Integrated into `LifeInsurancePage.jsx` and `NonLifeInsurancePage.jsx`.
+- **Admin Insurance CMS (`AdminInsurancePage.jsx`)**:
+  - Mounted route: `/admin/cms/insurance` (`ROUTES.ADMIN_INSURANCE`).
+  - Added to Admin sidebar in `DashboardLayout.jsx` with real-time plan count badge.
+  - Features: Type filter (All / ประกันชีวิต / ประกันวินาศภัย), Search by name/tagline, toggle active status directly from table, Add/Edit modal with multi-feature tags, and delete confirmation modal.
+- **Frontend Live API & Graceful Offline Fallback**:
+  - `AuthContext.jsx` connects to live backend on mount (`http://localhost:5001/api/...`).
+  - Utilizes `Promise.allSettled` to guarantee the application never crashes or shows white screens if the backend or database is restarting.
+- **Verification**:
+  - All 6 unit tests passing (`npm test`).
+  - Vite production build clean (`npm run build` completed in < 1s).
+  - API endpoint verified via curl (`GET http://localhost:5001/api/insurance-plans` returning 200 OK with seeded plans).
+
 
 
 

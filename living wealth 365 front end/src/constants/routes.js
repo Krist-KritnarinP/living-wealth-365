@@ -17,6 +17,7 @@ export const ROUTES = {
 
   // Admin
   ADMIN_DASHBOARD: '/admin/dashboard',
+  ADMIN_INSURANCE: '/admin/cms/insurance',
   ADMIN_BLOG: '/admin/cms/blog',
   ADMIN_PRODUCTS: '/admin/cms/products',
 };

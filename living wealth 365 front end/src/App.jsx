@@ -29,6 +29,7 @@ import AccountWishlistPage from './pages/account/AccountWishlistPage';
 
 // Admin Pages
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminInsurancePage from './pages/admin/AdminInsurancePage';
 import AdminBlogPage from './pages/admin/AdminBlogPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
 
@@ -115,6 +116,14 @@ function AppShell() {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminProductsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.ADMIN_INSURANCE}
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminInsurancePage />
               </ProtectedRoute>
             }
           />

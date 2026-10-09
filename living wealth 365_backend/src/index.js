@@ -11,6 +11,7 @@ import { leadsRouter } from './routes/leads.js';
 import { postsRouter } from './routes/posts.js';
 import { productsRouter } from './routes/products.js';
 import { wishlistRouter } from './routes/wishlist.js';
+import { insurancePlansRouter } from './routes/insurancePlans.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -36,6 +37,7 @@ app.use('/api/leads', leadsRouter);
 app.use('/api/posts', postsRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/wishlist', wishlistRouter);
+app.use('/api/insurance-plans', insurancePlansRouter);
 
 // Global Error Handler
 app.use(errorHandler);

@@ -128,3 +128,28 @@ model Wishlist {
   @@unique([userId, productId])
   @@map("wishlists")
 }
+
+// 6. แผนประกันภัยและการเงิน (Insurance Plans CMS & Comparison)
+model InsurancePlan {
+  id             String   @id @default(uuid())
+  type           String   // 'LIFE' (ชีวิต/สุขภาพ/โรคร้าย/เกษียณ) หรือ 'NON_LIFE' (รถ/บ้าน/ธุรกิจ/PA)
+  category       String   // เช่น 'HEALTH', 'CRITICAL_ILLNESS', 'RETIREMENT', 'TAX', 'MOTOR', 'PROPERTY', 'PA'
+  categoryName   String   // เช่น 'ประกันสุขภาพเหมาจ่าย', 'คุ้มครองโรคร้ายแรง', 'วางแผนบำนาญ'
+  name           String   // ชื่อแผนประกัน เช่น 'AIA Health Happy', 'AIA Multi-Pay CI'
+  slug           String   @unique
+  tagline        String?  // คำโปรย เช่น 'เหมาจ่ายค่ารักษาพยาบาลสูงสุด 25 ล้านบาท/รอบปีกรมธรรม์'
+  coverageAmount String?  // เช่น 'สูงสุด 25,000,000 บาท'
+  startingPrice  String?  // เช่น 'เริ่มต้น 1,850 บ./เดือน'
+  features       String   @db.Text // จุดเด่นความคุ้มครอง (เก็บเป็น JSON string หรือรายการคั่นด้วย newline)
+  recommendedFor String?  // เช่น 'คนวัยทำงาน, ผู้ที่ต้องการคุ้มครองค่ารักษาพยาบาล รพ.เอกชน'
+  description    String   @db.Text // รายละเอียดเชิงลึกและเงื่อนไข
+  imageUrl       String?  @db.Text
+  brochureUrl    String?  @db.Text
+  isActive       Boolean  @default(true) // แอดมินสามารถเปิด/ปิด หรือยกเลิกแผนได้
+  sortOrder      Int      @default(0)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("insurance_plans")
+}

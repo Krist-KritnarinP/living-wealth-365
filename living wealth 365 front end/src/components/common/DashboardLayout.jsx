@@ -15,6 +15,7 @@ import {
   ExternalLink,
   Menu,
   X,
+  ShieldCheck,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -23,7 +24,7 @@ import { ROUTES } from '../../constants/routes';
 import BrandLogo from './BrandLogo';
 
 export default function DashboardLayout({ children, type = 'customer' }) {
-  const { currentUser, logout, theme, toggleTheme, wishlist, leads, posts, products } = useAuth();
+  const { currentUser, logout, theme, toggleTheme, wishlist, leads, posts, products, insurancePlans = [] } = useAuth();
   const { language, toggleLanguage, t } = useLanguage();
   const { showToast } = useToast();
   const location = useLocation();
@@ -84,6 +85,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       icon: Users,
       badge: newLeadsCount > 0 ? `${newLeadsCount} New` : null,
       badgeColor: 'badge-warning text-warning-content font-bold',
+    },
+    {
+      title: 'จัดการแผนประกัน',
+      path: ROUTES.ADMIN_INSURANCE,
+      icon: ShieldCheck,
+      badge: insurancePlans.length > 0 ? insurancePlans.length : null,
+      badgeColor: 'badge-primary text-white',
     },
     {
       title: t('cmsBlog'),
