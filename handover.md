@@ -84,7 +84,15 @@ living wealth 365/
             └── health.js              # GET /api/health
 ```
 
-## 4. How to Run
+## 5. Master Architecture Specification (ARCHITECTURE.md)
+- **Approved & Created**: `living wealth 365 front end/ARCHITECTURE.md`
+- **Master Route Summary**:
+  - **Public Routes**: `/` (Home), `/insurance/life`, `/insurance/non-life`, `/mutelu`, `/blog`, `/blog/:slug`, `/login`, `/register`, `/thank-you`
+  - **Customer Routes (Role: CUSTOMER)**: `/account` (Overview), `/account/history` (Consultation status tracking), `/account/wishlist` (Saved auspicious items)
+  - **Admin Routes (Role: ADMIN)**: `/admin/dashboard` (Leads CRM pipeline), `/admin/cms/blog`, `/admin/cms/products`
+- **Clean Structure**: Separated Frontend (`src/pages/`, `src/components/`, `src/context/`, `src/api/`) and Backend (`prisma/`, `src/routes/`, `src/controllers/`, `src/middlewares/`).
+
+## 6. How to Run
 ### Backend:
 ```bash
 cd "living wealth 365_backend"
@@ -98,3 +106,4 @@ cd "living wealth 365 front end"
 npm run dev
 # Runs on http://localhost:5173
 ```
+
