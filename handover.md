@@ -73,7 +73,7 @@ living wealth 365/
     ├── note/
     │   └── guidelines.md              # Engineering rules copy for backend
     ├── prisma/
-    │   └── schema.prisma              # Official models: Admin, Lead, Post, Product, LeadStatus enum
+    │   └── schema.prisma              # Official models: User, Lead, Post, Product, Wishlist, Enums: Role, LeadStatus
     └── src/
         ├── index.js                   # Base Express server entry point
         ├── lib/
