@@ -96,7 +96,23 @@ export function AuthProvider({ children }) {
         setInsurancePlans(fetchedPlans.value);
       }
       if (fetchedPosts.status === 'fulfilled' && Array.isArray(fetchedPosts.value)) {
-        setPosts(fetchedPosts.value);
+        const normalizedPosts = fetchedPosts.value.map((p) => ({
+          ...p,
+          author:
+            typeof p.author === 'object'
+              ? p.author?.name || p.author?.username || 'ทีมที่ปรึกษา Living Wealth 365'
+              : p.author || 'ทีมที่ปรึกษา Living Wealth 365',
+          publishedAt:
+            p.publishedAt ||
+            (p.createdAt
+              ? new Date(p.createdAt).toLocaleDateString('th-TH', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric',
+                })
+              : 'ล่าสุด'),
+        }));
+        setPosts(normalizedPosts);
       }
       if (fetchedProducts.status === 'fulfilled' && Array.isArray(fetchedProducts.value)) {
         setProducts(fetchedProducts.value);

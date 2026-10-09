@@ -47,15 +47,27 @@ export default function BlogDetailPage() {
           <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-base-content/70 border-y border-base-300 py-3">
             <span className="flex items-center gap-1.5 font-semibold text-primary">
               <User className="w-4 h-4 text-secondary" />
-              {post.author}
+              {typeof post.author === 'object'
+                ? post.author?.name || post.author?.username || 'ทีมที่ปรึกษา'
+                : post.author || 'ทีมที่ปรึกษา'}
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">
               <Clock className="w-4 h-4" />
-              เวลาอ่าน {post.readTime}
+              เวลาอ่าน {post.readTime || '3 นาที'}
             </span>
             <span>•</span>
-            <span>เผยแพร่เมื่อ: {post.publishedAt}</span>
+            <span>
+              เผยแพร่เมื่อ:{' '}
+              {post.publishedAt ||
+                (post.createdAt
+                  ? new Date(post.createdAt).toLocaleDateString('th-TH', {
+                      year: 'numeric',
+                      month: 'short',
+                      day: 'numeric',
+                    })
+                  : 'ล่าสุด')}
+            </span>
           </div>
         </div>
 

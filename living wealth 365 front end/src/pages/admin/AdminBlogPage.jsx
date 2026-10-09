@@ -119,8 +119,21 @@ export default function AdminBlogPage() {
                       {post.category}
                     </span>
                   </td>
-                  <td className="whitespace-nowrap">{post.author}</td>
-                  <td className="whitespace-nowrap">{post.publishedAt}</td>
+                  <td className="whitespace-nowrap">
+                    {typeof post.author === 'object'
+                      ? post.author?.name || post.author?.username || 'ที่ปรึกษา'
+                      : post.author || 'ที่ปรึกษา'}
+                  </td>
+                  <td className="whitespace-nowrap">
+                    {post.publishedAt ||
+                      (post.createdAt
+                        ? new Date(post.createdAt).toLocaleDateString('th-TH', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                          })
+                        : '-')}
+                  </td>
                   <td className="whitespace-nowrap text-center">
                     <button
                       type="button"

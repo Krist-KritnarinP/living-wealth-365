@@ -101,7 +101,9 @@ export default function BlogPage() {
                     <div className="flex items-center gap-3 text-xs text-base-content/60">
                       <span className="flex items-center gap-1">
                         <User className="w-3.5 h-3.5 text-secondary" />
-                        {post.author}
+                        {typeof post.author === 'object'
+                          ? post.author?.name || post.author?.username || 'ทีมที่ปรึกษา'
+                          : post.author || 'ทีมที่ปรึกษา'}
                       </span>
                       <span>•</span>
                       <span className="flex items-center gap-1">
