@@ -6,6 +6,7 @@ import {
   ArrowRight,
   CheckCircle2,
   ChevronRight,
+  Calculator,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
@@ -59,6 +60,14 @@ export default function HomePage() {
                   <span>นัดหมายปรึกษาฟรี</span>
                   <ArrowRight className="w-5 h-5" />
                 </a>
+
+                <Link
+                  to={ROUTES.TAX_CALCULATOR}
+                  className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 gap-2"
+                >
+                  <Calculator className="w-5 h-5 text-secondary" />
+                  <span>คำนวณภาษีเบื้องต้น</span>
+                </Link>
 
                 <Link
                   to={ROUTES.MUTELU}
@@ -194,10 +203,10 @@ export default function HomePage() {
 
                 <div className="pt-6">
                   <Link
-                    to={ROUTES.INSURANCE_LIFE}
+                    to={pillar.id === 'legacy' ? ROUTES.TAX_CALCULATOR : ROUTES.INSURANCE_LIFE}
                     className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
                   >
-                    <span>ดูรายละเอียด</span>
+                    <span>{pillar.id === 'legacy' ? 'คำนวณและวางแผนภาษี' : 'ดูรายละเอียด'}</span>
                     <ChevronRight className="w-4 h-4" />
                   </Link>
                 </div>

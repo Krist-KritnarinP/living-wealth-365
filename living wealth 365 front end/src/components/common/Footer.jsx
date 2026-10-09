@@ -61,11 +61,11 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to={ROUTES.BLOG}
+                  to={ROUTES.TAX_CALCULATOR}
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1 h-1 rounded-full bg-secondary"></span>
-                  วางแผนภาษีบุคคลธรรมดา
+                  คำนวณและวางแผนภาษีบุคคลธรรมดา
                 </Link>
               </li>
             </ul>

@@ -3,6 +3,7 @@ export const ROUTES = {
   HOME: '/',
   INSURANCE_LIFE: '/insurance/life',
   INSURANCE_NON_LIFE: '/insurance/non-life',
+  TAX_CALCULATOR: '/tax-calculator',
   MUTELU: '/mutelu',
   BLOG: '/blog',
   BLOG_DETAIL: (slug = ':slug') => `/blog/${slug}`,

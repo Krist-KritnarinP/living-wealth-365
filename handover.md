@@ -350,6 +350,44 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit tests passing 6/6 (`npm test`).
   - Production build clean (`npm run build` passed in 665ms).
 
+## 20. Personal Income Tax Calculator (ระบบคำนวณภาษีเงินได้บุคคลธรรมดา ภ.ง.ด. 90/91)
+- **Engine Implementation (`src/utils/taxCalculator.js`)**:
+  - Implements Thai Revenue Department (กรมสรรพากร) progressive tax brackets (0% - 35%):
+    - 0 – 150,000 THB: 0% (ยกเว้น)
+    - 150,001 – 300,000 THB: 5%
+    - 300,001 – 500,000 THB: 10%
+    - 500,001 – 750,000 THB: 15%
+    - 750,001 – 1,000,000 THB: 20%
+    - 1,000,001 – 2,000,000 THB: 25%
+    - 2,000,001 – 5,000,000 THB: 30%
+    - เกิน 5,000,000 THB: 35%
+  - Standard statutory expenses (50% up to 100,000 THB).
+  - Deductions support:
+    - Personal allowance (60,000 THB)
+    - Spouse allowance (60,000 THB)
+    - Children allowance (30,000 THB / person)
+    - Parent allowance (30,000 THB / person)
+    - Social security (max 9,000 THB)
+    - General & health life insurance (max 100,000 THB)
+    - Annuity / pension insurance (max 15% of income, up to 200,000 THB)
+    - Retirement funds (Provident fund, RMF, SSF/Thai ESG)
+    - Home mortgage interest (max 100,000 THB)
+  - Tax-saving opportunity analysis: Computes remaining life/annuity insurance deduction quota and calculates potential cash tax savings (`remainingQuota * marginalRate`).
+- **Interactive UI (`src/pages/public/TaxCalculatorPage.jsx`)**:
+  - Full-screen responsive 12-column Zen Glass layout.
+  - Interactive inputs with quick preset income buttons, real-time recalculation, and progressive bracket step visualizer.
+  - Highlights tax savings with a 1-click consultation modal integrating `LeadCaptureForm` pre-filled with interest "วางแผนภาษีและลดหย่อนภาษีบุคคลธรรมดา".
+- **Navigation Integration**:
+  - Route: `/tax-calculator` (`ROUTES.TAX_CALCULATOR`).
+  - Top Navbar: Added "คำนวณภาษี" (TH) / "Tax Calculator" (EN) navigation link.
+  - Hero Section: Prominent "คำนวณภาษีเบื้องต้น" CTA button with `Calculator` icon.
+  - 3 Pillars Section: "บริหารภาษี & ส่งต่อมรดก" links directly to the tax calculator.
+  - Footer: "คำนวณและวางแผนภาษีบุคคลธรรมดา" link under บริการและการวางแผน.
+- **Verification & Test Coverage (`tests/taxCalculator.test.js`)**:
+  - 4 dedicated unit tests covering 0% threshold, progressive tiers (5%, 10%), tax deduction savings, and zero/negative input safeguards.
+  - All 10 project tests passing cleanly (`npm test`).
+  - Production build successful (`npm run build`).
+
 
 
 
