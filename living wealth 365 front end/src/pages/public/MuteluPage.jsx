@@ -9,6 +9,7 @@ export default function MuteluPage() {
   const { products } = useAuth();
   const [selectedCategory, setSelectedCategory] = useState('ทั้งหมด');
   const [selectedInterest, setSelectedInterest] = useState('หินมงคล & ปรึกษาเสริมดวงชะตา');
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const categories = [
     'ทั้งหมด',
@@ -27,12 +28,14 @@ export default function MuteluPage() {
   });
 
   const handleSelectProduct = (prod) => {
+    setSelectedProduct(prod);
     setSelectedInterest(`บูชาหินมงคล: ${prod.name} (฿${prod.price})`);
     const formEl = document.getElementById('consult-form');
     if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSelectCalculatedStone = (stoneName) => {
+    setSelectedProduct({ name: `หินมงคลตามวันเกิด: ${stoneName}` });
     setSelectedInterest(`บูชาหินมงคลตามวันเกิด: ${stoneName}`);
     const formEl = document.getElementById('consult-form');
     if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
@@ -108,6 +111,7 @@ export default function MuteluPage() {
       {/* Lead Form */}
       <section id="consult-form" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LeadCaptureForm
+          selection={selectedProduct}
           defaultInterest={selectedInterest}
           title="สนใจบูชาหินมงคลหรือสอบถามรายละเอียด"
           subtitle="แจ้งขนาดข้อมือ หรือขอคำแนะนำการเลือกหินมงคลเฉพาะบุคคลจากผู้เชี่ยวชาญได้ฟรี"

@@ -78,8 +78,12 @@ export function AuthProvider({ children }) {
     setTheme((prev) => (prev === 'zen-light' ? 'zen-dark' : 'zen-light'));
   };
 
-  const loginAsCustomer = () => {
-    setCurrentUser(MOCK_USERS.customer);
+  const loginAsCustomer = (customData) => {
+    setCurrentUser(customData ? { ...MOCK_USERS.customer, ...customData } : MOCK_USERS.customer);
+  };
+
+  const updateUser = (updates) => {
+    setCurrentUser((prev) => (prev ? { ...prev, ...updates } : prev));
   };
 
   const loginAsAdmin = () => {
@@ -176,6 +180,7 @@ export function AuthProvider({ children }) {
         theme,
         toggleTheme,
         currentUser,
+        updateUser,
         loginAsCustomer,
         loginAsAdmin,
         logout,

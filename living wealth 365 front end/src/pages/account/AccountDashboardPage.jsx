@@ -8,7 +8,7 @@ import { ROUTES } from '../../constants/routes';
 import DashboardLayout from '../../components/common/DashboardLayout';
 
 export default function AccountDashboardPage() {
-  const { currentUser, wishlist, leads } = useAuth();
+  const { currentUser, updateUser, wishlist, leads } = useAuth();
   const { t } = useLanguage();
   const { showToast } = useToast();
 
@@ -23,8 +23,31 @@ export default function AccountDashboardPage() {
     (l) => l.userId === currentUser?.id || l.phone === currentUser?.phone
   );
 
+  const handleStartEdit = () => {
+    setProfile({
+      name: currentUser?.name || '',
+      phone: currentUser?.phone || '',
+      birthDate: currentUser?.birthDate || '',
+    });
+    setEditing(true);
+  };
+
+  const handleCancelEdit = () => {
+    setProfile({
+      name: currentUser?.name || '',
+      phone: currentUser?.phone || '',
+      birthDate: currentUser?.birthDate || '',
+    });
+    setEditing(false);
+  };
+
   const handleSave = (e) => {
     e.preventDefault();
+    updateUser({
+      name: profile.name,
+      phone: profile.phone,
+      birthDate: profile.birthDate,
+    });
     setEditing(false);
     showToast(t('saveSuccess'), 'success');
   };
@@ -91,13 +114,22 @@ export default function AccountDashboardPage() {
               <User className="w-5 h-5 text-secondary" />
               <span>{t('profileOverview')}</span>
             </h2>
-            <button
-              onClick={() => setEditing(!editing)}
-              className="btn btn-sm btn-outline rounded-xl font-bold gap-1.5"
-            >
-              {editing ? <Check className="w-4 h-4" /> : <Edit3 className="w-4 h-4" />}
-              <span>{editing ? t('cancel') : t('edit')}</span>
-            </button>
+            {!editing ? (
+              <button
+                onClick={handleStartEdit}
+                className="btn btn-sm btn-outline rounded-xl font-bold gap-1.5"
+              >
+                <Edit3 className="w-4 h-4" />
+                <span>{t('edit')}</span>
+              </button>
+            ) : (
+              <button
+                onClick={handleCancelEdit}
+                className="btn btn-sm btn-ghost rounded-xl font-bold gap-1.5 text-error"
+              >
+                <span>{t('cancel')}</span>
+              </button>
+            )}
           </div>
 
           {editing ? (
@@ -140,15 +172,31 @@ export default function AccountDashboardPage() {
                 />
               </div>
 
-              <button type="submit" className="btn btn-primary btn-sm rounded-xl font-bold px-6">
-                {t('save')}
-              </button>
+              <div className="flex items-center gap-2 pt-2">
+                <button type="submit" className="btn btn-primary btn-sm rounded-xl font-bold px-6">
+                  {t('save')}
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCancelEdit}
+                  className="btn btn-ghost btn-sm rounded-xl font-bold px-4"
+                >
+                  {t('cancel')}
+                </button>
+              </div>
             </form>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
               <div className="space-y-1">
                 <span className="text-xs text-base-content/60">ชื่อ-นามสกุล:</span>
-                <p className="font-bold text-primary text-base">{profile.name}</p>
+                <p className="font-bold text-primary text-base">{currentUser?.name || profile.name}</p>
+              </div>
+
+              <div className="space-y-1">
+                <span className="text-xs text-base-content/60">ชื่อผู้ใช้ (Username):</span>
+                <p className="font-bold text-secondary text-base">
+                  @{currentUser?.username || 'user'}
+                </p>
               </div>
 
               <div className="space-y-1">

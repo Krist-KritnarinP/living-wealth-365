@@ -1,13 +1,19 @@
 import { useSearchParams, Link } from 'react-router-dom';
-import { CheckCircle2, ArrowRight, Clock, ShieldCheck, FileText, Heart } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Clock, ShieldCheck, FileText, Heart, User, Phone } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
 
 export default function ThankYouPage() {
   const [searchParams] = useSearchParams();
   const leadId = searchParams.get('leadId') || 'LEAD-999';
-  const interest = searchParams.get('interest') || 'บริการและการวางแผน';
-  const { currentUser } = useAuth();
+  const { currentUser, leads } = useAuth();
+
+  // ดึงข้อมูล Lead จริงจาก Context หากมี
+  const currentLead = leads.find((l) => l.id === leadId);
+
+  const interest = currentLead?.interest || searchParams.get('interest') || 'บริการและการวางแผน';
+  const customerName = currentLead?.name || searchParams.get('name') || currentUser?.name || '';
+  const customerPhone = currentLead?.phone || searchParams.get('phone') || '';
 
   return (
     <div className="w-full min-h-[75vh] flex items-center justify-center px-4 sm:px-8 py-16">
@@ -31,21 +37,42 @@ export default function ThankYouPage() {
             เราได้รับข้อมูลของท่านเรียบร้อยแล้ว!
           </h1>
           <p className="text-sm sm:text-base text-base-content/75 max-w-lg mx-auto leading-relaxed">
-            ขอบพระคุณที่ไว้วางใจให้ <span className="font-bold text-primary">Living Wealth 365</span> เป็นผู้ดูแลความมั่นคงทางการเงินและพลังใจของท่าน
+            ขอบพระคุณ{customerName ? `คุณ ${customerName}` : 'ที่ไว้วางใจ'}ให้{' '}
+            <span className="font-bold text-primary">Living Wealth 365</span> เป็นผู้ดูแลความมั่นคงทางการเงินและพลังใจของท่าน
           </p>
         </div>
 
         {/* Lead Reference Card */}
-        <div className="bg-base-100/80 rounded-2xl p-5 border border-base-300 text-left space-y-2.5 max-w-lg mx-auto">
-          <div className="flex items-center justify-between text-xs sm:text-sm">
+        <div className="bg-base-100/90 rounded-2xl p-5 border border-base-300 text-left space-y-3 max-w-lg mx-auto shadow-xs">
+          <div className="flex items-center justify-between text-xs sm:text-sm border-b border-base-300/50 pb-2">
             <span className="text-base-content/60">รหัสอ้างอิงคำขอ (Reference ID):</span>
             <span className="font-mono font-bold text-primary">{leadId}</span>
           </div>
+
+          {customerName && (
+            <div className="flex items-center justify-between text-xs sm:text-sm">
+              <span className="text-base-content/60">ชื่อผู้ติดต่อ:</span>
+              <span className="font-semibold text-base-content flex items-center gap-1">
+                <User className="w-3.5 h-3.5 text-primary" /> {customerName}
+              </span>
+            </div>
+          )}
+
+          {customerPhone && (
+            <div className="flex items-center justify-between text-xs sm:text-sm">
+              <span className="text-base-content/60">เบอร์โทรศัพท์ที่ใช้ติดต่อกลับ:</span>
+              <span className="font-mono font-semibold text-base-content flex items-center gap-1">
+                <Phone className="w-3.5 h-3.5 text-primary" /> {customerPhone}
+              </span>
+            </div>
+          )}
+
           <div className="flex items-center justify-between text-xs sm:text-sm">
             <span className="text-base-content/60">หัวข้อที่สนใจ:</span>
             <span className="font-semibold text-secondary">{interest}</span>
           </div>
-          <div className="flex items-center justify-between text-xs sm:text-sm">
+
+          <div className="flex items-center justify-between text-xs sm:text-sm pt-1 border-t border-base-300/50">
             <span className="text-base-content/60">ขั้นตอนถัดไป:</span>
             <span className="font-medium text-success flex items-center gap-1">
               <Clock className="w-3.5 h-3.5" /> ที่ปรึกษาจะติดต่อกลับภายใน 24 ชม.

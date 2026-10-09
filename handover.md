@@ -165,17 +165,54 @@ living wealth 365/
   - Phase 5 (Testing & QA): Pending Phase 4 completion.
   - Phase 6 (Deployment & Launch): Pending Phase 5 completion.
 
-## 11. How to Run
+## 11. Full Backend API, Local MySQL Workbench Prep, Password Strength Meter & Mobile Navigation
+- **Strict Security & Git Hygiene**:
+  - Tightened root `.gitignore`, frontend `.gitignore`, and backend `.gitignore`.
+  - Strictly excluded all `.env*`, `.env.local`, keys, certificates, test artifacts (`playwright-report`, `test-results`), and logs from Git.
+- **Backend Architecture & MySQL Integration (`living wealth 365_backend`)**:
+  - Prepared connection path for local MySQL Workbench (`Service: Mysql@localhost:3306`, `User: root`).
+  - Configured `DATABASE_URL="mysql://root:PASSWORD_HERE@localhost:3306/living_wealth_365"`.
+  - Updated `prisma/schema.prisma` to MySQL datasource and added unique `username` field to `User` model.
+  - Configured `JWT_SECRET` in `.env` (enforcing >= 10 characters requirement) with `src/lib/jwt.js`.
+  - Implemented authentication & role middleware (`src/middleware/auth.js`) supporting Customer and Admin verification.
+  - Implemented complete API routes:
+    - `/api/auth`: register (with password >= 8 chars, unique username/email), login, me, profile update, logout.
+    - `/api/leads`: create lead, list leads (admin CRM pipeline & customer history), update status/notes.
+    - `/api/posts`: Blog CMS (public list, read single slug, admin create/update/delete).
+    - `/api/products`: Mu-Tae-Lu CMS (public active catalog, admin create/update/delete).
+    - `/api/wishlist`: Customer auspicious item wishlist management.
+- **Frontend Password Strength Meter & Single-Column Register Page**:
+  - Redesigned `RegisterPage.jsx` into a clean, 100% single-column layout.
+  - Separated `username` (3-30 chars, alphanumeric + _) and `name` (Full Name) into distinct fields.
+  - Implemented interactive Password Strength Meter starting at 8 characters:
+    - Visual color-coded progress bar (Weak / Medium / Strong).
+    - Real-time criteria checklist:
+      1. Minimum 8 characters (Weak / ง่าย)
+      2. Upper & lower case letters (A-Z, a-z)
+      3. Numbers (Medium / ปานกลาง)
+      4. Special characters `@$!%*?#&` (Strong / ยาก - ปลอดภัยสูง)
+    - Real-time matching indicator for Confirm Password (`CheckCircle2` "ตรงกัน" / `XCircle` "ไม่ตรงกัน").
+- **Mobile Responsive Navigation (< 390px)**:
+  - Redesigned `Navbar.jsx` for compact viewports: secondary actions (language switcher, theme switcher, wishlist) tucked into mobile drawer, completely preventing menu overflow on screens < 390px.
+  - Preserved bilingual support (`useLanguage`) and W3C ARIA accessibility in dialogs and modals (ESC key listener, focus trap).
+- **Data Continuity & Form Validation**:
+  - Integrated `normalizePhone` and `validPhone` for 9-10 digit Thai numbers.
+  - Added selected product summary card to `LeadCaptureForm.jsx` when selecting auspicious stones.
+  - Forwarded real lead reference ID and details to `ThankYouPage.jsx`.
+  - Added 6 Node.js unit tests (`tests/validation.test.js`) verifying phone normalization, username, password meter, birth date, registration validation, and safe redirects.
+
+## 12. How to Run
 ### Frontend:
 ```bash
 cd "living wealth 365 front end"
-npm run dev
-# Runs on http://localhost:5173
+npm test      # Runs 6 unit tests
+npm run dev   # Runs on http://localhost:5173
 ```
 
 ### Backend:
 ```bash
 cd "living wealth 365_backend"
+# กรอกรหัสผ่าน MySQL ใน .env ที่ DATABASE_URL ก่อนรัน npx prisma db push
 npm run dev
 # Server runs on http://localhost:5001 (Health check: /api/health)
 ```

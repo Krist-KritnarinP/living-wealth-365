@@ -16,11 +16,13 @@ import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 export default function HomePage() {
   const { products, posts } = useAuth();
   const [selectedInterest, setSelectedInterest] = useState('ประกันสุขภาพเหมาจ่าย AIA');
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const featuredProducts = products.filter((p) => p.isActive).slice(0, 3);
   const featuredPosts = posts.filter((p) => p.published).slice(0, 3);
 
   const handleSelectProduct = (prod) => {
+    setSelectedProduct(prod);
     setSelectedInterest(`หินมงคล: ${prod.name}`);
     const el = document.getElementById('consult-form');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -308,6 +310,7 @@ export default function HomePage() {
       {/* 6. LEAD CAPTURE FORM SECTION */}
       <section id="consult-form" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LeadCaptureForm
+          selection={selectedProduct}
           defaultInterest={selectedInterest}
           title="พร้อมเริ่มต้นสร้างชีวิตที่มั่นคงแล้วหรือยัง?"
           subtitle="ให้ที่ปรึกษาจาก Living Wealth 365 ช่วยคำนวณและออกแบบแผนการเงินที่คุ้มค่าที่สุดสำหรับคุณ"

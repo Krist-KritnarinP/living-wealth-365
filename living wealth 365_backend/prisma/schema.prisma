@@ -1,12 +1,12 @@
 // ==========================================
-// ⚙️ Prisma Configuration
+// ⚙️ Prisma Configuration for Living Wealth 365
 // ==========================================
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" // เปลี่ยนเป็น "mysql" ได้หากโฮสต์ของคุณใช้ MySQL
+  provider = "mysql" // Local MySQL Workbench @ localhost:3306
   url      = env("DATABASE_URL")
 }
 
@@ -32,51 +32,54 @@ enum LeadStatus {
 // 1. ผู้ใช้งาน (รองรับทั้ง Admin และ Customer)
 model User {
   id          String     @id @default(uuid())
-  email       String     @unique
-  password    String     // ต้องเข้ารหัส (เช่น bcrypt) ก่อนบันทึกลงฐานข้อมูล
-  name        String
-  phone       String?    // เบอร์โทร (ใช้ Auto-fill ในฟอร์ม Lead ได้)
-  birthDate   DateTime?  // สำหรับใช้คำนวณหินมงคลเฉพาะบุคคล (สายมู)
+  username    String     @unique // ชื่อผู้ใช้ในระบบ
+  email       String     @unique // อีเมลสำหรับติดต่อและเข้าสู่ระบบ
+  password    String     // รหัสผ่านเข้ารหัส bcrypt (มาตรฐานเริ่มต้น 8 ตัวอักษร)
+  name        String     // ชื่อ-นามสกุล
+  phone       String?    // เบอร์โทรศัพท์ 9-10 หลัก
+  birthDate   DateTime?  // วันเกิด (สำหรับคำนวณหินมงคลประจำตัว)
   role        Role       @default(CUSTOMER)
   
   // Relations
   leads       Lead[]     // ประวัติการส่งฟอร์มขอคำปรึกษา
   posts       Post[]     // บทความที่เขียน (สำหรับ Admin)
-  wishlists   Wishlist[] // สินค้าสายมูที่กดบันทึกไว้ดูภายหลัง
+  wishlists   Wishlist[] // สินค้าสายมูที่บันทึกไว้ใน Wishlist
   
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
+
+  @@map("users")
 }
 
 // 2. ข้อมูลติดต่อกลับ (Lead Capture)
 model Lead {
   id            String     @id @default(uuid())
-  
-  // ข้อมูลฟอร์ม (บังคับกรอก เพื่อรองรับลูกค้าที่ไม่ได้ Login)
-  name          String
-  phone         String
-  interest      String     
-  preferredTime String?    
+  name          String     // ชื่อลูกค้าสำหรับติดต่อ
+  phone         String     // เบอร์โทรศัพท์
+  interest      String     // บริการหรือสินค้าที่สนใจ
+  preferredTime String?    // ช่วงเวลาที่สะดวกรับสาย
   status        LeadStatus @default(NEW)
-  notes         String?    @db.Text 
+  notes         String?    @db.Text // บันทึกจากลูกค้าหรือที่ปรึกษา
 
-  // ความสัมพันธ์กับ User (Optional เพื่อให้ลูกค้าขาจรกรอกได้)
-  // หาก User ลบบัญชี (SetNull) ข้อมูล Lead จะยังอยู่แต่ไม่ผูกกับบัญชีแล้ว
+  // ความสัมพันธ์กับ User (Optional รองรับลูกค้าทั่วไปที่ไม่ได้ Login)
   userId        String?
   user          User?      @relation(fields: [userId], references: [id], onDelete: SetNull)
   
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
+
+  @@map("leads")
 }
 
-// 3. บทความความรู้ (Blog)
+// 3. บทความความรู้ (Blog CMS)
 model Post {
   id          String   @id @default(uuid())
-  title       String
+  title       String   @db.VarChar(255)
   slug        String   @unique
   content     String   @db.Text
-  excerpt     String?  
-  imageUrl    String?  
+  excerpt     String?  @db.Text
+  imageUrl    String?  @db.Text
+  category    String   @default("การวางแผนการเงิน")
   published   Boolean  @default(false)
   
   // ลิงก์ไปยังผู้เขียนบทความ
@@ -85,21 +88,29 @@ model Post {
   
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@map("posts")
 }
 
-// 4. สินค้าสายมู / วัตถุมงคล (Mu-Tae-Lu)
+// 4. สินค้าสายมู / วัตถุมงคล (Mu-Tae-Lu CMS)
 model Product {
   id           String     @id @default(uuid())
   name         String
+  category     String?
+  price        Decimal?   @db.Decimal(10, 2)
   description  String     @db.Text
-  imageUrl     String?
-  isActive     Boolean    @default(true) 
+  imageUrl     String?    @db.Text
+  stoneType    String?    // ประเภทหินมงคล เช่น ไทเกอร์อาย, ลาพิส
+  dayOfWeek    String?    // วันในสัปดาห์ที่ถูกโฉลก เช่น Sunday, Monday
+  isActive     Boolean    @default(true)
   
   // Relations
   wishlistedBy Wishlist[]
   
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
+
+  @@map("products")
 }
 
 // 5. ระบบบันทึกสิ่งที่สนใจ (Wishlist) สำหรับสมาชิก
@@ -108,12 +119,12 @@ model Wishlist {
   userId    String
   productId String
   
-  // หากลบ User หรือ Product ข้อมูลใน Wishlist จะถูกลบตามไปด้วย (Cascade)
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
 
-  // ป้องกันไม่ให้ User กด Favorite สินค้าชิ้นเดิมซ้ำซ้อน
-  @@unique([userId, productId]) 
+  // ป้องกันการบันทึกชิ้นเดิมซ้ำ
+  @@unique([userId, productId])
+  @@map("wishlists")
 }
