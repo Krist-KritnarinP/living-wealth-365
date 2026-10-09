@@ -11,10 +11,22 @@ Before changing code, inspect relevant repository instructions, existing impleme
 3. Edge cases, business rules, security boundaries, assumptions, and verification plan.
 Proceed autonomously with authorized, reversible work. Obtain agreement before materially expanding scope, introducing costs, destructive migrations, or major architecture changes unless already authorized. Ask only about ambiguity that materially affects correctness; continue independent work meanwhile.
 
-## 2. Scope and Architecture
+## 2. Scope, Clean Code and Architecture
 Preserve established conventions and working behavior. Do not reformat, rename, delete comments, or refactor unrelated code. Make necessary structural changes within the requested feature, and explain why.
-For new code, separate pages, UI components, domain logic, data access, and infrastructure where these boundaries are useful. Refactor the feature into cohesive components before completion. Extract components around meaningful responsibilities or reuse, not every fragment of markup. Avoid giant components, circular dependencies, excessive prop drilling, speculative abstractions, and unnecessary wrappers.
-Use clear names, explicit data flow, small focused functions, and the simplest implementation that handles real requirements. Follow the repository's typing conventions and strengthen types at trust boundaries. Remove obsolete code introduced by your changes. Do not leave duplicate implementations, unexplained placeholders, or TODOs in required functionality.
+
+### Clean Code & Component Refactoring Mandate (Professional Programmer Standard)
+- **Component Decomposition**: แยกหน้าที่ของโค้ดอย่างเป็นระเบียบ (Single Responsibility Principle)
+  - ห้ามเขียนคอมโพเนนต์ยักษ์ (Monolithic Giant Component) หรือเอาโค้ดหลายร้อยบรรทัดมากองรวมในไฟล์เดียว (เช่น กองรวมใน `App.jsx`)
+  - แยกย่อยเป็นโฟลเดอร์ที่เป็นระบบ: `src/components/`, `src/pages/`, `src/constants/`, `src/services/`, `src/hooks/`
+  - สกัดชิ้นส่วน UI ที่มีหน้าที่เฉพาะตัวออกเป็นคอมโพเนนต์อิสระ เช่น `Navbar`, `Footer`, `HeroSection`, `ServiceCard`, `ContactForm`
+- **Readability & Self-Documenting Code**:
+  - ใช้ชื่อตัวแปร ฟังก์ชัน และคอมโพเนนต์ที่สื่อความหมายชัดเจน ตรงไปตรงมา (Descriptive & Meaningful naming)
+  - ฟังก์ชันต้องมีขนาดเล็ก ทำงานเพียงหน้าที่เดียว (Small, Focused Functions)
+  - หลีกเลี่ยงโค้ดซ้ำซ้อน (DRY: Don't Repeat Yourself) ดึงค่าคงที่ (Constants) หรือข้อมูล Mock ออกมาเก็บเป็นไฟล์แยก
+- **Continuous Refactoring**:
+  - เมื่อพัฒนาฟีเจอร์เสร็จ ต้องตรวจสอบและ Refactor โค้ดให้กระชับ สะอาด เป็นระเบียบเรียบร้อย ก่อนส่งมอบงานเสมอ
+  - หลีกเลี่ยง Circular Dependencies, Excessive Prop Drilling, และ Unnecessary Wrappers
+  - ลบโค้ดที่ไม่ใช้งาน (Dead code) และห้ามทิ้ง Placeholder หรือ TODO ค้างไว้ใน Required functionality
 
 ## 3. UI Quality: Avoid Generic AI Output
 Start from the user's audience, task, content, brand, and references. Establish a coherent visual direction before substantial UI work: typography, spacing, color, layout, density, interaction, and responsive behavior.

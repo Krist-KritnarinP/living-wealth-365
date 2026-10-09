@@ -53,10 +53,19 @@ living wealth 365/
 │   ├── note/
 │   │   └── guidelines.md              # Engineering rules copy for frontend
 │   └── src/
-│       ├── App.jsx                    # True 100% Full-Screen & A++ Typography UI
+│       ├── App.jsx                    # Clean root coordinator component (Decomposed & Refactored)
 │       ├── api.js                     # Base Axios client
-│       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5 + A++ Base
-│       └── main.jsx
+│       ├── index.css                  # Zen Glass theme: Tailwind CSS 4 + daisyUI 5 + balanced base
+│       ├── main.jsx
+│       ├── constants/
+│       │   └── content.js             # Structured business data & pillars constants (DRY)
+│       └── components/                # Modular, cohesive components (Single Responsibility)
+│           ├── Navbar.jsx             # Top navigation & theme toggle
+│           ├── HeroSection.jsx        # Full-screen Hero banner & CTAs
+│           ├── CoreValues.jsx         # 6 core values grid
+│           ├── PillarsSection.jsx     # Financial pillars cards & selection
+│           ├── ContactSection.jsx     # Contact info & promise checklist
+│           └── Footer.jsx             # Full-width footer
 │
 └── living wealth 365_backend/         # Pure Node.js + Express (ES Modules, no TypeScript)
     ├── package.json                   # Express, Prisma, Zod, Helmet, Cors, Morgan
