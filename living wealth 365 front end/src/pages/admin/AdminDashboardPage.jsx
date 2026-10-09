@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   PhoneCall,
   Shield,
@@ -12,6 +12,10 @@ import {
   CheckCircle2,
   AlertCircle,
   FileText,
+  Copy,
+  Check,
+  X,
+  Smartphone,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -27,7 +31,22 @@ export default function AdminDashboardPage() {
   const [filterStatus, setFilterStatus] = useState('ALL');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedLeadForNote, setSelectedLeadForNote] = useState(null);
+  const [selectedLeadForCall, setSelectedLeadForCall] = useState(null);
+  const [copiedPhone, setCopiedPhone] = useState(false);
   const [noteText, setNoteText] = useState('');
+
+  // Handle ESC key to close open modals
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setSelectedLeadForNote(null);
+        setSelectedLeadForCall(null);
+        setCopiedPhone(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   const totalLeads = leads.length;
   const newLeads = leads.filter((l) => l.status === 'NEW').length;
@@ -342,16 +361,20 @@ export default function AdminDashboardPage() {
                         </button>
                       </td>
 
-                      {/* Quick Call Action Button */}
-                      <td className="py-4 pr-4 text-right">
-                        <a
-                          href={`tel:${lead.phone}`}
-                          className="btn btn-sm btn-outline btn-primary rounded-xl font-bold gap-1.5 shadow-xs"
-                          title="กดเพื่อโทรออกหาลูกค้าทันที"
+                      {/* Quick Contact & Call Action Button */}
+                      <td className="py-4 pr-4 text-right whitespace-nowrap">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedLeadForCall(lead);
+                            setCopiedPhone(false);
+                          }}
+                          className="btn btn-sm btn-outline btn-primary rounded-xl font-bold gap-1.5 shadow-xs whitespace-nowrap cursor-pointer hover:scale-105 transition-transform"
+                          title="คลิกเพื่อเปิดข้อมูลติดต่อและจัดการโทรหาลูกค้า"
                         >
                           <PhoneCall className="w-3.5 h-3.5" />
                           <span>{lead.phone}</span>
-                        </a>
+                        </button>
                       </td>
                     </tr>
                   ))
@@ -361,7 +384,170 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Note Edit Modal using daisyUI Modal */}
+        {/* 📞 1. Custom Contact & Call Modal */}
+        {selectedLeadForCall && (
+          <div className="modal modal-open z-50">
+            <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+              {/* Header */}
+              <div className="flex items-start justify-between border-b border-base-300/60 pb-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-inner">
+                    <PhoneCall className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-black text-lg text-primary">
+                      ติดต่อลูกค้า: {selectedLeadForCall.name}
+                    </h3>
+                    <p className="text-xs text-base-content/60 font-mono">
+                      รหัสคำขอ #{selectedLeadForCall.id}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedLeadForCall(null);
+                    setCopiedPhone(false);
+                  }}
+                  className="btn btn-ghost btn-circle btn-sm text-base-content/60 hover:text-base-content"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Lead Details Card */}
+              <div className="bg-base-200/60 rounded-2xl p-4 border border-base-300/50 space-y-3">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-base-content/60 font-medium">สถานะปัจจุบัน:</span>
+                  <StatusBadge status={selectedLeadForCall.status} />
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-base-content/60 font-medium">เรื่องที่สนใจ / แผน:</span>
+                  <span className="font-bold text-primary text-right max-w-[65%] truncate">
+                    {selectedLeadForCall.interest}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-base-content/60 font-medium">ช่วงเวลาที่สะดวก:</span>
+                  <span className="font-semibold text-secondary flex items-center gap-1">
+                    <Clock className="w-3.5 h-3.5" />
+                    {selectedLeadForCall.preferredTime}
+                  </span>
+                </div>
+              </div>
+
+              {/* Phone Highlight & Copy Section */}
+              <div className="bg-primary/5 rounded-2xl p-5 border border-primary/20 space-y-3 text-center">
+                <div className="text-xs font-bold text-primary/70 uppercase tracking-wider">
+                  เบอร์โทรศัพท์ลูกค้า
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-primary font-mono tracking-wider">
+                  {selectedLeadForCall.phone}
+                </div>
+
+                <div className="flex items-center justify-center gap-2 pt-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      navigator.clipboard.writeText(selectedLeadForCall.phone);
+                      setCopiedPhone(true);
+                      showToast('คัดลอกเบอร์โทรเรียบร้อยแล้ว', 'success');
+                      setTimeout(() => setCopiedPhone(false), 2500);
+                    }}
+                    className={`btn btn-sm rounded-xl font-bold gap-1.5 transition-all ${
+                      copiedPhone
+                        ? 'btn-success text-white'
+                        : 'btn-neutral'
+                    }`}
+                  >
+                    {copiedPhone ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        <span>คัดลอกแล้ว</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        <span>คัดลอกเบอร์โทร</span>
+                      </>
+                    )}
+                  </button>
+
+                  <a
+                    href={`tel:${selectedLeadForCall.phone}`}
+                    onClick={() => {
+                      if (selectedLeadForCall.status === 'NEW') {
+                        handleStatusChange(selectedLeadForCall.id, 'CONTACTED');
+                      }
+                    }}
+                    className="btn btn-sm btn-primary rounded-xl font-bold gap-1.5 text-white shadow-xs"
+                    title="เปิดแอปโทรศัพท์บนเครื่อง"
+                  >
+                    <Smartphone className="w-4 h-4" />
+                    <span>โทรออก (tel:)</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Quick Actions: Update to Contacted & Open Note */}
+              <div className="pt-1 flex flex-col sm:flex-row gap-2">
+                {selectedLeadForCall.status === 'NEW' && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleStatusChange(selectedLeadForCall.id, 'CONTACTED');
+                      setSelectedLeadForCall({
+                        ...selectedLeadForCall,
+                        status: 'CONTACTED',
+                      });
+                      showToast('อัปเดตสถานะเป็น "กำลังคุยแผน" แล้ว', 'info');
+                    }}
+                    className="btn btn-sm btn-outline btn-info rounded-xl font-bold flex-1 gap-1.5"
+                  >
+                    <CheckCircle2 className="w-4 h-4" />
+                    <span>ปรับเป็น "กำลังคุยแผน"</span>
+                  </button>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const currentLead = selectedLeadForCall;
+                    setSelectedLeadForCall(null);
+                    handleOpenNoteModal(currentLead);
+                  }}
+                  className="btn btn-sm btn-ghost border border-base-300 rounded-xl font-bold flex-1 gap-1.5"
+                >
+                  <MessageSquare className="w-4 h-4 text-secondary" />
+                  <span>จดบันทึกการคุย</span>
+                </button>
+              </div>
+
+              {/* Close Button */}
+              <div className="modal-action pt-0 mt-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedLeadForCall(null);
+                    setCopiedPhone(false);
+                  }}
+                  className="btn btn-sm btn-ghost w-full rounded-xl text-base-content/60"
+                >
+                  ปิดหน้าต่าง
+                </button>
+              </div>
+            </div>
+            <div
+              className="modal-backdrop bg-black/40 backdrop-blur-xs"
+              onClick={() => {
+                setSelectedLeadForCall(null);
+                setCopiedPhone(false);
+              }}
+            ></div>
+          </div>
+        )}
+
+        {/* 📝 2. Note Edit Modal */}
         {selectedLeadForNote && (
           <div className="modal modal-open z-50">
             <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 space-y-4">
