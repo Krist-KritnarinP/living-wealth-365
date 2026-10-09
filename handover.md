@@ -333,10 +333,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Public Website Integration**:
   - `PlanCard.jsx`: Displays cover image and "ดาวน์โหลดโบรชัวร์ (PDF)" button in both card view and detail comparison modal.
   - `ProductCard.jsx`, `BlogPage.jsx`, and `BlogDetailPage.jsx`: Fully integrated with `resolveAssetUrl` and image fallbacks.
+## 19. Item Editing Implementation in Blog CMS & Products CMS
+- **Identified Gap**:
+  - `AdminBlogPage.jsx` and `AdminProductsPage.jsx` only had delete actions (`Trash2`) in their tables and only supported creation (`handleCreate`) without editing state.
+- **Implementation in `AdminBlogPage.jsx`**:
+  - Added `editingPost` state and `handleOpenAdd()` / `handleOpenEdit(post)` handlers.
+  - Added `Edit2` pencil button in the action column next to delete.
+  - Pre-populates all post fields (title, category, readTime, excerpt, content, imageUrl) when clicking edit.
+  - Form switches dynamically to edit mode: Title "แก้ไขบทความความรู้", submit button "บันทึกการแก้ไข", calling `updatePost(editingPost.id, formData)`.
+- **Implementation in `AdminProductsPage.jsx`**:
+  - Added `editingProduct` state and `handleOpenAdd()` / `handleOpenEdit(prod)` handlers.
+  - Added `Edit2` pencil button in the action column next to delete.
+  - Pre-populates all product fields (name, category, price, dayMatch, element, description, imageUrl) when clicking edit.
+  - Form switches dynamically to edit mode: Title "แก้ไขข้อมูลสินค้าหินมงคล", submit button "บันทึกการแก้ไข", calling `updateProduct(editingProduct.id, formData)`.
 - **Verification**:
-  - Frontend build successful (`npm run build` passed in 767ms).
-  - All 6 tests passing cleanly (`npm test`).
-  - Backend syntax checks passed (`node -c`).
+  - Unit tests passing 6/6 (`npm test`).
+  - Production build clean (`npm run build` passed in 665ms).
+
 
 
 

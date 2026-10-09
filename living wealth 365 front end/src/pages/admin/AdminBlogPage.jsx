@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Trash2, Eye, EyeOff, Shield } from 'lucide-react';
+import { Plus, Trash2, Eye, EyeOff, Shield, Edit2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
@@ -14,6 +14,7 @@ export default function AdminBlogPage() {
   const { showToast } = useToast();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingPost, setEditingPost] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -25,10 +26,8 @@ export default function AdminBlogPage() {
     readTime: '5 นาที',
   });
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    addPost(formData);
-    showToast('สร้างบทความใหม่เรียบร้อยแล้ว!', 'success');
+  const handleOpenAdd = () => {
+    setEditingPost(null);
     setFormData({
       title: '',
       category: 'วางแผนภาษี',
@@ -37,6 +36,40 @@ export default function AdminBlogPage() {
       imageUrl: '',
       readTime: '5 นาที',
     });
+    setModalOpen(true);
+  };
+
+  const handleOpenEdit = (post) => {
+    setEditingPost(post);
+    setFormData({
+      title: post.title || '',
+      category: post.category || 'วางแผนภาษี',
+      excerpt: post.excerpt || '',
+      content: post.content || '',
+      imageUrl: post.imageUrl || '',
+      readTime: post.readTime || '5 นาที',
+    });
+    setModalOpen(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editingPost) {
+      updatePost(editingPost.id, formData);
+      showToast(`อัปเดตบทความ "${formData.title}" เรียบร้อยแล้ว!`, 'success');
+    } else {
+      addPost(formData);
+      showToast('สร้างบทความใหม่เรียบร้อยแล้ว!', 'success');
+    }
+    setFormData({
+      title: '',
+      category: 'วางแผนภาษี',
+      excerpt: '',
+      content: '',
+      imageUrl: '',
+      readTime: '5 นาที',
+    });
+    setEditingPost(null);
     setModalOpen(false);
   };
 
@@ -75,7 +108,7 @@ export default function AdminBlogPage() {
           </div>
 
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={handleOpenAdd}
             className="btn btn-primary btn-sm rounded-xl font-bold gap-2 shadow-xs"
           >
             <Plus className="w-4 h-4" />
@@ -168,13 +201,24 @@ export default function AdminBlogPage() {
                     </button>
                   </td>
                   <td className="text-right whitespace-nowrap">
-                    <button
-                      onClick={() => setDeleteTarget(post)}
-                      className="btn btn-xs btn-ghost text-error"
-                      title="ลบบทความ"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center justify-end gap-1">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenEdit(post)}
+                        className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
+                        title="แก้ไขบทความ"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setDeleteTarget(post)}
+                        className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
+                        title="ลบบทความ"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -186,8 +230,10 @@ export default function AdminBlogPage() {
         {modalOpen && (
           <div className="modal modal-open z-50">
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
-              <h3 className="font-bold text-lg text-primary">เขียนบทความความรู้ใหม่</h3>
-              <form onSubmit={handleCreate} className="space-y-4 mt-4 text-xs sm:text-sm">
+              <h3 className="font-bold text-lg text-primary">
+                {editingPost ? 'แก้ไขบทความความรู้' : 'เขียนบทความความรู้ใหม่'}
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
                 <div className="flex flex-col gap-1.5 w-full">
                   <label className="text-xs font-bold text-base-content/80">ชื่อหัวข้อบทความ</label>
                   <input
@@ -269,7 +315,7 @@ export default function AdminBlogPage() {
                     type="submit"
                     className="btn btn-sm btn-primary rounded-xl font-bold"
                   >
-                    {t('save')} & เผยแพร่
+                    {editingPost ? 'บันทึกการแก้ไข' : `${t('save')} & เผยแพร่`}
                   </button>
                 </div>
               </form>

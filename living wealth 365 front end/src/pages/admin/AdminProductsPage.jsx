@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Trash2, CheckCircle2, XCircle, Shield } from 'lucide-react';
+import { Plus, Trash2, CheckCircle2, XCircle, Shield, Edit2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
@@ -14,6 +14,7 @@ export default function AdminProductsPage() {
   const { showToast } = useToast();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
   const [deleteTarget, setDeleteTarget] = useState(null);
 
   const [formData, setFormData] = useState({
@@ -26,10 +27,8 @@ export default function AdminProductsPage() {
     element: 'ธาตุทอง',
   });
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    addProduct(formData);
-    showToast('เพิ่มสินค้าหินมงคลใหม่สำเร็จ!', 'success');
+  const handleOpenAdd = () => {
+    setEditingProduct(null);
     setFormData({
       name: '',
       category: 'ดึงดูดทรัพย์ & โชคลาภ',
@@ -39,6 +38,42 @@ export default function AdminProductsPage() {
       dayMatch: 'ทุกวันเกิด',
       element: 'ธาตุทอง',
     });
+    setModalOpen(true);
+  };
+
+  const handleOpenEdit = (prod) => {
+    setEditingProduct(prod);
+    setFormData({
+      name: prod.name || '',
+      category: prod.category || 'ดึงดูดทรัพย์ & โชคลาภ',
+      price: prod.price || '',
+      description: prod.description || '',
+      imageUrl: prod.imageUrl || '',
+      dayMatch: prod.dayMatch || 'ทุกวันเกิด',
+      element: prod.element || 'ธาตุทอง',
+    });
+    setModalOpen(true);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (editingProduct) {
+      updateProduct(editingProduct.id, formData);
+      showToast(`อัปเดตสินค้า "${formData.name}" เรียบร้อยแล้ว!`, 'success');
+    } else {
+      addProduct(formData);
+      showToast('เพิ่มสินค้าหินมงคลใหม่สำเร็จ!', 'success');
+    }
+    setFormData({
+      name: '',
+      category: 'ดึงดูดทรัพย์ & โชคลาภ',
+      price: '1,990',
+      description: '',
+      imageUrl: '',
+      dayMatch: 'ทุกวันเกิด',
+      element: 'ธาตุทอง',
+    });
+    setEditingProduct(null);
     setModalOpen(false);
   };
 
@@ -77,7 +112,7 @@ export default function AdminProductsPage() {
           </div>
 
           <button
-            onClick={() => setModalOpen(true)}
+            onClick={handleOpenAdd}
             className="btn btn-secondary btn-sm text-white rounded-xl font-bold gap-2 shadow-xs"
           >
             <Plus className="w-4 h-4" />
@@ -155,13 +190,24 @@ export default function AdminProductsPage() {
                     </button>
                   </td>
                   <td className="text-right whitespace-nowrap">
-                    <button
-                      onClick={() => setDeleteTarget(prod)}
-                      className="btn btn-xs btn-ghost text-error"
-                      title="ลบสินค้า"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center justify-end gap-1">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenEdit(prod)}
+                        className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
+                        title="แก้ไขสินค้า"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setDeleteTarget(prod)}
+                        className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
+                        title="ลบสินค้า"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
@@ -173,8 +219,10 @@ export default function AdminProductsPage() {
         {modalOpen && (
           <div className="modal modal-open z-50">
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
-              <h3 className="font-bold text-lg text-primary">เพิ่มสินค้าหินมงคลใหม่</h3>
-              <form onSubmit={handleCreate} className="space-y-4 mt-4 text-xs sm:text-sm">
+              <h3 className="font-bold text-lg text-primary">
+                {editingProduct ? 'แก้ไขข้อมูลสินค้าหินมงคล' : 'เพิ่มสินค้าหินมงคลใหม่'}
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col gap-1.5 w-full">
                     <label className="text-xs font-bold text-base-content/80">ชื่อหินมงคล</label>
@@ -256,7 +304,7 @@ export default function AdminProductsPage() {
                     type="submit"
                     className="btn btn-sm btn-secondary text-white rounded-xl font-bold"
                   >
-                    {t('save')} สินค้า
+                    {editingProduct ? 'บันทึกการแก้ไข' : `${t('save')} สินค้า`}
                   </button>
                 </div>
               </form>
