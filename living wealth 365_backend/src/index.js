@@ -4,6 +4,9 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 
+import path from 'path';
+import fs from 'fs';
+
 // Routes
 import { healthRouter } from './routes/health.js';
 import { authRouter } from './routes/auth.js';
@@ -12,6 +15,7 @@ import { postsRouter } from './routes/posts.js';
 import { productsRouter } from './routes/products.js';
 import { wishlistRouter } from './routes/wishlist.js';
 import { insurancePlansRouter } from './routes/insurancePlans.js';
+import { uploadRouter } from './routes/upload.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
 dotenv.config();
@@ -19,8 +23,18 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// Ensure uploads directory exists
+const uploadsDir = path.join(process.cwd(), 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
 // Middlewares
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  })
+);
 app.use(
   cors({
     origin: process.env.CORS_ORIGIN || '*',
@@ -30,6 +44,9 @@ app.use(
 app.use(express.json());
 app.use(morgan('dev'));
 
+// 📂 Static File Serving (Uploads: Images & PDFs)
+app.use('/uploads', express.static(uploadsDir));
+
 // 🚀 API Routes
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
@@ -38,6 +55,7 @@ app.use('/api/posts', postsRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/wishlist', wishlistRouter);
 app.use('/api/insurance-plans', insurancePlansRouter);
+app.use('/api/upload', uploadRouter);
 
 // Global Error Handler
 app.use(errorHandler);

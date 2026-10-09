@@ -309,6 +309,36 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - All 6 unit tests passing (`npm test`).
   - Production build clean (`npm run build` passed in 659ms).
 
+## 18. Multi-Format File Upload System (Images & PDF Brochures with DaisyUI Radial Progress)
+- **Backend Architecture (`living wealth 365_backend`)**:
+  - Integrated `multer` disk storage in `src/routes/upload.js`.
+  - Configured safe sanitized unique file naming (`${baseName}-${timestamp}-${random}.${ext}`).
+  - Strict MIME type filter: Images (`JPG`, `PNG`, `WebP`, `GIF`, `SVG`) and Documents (`application/pdf`) with 25MB file size limit.
+  - Automatic `uploads/` directory creation and static asset serving via `app.use('/uploads', express.static(...))`.
+  - Configured `helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } })` to ensure cross-origin asset loading between frontend (port 5173) and backend (port 5001).
+  - Protected with `authenticateUser` and `requireAdmin` middleware.
+  - `.gitignore` updated to prevent uploaded media from entering version control.
+- **Frontend Architecture (`living wealth 365 front end`)**:
+  - Added `uploadApi.uploadFile(file, onProgress)` with Axios upload progress tracking and `resolveAssetUrl` helper in `src/api.js`.
+  - Built reusable `FileUploadZone.jsx` component:
+    - Dedicated `+` button and drag-and-drop dropzone.
+    - Uses exact DaisyUI `radial-progress` with `--value: [percent]`, `aria-valuenow`, and `role="progressbar"` during upload.
+    - Image preview thumbnail with "เปลี่ยน (+)" and "ลบ (Trash)" actions.
+    - PDF document badge with direct preview link.
+    - Optional manual URL entry fallback.
+- **Admin CMS Integration**:
+  - `AdminInsurancePage.jsx`: Cover image (`imageUrl`) + PDF brochure (`brochureUrl`) upload zones. Table displays cover thumbnail and 1-click PDF badge.
+  - `AdminBlogPage.jsx`: Cover image (`imageUrl`) upload zone. Table displays article thumbnail.
+  - `AdminProductsPage.jsx`: Auspicious product image (`imageUrl`) upload zone. Table displays product thumbnail.
+- **Public Website Integration**:
+  - `PlanCard.jsx`: Displays cover image and "ดาวน์โหลดโบรชัวร์ (PDF)" button in both card view and detail comparison modal.
+  - `ProductCard.jsx`, `BlogPage.jsx`, and `BlogDetailPage.jsx`: Fully integrated with `resolveAssetUrl` and image fallbacks.
+- **Verification**:
+  - Frontend build successful (`npm run build` passed in 767ms).
+  - All 6 tests passing cleanly (`npm test`).
+  - Backend syntax checks passed (`node -c`).
+
+
 
 
 

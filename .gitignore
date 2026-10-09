@@ -33,6 +33,9 @@ dist-ssr/
 build/
 */dist/
 */build/
+uploads/
+*/uploads/
+!*/uploads/.gitkeep
 
 # Test reports & artifacts
 test-results/

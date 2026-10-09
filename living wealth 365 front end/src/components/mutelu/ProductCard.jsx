@@ -2,6 +2,7 @@ import { Heart, Sparkles, Send } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
+import { resolveAssetUrl } from '../../api';
 
 export default function ProductCard({ product, onSelectForLead }) {
   const { wishlist, toggleWishlist, currentUser } = useAuth();
@@ -23,7 +24,10 @@ export default function ProductCard({ product, onSelectForLead }) {
       {/* Image & Badges Container */}
       <div className="relative aspect-4/3 w-full overflow-hidden bg-base-200">
         <img
-          src={product.imageUrl}
+          src={resolveAssetUrl(
+            product.imageUrl,
+            'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=80'
+          )}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />

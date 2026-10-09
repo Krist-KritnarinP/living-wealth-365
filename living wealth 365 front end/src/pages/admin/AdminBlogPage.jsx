@@ -5,6 +5,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import ConfirmModal from '../../components/common/ConfirmModal';
+import FileUploadZone from '../../components/common/FileUploadZone';
+import { resolveAssetUrl } from '../../api';
 
 export default function AdminBlogPage() {
   const { posts, addPost, updatePost, deletePost } = useAuth();
@@ -19,7 +21,7 @@ export default function AdminBlogPage() {
     category: 'วางแผนภาษี',
     excerpt: '',
     content: '',
-    imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1000&auto=format&fit=crop&q=80',
+    imageUrl: '',
     readTime: '5 นาที',
   });
 
@@ -32,7 +34,7 @@ export default function AdminBlogPage() {
       category: 'วางแผนภาษี',
       excerpt: '',
       content: '',
-      imageUrl: 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1000&auto=format&fit=crop&q=80',
+      imageUrl: '',
       readTime: '5 นาที',
     });
     setModalOpen(false);
@@ -100,9 +102,16 @@ export default function AdminBlogPage() {
                   <td>
                     <div className="flex items-center gap-3">
                       <img
-                        src={post.imageUrl}
+                        src={resolveAssetUrl(
+                          post.imageUrl,
+                          'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&auto=format&fit=crop&q=80'
+                        )}
                         alt={post.title}
-                        className="w-12 h-12 rounded-xl object-cover"
+                        className="w-12 h-12 rounded-xl object-cover shrink-0 bg-base-200 border border-base-300"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&auto=format&fit=crop&q=80';
+                        }}
                       />
                       <div>
                         <div className="font-bold text-primary max-w-sm truncate">
@@ -215,6 +224,15 @@ export default function AdminBlogPage() {
                     />
                   </div>
                 </div>
+
+                {/* Cover Image Upload Zone */}
+                <FileUploadZone
+                  label="รูปภาพหน้าปกบทความ (Cover Image)"
+                  accept="image"
+                  value={formData.imageUrl}
+                  onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+                  helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพปกจากคอมพิวเตอร์ หรือใส่ URL รูปภาพ"
+                />
 
                 <div className="flex flex-col gap-1.5 w-full">
                   <label className="text-xs font-bold text-base-content/80">คำโปรยสั้นๆ (Excerpt)</label>

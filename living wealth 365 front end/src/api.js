@@ -69,3 +69,40 @@ export const wishlistApi = {
   toggle: (productId) => api.post(`/wishlist/${productId}`).then((res) => res.data),
   delete: (productId) => api.delete(`/wishlist/${productId}`).then((res) => res.data),
 };
+
+// 📂 File Upload APIs (Images & PDFs)
+export const uploadApi = {
+  uploadFile: (file, onProgress) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return api
+      .post('/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        onUploadProgress: (progressEvent) => {
+          if (onProgress && progressEvent.total) {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            onProgress(percent);
+          }
+        },
+      })
+      .then((res) => res.data);
+  },
+};
+
+// 🔗 Helper for resolving relative asset URLs
+export const resolveAssetUrl = (url, fallback = '') => {
+  if (!url) return fallback;
+  if (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:')) {
+    return url;
+  }
+  const serverBase =
+    import.meta.env.VITE_SERVER_URL ||
+    (import.meta.env.VITE_API_URL
+      ? import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '')
+      : 'http://localhost:5001');
+  return `${serverBase}${url.startsWith('/') ? '' : '/'}${url}`;
+};
+

@@ -5,6 +5,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import ConfirmModal from '../../components/common/ConfirmModal';
+import FileUploadZone from '../../components/common/FileUploadZone';
+import { resolveAssetUrl } from '../../api';
 
 export default function AdminProductsPage() {
   const { products, addProduct, updateProduct, deleteProduct } = useAuth();
@@ -19,7 +21,7 @@ export default function AdminProductsPage() {
     category: 'ดึงดูดทรัพย์ & โชคลาภ',
     price: '1,990',
     description: '',
-    imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=80',
+    imageUrl: '',
     dayMatch: 'ทุกวันเกิด',
     element: 'ธาตุทอง',
   });
@@ -33,7 +35,7 @@ export default function AdminProductsPage() {
       category: 'ดึงดูดทรัพย์ & โชคลาภ',
       price: '1,990',
       description: '',
-      imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=80',
+      imageUrl: '',
       dayMatch: 'ทุกวันเกิด',
       element: 'ธาตุทอง',
     });
@@ -102,9 +104,16 @@ export default function AdminProductsPage() {
                   <td>
                     <div className="flex items-center gap-3">
                       <img
-                        src={prod.imageUrl}
+                        src={resolveAssetUrl(
+                          prod.imageUrl,
+                          'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400&auto=format&fit=crop&q=80'
+                        )}
                         alt={prod.name}
-                        className="w-12 h-12 rounded-xl object-cover"
+                        className="w-12 h-12 rounded-xl object-cover shrink-0 bg-base-200 border border-base-300"
+                        onError={(e) => {
+                          e.currentTarget.src =
+                            'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400&auto=format&fit=crop&q=80';
+                        }}
                       />
                       <div>
                         <div className="font-bold text-primary">{prod.name}</div>
@@ -225,6 +234,15 @@ export default function AdminProductsPage() {
                     className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
                   ></textarea>
                 </div>
+
+                {/* Product Image Upload Zone */}
+                <FileUploadZone
+                  label="รูปภาพหินมงคล / สินค้า (Product Image)"
+                  accept="image"
+                  value={formData.imageUrl}
+                  onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+                  helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพสินค้า หรือใส่ URL รูปภาพ"
+                />
 
                 <div className="modal-action">
                   <button

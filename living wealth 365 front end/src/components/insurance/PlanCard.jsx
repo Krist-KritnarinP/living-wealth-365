@@ -9,7 +9,9 @@ import {
   Sparkles,
   X,
   FileText,
+  Download,
 } from 'lucide-react';
+import { resolveAssetUrl } from '../../api';
 
 export default function PlanCard({ plan, onSelectPlan }) {
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -31,6 +33,20 @@ export default function PlanCard({ plan, onSelectPlan }) {
       <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-base-300 hover:border-primary/50 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group relative overflow-hidden">
         {/* Subtle decorative accent */}
         <div className="absolute -top-10 -right-10 w-28 h-28 bg-primary/5 rounded-full blur-xl pointer-events-none group-hover:bg-primary/10 transition-colors"></div>
+
+        {/* Optional Cover Image */}
+        {plan.imageUrl && (
+          <div className="aspect-16/9 -mx-6 -mt-6 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden bg-base-200 border-b border-base-300/60 relative">
+            <img
+              src={resolveAssetUrl(plan.imageUrl)}
+              alt={plan.name}
+              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none';
+              }}
+            />
+          </div>
+        )}
 
         <div className="space-y-5">
           {/* Header Badges */}
@@ -93,24 +109,39 @@ export default function PlanCard({ plan, onSelectPlan }) {
           )}
         </div>
 
-        {/* Action Buttons */}
-        <div className="pt-6 mt-4 border-t border-base-300/60 grid grid-cols-2 gap-2.5">
-          <button
-            type="button"
-            onClick={() => setShowDetailModal(true)}
-            className="btn btn-outline btn-sm rounded-xl font-bold gap-1 text-xs"
-          >
-            <Info className="w-3.5 h-3.5" />
-            <span>ดูรายละเอียด</span>
-          </button>
-          <button
-            type="button"
-            onClick={() => onSelectPlan && onSelectPlan(plan)}
-            className="btn btn-primary btn-sm rounded-xl font-bold gap-1 shadow-sm text-xs text-white"
-          >
-            <span>ขอใบเสนอราคา</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+        {/* Action Buttons & Brochure Download */}
+        <div className="pt-5 mt-4 border-t border-base-300/60 space-y-2.5">
+          {plan.brochureUrl && (
+            <a
+              href={resolveAssetUrl(plan.brochureUrl)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-outline btn-secondary btn-sm w-full rounded-xl font-bold gap-1.5 text-xs shadow-xs hover:shadow-md transition-all"
+            >
+              <FileText className="w-3.5 h-3.5" />
+              <span>ดาวน์โหลดโบรชัวร์ (PDF)</span>
+              <Download className="w-3.5 h-3.5 ml-auto opacity-70" />
+            </a>
+          )}
+
+          <div className="grid grid-cols-2 gap-2.5">
+            <button
+              type="button"
+              onClick={() => setShowDetailModal(true)}
+              className="btn btn-outline btn-sm rounded-xl font-bold gap-1 text-xs"
+            >
+              <Info className="w-3.5 h-3.5" />
+              <span>ดูรายละเอียด</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => onSelectPlan && onSelectPlan(plan)}
+              className="btn btn-primary btn-sm rounded-xl font-bold gap-1 shadow-sm text-xs text-white"
+            >
+              <span>ขอใบเสนอราคา</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -142,6 +173,17 @@ export default function PlanCard({ plan, onSelectPlan }) {
                 <X className="w-5 h-5" />
               </button>
             </div>
+
+            {/* Optional Cover Image Banner in Modal */}
+            {plan.imageUrl && (
+              <div className="w-full h-44 sm:h-52 rounded-2xl overflow-hidden bg-base-200 border border-base-300 shadow-inner">
+                <img
+                  src={resolveAssetUrl(plan.imageUrl)}
+                  alt={plan.name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
 
             {/* Quick Metrics */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -200,25 +242,42 @@ export default function PlanCard({ plan, onSelectPlan }) {
             )}
 
             {/* Modal Actions */}
-            <div className="modal-action pt-4 border-t border-base-300 flex items-center justify-end gap-3">
-              <button
-                type="button"
-                onClick={() => setShowDetailModal(false)}
-                className="btn btn-ghost rounded-xl font-bold"
-              >
-                ปิดหน้าต่าง
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setShowDetailModal(false);
-                  if (onSelectPlan) onSelectPlan(plan);
-                }}
-                className="btn btn-primary rounded-xl font-bold gap-2 text-white shadow-md"
-              >
-                <span>เลือกแผนนี้ & ขอใบเสนอราคา</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
+            <div className="modal-action pt-4 border-t border-base-300 flex flex-wrap items-center justify-between gap-3">
+              {plan.brochureUrl ? (
+                <a
+                  href={resolveAssetUrl(plan.brochureUrl)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline btn-secondary rounded-xl font-bold gap-1.5 text-xs"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>ดาวน์โหลดโบรชัวร์ (PDF)</span>
+                  <Download className="w-3.5 h-3.5 opacity-70" />
+                </a>
+              ) : (
+                <div />
+              )}
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setShowDetailModal(false)}
+                  className="btn btn-ghost rounded-xl font-bold"
+                >
+                  ปิดหน้าต่าง
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setShowDetailModal(false);
+                    if (onSelectPlan) onSelectPlan(plan);
+                  }}
+                  className="btn btn-primary rounded-xl font-bold gap-2 text-white shadow-md"
+                >
+                  <span>เลือกแผนนี้ & ขอใบเสนอราคา</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           </div>
           <div

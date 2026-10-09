@@ -3,6 +3,7 @@ import { ArrowLeft, Clock, User, Share2 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { ROUTES } from '../../constants/routes';
+import { resolveAssetUrl } from '../../api';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 
 export default function BlogDetailPage() {
@@ -74,9 +75,16 @@ export default function BlogDetailPage() {
         {/* Featured Image */}
         <div className="aspect-16/9 w-full rounded-3xl overflow-hidden shadow-lg border border-base-300">
           <img
-            src={post.imageUrl}
+            src={resolveAssetUrl(
+              post.imageUrl,
+              'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80'
+            )}
             alt={post.title}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              e.currentTarget.src =
+                'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80';
+            }}
           />
         </div>
 

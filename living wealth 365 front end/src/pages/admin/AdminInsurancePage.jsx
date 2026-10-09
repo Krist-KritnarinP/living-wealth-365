@@ -10,12 +10,16 @@ import {
   Search,
   Filter,
   Check,
+  FileText,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import ConfirmModal from '../../components/common/ConfirmModal';
+import FileUploadZone from '../../components/common/FileUploadZone';
+import { resolveAssetUrl } from '../../api';
 
 export default function AdminInsurancePage() {
   const { insurancePlans, addInsurancePlan, updateInsurancePlan, deleteInsurancePlan } = useAuth();
@@ -40,6 +44,8 @@ export default function AdminInsurancePage() {
     features: '',
     recommendedFor: '',
     description: '',
+    imageUrl: '',
+    brochureUrl: '',
     isActive: true,
   });
 
@@ -71,6 +77,8 @@ export default function AdminInsurancePage() {
       features: '',
       recommendedFor: '',
       description: '',
+      imageUrl: '',
+      brochureUrl: '',
       isActive: true,
     });
     setModalOpen(true);
@@ -98,6 +106,8 @@ export default function AdminInsurancePage() {
       features: parsedFeatures,
       recommendedFor: plan.recommendedFor || '',
       description: plan.description || '',
+      imageUrl: plan.imageUrl || '',
+      brochureUrl: plan.brochureUrl || '',
       isActive: plan.isActive ?? true,
     });
     setModalOpen(true);
@@ -251,12 +261,43 @@ export default function AdminInsurancePage() {
                   filteredPlans.map((plan) => (
                     <tr key={plan.id} className="hover:bg-base-200/30 transition-colors">
                       <td className="py-4 pl-6">
-                        <div className="font-bold text-primary text-base">{plan.name}</div>
-                        {plan.tagline && (
-                          <div className="text-xs text-base-content/60 line-clamp-1 max-w-sm">
-                            {plan.tagline}
+                        <div className="flex items-center gap-3">
+                          {plan.imageUrl ? (
+                            <div className="w-12 h-12 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
+                              <img
+                                src={resolveAssetUrl(plan.imageUrl)}
+                                alt={plan.name}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
+                              <ShieldCheck className="w-6 h-6" />
+                            </div>
+                          )}
+                          <div className="min-w-0">
+                            <div className="font-bold text-primary text-base flex items-center gap-2">
+                              <span className="truncate">{plan.name}</span>
+                              {plan.brochureUrl && (
+                                <a
+                                  href={resolveAssetUrl(plan.brochureUrl)}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="badge badge-secondary badge-outline text-[10px] font-bold py-1 px-2 gap-1 shrink-0 hover:bg-secondary hover:text-white transition-colors"
+                                  title="คลิกเพื่อเปิดดูไฟล์โบรชัวร์ PDF"
+                                >
+                                  <FileText className="w-3 h-3" />
+                                  PDF
+                                </a>
+                              )}
+                            </div>
+                            {plan.tagline && (
+                              <div className="text-xs text-base-content/60 line-clamp-1 max-w-sm mt-0.5">
+                                {plan.tagline}
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </td>
                       <td className="whitespace-nowrap">
                         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80 whitespace-nowrap">
@@ -450,6 +491,24 @@ export default function AdminInsurancePage() {
                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                     className="textarea textarea-bordered w-full rounded-xl text-sm bg-base-100 leading-relaxed"
                   ></textarea>
+                </div>
+
+                {/* Media & Documents Upload: Cover Image & PDF Brochure */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full p-4 rounded-2xl bg-base-200/40 border border-base-300/60">
+                  <FileUploadZone
+                    label="รูปภาพหน้าปกแผนประกัน"
+                    accept="image"
+                    value={formData.imageUrl}
+                    onChange={(url) => setFormData((prev) => ({ ...prev, imageUrl: url }))}
+                    helpText="ภาพตัวอย่างแผนประกันภัย (JPG, PNG, WebP)"
+                  />
+                  <FileUploadZone
+                    label="เอกสารโบรชัวร์ความคุ้มครอง (PDF)"
+                    accept="pdf"
+                    value={formData.brochureUrl}
+                    onChange={(url) => setFormData((prev) => ({ ...prev, brochureUrl: url }))}
+                    helpText="ไฟล์ PDF สรุปเงื่อนไขและผลประโยชน์"
+                  />
                 </div>
 
                 {/* Status Toggle */}
