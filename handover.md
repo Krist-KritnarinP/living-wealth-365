@@ -293,9 +293,22 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
     - `AdminBlogPage.jsx`
     - `BlogPage.jsx`
     - `BlogDetailPage.jsx`
+## 17. 100% True Full-Screen Dashboard Expansion (Edge-to-Edge)
+- **Elimination of Max-Width Constraints**:
+  - Removed restrictive `max-w-7xl` and `max-w-6xl` containers across all internal CRM and CMS dashboard pages.
+  - Replaced with true edge-to-edge `w-full` layout in:
+    - `AdminInsurancePage.jsx` (Insurance Plans CMS)
+    - `AdminDashboardPage.jsx` (Leads CRM Pipeline)
+    - `AdminProductsPage.jsx` (Auspicious Items CMS)
+    - `AdminBlogPage.jsx` (Knowledge Hub CMS)
+    - `AccountDashboardPage.jsx` (Customer Profile)
+    - `AccountHistoryPage.jsx` (Consultation History)
+    - `AccountWishlistPage.jsx` (Saved Wishlist)
+  - Tables, metric cards, action toolbars, and search filters now stretch 100% across the full viewport width without any vacant gaps on the right side.
 - **Verification**:
   - All 6 unit tests passing (`npm test`).
-  - Production build clean (`npm run build` passed in 1.57s).
+  - Production build clean (`npm run build` passed in 659ms).
+
 
 
 
