@@ -86,12 +86,12 @@ export default function AdminBlogPage() {
           <table className="table table-zebra w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
-                <th>รูปภาพ & หัวข้อบทความ</th>
-                <th>หมวดหมู่</th>
-                <th>ผู้เขียน</th>
-                <th>วันที่เผยแพร่</th>
-                <th>{t('status')}</th>
-                <th className="text-right">การจัดการ</th>
+                <th className="min-w-[200px]">รูปภาพ & หัวข้อบทความ</th>
+                <th className="whitespace-nowrap">หมวดหมู่</th>
+                <th className="whitespace-nowrap">ผู้เขียน</th>
+                <th className="whitespace-nowrap">วันที่เผยแพร่</th>
+                <th className="whitespace-nowrap text-center min-w-[130px]">{t('status')}</th>
+                <th className="text-right whitespace-nowrap">การจัดการ</th>
               </tr>
             </thead>
             <tbody>
@@ -114,33 +114,38 @@ export default function AdminBlogPage() {
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <span className="badge badge-primary badge-outline text-xs">
+                  <td className="whitespace-nowrap">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
                       {post.category}
                     </span>
                   </td>
-                  <td>{post.author}</td>
-                  <td>{post.publishedAt}</td>
-                  <td>
+                  <td className="whitespace-nowrap">{post.author}</td>
+                  <td className="whitespace-nowrap">{post.publishedAt}</td>
+                  <td className="whitespace-nowrap text-center">
                     <button
+                      type="button"
                       onClick={() => handleTogglePublish(post)}
-                      className={`badge text-xs font-bold gap-1 cursor-pointer transition-all ${
-                        post.published ? 'badge-success text-white' : 'badge-ghost'
+                      className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
+                        post.published
+                          ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
+                          : 'bg-slate-500/15 text-slate-600 hover:bg-slate-500/25 border border-slate-500/30 dark:bg-slate-500/20 dark:text-slate-300'
                       }`}
                       title="คลิกเพื่อสลับสถานะ"
                     >
                       {post.published ? (
                         <>
-                          <Eye className="w-3 h-3" /> เผยแพร่แล้ว
+                          <Eye className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                          <span>เผยแพร่แล้ว</span>
                         </>
                       ) : (
                         <>
-                          <EyeOff className="w-3 h-3" /> ฉบับร่าง
+                          <EyeOff className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 shrink-0" />
+                          <span>ฉบับร่าง</span>
                         </>
                       )}
                     </button>
                   </td>
-                  <td className="text-right">
+                  <td className="text-right whitespace-nowrap">
                     <button
                       onClick={() => setDeleteTarget(post)}
                       className="btn btn-xs btn-ghost text-error"

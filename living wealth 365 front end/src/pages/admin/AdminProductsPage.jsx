@@ -88,12 +88,12 @@ export default function AdminProductsPage() {
           <table className="table table-zebra w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
-                <th>รูปภาพ & ชื่อสินค้า</th>
-                <th>หมวดหมู่</th>
-                <th>ราคาบูชา</th>
-                <th>เหมาะกับวันเกิด</th>
-                <th>สถานะแสดงผล</th>
-                <th className="text-right">การจัดการ</th>
+                <th className="min-w-[200px]">รูปภาพ & ชื่อสินค้า</th>
+                <th className="whitespace-nowrap">หมวดหมู่</th>
+                <th className="whitespace-nowrap">ราคาบูชา</th>
+                <th className="whitespace-nowrap">เหมาะกับวันเกิด</th>
+                <th className="whitespace-nowrap text-center min-w-[130px]">สถานะแสดงผล</th>
+                <th className="text-right whitespace-nowrap">การจัดการ</th>
               </tr>
             </thead>
             <tbody>
@@ -114,33 +114,38 @@ export default function AdminProductsPage() {
                       </div>
                     </div>
                   </td>
-                  <td>
-                    <span className="badge badge-secondary text-white text-xs">
+                  <td className="whitespace-nowrap">
+                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary border border-secondary/30 whitespace-nowrap">
                       {prod.category}
                     </span>
                   </td>
-                  <td className="font-extrabold text-secondary">฿{prod.price}</td>
-                  <td>{prod.dayMatch}</td>
-                  <td>
+                  <td className="font-extrabold text-secondary whitespace-nowrap">฿{prod.price}</td>
+                  <td className="whitespace-nowrap">{prod.dayMatch}</td>
+                  <td className="whitespace-nowrap text-center">
                     <button
+                      type="button"
                       onClick={() => handleToggleActive(prod)}
-                      className={`badge text-xs font-bold gap-1 cursor-pointer transition-all ${
-                        prod.isActive ? 'badge-success text-white' : 'badge-ghost'
+                      className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
+                        prod.isActive
+                          ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
+                          : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
                       }`}
                       title="คลิกเพื่อสลับสถานะ"
                     >
                       {prod.isActive ? (
                         <>
-                          <CheckCircle2 className="w-3 h-3" /> เปิดแสดงผล
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                          <span>เปิดแสดงผล</span>
                         </>
                       ) : (
                         <>
-                          <XCircle className="w-3 h-3" /> ปิดซ่อน
+                          <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+                          <span>ปิดซ่อน</span>
                         </>
                       )}
                     </button>
                   </td>
-                  <td className="text-right">
+                  <td className="text-right whitespace-nowrap">
                     <button
                       onClick={() => setDeleteTarget(prod)}
                       className="btn btn-xs btn-ghost text-error"

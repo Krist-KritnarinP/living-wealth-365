@@ -232,12 +232,12 @@ export default function AdminInsurancePage() {
             <table className="table table-zebra w-full">
               <thead>
                 <tr className="bg-base-200/50 text-base-content/80 text-xs uppercase font-black">
-                  <th className="py-4 pl-6">แผนประกันภัย</th>
-                  <th>หมวดหมู่</th>
-                  <th>วงเงินคุ้มครอง</th>
-                  <th>ราคาเริ่มต้น</th>
-                  <th>สถานะ</th>
-                  <th className="text-right pr-6">การจัดการ</th>
+                  <th className="py-4 pl-6 min-w-[240px]">แผนประกันภัย</th>
+                  <th className="whitespace-nowrap">หมวดหมู่</th>
+                  <th className="whitespace-nowrap">วงเงินคุ้มครอง</th>
+                  <th className="whitespace-nowrap">ราคาเริ่มต้น</th>
+                  <th className="whitespace-nowrap text-center min-w-[130px]">สถานะ</th>
+                  <th className="text-right pr-6 whitespace-nowrap min-w-[100px]">การจัดการ</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-base-300/40 text-sm">
@@ -258,59 +258,63 @@ export default function AdminInsurancePage() {
                           </div>
                         )}
                       </td>
-                      <td>
-                        <span className="badge badge-outline text-xs font-semibold">
+                      <td className="whitespace-nowrap">
+                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80 whitespace-nowrap">
                           {plan.categoryName}
                         </span>
                       </td>
-                      <td className="font-bold text-primary">
+                      <td className="whitespace-nowrap font-bold text-primary">
                         {plan.coverageAmount || '-'}
                       </td>
-                      <td className="font-black text-secondary">
+                      <td className="whitespace-nowrap font-black text-secondary">
                         {plan.startingPrice || '-'}
                       </td>
-                      <td>
+                      <td className="whitespace-nowrap text-center">
                         <button
                           type="button"
                           onClick={() => handleToggleActive(plan)}
-                          className={`badge text-xs font-bold gap-1 cursor-pointer transition-transform hover:scale-105 ${
+                          className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
                             plan.isActive
-                              ? 'badge-success text-white'
-                              : 'badge-error text-white'
+                              ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
+                              : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
                           }`}
                           title="คลิกเพื่อสลับสถานะเปิด/ปิด"
                         >
                           {plan.isActive ? (
                             <>
-                              <CheckCircle className="w-3 h-3" /> เปิดใช้งาน
+                              <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                              <span>เปิดใช้งาน</span>
                             </>
                           ) : (
                             <>
-                              <XCircle className="w-3 h-3" /> ปิดใช้งาน
+                              <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+                              <span>ปิดใช้งาน</span>
                             </>
                           )}
                         </button>
                       </td>
-                      <td className="text-right pr-6 space-x-1">
-                        <button
-                          type="button"
-                          onClick={() => handleOpenEdit(plan)}
-                          className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
-                          title="แก้ไขแผน"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setPlanToDelete(plan);
-                            setDeleteModalOpen(true);
-                          }}
-                          className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
-                          title="ลบแผน"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                      <td className="text-right pr-6 whitespace-nowrap">
+                        <div className="inline-flex items-center justify-end gap-1">
+                          <button
+                            type="button"
+                            onClick={() => handleOpenEdit(plan)}
+                            className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
+                            title="แก้ไขแผน"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPlanToDelete(plan);
+                              setDeleteModalOpen(true);
+                            }}
+                            className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
+                            title="ลบแผน"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))
