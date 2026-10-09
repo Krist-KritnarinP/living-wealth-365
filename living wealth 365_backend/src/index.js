@@ -43,7 +43,7 @@ app.use('/api/insurance-plans', insurancePlansRouter);
 app.use(errorHandler);
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`===================================================`);
   console.log(`✨ [Living Wealth 365 Backend API] Online`);
   console.log(`🌐 URL: http://localhost:${PORT}`);
@@ -52,8 +52,19 @@ app.listen(PORT, () => {
   console.log(`📋 Leads: http://localhost:${PORT}/api/leads`);
   console.log(`📰 Posts: http://localhost:${PORT}/api/posts`);
   console.log(`💎 Products: http://localhost:${PORT}/api/products`);
+  console.log(`📑 Plans: http://localhost:${PORT}/api/insurance-plans`);
   console.log(`💖 Wishlist: http://localhost:${PORT}/api/wishlist`);
   console.log(`===================================================`);
+});
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`\n❌ [PORT IN USE] Port ${PORT} กำลังถูกใช้งานโดย Process อื่นอยู่`);
+    console.error(`👉 วิธีแก้: ปิด process ที่ค้างอยู่ หรือรัน 'npx kill-port ${PORT}'\n`);
+  } else {
+    console.error('❌ Server startup error:', err);
+  }
+  process.exit(1);
 });
 
 export default app;
