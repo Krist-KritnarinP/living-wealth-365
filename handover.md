@@ -425,6 +425,24 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - All 10 test suites passed (`npm test`).
   - Production build successful (`npm run build` completed in 767ms).
 
+## 23. Elimination of Stuck Leading Zeros & Frictionless Numeric Inputs in Tax Calculator
+- **Identified UX Friction**:
+  - Input fields initialized with numeric `0` caused the digit "0" to persist in inputs; pressing backspace converted `""` back to `0`, making it impossible to erase the leading zero when typing (e.g. typing resulted in "050000").
+- **Solution Implementation (`src/components/tax/TaxCalculator.jsx`)**:
+  - **Blank State Representation**: Fields defaulting to zero (`otherIncome`, `annuityInsurance`, `providentFundAndRmf`, `homeLoanInterest`) now initialize with empty string `""` paired with `placeholder="0"`.
+  - **`handleNumberInput(setter, max)` Engine**:
+    - Supports blank clearing: Backspacing to empty sets `""` instead of reverting to `0`.
+    - Auto-strips leading zeros: Uses `raw.replace(/^0+(?=\d)/, '')` so typing after 0 instantly becomes clean numbers without manual cursor adjustment.
+    - Honors statutory ceilings (e.g., social security max 9,000, life insurance max 100,000).
+  - **`onFocus={(e) => e.target.select()}`**:
+    - Clicking or tabbing into any numeric input auto-selects the entire value, allowing instant overwrite without manual backspacing.
+  - **Robust Real-Time Calculation**:
+    - Converts inputs via `Number(val) || 0` prior to invoking `calculatePersonalTax`, preserving flawless live reactive computation.
+- **Verification**:
+  - All 10 unit test suites passed (`npm test`).
+  - Production build clean (`npm run build` in 886ms).
+
+
 
 
 

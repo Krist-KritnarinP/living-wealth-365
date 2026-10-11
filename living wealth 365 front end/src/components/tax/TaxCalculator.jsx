@@ -18,7 +18,7 @@ export default function TaxCalculator({ hideHeader = false }) {
   // Input State (Default: Realistic Thai salary earner 45,000 THB/mo)
   const [monthlySalary, setMonthlySalary] = useState(45000);
   const [bonus, setBonus] = useState(90000);
-  const [otherIncome, setOtherIncome] = useState(0);
+  const [otherIncome, setOtherIncome] = useState('');
 
   // Family Deductions
   const [hasSpouse, setHasSpouse] = useState(false);
@@ -28,27 +28,45 @@ export default function TaxCalculator({ hideHeader = false }) {
   // Savings & Insurance Deductions
   const [socialSecurity, setSocialSecurity] = useState(9000);
   const [lifeInsurance, setLifeInsurance] = useState(30000);
-  const [annuityInsurance, setAnnuityInsurance] = useState(0);
-  const [providentFundAndRmf, setProvidentFundAndRmf] = useState(0);
-  const [homeLoanInterest, setHomeLoanInterest] = useState(0);
+  const [annuityInsurance, setAnnuityInsurance] = useState('');
+  const [providentFundAndRmf, setProvidentFundAndRmf] = useState('');
+  const [homeLoanInterest, setHomeLoanInterest] = useState('');
 
   // Modal State for Consultation Request
   const [showConsultModal, setShowConsultModal] = useState(false);
 
+  // Helper to handle smooth numeric inputs without stuck leading zeros
+  const handleNumberInput = (setter, max) => (e) => {
+    const raw = e.target.value;
+    if (raw === '') {
+      setter('');
+      return;
+    }
+    // Auto-strip leading zeros when user types after 0 (e.g. "05" -> "5")
+    const cleaned = raw.replace(/^0+(?=\d)/, '');
+    const num = Number(cleaned);
+    if (isNaN(num)) return;
+    if (max !== undefined && num > max) {
+      setter(max);
+    } else {
+      setter(cleaned === '' ? '' : num);
+    }
+  };
+
   // Calculate tax in real-time
   const taxResult = useMemo(() => {
     return calculatePersonalTax({
-      monthlySalary,
-      bonus,
-      otherIncome,
+      monthlySalary: Number(monthlySalary) || 0,
+      bonus: Number(bonus) || 0,
+      otherIncome: Number(otherIncome) || 0,
       hasSpouse,
       childrenCount,
       parentsCount,
-      socialSecurity,
-      lifeInsurance,
-      annuityInsurance,
-      providentFundAndRmf,
-      homeLoanInterest,
+      socialSecurity: Number(socialSecurity) || 0,
+      lifeInsurance: Number(lifeInsurance) || 0,
+      annuityInsurance: Number(annuityInsurance) || 0,
+      providentFundAndRmf: Number(providentFundAndRmf) || 0,
+      homeLoanInterest: Number(homeLoanInterest) || 0,
     });
   }, [
     monthlySalary,
@@ -65,7 +83,7 @@ export default function TaxCalculator({ hideHeader = false }) {
   ]);
 
   const formatNumber = (num) => {
-    return Math.round(num).toLocaleString('th-TH');
+    return Math.round(Number(num) || 0).toLocaleString('th-TH');
   };
 
   return (
@@ -127,13 +145,15 @@ export default function TaxCalculator({ hideHeader = false }) {
                     type="number"
                     min="0"
                     step="1000"
+                    placeholder="0"
                     value={monthlySalary}
-                    onChange={(e) => setMonthlySalary(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setMonthlySalary)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
                 <span className="text-[11px] text-base-content/60">
-                  รวม 12 เดือน: ฿{formatNumber(monthlySalary * 12)}
+                  รวม 12 เดือน: ฿{formatNumber((Number(monthlySalary) || 0) * 12)}
                 </span>
               </div>
 
@@ -149,8 +169,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     type="number"
                     min="0"
                     step="5000"
+                    placeholder="0"
                     value={bonus}
-                    onChange={(e) => setBonus(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setBonus)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
@@ -170,8 +192,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                   type="number"
                   min="0"
                   step="5000"
+                  placeholder="0"
                   value={otherIncome}
-                  onChange={(e) => setOtherIncome(Number(e.target.value))}
+                  onFocus={(e) => e.target.select()}
+                  onChange={handleNumberInput(setOtherIncome)}
                   className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                 />
               </div>
@@ -186,7 +210,7 @@ export default function TaxCalculator({ hideHeader = false }) {
                   type="button"
                   onClick={() => setMonthlySalary(preset)}
                   className={`btn btn-xs rounded-lg font-bold ${
-                    monthlySalary === preset
+                    Number(monthlySalary) === preset
                       ? 'btn-primary text-white'
                       : 'btn-ghost border border-base-300'
                   }`}
@@ -318,8 +342,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     min="0"
                     max="9000"
                     step="500"
+                    placeholder="0"
                     value={socialSecurity}
-                    onChange={(e) => setSocialSecurity(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setSocialSecurity, 9000)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
@@ -342,8 +368,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     min="0"
                     max="100000"
                     step="5000"
+                    placeholder="0"
                     value={lifeInsurance}
-                    onChange={(e) => setLifeInsurance(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setLifeInsurance, 100000)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
@@ -366,8 +394,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     min="0"
                     max="200000"
                     step="5000"
+                    placeholder="0"
                     value={annuityInsurance}
-                    onChange={(e) => setAnnuityInsurance(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setAnnuityInsurance, 200000)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
@@ -389,8 +419,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     type="number"
                     min="0"
                     step="5000"
+                    placeholder="0"
                     value={providentFundAndRmf}
-                    onChange={(e) => setProvidentFundAndRmf(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setProvidentFundAndRmf)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
@@ -410,8 +442,10 @@ export default function TaxCalculator({ hideHeader = false }) {
                     min="0"
                     max="100000"
                     step="5000"
+                    placeholder="0"
                     value={homeLoanInterest}
-                    onChange={(e) => setHomeLoanInterest(Number(e.target.value))}
+                    onFocus={(e) => e.target.select()}
+                    onChange={handleNumberInput(setHomeLoanInterest, 100000)}
                     className="input input-bordered w-full pl-8 rounded-xl bg-base-100 font-bold text-sm"
                   />
                 </div>
