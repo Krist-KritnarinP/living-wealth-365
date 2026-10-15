@@ -19,24 +19,30 @@ export default function AdminProductsPage() {
 
   const [formData, setFormData] = useState({
     name: '',
-    category: 'ดึงดูดทรัพย์ & โชคลาภ',
+    category: 'อำนาจ & ความมั่งคั่ง',
     price: '1,990',
+    stoneType: '',
+    aspect: 'SCIENCE',
+    chakra: '',
+    mineralFormula: '',
     description: '',
     imageUrl: '',
-    dayMatch: 'ทุกวันเกิด',
-    element: 'ธาตุทอง',
+    dayOfWeek: 'วันพฤหัสบดี, วันจันทร์',
   });
 
   const handleOpenAdd = () => {
     setEditingProduct(null);
     setFormData({
       name: '',
-      category: 'ดึงดูดทรัพย์ & โชคลาภ',
+      category: 'อำนาจ & ความมั่งคั่ง',
       price: '1,990',
+      stoneType: '',
+      aspect: 'SCIENCE',
+      chakra: '',
+      mineralFormula: '',
       description: '',
       imageUrl: '',
-      dayMatch: 'ทุกวันเกิด',
-      element: 'ธาตุทอง',
+      dayOfWeek: 'วันพฤหัสบดี, วันจันทร์',
     });
     setModalOpen(true);
   };
@@ -45,12 +51,15 @@ export default function AdminProductsPage() {
     setEditingProduct(prod);
     setFormData({
       name: prod.name || '',
-      category: prod.category || 'ดึงดูดทรัพย์ & โชคลาภ',
+      category: prod.category || 'อำนาจ & ความมั่งคั่ง',
       price: prod.price || '',
+      stoneType: prod.stoneType || '',
+      aspect: prod.aspect || 'SCIENCE',
+      chakra: prod.chakra || '',
+      mineralFormula: prod.mineralFormula || '',
       description: prod.description || '',
       imageUrl: prod.imageUrl || '',
-      dayMatch: prod.dayMatch || 'ทุกวันเกิด',
-      element: prod.element || 'ธาตุทอง',
+      dayOfWeek: prod.dayOfWeek || prod.dayMatch || 'วันพฤหัสบดี, วันจันทร์',
     });
     setModalOpen(true);
   };
@@ -126,7 +135,7 @@ export default function AdminProductsPage() {
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
                 <th className="min-w-[200px]">รูปภาพ & ชื่อสินค้า</th>
-                <th className="whitespace-nowrap">หมวดหมู่</th>
+                <th className="whitespace-nowrap">มิติ & สูตรแร่</th>
                 <th className="whitespace-nowrap">ราคาบูชา</th>
                 <th className="whitespace-nowrap">เหมาะกับวันเกิด</th>
                 <th className="whitespace-nowrap text-center min-w-[130px]">สถานะแสดงผล</th>
@@ -159,12 +168,27 @@ export default function AdminProductsPage() {
                     </div>
                   </td>
                   <td className="whitespace-nowrap">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-secondary/15 text-secondary border border-secondary/30 whitespace-nowrap">
-                      {prod.category}
-                    </span>
+                    <div className="flex flex-col gap-1 items-start">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-secondary/15 text-secondary border border-secondary/30">
+                        {prod.aspect === 'SCIENCE'
+                          ? '🔬 วิทยาศาสตร์'
+                          : prod.aspect === 'CHAKRA_ENERGY'
+                          ? '✨ จักระ'
+                          : prod.aspect === 'HISTORY'
+                          ? '🏛️ ประวัติศาสตร์'
+                          : prod.aspect || '💎 แร่ธรรมชาติ'}
+                      </span>
+                      {prod.mineralFormula && (
+                        <span className="text-[10px] font-mono text-base-content/60">
+                          {prod.mineralFormula}
+                        </span>
+                      )}
+                    </div>
                   </td>
-                  <td className="font-extrabold text-secondary whitespace-nowrap">฿{prod.price}</td>
-                  <td className="whitespace-nowrap">{prod.dayMatch}</td>
+                  <td className="font-extrabold text-secondary whitespace-nowrap">
+                    ฿{typeof prod.price === 'number' ? prod.price.toLocaleString() : prod.price}
+                  </td>
+                  <td className="whitespace-nowrap">{prod.dayOfWeek || prod.dayMatch || 'ทุกวันเกิด'}</td>
                   <td className="whitespace-nowrap text-center">
                     <button
                       type="button"
@@ -220,16 +244,16 @@ export default function AdminProductsPage() {
           <div className="modal modal-open z-50">
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
               <h3 className="font-bold text-lg text-primary">
-                {editingProduct ? 'แก้ไขข้อมูลสินค้าหินมงคล' : 'เพิ่มสินค้าหินมงคลใหม่'}
+                {editingProduct ? 'แก้ไขข้อมูลแร่ธาตุ / สินค้า' : 'เพิ่มแร่ธาตุ / สินค้าคัดสรรใหม่'}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">ชื่อหินมงคล</label>
+                    <label className="text-xs font-bold text-base-content/80">ชื่อแร่ธาตุ / ชิ้นงาน</label>
                     <input
                       type="text"
                       required
-                      placeholder="เช่น หินไหมทอง (Rutilated Quartz)"
+                      placeholder="เช่น หินไหมทองจักรพรรดิ"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="input input-bordered w-full rounded-xl bg-base-100"
@@ -249,9 +273,63 @@ export default function AdminProductsPage() {
                   </div>
                 </div>
 
+                {/* Aspect & Chakra */}
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่เสริมดวง</label>
+                    <label className="text-xs font-bold text-base-content/80">มิติชิ้นงาน (Aspect)</label>
+                    <select
+                      value={formData.aspect}
+                      onChange={(e) => setFormData({ ...formData, aspect: e.target.value })}
+                      className="select select-bordered w-full rounded-xl bg-base-100"
+                    >
+                      <option value="SCIENCE">🔬 SCIENCE (วิทยาศาสตร์ & แร่ธาตุ)</option>
+                      <option value="CHAKRA_ENERGY">✨ CHAKRA_ENERGY (จักระ & สมาธิ)</option>
+                      <option value="HISTORY">🏛️ HISTORY (ประวัติศาสตร์โบราณ)</option>
+                      <option value="CULTURE">📜 CULTURE (วัฒนธรรมและความเชื่อ)</option>
+                      <option value="PERSONAL_EXP">🌿 PERSONAL_EXP (บันทึกประสบการณ์)</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">จักระที่สอดคล้อง</label>
+                    <input
+                      type="text"
+                      placeholder="เช่น จักระที่ 3 มณีปุระ (Solar Plexus)"
+                      value={formData.chakra}
+                      onChange={(e) => setFormData({ ...formData, chakra: e.target.value })}
+                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    />
+                  </div>
+                </div>
+
+                {/* Mineral Formula & Stone Type */}
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">สูตรเคมีแร่ธาตุ (Formula)</label>
+                    <input
+                      type="text"
+                      placeholder="เช่น SiO₂ with TiO₂ Rutile Needles"
+                      value={formData.mineralFormula}
+                      onChange={(e) => setFormData({ ...formData, mineralFormula: e.target.value })}
+                      className="input input-bordered w-full rounded-xl bg-base-100 font-mono text-xs"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ชนิดแร่ / ขนาดหิน</label>
+                    <input
+                      type="text"
+                      placeholder="เช่น ควอตซ์ใส เส้นไหมทอง 12mm"
+                      value={formData.stoneType}
+                      onChange={(e) => setFormData({ ...formData, stoneType: e.target.value })}
+                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่</label>
                     <input
                       type="text"
                       value={formData.category}
@@ -261,11 +339,11 @@ export default function AdminProductsPage() {
                   </div>
 
                   <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">เหมาะกับวันเกิด</label>
+                    <label className="text-xs font-bold text-base-content/80">สัมพันธ์กับวัน</label>
                     <input
                       type="text"
-                      value={formData.dayMatch}
-                      onChange={(e) => setFormData({ ...formData, dayMatch: e.target.value })}
+                      value={formData.dayOfWeek}
+                      onChange={(e) => setFormData({ ...formData, dayOfWeek: e.target.value })}
                       className="input input-bordered w-full rounded-xl bg-base-100"
                     />
                   </div>

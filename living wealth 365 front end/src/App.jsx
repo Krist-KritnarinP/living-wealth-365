@@ -11,13 +11,18 @@ import Footer from './components/common/Footer';
 import RoleSwitcher from './components/common/RoleSwitcher';
 import ProtectedRoute from './components/common/ProtectedRoute';
 
-// Public Pages
+// 🏛️ The 7 Content Pillar Pages
 import HomePage from './pages/public/HomePage';
-import LifeInsurancePage from './pages/public/LifeInsurancePage';
-import NonLifeInsurancePage from './pages/public/NonLifeInsurancePage';
-import MuteluPage from './pages/public/MuteluPage';
-import BlogPage from './pages/public/BlogPage';
+import LifePage from './pages/public/LifePage';
+import WealthPage from './pages/public/WealthPage';
+import WellbeingPage from './pages/public/WellbeingPage';
+import InnerLifePage from './pages/public/InnerLifePage';
+import EarthEnergyPage from './pages/public/EarthEnergyPage';
+import JournalPage from './pages/public/JournalPage';
 import BlogDetailPage from './pages/public/BlogDetailPage';
+import AboutPage from './pages/public/AboutPage';
+
+// Auth & Utility Pages
 import LoginPage from './pages/public/LoginPage';
 import RegisterPage from './pages/public/RegisterPage';
 import ThankYouPage from './pages/public/ThankYouPage';
@@ -57,17 +62,29 @@ function AppShell() {
       {/* Main Viewport Content */}
       <main className="flex-1 w-full">
         <Routes>
-          {/* 🌐 1. Public Routes */}
+          {/* 🏛️ 1. The 7 Pillar Public Routes */}
           <Route path={ROUTES.HOME} element={<HomePage />} />
-          <Route path={ROUTES.INSURANCE_LIFE} element={<LifeInsurancePage />} />
-          <Route path={ROUTES.INSURANCE_NON_LIFE} element={<NonLifeInsurancePage />} />
-          <Route path={ROUTES.MUTELU} element={<MuteluPage />} />
-          <Route path={ROUTES.BLOG} element={<BlogPage />} />
+          <Route path={ROUTES.LIFE} element={<LifePage />} />
+          <Route path={ROUTES.WEALTH} element={<WealthPage />} />
+          <Route path={ROUTES.WELLBEING} element={<WellbeingPage />} />
+          <Route path={ROUTES.INNER_LIFE} element={<InnerLifePage />} />
+          <Route path={ROUTES.EARTH_ENERGY} element={<EarthEnergyPage />} />
+          <Route path={ROUTES.JOURNAL} element={<JournalPage />} />
+          <Route path="/journal/:slug" element={<BlogDetailPage />} />
+          <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+
+          {/* 🔄 Backwards Compatibility & Shortlinks */}
+          <Route path="/insurance/life" element={<Navigate to="/wealth?tab=protection" replace />} />
+          <Route path="/insurance/non-life" element={<Navigate to="/wealth?tab=protection" replace />} />
+          <Route path="/mutelu" element={<Navigate to="/earth-energy" replace />} />
+          <Route path="/blog" element={<Navigate to="/journal" replace />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
+          <Route path="/tax-calculator" element={<Navigate to="/wealth?tab=calculator" replace />} />
+
+          {/* 🔑 Auth & Utility */}
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />
           <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
           <Route path={ROUTES.THANK_YOU} element={<ThankYouPage />} />
-          <Route path="/tax-calculator" element={<Navigate to="/blog?tab=calculator" replace />} />
 
           {/* 👤 2. Customer Routes (Role: CUSTOMER) */}
           <Route

@@ -19,7 +19,11 @@ export default function AdminBlogPage() {
 
   const [formData, setFormData] = useState({
     title: '',
-    category: 'วางแผนภาษี',
+    category: 'การวางแผนภาษี',
+    pillar: 'JOURNAL',
+    postType: 'ARTICLE',
+    authorName: 'Top & Joy',
+    tags: '',
     excerpt: '',
     content: '',
     imageUrl: '',
@@ -30,7 +34,11 @@ export default function AdminBlogPage() {
     setEditingPost(null);
     setFormData({
       title: '',
-      category: 'วางแผนภาษี',
+      category: 'การวางแผนภาษี',
+      pillar: 'JOURNAL',
+      postType: 'ARTICLE',
+      authorName: 'Top & Joy',
+      tags: '',
       excerpt: '',
       content: '',
       imageUrl: '',
@@ -43,7 +51,11 @@ export default function AdminBlogPage() {
     setEditingPost(post);
     setFormData({
       title: post.title || '',
-      category: post.category || 'วางแผนภาษี',
+      category: post.category || 'การวางแผนภาษี',
+      pillar: post.pillar || 'JOURNAL',
+      postType: post.postType || 'ARTICLE',
+      authorName: post.authorName || (typeof post.author === 'string' ? post.author : 'Top & Joy'),
+      tags: post.tags || '',
       excerpt: post.excerpt || '',
       content: post.content || '',
       imageUrl: post.imageUrl || '',
@@ -122,7 +134,7 @@ export default function AdminBlogPage() {
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
                 <th className="min-w-[200px]">รูปภาพ & หัวข้อบทความ</th>
-                <th className="whitespace-nowrap">หมวดหมู่</th>
+                <th className="whitespace-nowrap">เสาหลัก & รูปแบบ</th>
                 <th className="whitespace-nowrap">ผู้เขียน</th>
                 <th className="whitespace-nowrap">วันที่เผยแพร่</th>
                 <th className="whitespace-nowrap text-center min-w-[130px]">{t('status')}</th>
@@ -151,20 +163,28 @@ export default function AdminBlogPage() {
                           {post.title}
                         </div>
                         <div className="text-xs text-base-content/50 font-mono">
-                          /blog/{post.slug}
+                          /journal/{post.slug}
                         </div>
                       </div>
                     </div>
                   </td>
                   <td className="whitespace-nowrap">
-                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-primary/10 text-primary border border-primary/20 whitespace-nowrap">
-                      {post.category}
-                    </span>
+                    <div className="flex flex-col gap-1 items-start">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/20">
+                        {post.pillar || 'JOURNAL'}
+                      </span>
+                      {post.postType && post.postType !== 'ARTICLE' && (
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-secondary/15 text-secondary">
+                          {post.postType}
+                        </span>
+                      )}
+                    </div>
                   </td>
                   <td className="whitespace-nowrap">
-                    {typeof post.author === 'object'
-                      ? post.author?.name || post.author?.username || 'ที่ปรึกษา'
-                      : post.author || 'ที่ปรึกษา'}
+                    {post.authorName ||
+                      (typeof post.author === 'object'
+                        ? post.author?.name || post.author?.username
+                        : post.author || 'Top & Joy')}
                   </td>
                   <td className="whitespace-nowrap">
                     {post.publishedAt ||
@@ -231,7 +251,7 @@ export default function AdminBlogPage() {
           <div className="modal modal-open z-50">
             <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
               <h3 className="font-bold text-lg text-primary">
-                {editingPost ? 'แก้ไขบทความความรู้' : 'เขียนบทความความรู้ใหม่'}
+                {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
                 <div className="flex flex-col gap-1.5 w-full">
@@ -239,25 +259,58 @@ export default function AdminBlogPage() {
                   <input
                     type="text"
                     required
-                    placeholder="เช่น เทคนิคลดหย่อนภาษี 2568..."
+                    placeholder="เช่น สมดุล 6 มิติของชีวิต..."
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     className="input input-bordered w-full rounded-xl bg-base-100"
                   />
                 </div>
 
+                {/* Pillar & Post Type */}
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่</label>
+                    <label className="text-xs font-bold text-base-content/80">เสาหลัก (Pillar)</label>
                     <select
-                      value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      value={formData.pillar}
+                      onChange={(e) => setFormData({ ...formData, pillar: e.target.value })}
                       className="select select-bordered w-full rounded-xl bg-base-100"
                     >
-                      <option value="วางแผนภาษี">วางแผนภาษี</option>
-                      <option value="ประกันชีวิต & สุขภาพ">ประกันชีวิต & สุขภาพ</option>
-                      <option value="วางแผนเกษียณ">วางแผนเกษียณ</option>
+                      <option value="LIFE">1. LIFE (สมดุลชีวิต 6 มิติ)</option>
+                      <option value="WEALTH">2. WEALTH (สถาปัตยกรรมการเงิน)</option>
+                      <option value="WELLBEING">3. WELLBEING (อายุวัฒนะ & สุขภาพ)</option>
+                      <option value="INNER_LIFE">4. INNER_LIFE (โลกภายใน & สมาธิ)</option>
+                      <option value="EARTH_ENERGY">5. EARTH_ENERGY (แร่ธาตุธรรมชาติ)</option>
+                      <option value="JOURNAL">6. JOURNAL (วารสาร & ความคิด)</option>
+                      <option value="ABOUT">7. ABOUT (ปรัชญา & เรื่องราว)</option>
                     </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">รูปแบบเนื้อหา (Type)</label>
+                    <select
+                      value={formData.postType}
+                      onChange={(e) => setFormData({ ...formData, postType: e.target.value })}
+                      className="select select-bordered w-full rounded-xl bg-base-100"
+                    >
+                      <option value="ARTICLE">บทความทั่วไป (Article)</option>
+                      <option value="TOPS_NOTES">Top's Notes (บันทึกของท็อป)</option>
+                      <option value="JOURNEY">Joy's Journey (บันทึกการเดินทาง)</option>
+                      <option value="EXPLORING">Exploring (การสำรวจร่วมกัน)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* Author & Read Time */}
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">ผู้เขียน (Author)</label>
+                    <input
+                      type="text"
+                      value={formData.authorName}
+                      onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
+                      placeholder="เช่น Top & Joy, Top, หรือ Joy"
+                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    />
                   </div>
 
                   <div className="flex flex-col gap-1.5 w-full">
@@ -266,6 +319,31 @@ export default function AdminBlogPage() {
                       type="text"
                       value={formData.readTime}
                       onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
+                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    />
+                  </div>
+                </div>
+
+                {/* Category & Tags */}
+                <div className="grid grid-cols-2 gap-4 w-full">
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่ย่อย</label>
+                    <input
+                      type="text"
+                      value={formData.category}
+                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                      placeholder="เช่น การวางแผนภาษี, สุขภาพระดับเซลล์"
+                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    />
+                  </div>
+
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">แท็ก (Tags)</label>
+                    <input
+                      type="text"
+                      value={formData.tags}
+                      onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                      placeholder="เช่น #Tax #Longevity #Balance"
                       className="input input-bordered w-full rounded-xl bg-base-100"
                     />
                   </div>

@@ -94,14 +94,14 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       badgeColor: 'badge-primary text-white',
     },
     {
-      title: t('cmsBlog'),
+      title: "วารสาร & Top's Notes (CMS)",
       path: ROUTES.ADMIN_BLOG,
       icon: FileText,
       badge: posts.length,
       badgeColor: 'badge-ghost',
     },
     {
-      title: t('cmsProducts'),
+      title: 'แร่ธาตุ & คริสตัล (CMS)',
       path: ROUTES.ADMIN_PRODUCTS,
       icon: Package,
       badge: products.length,

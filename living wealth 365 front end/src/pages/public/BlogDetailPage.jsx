@@ -29,28 +29,48 @@ export default function BlogDetailPage() {
       <article className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 max-w-4xl mx-auto space-y-8">
         {/* Back Link */}
         <Link
-          to={ROUTES.BLOG}
+          to={ROUTES.JOURNAL}
           className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-secondary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>กลับไปคลังความรู้</span>
+          <span>กลับไปหน้าวารสาร & Top's Notes</span>
         </Link>
 
         {/* Title & Metadata */}
         <div className="space-y-4">
-          <span className="badge badge-primary text-xs font-bold px-3 py-1">
-            {post.category}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="badge badge-primary text-xs font-bold px-3 py-1">
+              {post.pillar || post.category}
+            </span>
+            {post.postType && post.postType !== 'ARTICLE' && (
+              <span className="badge badge-secondary text-xs font-bold px-3 py-1">
+                {post.postType === 'TOPS_NOTES' ? "Top's Notes" : post.postType === 'JOURNEY' ? "Joy's Journey" : 'Exploring'}
+              </span>
+            )}
+            {post.category && post.category !== post.pillar && (
+              <span className="badge badge-outline text-xs font-semibold px-2.5 py-1">
+                {post.category}
+              </span>
+            )}
+          </div>
+
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-primary leading-tight">
             {post.title}
           </h1>
 
+          {post.tags && (
+            <div className="text-xs font-semibold text-secondary">
+              {post.tags}
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-base-content/70 border-y border-base-300 py-3">
             <span className="flex items-center gap-1.5 font-semibold text-primary">
               <User className="w-4 h-4 text-secondary" />
-              {typeof post.author === 'object'
-                ? post.author?.name || post.author?.username || 'ทีมที่ปรึกษา'
-                : post.author || 'ทีมที่ปรึกษา'}
+              {post.authorName ||
+                (typeof post.author === 'object'
+                  ? post.author?.name || post.author?.username || 'Top & Joy'
+                  : post.author || 'Top & Joy')}
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">

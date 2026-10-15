@@ -11,8 +11,17 @@ export const productsRouter = Router();
 productsRouter.get('/', optionalUser, async (req, res) => {
   try {
     const isAdmin = req.user?.role === 'ADMIN';
+    const { aspect, chakra, category } = req.query;
+
+    const where = {
+      ...(isAdmin ? {} : { isActive: true }),
+      ...(aspect ? { aspect } : {}),
+      ...(chakra ? { chakra } : {}),
+      ...(category && category !== 'ทั้งหมด' ? { category } : {}),
+    };
+
     const products = await prisma.product.findMany({
-      where: isAdmin ? {} : { isActive: true },
+      where,
       orderBy: { createdAt: 'desc' },
     });
     res.json({ products });
@@ -46,7 +55,20 @@ productsRouter.get('/:id', async (req, res) => {
  */
 productsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
   try {
-    const { name, category, price, description, imageUrl, stoneType, dayOfWeek, isActive } = req.body;
+    const {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      stoneType,
+      dayOfWeek,
+      aspect,
+      chakra,
+      mineralFormula,
+      isCurated,
+      isActive,
+    } = req.body;
 
     if (!name || !description) {
       return res.status(400).json({ error: 'กรุณาระบุชื่อสินค้าและรายละเอียด' });
@@ -55,17 +77,21 @@ productsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
     const newProduct = await prisma.product.create({
       data: {
         name: name.trim(),
-        category: category || 'หินมงคล',
+        category: category || 'แร่ธาตุและคริสตัล',
         price: price ? parseFloat(price) : null,
         description: description.trim(),
         imageUrl: imageUrl ? imageUrl.trim() : null,
         stoneType: stoneType || null,
         dayOfWeek: dayOfWeek || null,
+        aspect: aspect || 'CHAKRA_ENERGY',
+        chakra: chakra || null,
+        mineralFormula: mineralFormula || null,
+        isCurated: isCurated ?? true,
         isActive: isActive ?? true,
       },
     });
 
-    res.status(201).json({ message: 'สร้างสินค้าสำเร็จ', product: newProduct });
+    res.status(201).json({ message: 'สร้างข้อมูลแร่ธาตุสำเร็จ', product: newProduct });
   } catch (error) {
     console.error('[Create Product Error]:', error);
     res.status(500).json({ error: 'เกิดข้อผิดพลาดในการสร้างสินค้า' });
@@ -79,7 +105,20 @@ productsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
 productsRouter.patch('/:id', authenticateUser, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, category, price, description, imageUrl, stoneType, dayOfWeek, isActive } = req.body;
+    const {
+      name,
+      category,
+      price,
+      description,
+      imageUrl,
+      stoneType,
+      dayOfWeek,
+      aspect,
+      chakra,
+      mineralFormula,
+      isCurated,
+      isActive,
+    } = req.body;
 
     const updatedProduct = await prisma.product.update({
       where: { id },
@@ -91,11 +130,15 @@ productsRouter.patch('/:id', authenticateUser, requireAdmin, async (req, res) =>
         imageUrl: imageUrl !== undefined ? imageUrl : undefined,
         stoneType: stoneType !== undefined ? stoneType : undefined,
         dayOfWeek: dayOfWeek !== undefined ? dayOfWeek : undefined,
+        aspect: aspect !== undefined ? aspect : undefined,
+        chakra: chakra !== undefined ? chakra : undefined,
+        mineralFormula: mineralFormula !== undefined ? mineralFormula : undefined,
+        isCurated: isCurated !== undefined ? isCurated : undefined,
         isActive: isActive !== undefined ? isActive : undefined,
       },
     });
 
-    res.json({ message: 'อัปเดตสินค้าสำเร็จ', product: updatedProduct });
+    res.json({ message: 'อัปเดตข้อมูลสำเร็จ', product: updatedProduct });
   } catch (error) {
     console.error('[Update Product Error]:', error);
     res.status(500).json({ error: 'ไม่สามารถอัปเดตสินค้าได้' });

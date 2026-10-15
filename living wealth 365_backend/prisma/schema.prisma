@@ -25,6 +25,34 @@ enum LeadStatus {
   CANCELLED
 }
 
+// 🏛️ 7 เสาหลักของ Living Wealth 365
+enum ContentPillar {
+  LIFE           // 1. Life Planning, Purpose, Lifestyle, Living after Retirement
+  WEALTH         // 2. Financial, Protection, Investment, Tax, Retirement, Legacy
+  WELLBEING      // 3. Healthspan, Nutrition, Sleep, Mental Health, Mindfulness
+  INNER_LIFE     // 4. Philosophy, Buddhism, Consciousness, Meditation
+  EARTH_ENERGY   // 5. Minerals, Crystals, Chakras, Traditions
+  JOURNAL        // 6. Explore & Journal, Books, Tech, Longevity, Travel
+  ABOUT          // 7. Philosophy, Top & Joy
+}
+
+// ✍️ รูปแบบเนื้อหา
+enum PostType {
+  ARTICLE        // บทความวิชาการ / บทความยาว
+  TOPS_NOTES     // 🌟 บันทึกความคิดของ Top (Top's Notes)
+  JOURNEY        // 🌟 เรื่องราวการเดินทางและการทดลองของ Top & Joy
+  EXPLORING      // สิ่งที่กำลังค้นคว้า / รีวิวหนังสือ / Longevity
+}
+
+// 💎 มิติของแร่ธาตุและคริสตัล (Earth & Energy)
+enum EarthAspect {
+  SCIENCE        // วิทยาศาสตร์, ธรณีวิทยา, โครงสร้างแร่
+  HISTORY        // ประวัติศาสตร์และแหล่งกำเนิด
+  CULTURE        // วัฒนธรรมและประเพณีความเชื่อโบราณ
+  CHAKRA_ENERGY  // พลังงานจักระและการเจริญสติ (Mindfulness)
+  PERSONAL_EXP   // บันทึกการทดลองส่วนตัว
+}
+
 // ==========================================
 // 🗄️ Models
 // ==========================================
@@ -51,12 +79,12 @@ model User {
   @@map("users")
 }
 
-// 2. ข้อมูลติดต่อกลับ (Lead Capture)
+// 2. ข้อมูลติดต่อกลับ (Lead Capture & Let's Talk)
 model Lead {
   id            String     @id @default(uuid())
   name          String     // ชื่อลูกค้าสำหรับติดต่อ
   phone         String     // เบอร์โทรศัพท์
-  interest      String     // บริการหรือสินค้าที่สนใจ
+  interest      String     // บริการหรือหัวข้อที่สนใจ (เช่น วางแผนชีวิต, ภาษี, ประกัน, พูดคุยกับ Top & Joy)
   preferredTime String?    // ช่วงเวลาที่สะดวกรับสาย
   status        LeadStatus @default(NEW)
   notes         String?    @db.Text // บันทึกจากลูกค้าหรือที่ปรึกษา
@@ -71,44 +99,53 @@ model Lead {
   @@map("leads")
 }
 
-// 3. บทความความรู้ (Blog CMS)
+// 3. บทความ & วารสาร (Explore, Journal & Knowledge Hub)
 model Post {
-  id          String   @id @default(uuid())
-  title       String   @db.VarChar(255)
-  slug        String   @unique
-  content     String   @db.Text
-  excerpt     String?  @db.Text
-  imageUrl    String?  @db.Text
-  category    String   @default("การวางแผนการเงิน")
-  published   Boolean  @default(false)
+  id          String        @id @default(uuid())
+  title       String        @db.VarChar(255)
+  slug        String        @unique
+  content     String        @db.Text
+  excerpt     String?       @db.Text
+  imageUrl    String?       @db.Text
+  category    String        @default("การวางแผนการเงิน")
+  pillar      ContentPillar @default(JOURNAL) // 🏛️ จัดอยู่ใน 7 เสาหลัก
+  postType    PostType      @default(ARTICLE) // ✍️ บทความ / Top's Notes / Journey
+  authorName  String        @default("Top & Joy") // 👤 ผู้เขียน: Top, Joy, หรือ Top & Joy
+  readTime    String?       @default("5 นาที")
+  tags        String?       // #Tax, #Longevity, #Mindfulness
+  published   Boolean       @default(false)
   
-  // ลิงก์ไปยังผู้เขียนบทความ
+  // ลิงก์ไปยัง User ในระบบ
   authorId    String
-  author      User     @relation(fields: [authorId], references: [id])
+  author      User          @relation(fields: [authorId], references: [id])
   
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 
   @@map("posts")
 }
 
-// 4. สินค้าสายมู / วัตถุมงคล (Mu-Tae-Lu CMS)
+// 4. แร่ธาตุ คริสตัล และพลังงานธรรมชาติ (Earth & Energy Curation)
 model Product {
-  id           String     @id @default(uuid())
-  name         String
-  category     String?
-  price        Decimal?   @db.Decimal(10, 2)
-  description  String     @db.Text
-  imageUrl     String?    @db.Text
-  stoneType    String?    // ประเภทหินมงคล เช่น ไทเกอร์อาย, ลาพิส
-  dayOfWeek    String?    // วันในสัปดาห์ที่ถูกโฉลก เช่น Sunday, Monday
-  isActive     Boolean    @default(true)
+  id             String       @id @default(uuid())
+  name           String
+  category       String?
+  price          Decimal?     @db.Decimal(10, 2)
+  description    String       @db.Text
+  imageUrl       String?      @db.Text
+  stoneType      String?      // ชนิดของแร่หรือคริสตัล เช่น ไทเกอร์อาย, ลาพิส ลาซูลี, มาลาไคต์
+  dayOfWeek      String?      // วันในสัปดาห์ที่สัมพันธ์
+  aspect         EarthAspect  @default(CHAKRA_ENERGY) // 💎 มิติของชิ้นงาน: วิทย์ / ประวัติศาสตร์ / วัฒนธรรม / จักระ
+  chakra         String?      // จักระที่สอดคล้อง เช่น จักระ 4 (หัวใจ), จักระ 6 (ตาที่สาม)
+  mineralFormula String?      // สูตรโครงสร้างแร่ทางเคมี เช่น SiO2, Cu2CO3(OH)2
+  isCurated      Boolean      @default(true) // ชิ้นงานคัดสรรพิเศษโดย Top & Joy
+  isActive       Boolean      @default(true)
   
   // Relations
-  wishlistedBy Wishlist[]
+  wishlistedBy   Wishlist[]
   
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
 
   @@map("products")
 }

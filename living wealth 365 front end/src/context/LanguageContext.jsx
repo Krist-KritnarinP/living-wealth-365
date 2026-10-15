@@ -4,8 +4,21 @@ const LanguageContext = createContext(null);
 
 export const TRANSLATIONS = {
   th: {
-    // Navigation
+    // Navigation & 7 Pillars
     home: 'หน้าหลัก',
+    life: 'สมดุลชีวิต 6 มิติ',
+    wealth: 'สถาปัตยกรรมการเงิน',
+    wellbeing: 'อายุวัฒนะ & สุขภาพ',
+    innerLife: 'โลกภายใน & สมาธิ',
+    earthEnergy: 'พลังงานธรรมชาติ & แร่ธาตุ',
+    journal: 'วารสาร & Top\'s Notes',
+    about: 'เกี่ยวกับเรา & Top & Joy',
+    letsTalk: "สนทนากับเรา (Let's Talk)",
+    gatewayLiving: 'Living (วิถีชีวิต)',
+    gatewayLearning: 'Learning (ความรู้)',
+    gatewayConnecting: 'Connecting (เพื่อนร่วมทาง)',
+
+    // Backwards Compatibility Links
     insuranceLife: 'ประกันชีวิต & สุขภาพ',
     insuranceNonLife: 'ประกันวินาศภัย',
     taxCalculator: 'คำนวณภาษี',
@@ -62,8 +75,21 @@ export const TRANSLATIONS = {
     logoutSuccess: 'ออกจากระบบเรียบร้อยแล้ว',
   },
   en: {
-    // Navigation
+    // Navigation & 7 Pillars
     home: 'Home',
+    life: 'Life Balance (6D)',
+    wealth: 'Wealth Architecture',
+    wellbeing: 'Longevity & Health',
+    innerLife: 'Inner Life & Stillness',
+    earthEnergy: 'Earth & Energy',
+    journal: "Journal & Top's Notes",
+    about: 'About Us & Top & Joy',
+    letsTalk: "Let's Talk",
+    gatewayLiving: 'Living',
+    gatewayLearning: 'Learning',
+    gatewayConnecting: 'Connecting',
+
+    // Backwards Compatibility Links
     insuranceLife: 'Life & Health',
     insuranceNonLife: 'General Insurance',
     taxCalculator: 'Tax Calculator',

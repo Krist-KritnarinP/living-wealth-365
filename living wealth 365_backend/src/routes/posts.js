@@ -11,8 +11,17 @@ export const postsRouter = Router();
 postsRouter.get('/', optionalUser, async (req, res) => {
   try {
     const isAdmin = req.user?.role === 'ADMIN';
+    const { pillar, postType, category } = req.query;
+
+    const where = {
+      ...(isAdmin ? {} : { published: true }),
+      ...(pillar ? { pillar } : {}),
+      ...(postType ? { postType } : {}),
+      ...(category && category !== 'ทั้งหมด' ? { category } : {}),
+    };
+
     const posts = await prisma.post.findMany({
-      where: isAdmin ? {} : { published: true },
+      where,
       orderBy: { createdAt: 'desc' },
       include: {
         author: {
@@ -62,7 +71,20 @@ postsRouter.get('/:slug', optionalUser, async (req, res) => {
  */
 postsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
   try {
-    const { title, slug, content, excerpt, imageUrl, category, published } = req.body;
+    const {
+      title,
+      slug,
+      content,
+      excerpt,
+      imageUrl,
+      category,
+      pillar,
+      postType,
+      authorName,
+      readTime,
+      tags,
+      published,
+    } = req.body;
 
     if (!title || !content) {
       return res.status(400).json({ error: 'กรุณาระบุหัวข้อและเนื้อหาบทความ' });
@@ -78,6 +100,11 @@ postsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
         excerpt: excerpt ? excerpt.trim() : null,
         imageUrl: imageUrl ? imageUrl.trim() : null,
         category: category || 'การวางแผนการเงิน',
+        pillar: pillar || 'JOURNAL',
+        postType: postType || 'ARTICLE',
+        authorName: authorName ? authorName.trim() : 'Top & Joy',
+        readTime: readTime ? readTime.trim() : '5 นาที',
+        tags: tags ? tags.trim() : null,
         published: published ?? true,
         authorId: req.user.id,
       },
@@ -97,7 +124,20 @@ postsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
 postsRouter.patch('/:id', authenticateUser, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, slug, content, excerpt, imageUrl, category, published } = req.body;
+    const {
+      title,
+      slug,
+      content,
+      excerpt,
+      imageUrl,
+      category,
+      pillar,
+      postType,
+      authorName,
+      readTime,
+      tags,
+      published,
+    } = req.body;
 
     const updatedPost = await prisma.post.update({
       where: { id },
@@ -108,6 +148,11 @@ postsRouter.patch('/:id', authenticateUser, requireAdmin, async (req, res) => {
         excerpt: excerpt !== undefined ? excerpt : undefined,
         imageUrl: imageUrl !== undefined ? imageUrl : undefined,
         category: category !== undefined ? category : undefined,
+        pillar: pillar !== undefined ? pillar : undefined,
+        postType: postType !== undefined ? postType : undefined,
+        authorName: authorName !== undefined ? authorName : undefined,
+        readTime: readTime !== undefined ? readTime : undefined,
+        tags: tags !== undefined ? tags : undefined,
         published: published !== undefined ? published : undefined,
       },
     });

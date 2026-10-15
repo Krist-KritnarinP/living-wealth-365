@@ -1,4 +1,4 @@
-import { Heart, Sparkles, Send } from 'lucide-react';
+import { Heart, Sparkles, Send, Atom, Compass, BookOpen, Layers } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
@@ -12,15 +12,32 @@ export default function ProductCard({ product, onSelectForLead }) {
   const handleWishlistClick = (e) => {
     e.stopPropagation();
     if (!currentUser) {
-      // Save intent and navigate to login
-      navigate(`${ROUTES.LOGIN}?redirect=${encodeURIComponent(ROUTES.MUTELU)}`);
+      navigate(`${ROUTES.LOGIN}?redirect=${encodeURIComponent(ROUTES.EARTH_ENERGY)}`);
       return;
     }
     toggleWishlist(product.id);
   };
 
+  // Aspect Badge Helper
+  const getAspectBadge = (aspect) => {
+    switch (aspect) {
+      case 'SCIENCE':
+        return { label: '🔬 วิทย์ & แร่ธาตุ', color: 'badge-info' };
+      case 'HISTORY':
+        return { label: '🏛️ ประวัติศาสตร์', color: 'badge-neutral' };
+      case 'CHAKRA_ENERGY':
+        return { label: '✨ พลังจักระ', color: 'badge-secondary' };
+      case 'CULTURE':
+        return { label: '📜 วัฒนธรรม', color: 'badge-accent' };
+      default:
+        return { label: '💎 คัดสรรพิเศษ', color: 'badge-secondary' };
+    }
+  };
+
+  const aspectBadge = getAspectBadge(product.aspect);
+
   return (
-    <div className="card zen-surface border border-base-300/60 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 group flex flex-col justify-between">
+    <div className="card zen-surface border border-base-300/60 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
       {/* Image & Badges Container */}
       <div className="relative aspect-4/3 w-full overflow-hidden bg-base-200">
         <img
@@ -31,13 +48,17 @@ export default function ProductCard({ product, onSelectForLead }) {
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-          <span className="badge badge-primary text-xs font-bold shadow-xs">
-            {product.category}
+
+        {/* Top Badges */}
+        <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 max-w-[80%]">
+          <span className={`badge ${aspectBadge.color} text-[11px] font-bold shadow-xs py-0.5`}>
+            {aspectBadge.label}
           </span>
-          <span className="badge badge-secondary text-xs font-semibold text-white shadow-xs">
-            {product.element}
-          </span>
+          {product.category && (
+            <span className="badge badge-primary text-[11px] font-bold shadow-xs py-0.5">
+              {product.category}
+            </span>
+          )}
         </div>
 
         {/* Favorite Wishlist Button */}
@@ -58,34 +79,56 @@ export default function ProductCard({ product, onSelectForLead }) {
       <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
         <div>
           <div className="flex items-start justify-between gap-2">
-            <h4 className="text-lg font-black text-primary leading-snug">
+            <h4 className="text-base sm:text-lg font-black text-primary leading-snug group-hover:text-secondary transition-colors">
               {product.name}
             </h4>
-            <div className="text-right">
-              <span className="text-base font-extrabold text-secondary">
-                ฿{product.price}
-              </span>
-            </div>
+            {product.price && (
+              <div className="text-right shrink-0">
+                <span className="text-base font-extrabold text-secondary">
+                  ฿{typeof product.price === 'number' ? product.price.toLocaleString() : product.price}
+                </span>
+              </div>
+            )}
           </div>
 
-          <p className="text-sm text-base-content/70 mt-2 line-clamp-2 leading-relaxed">
+          {/* Mineral Formula & Chakra Tag */}
+          {(product.mineralFormula || product.chakra) && (
+            <div className="mt-2 space-y-1">
+              {product.mineralFormula && (
+                <div className="text-[11px] font-mono text-base-content/70 flex items-center gap-1.5 truncate">
+                  <Atom className="w-3.5 h-3.5 text-info shrink-0" />
+                  <span>สูตรแร่: {product.mineralFormula}</span>
+                </div>
+              )}
+              {product.chakra && (
+                <div className="text-[11px] font-semibold text-secondary flex items-center gap-1.5 truncate">
+                  <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                  <span>{product.chakra}</span>
+                </div>
+              )}
+            </div>
+          )}
+
+          <p className="text-xs sm:text-sm text-base-content/75 mt-2.5 line-clamp-2 leading-relaxed">
             {product.description}
           </p>
 
-          <div className="mt-3 text-xs font-semibold text-primary/80 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
-            <span>เหมาะกับ: {product.dayMatch}</span>
-          </div>
+          {product.dayOfWeek && (
+            <div className="mt-3 text-xs font-semibold text-primary/80 flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+              <span>สัมพันธ์กับ: {product.dayOfWeek}</span>
+            </div>
+          )}
         </div>
 
         {/* Actions */}
         <div className="pt-2 flex items-center gap-2">
           <button
             onClick={() => onSelectForLead && onSelectForLead(product)}
-            className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
+            className="btn btn-secondary btn-outline btn-sm w-full rounded-xl font-bold gap-1.5 hover:btn-secondary hover:text-white"
           >
             <Send className="w-3.5 h-3.5" />
-            <span>ปรึกษาและบูชา</span>
+            <span>ปรึกษา & บูชาชิ้นงาน</span>
           </button>
         </div>
       </div>
