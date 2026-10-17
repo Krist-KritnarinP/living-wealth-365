@@ -16,6 +16,7 @@ import {
   Menu,
   X,
   ShieldCheck,
+  Sliders,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -106,6 +107,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       icon: Package,
       badge: products.length,
       badgeColor: 'badge-secondary text-white',
+    },
+    {
+      title: 'ปรับแต่งหน้าเว็บ (Site Customizer)',
+      path: ROUTES.ADMIN_CUSTOMIZER,
+      icon: Sliders,
+      badge: 'Live',
+      badgeColor: 'badge-accent text-white font-bold',
     },
   ];
 

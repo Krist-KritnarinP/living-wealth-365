@@ -4,25 +4,25 @@ import {
   Compass,
   Sparkles,
   ArrowRight,
-  ShieldCheck,
   HeartHandshake,
   Activity,
   Gem,
   Coins,
-  Brain,
   Feather,
   CheckCircle2,
   ChevronRight,
-  Info,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
 import { ROUTES } from '../../constants/routes';
 import LifeMapTeaser from '../../components/common/LifeMapTeaser';
 import ProductCard from '../../components/mutelu/ProductCard';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
+import EditableText from '../../components/common/EditableText';
 
 export default function HomePage() {
   const { products, posts } = useAuth();
+  const { content } = useSiteCustomizer();
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const curatedProducts = products.filter((p) => p.isActive).slice(0, 4);
@@ -43,35 +43,60 @@ export default function HomePage() {
             {/* Left Content */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
-                <Sparkles className="w-4 h-4" />
-                <span>A LIFE WELL PLANNED. A LIFE WELL LIVED.</span>
+                <Sparkles className="w-4 h-4 shrink-0" />
+                <EditableText
+                  fieldKey="hero.badge"
+                  label="Hero ป้ายหัวข้อ"
+                  fallback="A LIFE WELL PLANNED. A LIFE WELL LIVED."
+                />
               </div>
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.15] tracking-tight">
-                วันนี้... อะไรคือสิ่งที่คุณ <br />
-                <span className="text-secondary">อยากรักษาไว้มากที่สุด?</span>
+                <EditableText
+                  fieldKey="hero.titleLine1"
+                  label="Hero หัวข้อ บรรทัด 1"
+                  fallback="วันนี้... อะไรคือสิ่งที่คุณ"
+                />{' '}
+                <br />
+                <EditableText
+                  fieldKey="hero.titleLine2"
+                  label="Hero หัวข้อ บรรทัด 2 (เน้นสีทอง)"
+                  fallback="อยากรักษาไว้มากที่สุด?"
+                  className="text-secondary"
+                />
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed max-w-2xl">
-                ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก
-                และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง
-                เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย <strong>Admin A & Admin B</strong>
+                <EditableText
+                  fieldKey="hero.description"
+                  label="Hero คำบรรยายหลัก"
+                  multiline
+                  fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย Admin A & Admin B"
+                />
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
-                  href="#lifemap"
+                  href={content?.hero?.primaryBtnLink || '#lifemap'}
                   className="btn btn-primary btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 shadow-md gap-2"
                 >
                   <Compass className="w-5 h-5" />
-                  <span>สำรวจ Life Map 6 มิติ</span>
+                  <EditableText
+                    fieldKey="hero.primaryBtnText"
+                    label="ข้อความปุ่มหลัก Hero"
+                    fallback="สำรวจ Life Map 6 มิติ"
+                  />
                 </a>
 
                 <Link
-                  to={ROUTES.ABOUT}
+                  to={content?.hero?.secondaryBtnLink || ROUTES.ABOUT}
                   className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 gap-2"
                 >
-                  <span>รู้จัก Admin A & Admin B</span>
+                  <EditableText
+                    fieldKey="hero.secondaryBtnText"
+                    label="ข้อความปุ่มรอง Hero"
+                    fallback="รู้จัก Admin A & Admin B"
+                  />
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -79,12 +104,20 @@ export default function HomePage() {
               {/* Trust Indicators */}
               <div className="pt-4 flex flex-wrap items-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold text-base-content/70">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-success" />
-                  <span>สถาปัตยกรรมการเงิน & ประกัน AIA ได้รับอนุญาต</span>
+                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                  <EditableText
+                    fieldKey="hero.trust1"
+                    label="ข้อความความน่าเชื่อถือ 1"
+                    fallback="สถาปัตยกรรมการเงิน & ประกัน AIA ได้รับอนุญาต"
+                  />
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-success" />
-                  <span>วิทยาศาสตร์แร่ธาตุ SiO₂ & สุขภาพ Longevity</span>
+                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                  <EditableText
+                    fieldKey="hero.trust2"
+                    label="ข้อความความน่าเชื่อถือ 2"
+                    fallback="วิทยาศาสตร์แร่ธาตุ SiO₂ & สุขภาพ Longevity"
+                  />
                 </div>
               </div>
             </div>
@@ -93,20 +126,35 @@ export default function HomePage() {
             <div className="lg:col-span-5 flex justify-center">
               <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-base-100">
                 <img
-                  src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&auto=format&fit=crop&q=80"
+                  src={
+                    content?.hero?.imageUrl ||
+                    'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&auto=format&fit=crop&q=80'
+                  }
                   alt="Living Wealth 365 Harmony & Balance"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/20 to-transparent flex items-end p-6">
                   <div className="text-white space-y-1">
-                    <span className="text-xs uppercase tracking-widest font-bold text-secondary">
-                      Fellow Travelers
+                    <span className="text-xs uppercase tracking-widest font-bold text-secondary block">
+                      <EditableText
+                        fieldKey="hero.imageBadge"
+                        label="การ์ดรูปภาพ Badge"
+                        fallback="Fellow Travelers"
+                      />
                     </span>
                     <h3 className="text-xl font-bold">
-                      สุขภาพดี • การเงินมั่นคง • จิตใจสงบสุข
+                      <EditableText
+                        fieldKey="hero.imageTitle"
+                        label="การ์ดรูปภาพ หัวข้อ"
+                        fallback="สุขภาพดี • การเงินมั่นคง • จิตใจสงบสุข"
+                      />
                     </h3>
                     <p className="text-xs text-white/80">
-                      Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ
+                      <EditableText
+                        fieldKey="hero.imageSubtitle"
+                        label="การ์ดรูปภาพ คำบรรยายย่อย"
+                        fallback="Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ"
+                      />
                     </p>
                   </div>
                 </div>
@@ -119,14 +167,26 @@ export default function HomePage() {
       {/* 🧭 2. THREE CORE GATEWAYS: LIVING • LEARNING • CONNECTING */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-secondary">
-            Three Core Gateways
+          <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+            <EditableText
+              fieldKey="gateways.sectionBadge"
+              label="หัวข้อหมวด Gateways (Badge)"
+              fallback="Three Core Gateways"
+            />
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary">
-            3 ประตูสู่การใช้ชีวิตที่สมบูรณ์แบบ
+            <EditableText
+              fieldKey="gateways.sectionTitle"
+              label="หัวข้อหลัก 3 ประตูใหญ่"
+              fallback="3 ประตูสู่การใช้ชีวิตที่สมบูรณ์แบบ"
+            />
           </h2>
           <p className="text-sm sm:text-base text-base-content/75">
-            เลือกสำรวจตามมิติที่คุณต้องการดูแลในวันนี้
+            <EditableText
+              fieldKey="gateways.sectionSubtitle"
+              label="คำบรรยายย่อย 3 ประตูใหญ่"
+              fallback="เลือกสำรวจตามมิติที่คุณต้องการดูแลในวันนี้"
+            />
           </p>
         </div>
 
@@ -137,38 +197,66 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center">
                 <Activity className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary">
-                Gateway 01
+              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+                <EditableText
+                  fieldKey="gateways.living.badge"
+                  label="Gateway 1 Badge"
+                  fallback="Gateway 01"
+                />
               </span>
               <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
-                Living (วิถีชีวิต)
+                <EditableText
+                  fieldKey="gateways.living.title"
+                  label="Gateway 1 ชื่อหมวด"
+                  fallback="Living (วิถีชีวิต)"
+                />
               </h3>
               <p className="text-sm text-base-content/75 leading-relaxed">
-                การสร้างสมดุลชีวิต 6 มิติ (Life Map), วิทยาศาสตร์การชะลอวัยระดับเซลล์ (Longevity),
-                และแร่ธาตุธรรมชาติคัดสรรตามหลักธรณีวิทยาและพลังจักระ
+                <EditableText
+                  fieldKey="gateways.living.desc"
+                  label="Gateway 1 คำอธิบาย"
+                  multiline
+                  fallback="การสร้างสมดุลชีวิต 6 มิติ (Life Map), วิทยาศาสตร์การชะลอวัยระดับเซลล์ (Longevity), และแร่ธาตุธรรมชาติคัดสรรตามหลักธรณีวิทยาและพลังจักระ"
+                />
               </p>
               <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>Life: การออกแบบเวลา & เกษียณสำราญ</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.living.point1"
+                    label="Gateway 1 หัวข้อย่อย 1"
+                    fallback="Life: การออกแบบเวลา & เกษียณสำราญ"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>Wellbeing: Home Health Sanctuary</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.living.point2"
+                    label="Gateway 1 หัวข้อย่อย 2"
+                    fallback="Wellbeing: Home Health Sanctuary"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                  <span>Earth & Energy: ผลึกแร่ธาตุ & 3D Visualizer</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.living.point3"
+                    label="Gateway 1 หัวข้อย่อย 3"
+                    fallback="Earth & Energy: ผลึกแร่ธาตุ & 3D Visualizer"
+                  />
                 </li>
               </ul>
             </div>
 
             <div className="pt-6">
               <Link
-                to={ROUTES.LIFE}
+                to={content?.gateways?.living?.link || ROUTES.LIFE}
                 className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
               >
-                <span>สำรวจหมวด Living</span>
+                <EditableText
+                  fieldKey="gateways.living.btnText"
+                  label="Gateway 1 ข้อความปุ่ม"
+                  fallback="สำรวจหมวด Living"
+                />
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -180,38 +268,66 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 flex items-center justify-center">
                 <Coins className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary">
-                Gateway 02
+              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+                <EditableText
+                  fieldKey="gateways.learning.badge"
+                  label="Gateway 2 Badge"
+                  fallback="Gateway 02"
+                />
               </span>
               <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
-                Learning (การเรียนรู้)
+                <EditableText
+                  fieldKey="gateways.learning.title"
+                  label="Gateway 2 ชื่อหมวด"
+                  fallback="Learning (การเรียนรู้)"
+                />
               </h3>
               <p className="text-sm text-base-content/75 leading-relaxed">
-                สถาปัตยกรรมการเงิน 4 เสาหลัก, การคำนวณและวางแผนภาษีเชิงรุก 2568,
-                และโลกภายใน (Inner Life) เพื่อคืนความเงียบสงบให้จิตใจ
+                <EditableText
+                  fieldKey="gateways.learning.desc"
+                  label="Gateway 2 คำอธิบาย"
+                  multiline
+                  fallback="สถาปัตยกรรมการเงิน 4 เสาหลัก, การคำนวณและวางแผนภาษีเชิงรุก 2568, และโลกภายใน (Inner Life) เพื่อคืนความเงียบสงบให้จิตใจ"
+                />
               </p>
               <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Wealth: แผนประกันเหมาจ่าย & ภาษี 2568</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.learning.point1"
+                    label="Gateway 2 หัวข้อย่อย 1"
+                    fallback="Wealth: แผนประกันเหมาจ่าย & ภาษี 2568"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Inner Life: ศิลปะแห่งความเงียบสงบ (Stillness)</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.learning.point2"
+                    label="Gateway 2 หัวข้อย่อย 2"
+                    fallback="Inner Life: ศิลปะแห่งความเงียบสงบ (Stillness)"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Journal: บันทึกความคิดของ Admin A & Admin B</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.learning.point3"
+                    label="Gateway 2 หัวข้อย่อย 3"
+                    fallback="Journal: บันทึกความคิดของ Admin A & Admin B"
+                  />
                 </li>
               </ul>
             </div>
 
             <div className="pt-6">
               <Link
-                to={ROUTES.WEALTH}
+                to={content?.gateways?.learning?.link || ROUTES.WEALTH}
                 className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
               >
-                <span>สำรวจหมวด Learning</span>
+                <EditableText
+                  fieldKey="gateways.learning.btnText"
+                  label="Gateway 2 ข้อความปุ่ม"
+                  fallback="สำรวจหมวด Learning"
+                />
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -223,38 +339,66 @@ export default function HomePage() {
               <div className="w-12 h-12 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center">
                 <HeartHandshake className="w-6 h-6" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary">
-                Gateway 03
+              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+                <EditableText
+                  fieldKey="gateways.connecting.badge"
+                  label="Gateway 3 Badge"
+                  fallback="Gateway 03"
+                />
               </span>
               <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
-                Connecting (เพื่อนร่วมทาง)
+                <EditableText
+                  fieldKey="gateways.connecting.title"
+                  label="Gateway 3 ชื่อหมวด"
+                  fallback="Connecting (เพื่อนร่วมทาง)"
+                />
               </h3>
               <p className="text-sm text-base-content/75 leading-relaxed">
-                ทำความรู้จักเรื่องราวของ Admin A & Admin B และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk)
-                ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ
+                <EditableText
+                  fieldKey="gateways.connecting.desc"
+                  label="Gateway 3 คำอธิบาย"
+                  multiline
+                  fallback="ทำความรู้จักเรื่องราวของ Admin A & Admin B และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
+                />
               </p>
               <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  <span>About: จุดเริ่มต้นของ Living Wealth 365</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.connecting.point1"
+                    label="Gateway 3 หัวข้อย่อย 1"
+                    fallback="About: จุดเริ่มต้นของ Living Wealth 365"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  <span>Fellow Travelers: ปรัชญาไม่ตัดสิน</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.connecting.point2"
+                    label="Gateway 3 หัวข้อย่อย 2"
+                    fallback="Fellow Travelers: ปรัชญาไม่ตัดสิน"
+                  />
                 </li>
                 <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  <span>Let's Talk: นัดหมายพูดคุยฟรี 1-on-1</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                  <EditableText
+                    fieldKey="gateways.connecting.point3"
+                    label="Gateway 3 หัวข้อย่อย 3"
+                    fallback="Let's Talk: นัดหมายพูดคุยฟรี 1-on-1"
+                  />
                 </li>
               </ul>
             </div>
 
             <div className="pt-6">
               <Link
-                to={ROUTES.ABOUT}
+                to={content?.gateways?.connecting?.link || ROUTES.ABOUT}
                 className="btn btn-secondary btn-sm w-full text-white rounded-xl font-bold gap-1.5 shadow-xs"
               >
-                <span>รู้จักเรา & นัดหมายพูดคุย</span>
+                <EditableText
+                  fieldKey="gateways.connecting.btnText"
+                  label="Gateway 3 ข้อความปุ่ม"
+                  fallback="รู้จักเรา & นัดหมายพูดคุย"
+                />
                 <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
@@ -275,25 +419,35 @@ export default function HomePage() {
             <div className="lg:col-span-5 flex justify-center gap-4">
               <div className="relative aspect-4/5 w-44 sm:w-52 rounded-3xl overflow-hidden shadow-lg border-2 border-secondary/40">
                 <img
-                  src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
+                  src={
+                    content?.narrative?.adminAImage ||
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'
+                  }
                   alt="Admin A - Life & Wealth Planner"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">Admin A</span>
-                  <span className="text-[10px] text-secondary">Life & Wealth Planner</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminAName || 'Admin A'}</span>
+                  <span className="text-[10px] text-secondary">
+                    {content?.brand?.adminARole || 'Life & Wealth Planner'}
+                  </span>
                 </div>
               </div>
 
               <div className="relative aspect-4/5 w-44 sm:w-52 rounded-3xl overflow-hidden shadow-lg border-2 border-secondary/40 mt-6">
                 <img
-                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80"
+                  src={
+                    content?.narrative?.adminBImage ||
+                    'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80'
+                  }
                   alt="Admin B - Natural Energy & Wellbeing Curator"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">Admin B</span>
-                  <span className="text-[10px] text-secondary">Energy & Wellbeing</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminBName || 'Admin B'}</span>
+                  <span className="text-[10px] text-secondary">
+                    {content?.brand?.adminBRole || 'Energy & Wellbeing'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -302,29 +456,56 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
                 <HeartHandshake className="w-3.5 h-3.5" />
-                <span>FELLOW TRAVELERS • เพื่อนร่วมทางของคุณ</span>
+                <EditableText
+                  fieldKey="narrative.badge"
+                  label="Narrative Badge"
+                  fallback="FELLOW TRAVELERS • เพื่อนร่วมทางของคุณ"
+                />
               </div>
 
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight">
-                "เราไม่ได้มาเป็นผู้รู้ที่คอยสั่งสอน <br />
-                <span className="text-secondary">แต่พร้อมรับฟังเพื่อค้นหาชีวิตที่ใช่"</span>
+                <EditableText
+                  fieldKey="narrative.titleLine1"
+                  label="Narrative คำคมบรรทัด 1"
+                  fallback='"เราไม่ได้มาเป็นผู้รู้ที่คอยสั่งสอน'
+                />{' '}
+                <br />
+                <EditableText
+                  fieldKey="narrative.titleLine2"
+                  label="Narrative คำคมบรรทัด 2 (เน้นสีทอง)"
+                  fallback='แต่พร้อมรับฟังเพื่อค้นหาชีวิตที่ใช่"'
+                  className="text-secondary"
+                />
               </h2>
 
               <p className="text-sm sm:text-base text-base-content/80 leading-relaxed">
-                การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง
-                Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว
+                <EditableText
+                  fieldKey="narrative.body"
+                  label="Narrative เนื้อหาความเชื่อ"
+                  multiline
+                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
+                />
               </p>
 
               <div className="p-4 rounded-2xl bg-base-200/60 border border-base-300/40 text-xs sm:text-sm italic text-base-content/75">
-                "ทุกบทสนทนาเริ่มต้นที่การรับฟัง ไม่มีสคริปต์การขาย ไม่มีแรงกดดัน มีเพียงความตั้งใจที่จะช่วยให้ชีวิตของคุณเบาใจที่สุด"
+                <EditableText
+                  fieldKey="narrative.boxQuote"
+                  label="Narrative กล่องคำคมไฮไลต์"
+                  multiline
+                  fallback='"ทุกบทสนทนาเริ่มต้นที่การรับฟัง ไม่มีสคริปต์การขาย ไม่มีแรงกดดัน มีเพียงความตั้งใจที่จะช่วยให้ชีวิตของคุณเบาใจที่สุด"'
+                />
               </div>
 
               <div className="pt-2">
                 <Link
-                  to="/about#talk"
+                  to={content?.narrative?.btnLink || '/about#talk'}
                   className="btn btn-secondary btn-md rounded-2xl text-white font-bold px-6 shadow-xs gap-2"
                 >
-                  <span>นัดหมายสนทนา (Let's Talk)</span>
+                  <EditableText
+                    fieldKey="narrative.btnText"
+                    label="Narrative ข้อความปุ่ม"
+                    fallback="นัดหมายสนทนา (Let's Talk)"
+                  />
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -339,21 +520,37 @@ export default function HomePage() {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold mb-2">
               <Gem className="w-3.5 h-3.5" />
-              <span>Earth & Energy Curation</span>
+              <EditableText
+                fieldKey="minerals.badge"
+                label="หมวดแร่ธาตุ Badge"
+                fallback="Earth & Energy Curation"
+              />
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
-              แร่ธาตุธรรมชาติ คัดสรรตามหลักวิทยาศาสตร์และจักระ
+              <EditableText
+                fieldKey="minerals.title"
+                label="หมวดแร่ธาตุ หัวข้อ"
+                fallback="แร่ธาตุธรรมชาติ คัดสรรตามหลักวิทยาศาสตร์และจักระ"
+              />
             </h2>
             <p className="text-sm zen-muted">
-              ผลึกธรรมชาติแท้ โครงสร้าง SiO₂ และคุณสมบัติเพียโซอิเล็กทริกเพื่อความสงบมั่นคง
+              <EditableText
+                fieldKey="minerals.subtitle"
+                label="หมวดแร่ธาตุ คำบรรยายย่อย"
+                fallback="ผลึกธรรมชาติแท้ โครงสร้าง SiO₂ และคุณสมบัติเพียโซอิเล็กทริกเพื่อความสงบมั่นคง"
+              />
             </p>
           </div>
 
           <Link
-            to={ROUTES.EARTH_ENERGY}
+            to={content?.minerals?.btnLink || ROUTES.EARTH_ENERGY}
             className="btn btn-ghost text-secondary hover:text-primary font-bold gap-1.5 self-start sm:self-auto"
           >
-            <span>เปิด 3D Visualizer & คลังแร่ทั้งหมด</span>
+            <EditableText
+              fieldKey="minerals.btnText"
+              label="หมวดแร่ธาตุ ข้อความปุ่ม"
+              fallback="เปิด 3D Visualizer & คลังแร่ทั้งหมด"
+            />
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -375,21 +572,37 @@ export default function HomePage() {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-2">
               <Feather className="w-3.5 h-3.5" />
-              <span>Reflections & Knowledge Hub</span>
+              <EditableText
+                fieldKey="journal.badge"
+                label="หมวดวารสาร Badge"
+                fallback="Reflections & Knowledge Hub"
+              />
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
-              วารสารความคิดและ Admin A's Notes
+              <EditableText
+                fieldKey="journal.title"
+                label="หมวดวารสาร หัวข้อ"
+                fallback="วารสารความคิดและ Admin A's Notes"
+              />
             </h2>
             <p className="text-sm zen-muted">
-              บทความคัดสรรเพื่อช่วยให้คุณวางแผนชีวิต บริหารภาษี และดูแลสุขภาพ
+              <EditableText
+                fieldKey="journal.subtitle"
+                label="หมวดวารสาร คำบรรยายย่อย"
+                fallback="บทความคัดสรรเพื่อช่วยให้คุณวางแผนชีวิต บริหารภาษี และดูแลสุขภาพ"
+              />
             </p>
           </div>
 
           <Link
-            to={ROUTES.JOURNAL}
+            to={content?.journal?.btnLink || ROUTES.JOURNAL}
             className="btn btn-ghost text-secondary hover:text-primary font-bold gap-1.5 self-start sm:self-auto"
           >
-            <span>อ่านวารสารทั้งหมด</span>
+            <EditableText
+              fieldKey="journal.btnText"
+              label="หมวดวารสาร ข้อความปุ่ม"
+              fallback="อ่านวารสารทั้งหมด"
+            />
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -441,9 +654,16 @@ export default function HomePage() {
       <section id="talk-form" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LeadCaptureForm
           selection={selectedProduct}
-          defaultInterest={selectedProduct ? `แร่ธาตุ: ${selectedProduct.name}` : "Let's Talk กับ Admin A & Admin B (การวางแผนชีวิตและสมดุล 6 มิติ)"}
-          title="พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?"
-          subtitle="Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)"
+          defaultInterest={
+            selectedProduct
+              ? `แร่ธาตุ: ${selectedProduct.name}`
+              : `Let's Talk กับ ${content?.brand?.adminAName || 'Admin A'} & ${content?.brand?.adminBName || 'Admin B'} (การวางแผนชีวิตและสมดุล 6 มิติ)`
+          }
+          title={content?.leadForm?.title || 'พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?'}
+          subtitle={
+            content?.leadForm?.subtitle ||
+            'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
+          }
         />
       </section>
     </div>

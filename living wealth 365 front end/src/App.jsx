@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, useLocation, Navigate } from 'react-route
 import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { ToastProvider } from './context/ToastContext';
+import { SiteCustomizerProvider } from './context/SiteCustomizerContext';
 import { ROUTES } from './constants/routes';
 
 // Common Components
@@ -10,6 +11,9 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import RoleSwitcher from './components/common/RoleSwitcher';
 import ProtectedRoute from './components/common/ProtectedRoute';
+import AnnouncementBar from './components/common/AnnouncementBar';
+import VisualEditBar from './components/common/VisualEditBar';
+import VisualEditModal from './components/common/VisualEditModal';
 
 // 🏛️ The 7 Content Pillar Pages
 import HomePage from './pages/public/HomePage';
@@ -34,6 +38,7 @@ import AccountWishlistPage from './pages/account/AccountWishlistPage';
 
 // Admin Pages
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminSiteCustomizerPage from './pages/admin/AdminSiteCustomizerPage';
 import AdminInsurancePage from './pages/admin/AdminInsurancePage';
 import AdminBlogPage from './pages/admin/AdminBlogPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
@@ -56,7 +61,8 @@ function AppShell() {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-base-100 text-base-content antialiased selection:bg-secondary/30 selection:text-secondary">
-      {/* Show marketing navbar only on public pages */}
+      {/* Show marketing announcement bar and navbar only on public pages */}
+      {!isDashboard && <AnnouncementBar />}
       {!isDashboard && <Navbar />}
 
       {/* Main Viewport Content */}
@@ -122,6 +128,14 @@ function AppShell() {
             }
           />
           <Route
+            path={ROUTES.ADMIN_CUSTOMIZER}
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminSiteCustomizerPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path={ROUTES.ADMIN_BLOG}
             element={
               <ProtectedRoute requiredRole="ADMIN">
@@ -154,6 +168,10 @@ function AppShell() {
       {/* Show marketing footer only on public pages */}
       {!isDashboard && <Footer />}
 
+      {/* Floating Visual Customizer Toolbar & Modal for Admin */}
+      <VisualEditBar />
+      <VisualEditModal />
+
       {/* Floating Demo Role Switcher Toolbar */}
       <RoleSwitcher />
     </div>
@@ -165,10 +183,12 @@ export default function App() {
     <AuthProvider>
       <LanguageProvider>
         <ToastProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <AppShell />
-          </BrowserRouter>
+          <SiteCustomizerProvider>
+            <BrowserRouter>
+              <ScrollToTop />
+              <AppShell />
+            </BrowserRouter>
+          </SiteCustomizerProvider>
         </ToastProvider>
       </LanguageProvider>
     </AuthProvider>

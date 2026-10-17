@@ -35,6 +35,7 @@ export const ROUTES = {
 
   // ⚙️ Admin CMS & Operations
   ADMIN_DASHBOARD: '/admin/dashboard',
+  ADMIN_CUSTOMIZER: '/admin/customizer',
   ADMIN_INSURANCE: '/admin/cms/insurance',
   ADMIN_BLOG: '/admin/cms/blog',
   ADMIN_PRODUCTS: '/admin/cms/products',

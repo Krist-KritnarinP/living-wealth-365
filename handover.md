@@ -618,6 +618,38 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Tests: 10/10 passing (108ms).
   - Production Build: Success in 788ms.
 
+## 32. Admin Site Customizer & Visual In-Page Edit System (Hybrid CMS)
+- **Objective**: Provide an intuitive, flexible website customization system allowing Admins to modify site content, headlines, announcements, the 3 core gateways (Living, Learning, Connecting), founder personal narratives, consultation forms, and footer contact copy without needing code modifications.
+- **Architectural Approach (Hybrid Mode)**:
+  1. **Visual In-Page Click-to-Edit Mode**:
+     - Floating live toolbar ([`VisualEditBar.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/VisualEditBar.jsx)) displayed strictly when logged in as Admin (`role === 'ADMIN'`).
+     - Admins can toggle "โหมดคลิกแก้ไขหน้าเว็บ (ON / OFF)".
+     - When ON, all editable headlines, paragraphs, and badges render with a subtle dashed accent line and hover pencil badge via [`EditableText.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/EditableText.jsx).
+     - Clicking any element opens an immediate popover dialog ([`VisualEditModal.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/VisualEditModal.jsx)) with live character count, keyboard shortcuts (`Enter` / `Cmd+Enter`), and single-field reset.
+     - For standard visitors (`USER`), zero edit indicators or dashed lines appear, ensuring 100% clean semantic HTML and 0 layout shifts.
+  2. **Admin Dashboard Site Customizer**:
+     - Dedicated CMS dashboard page at `/admin/customizer` ([`AdminSiteCustomizerPage.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/pages/admin/AdminSiteCustomizerPage.jsx)).
+     - Integrated into [`DashboardLayout.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/DashboardLayout.jsx) with `Sliders` icon and `Live` badge.
+     - 7 Categorized Tabs:
+       - **📢 แถบประกาศ & แบรนด์**: Top announcement bar toggle, text, badge, link, brand name, slogan, Admin A & B roles.
+       - **🚀 ส่วนหัวเว็บไซต์ (Hero)**: Hook badge, Title line 1, Title line 2 (golden accent), lead description, primary/secondary CTA text & links, trust badges, and image overlay card.
+       - **🧭 3 ประตูใหญ่ & หมวดหมู่**: Gateway section headers and individual card settings for Living, Learning, and Connecting (titles, descriptions, bullet points, CTA links).
+       - **👤 เรื่องราว Admin A & B**: Philosophy headlines, body narratives, quote box highlights, and avatar photo URLs.
+       - **🤝 แบบฟอร์ม Let's Talk**: Consultation form badge, headline, subtitle, submit button CTA, and success confirmation copy.
+       - **📄 ท้ายเว็บ & ข้อมูลติดต่อ**: Footer introduction, quote, phone numbers, email, location address, copyright, and legal disclaimer.
+       - **💾 สำรอง & คืนค่า (JSON Backup & Restore)**: 1-click JSON export/download, clipboard copy, raw JSON import with schema validation, and factory reset dialog.
+  3. **Data Layer & Persistence**:
+     - Schema defined in [`siteCustomizerDefaults.js`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/constants/siteCustomizerDefaults.js).
+     - Context provider [`SiteCustomizerContext.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/context/SiteCustomizerContext.jsx) with `localStorage` persistence (`lw365_site_customizer_v1`) and deep merge to preserve backward compatibility.
+     - Pure JavaScript helper functions `getByPath`, `setByPath`, and `deepMerge` for dot-notation paths (`"gateways.living.title"`).
+  4. **Top Announcement Banner**:
+     - Added [`AnnouncementBar.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/AnnouncementBar.jsx) rendered across all marketing pages with gold gradient, dismissability, and direct click-to-edit support.
+- **Verification**:
+  - Test Suite: 15/15 passing (`node --test tests/*.test.js`) in 122ms.
+  - Production Build: `vite build` completed cleanly in 859ms with zero errors.
+  - Vercel Auto-deploy: Live at [https://livingwealth365.vercel.app](https://livingwealth365.vercel.app).
+
+
 
 
 

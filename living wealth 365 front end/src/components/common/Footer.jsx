@@ -2,8 +2,12 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Compass, HeartHandshake, Sparkles, Feather } from 'lucide-react';
 import { ROUTES } from '../../constants/routes';
 import BrandLogo from './BrandLogo';
+import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
+import EditableText from './EditableText';
 
 export default function Footer() {
+  const { content } = useSiteCustomizer();
+
   return (
     <footer className="w-full mt-20 border-t border-base-300/40 zen-surface">
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-16">
@@ -22,11 +26,20 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-base-content/75 leading-relaxed">
-              แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย <strong>Admin A & Admin B</strong>
+              <EditableText
+                fieldKey="footer.aboutText"
+                label="Footer คำแนะนำแบรนด์"
+                multiline
+                fallback="แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย Admin A & Admin B"
+              />
             </p>
             <div className="p-3 rounded-xl bg-base-200/50 border border-base-300/40 text-xs text-base-content/70 italic flex items-start gap-2">
               <Feather className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-              <span>"พวกเราไม่ใช่ผู้รู้ที่คอยสั่ง แต่คือเพื่อนร่วมทางที่พร้อมรับฟังและร่วมค้นหาชีวิตที่ใช่"</span>
+              <EditableText
+                fieldKey="footer.quote"
+                label="Footer คำคม"
+                fallback='"พวกเราไม่ใช่ผู้รู้ที่คอยสั่ง แต่คือเพื่อนร่วมทางที่พร้อมรับฟังและร่วมค้นหาชีวิตที่ใช่"'
+              />
             </div>
           </div>
 
@@ -131,15 +144,27 @@ export default function Footer() {
             <div className="space-y-2.5 text-sm text-base-content/80">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-secondary shrink-0" />
-                <span>082-111-2222 (Top) / 083-333-4444 (Joy)</span>
+                <EditableText
+                  fieldKey="footer.phone"
+                  label="Footer เบอร์โทร"
+                  fallback="082-111-2222 (Admin A) / 083-333-4444 (Admin B)"
+                />
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-secondary shrink-0" />
-                <span>hello@livingwealth365.com</span>
+                <EditableText
+                  fieldKey="footer.email"
+                  label="Footer อีเมล"
+                  fallback="hello@livingwealth365.com"
+                />
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
-                <span>Living Wealth Studio & Advisory, Bangkok</span>
+                <EditableText
+                  fieldKey="footer.location"
+                  label="Footer สถานที่"
+                  fallback="Living Wealth Studio & Advisory, Bangkok"
+                />
               </div>
               <div className="pt-2">
                 <Link
@@ -147,7 +172,7 @@ export default function Footer() {
                   className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2 shadow-xs"
                 >
                   <HeartHandshake className="w-4 h-4" />
-                  นัดหมายพูดคุยกับ Admin A & Admin B (ฟรี)
+                  นัดหมายพูดคุยกับ {content?.brand?.adminAName || 'Admin A'} & {content?.brand?.adminBName || 'Admin B'} (ฟรี)
                 </Link>
               </div>
             </div>
@@ -156,7 +181,13 @@ export default function Footer() {
 
         {/* Bottom Copyright */}
         <div className="mt-12 pt-6 border-t border-base-300/60 flex flex-col sm:flex-row items-center justify-between text-xs text-base-content/60 gap-4">
-          <p>© {new Date().getFullYear()} Living Wealth 365 by Admin A & Admin B. All rights reserved.</p>
+          <p>
+            <EditableText
+              fieldKey="footer.copyright"
+              label="Footer ลิขสิทธิ์"
+              fallback={`© ${new Date().getFullYear()} Living Wealth 365 by Admin A & Admin B. All rights reserved.`}
+            />
+          </p>
           <div className="flex items-center gap-6">
             <Link to={ROUTES.ABOUT} className="hover:text-primary transition-colors">เกี่ยวกับเรา</Link>
             <Link to={ROUTES.LIFE} className="hover:text-primary transition-colors">Life Map 6 มิติ</Link>

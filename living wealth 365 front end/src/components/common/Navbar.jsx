@@ -24,12 +24,14 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
+import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
 import { ROUTES } from '../../constants/routes';
 import BrandLogo from './BrandLogo';
 
 export default function Navbar() {
   const { theme, toggleTheme, currentUser, wishlist } = useAuth();
   const { language, toggleLanguage, t } = useLanguage();
+  const { content } = useSiteCustomizer();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
@@ -75,7 +77,7 @@ export default function Navbar() {
   const gateways = [
     {
       id: 'living',
-      title: language === 'th' ? 'Living (วิถีชีวิต)' : 'Living',
+      title: language === 'th' ? (content?.gateways?.living?.title || 'Living (วิถีชีวิต)') : 'Living',
       icon: Sparkles,
       items: [
         {
@@ -102,7 +104,7 @@ export default function Navbar() {
     },
     {
       id: 'learning',
-      title: language === 'th' ? 'Learning (การเรียนรู้)' : 'Learning',
+      title: language === 'th' ? (content?.gateways?.learning?.title || 'Learning (การเรียนรู้)') : 'Learning',
       icon: BookOpen,
       items: [
         {
@@ -128,7 +130,7 @@ export default function Navbar() {
     },
     {
       id: 'connecting',
-      title: language === 'th' ? 'Connecting (เพื่อนร่วมทาง)' : 'Connecting',
+      title: language === 'th' ? (content?.gateways?.connecting?.title || 'Connecting (เพื่อนร่วมทาง)') : 'Connecting',
       icon: MessageCircle,
       items: [
         {
@@ -166,7 +168,7 @@ export default function Navbar() {
               Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
             </span>
             <span className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wide zen-muted truncate notranslate" translate="no">
-              A LIFE WELL PLANNED. A LIFE WELL LIVED.
+              {content?.brand?.slogan || 'A LIFE WELL PLANNED. A LIFE WELL LIVED.'}
             </span>
           </div>
         </Link>
