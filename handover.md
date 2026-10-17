@@ -512,8 +512,30 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
     - 4 Consultation leads in CRM
     - Customer wishlist bookmark
   - Verified live Supabase querying via Prisma Client: `{ users: 4, posts: 15, products: 8, plans: 7, leads: 4 }`.
-- **Test Suite Integrity**:
-  - Frontend unit tests: 10/10 passed (141ms).
+## 27. Expanded Comprehensive Database Seeding on Supabase (Double Scale)
+- **Objective**: Scale up the platform database with a large, realistic, authentic dataset covering all 7 pillars, advanced wealth planning, active longevity science, mineral physics, and CRM leads.
+- **Backend Database Seeding Execution (`prisma/seed.js`)**:
+  - **9 Users**:
+    - Admins: `admin_lw` (System Admin), `top_curator` (Top), `joy_curator` (Joy), `dr_kanokwan` (Longevity & Wellness Medical Advisor).
+    - Customers: `somchai_lw`, `worraphon_vip` (HNW Estate & Trust), `thanarat_biz` (SME Owner & Keyman), `may_mindful` (Interior Designer & Meditator), `ananya_retire` (Active Retirement).
+  - **30 Articles across 7 Pillars**:
+    - Complete coverage of LIFE (Non-Monetary Assets, Universal Design, Ikigai), WEALTH (Keyman Protection, Estate Planning, 3-Bucket Strategy), WELLBEING (Zone 2 & VO2 Max, Gut-Brain Axis, Light Hygiene), INNER_LIFE (The Power of Not Knowing, Mindfulness in Business, Digital Detox), EARTH_ENERGY (Amethyst Physics, Tourmaline Pyroelectricity), JOURNAL (Top's 10-Year Reflections, Joy's Journey), ABOUT (Brand Philosophy).
+  - **16 Curated Earth & Energy Pieces**:
+    - Authenticated with precise mineral formulas (SiO₂ + Fe³⁺, NaFe₃Al₆(BO₃)₃Si₆O₁₈(OH)₄, SrSO₄, FeS₂, Be₃Al₂Si₆O₁₈ + Fe²⁺, KAlSi₃O₈, CaSO₄·2H₂O, etc.) and chakra mappings.
+  - **12 Comprehensive Protection Plans**:
+    - Added AIA Infinite Wealth Prestige (Unit Linked), AIA Senior Happy, AIA Keyman Executive Protection, AIA Smart Tax Care 10/5, AIA Critical Care Prestige (Targeted Therapy).
+  - **10 CRM Consultation Leads**:
+    - Spanning estate planning, corporate tax, home sanctuary minerals, senior health, and Let's Talk appointments.
+  - **4 Active Wishlists**:
+    - Seeded for Somchai, May, and Worraphon.
+- **Live Supabase PostgreSQL Verification**:
+  - Successfully verified via Prisma Client query:
+    `{ users: 9, posts: 30, products: 16, plans: 12, leads: 10, wishlists: 4 }`
+- **Frontend Synchronization**:
+  - Synchronized `src/constants/mockData.js` and `AuthContext.jsx` with `INITIAL_INSURANCE_PLANS` fallback to guarantee seamless offline and online parity.
+  - Unit tests: 10/10 passed (138ms).
+  - Production build: Clean bundle build in 999ms.
+
 
 
 

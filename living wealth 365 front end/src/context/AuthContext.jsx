@@ -7,7 +7,7 @@ import {
   productsApi,
   wishlistApi,
 } from '../api';
-import { INITIAL_PRODUCTS, INITIAL_POSTS, INITIAL_LEADS, MOCK_USERS } from '../constants/mockData';
+import { INITIAL_PRODUCTS, INITIAL_POSTS, INITIAL_LEADS, INITIAL_INSURANCE_PLANS, MOCK_USERS } from '../constants/mockData';
 
 const AuthContext = createContext(null);
 
@@ -24,7 +24,10 @@ export function AuthProvider({ children }) {
   });
 
   // Data states
-  const [insurancePlans, setInsurancePlans] = useState([]);
+  const [insurancePlans, setInsurancePlans] = useState(() => {
+    const saved = localStorage.getItem('lw365_plans');
+    return saved ? JSON.parse(saved) : (INITIAL_INSURANCE_PLANS || []);
+  });
   const [posts, setPosts] = useState(() => {
     const saved = localStorage.getItem('lw365_posts');
     return saved ? JSON.parse(saved) : INITIAL_POSTS;
