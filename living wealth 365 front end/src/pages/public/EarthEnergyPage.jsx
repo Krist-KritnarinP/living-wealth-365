@@ -67,7 +67,7 @@ export default function EarthEnergyPage() {
               <strong> วิทยาศาสตร์ฟิสิกส์แร่ธาตุ (SiO₂ Piezoelectricity)</strong>,
               <strong> ประวัติศาสตร์อารยธรรมโบราณ</strong>,
               <strong> พลังจักระและการเจริญสติ</strong>,
-              และ <strong>สุนทรียศาสตร์ของธรรมชาติ</strong> คัดสรรโดย Joy & Top
+              และ <strong>สุนทรียศาสตร์ของธรรมชาติ</strong> คัดสรรโดย Admin B & Admin A
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -144,7 +144,7 @@ export default function EarthEnergyPage() {
               สนใจชิ้นงาน {selectedProduct.name}
             </h3>
             <p className="py-2 text-sm text-base-content/80">
-              กรอกข้อมูลเพื่อให้คุณจอยหรือทีมงาน Living Wealth ติดต่อกลับเพื่อส่งมอบข้อมูลผลึก ขนาดข้อมือ และคำแนะนำการใช้งาน
+              กรอกข้อมูลเพื่อให้ Admin B หรือทีมงาน Living Wealth ติดต่อกลับเพื่อส่งมอบข้อมูลผลึก ขนาดข้อมือ และคำแนะนำการใช้งาน
             </p>
 
             <div className="mt-4">

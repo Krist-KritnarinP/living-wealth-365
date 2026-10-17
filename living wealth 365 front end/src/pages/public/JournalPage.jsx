@@ -30,14 +30,14 @@ export default function JournalPage() {
     { id: 'WELLBEING', label: '3. Wellbeing (สุขภาพ)' },
     { id: 'INNER_LIFE', label: '4. Inner Life (โลกภายใน)' },
     { id: 'EARTH_ENERGY', label: '5. Earth & Energy (แร่ธาตุ)' },
-    { id: 'JOURNAL', label: "6. Journal & Top's Notes" },
+    { id: 'JOURNAL', label: "6. Journal & Admin A's Notes" },
     { id: 'ABOUT', label: '7. Philosophy' },
   ];
 
   const types = [
     { id: 'ALL', label: 'ทุกรูปแบบ' },
-    { id: 'TOPS_NOTES', label: "⭐ Top's Notes" },
-    { id: 'JOURNEY', label: "🧭 Joy's Journey" },
+    { id: 'TOPS_NOTES', label: "⭐ Admin A's Notes" },
+    { id: 'JOURNEY', label: "🧭 Admin B's Journey" },
     { id: 'ARTICLE', label: '📖 บทความวิชาการ' },
     { id: 'EXPLORING', label: '🔍 การสำรวจร่วมกัน' },
   ];
@@ -65,7 +65,7 @@ export default function JournalPage() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary leading-tight">
-            วารสาร คลังความคิด และ Top's Notes
+            วารสาร คลังความคิด และ Admin A's Notes
           </h1>
 
           <p className="text-sm sm:text-base text-base-content/80 max-w-2xl mx-auto leading-relaxed">
@@ -171,7 +171,7 @@ export default function JournalPage() {
                     </span>
                     {post.postType && post.postType !== 'ARTICLE' && (
                       <span className="badge badge-sm badge-secondary font-bold">
-                        {post.postType === 'TOPS_NOTES' ? "Top's Notes" : post.postType === 'JOURNEY' ? 'Journey' : 'Exploring'}
+                        {post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : post.postType === 'JOURNEY' ? "Admin B's Journey" : 'Exploring'}
                       </span>
                     )}
                     <span className="zen-muted ml-auto">• {post.readTime || '5 นาที'}</span>

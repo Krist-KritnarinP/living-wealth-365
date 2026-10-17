@@ -302,7 +302,7 @@ export default function LifeMapTeaser({ standalone = false }) {
 
             <div className="p-3 rounded-xl bg-base-200/60 border border-base-300/40 text-xs text-base-content/80">
               <span className="font-bold text-primary block mb-1">
-                💡 ข้อสังเกตจาก Top & Joy สำหรับมิติ {lowest.name} ({scores[lowest.id]}/10):
+                💡 ข้อสังเกตจาก Admin A & Admin B สำหรับมิติ {lowest.name} ({scores[lowest.id]}/10):
               </span>
               <span>{lowest.tips}</span>
             </div>
@@ -311,7 +311,7 @@ export default function LifeMapTeaser({ standalone = false }) {
               href="/about#talk"
               className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2 mt-2 shadow-xs"
             >
-              <span>สนทนาออกแบบสมดุลชีวิตกับ Top & Joy</span>
+              <span>สนทนาออกแบบสมดุลชีวิตกับ Admin A & Admin B</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>

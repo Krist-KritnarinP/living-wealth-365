@@ -55,7 +55,7 @@ export default function HomePage() {
               <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed max-w-2xl">
                 ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก
                 และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง
-                เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย <strong>Top & Joy</strong>
+                เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย <strong>Admin A & Admin B</strong>
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
@@ -71,7 +71,7 @@ export default function HomePage() {
                   to={ROUTES.ABOUT}
                   className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 gap-2"
                 >
-                  <span>รู้จัก Top & Joy</span>
+                  <span>รู้จัก Admin A & Admin B</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
@@ -106,7 +106,7 @@ export default function HomePage() {
                       สุขภาพดี • การเงินมั่นคง • จิตใจสงบสุข
                     </h3>
                     <p className="text-xs text-white/80">
-                      Top & Joy พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ
+                      Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ
                     </p>
                   </div>
                 </div>
@@ -201,7 +201,7 @@ export default function HomePage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-                  <span>Journal: บันทึกความคิดของ Top & Joy</span>
+                  <span>Journal: บันทึกความคิดของ Admin A & Admin B</span>
                 </li>
               </ul>
             </div>
@@ -230,7 +230,7 @@ export default function HomePage() {
                 Connecting (เพื่อนร่วมทาง)
               </h3>
               <p className="text-sm text-base-content/75 leading-relaxed">
-                ทำความรู้จักเรื่องราวของ Top & Joy และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk)
+                ทำความรู้จักเรื่องราวของ Admin A & Admin B และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk)
                 ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ
               </p>
               <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
@@ -267,7 +267,7 @@ export default function HomePage() {
         <LifeMapTeaser standalone={false} />
       </section>
 
-      {/* 👤 4. TOP & JOY PERSONAL BRAND NARRATIVE */}
+      {/* 👤 4. ADMIN A & ADMIN B PERSONAL BRAND NARRATIVE */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="p-8 sm:p-12 lg:p-16 rounded-3xl zen-surface border border-secondary/30 shadow-md">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -276,11 +276,11 @@ export default function HomePage() {
               <div className="relative aspect-4/5 w-44 sm:w-52 rounded-3xl overflow-hidden shadow-lg border-2 border-secondary/40">
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
-                  alt="Top - Life & Wealth Planner"
+                  alt="Admin A - Life & Wealth Planner"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">Top (ท็อป)</span>
+                  <span className="text-xs font-bold block">Admin A</span>
                   <span className="text-[10px] text-secondary">Life & Wealth Planner</span>
                 </div>
               </div>
@@ -288,11 +288,11 @@ export default function HomePage() {
               <div className="relative aspect-4/5 w-44 sm:w-52 rounded-3xl overflow-hidden shadow-lg border-2 border-secondary/40 mt-6">
                 <img
                   src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80"
-                  alt="Joy - Natural Energy & Wellbeing Curator"
+                  alt="Admin B - Natural Energy & Wellbeing Curator"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">Joy (จอย)</span>
+                  <span className="text-xs font-bold block">Admin B</span>
                   <span className="text-[10px] text-secondary">Energy & Wellbeing</span>
                 </div>
               </div>
@@ -312,7 +312,7 @@ export default function HomePage() {
 
               <p className="text-sm sm:text-base text-base-content/80 leading-relaxed">
                 การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง
-                ท็อปและจอยเชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว
+                Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว
               </p>
 
               <div className="p-4 rounded-2xl bg-base-200/60 border border-base-300/40 text-xs sm:text-sm italic text-base-content/75">
@@ -369,7 +369,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 📰 6. CURATED ARTICLES & TOP'S NOTES */}
+      {/* 📰 6. CURATED ARTICLES & ADMIN A'S NOTES */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
@@ -378,7 +378,7 @@ export default function HomePage() {
               <span>Reflections & Knowledge Hub</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
-              วารสารความคิดและ Top's Notes
+              วารสารความคิดและ Admin A's Notes
             </h2>
             <p className="text-sm zen-muted">
               บทความคัดสรรเพื่อช่วยให้คุณวางแผนชีวิต บริหารภาษี และดูแลสุขภาพ
@@ -414,7 +414,7 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs zen-muted">
-                    <span>{post.postType === 'TOPS_NOTES' ? "Top's Notes" : 'Article'}</span>
+                    <span>{post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : 'Article'}</span>
                     <span>• {post.readTime || '5 นาที'}</span>
                   </div>
                   <h3 className="text-lg font-black text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
@@ -441,9 +441,9 @@ export default function HomePage() {
       <section id="talk-form" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LeadCaptureForm
           selection={selectedProduct}
-          defaultInterest={selectedProduct ? `แร่ธาตุ: ${selectedProduct.name}` : "Let's Talk กับ Top & Joy (การวางแผนชีวิตและสมดุล 6 มิติ)"}
+          defaultInterest={selectedProduct ? `แร่ธาตุ: ${selectedProduct.name}` : "Let's Talk กับ Admin A & Admin B (การวางแผนชีวิตและสมดุล 6 มิติ)"}
           title="พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?"
-          subtitle="Top & Joy พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)"
+          subtitle="Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)"
         />
       </section>
     </div>

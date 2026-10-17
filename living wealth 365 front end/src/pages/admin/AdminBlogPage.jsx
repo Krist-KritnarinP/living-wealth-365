@@ -22,7 +22,7 @@ export default function AdminBlogPage() {
     category: 'การวางแผนภาษี',
     pillar: 'JOURNAL',
     postType: 'ARTICLE',
-    authorName: 'Top & Joy',
+    authorName: 'Admin A & Admin B',
     tags: '',
     excerpt: '',
     content: '',
@@ -37,7 +37,7 @@ export default function AdminBlogPage() {
       category: 'การวางแผนภาษี',
       pillar: 'JOURNAL',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       tags: '',
       excerpt: '',
       content: '',
@@ -54,7 +54,7 @@ export default function AdminBlogPage() {
       category: post.category || 'การวางแผนภาษี',
       pillar: post.pillar || 'JOURNAL',
       postType: post.postType || 'ARTICLE',
-      authorName: post.authorName || (typeof post.author === 'string' ? post.author : 'Top & Joy'),
+      authorName: post.authorName || (typeof post.author === 'string' ? post.author : 'Admin A & Admin B'),
       tags: post.tags || '',
       excerpt: post.excerpt || '',
       content: post.content || '',
@@ -184,7 +184,7 @@ export default function AdminBlogPage() {
                     {post.authorName ||
                       (typeof post.author === 'object'
                         ? post.author?.name || post.author?.username
-                        : post.author || 'Top & Joy')}
+                        : post.author || 'Admin A & Admin B')}
                   </td>
                   <td className="whitespace-nowrap">
                     {post.publishedAt ||
@@ -293,8 +293,8 @@ export default function AdminBlogPage() {
                       className="select select-bordered w-full rounded-xl bg-base-100"
                     >
                       <option value="ARTICLE">บทความทั่วไป (Article)</option>
-                      <option value="TOPS_NOTES">Top's Notes (บันทึกของท็อป)</option>
-                      <option value="JOURNEY">Joy's Journey (บันทึกการเดินทาง)</option>
+                      <option value="TOPS_NOTES">Admin A's Notes (บันทึกของ Admin A)</option>
+                      <option value="JOURNEY">Admin B's Journey (บันทึกการเดินทางของ Admin B)</option>
                       <option value="EXPLORING">Exploring (การสำรวจร่วมกัน)</option>
                     </select>
                   </div>
@@ -308,7 +308,7 @@ export default function AdminBlogPage() {
                       type="text"
                       value={formData.authorName}
                       onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                      placeholder="เช่น Top & Joy, Top, หรือ Joy"
+                      placeholder="เช่น Admin A & Admin B, Admin A, หรือ Admin B"
                       className="input input-bordered w-full rounded-xl bg-base-100"
                     />
                   </div>

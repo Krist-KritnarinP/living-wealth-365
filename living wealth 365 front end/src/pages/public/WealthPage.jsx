@@ -303,7 +303,7 @@ export default function WealthPage() {
               สนใจปรึกษาแผน {selectedPlanForModal.name}
             </h3>
             <p className="py-2 text-sm text-base-content/80">
-              กรอกข้อมูลเพื่อให้ Top & Joy หรือทีมที่ปรึกษาติดต่อกลับเพื่อวางแผนเฉพาะบุคคล (ฟรี ไม่มีข้อผูกมัด)
+              กรอกข้อมูลเพื่อให้ Admin A & Admin B หรือทีมที่ปรึกษาติดต่อกลับเพื่อวางแผนเฉพาะบุคคล (ฟรี ไม่มีข้อผูกมัด)
             </p>
 
             <div className="mt-4">

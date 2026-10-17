@@ -547,6 +547,39 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Output Directory: `dist`
 - **Verification**: Clean Vite production build in 842ms.
 
+## 29. Founder Name Migration to "Admin A" & "Admin B" and Live Synchronization
+- **Migration Overview**:
+  - Replaced all public and admin-facing occurrences of personal founder names (**"คุณท็อป" / "ท็อป" / "Top"** and **"คุณจอย" / "จอย" / "Joy"**) with **"Admin A"** and **"Admin B"** across the entire project.
+  - Preserved unrelated non-name terms:
+    - `"โรสควอตซ์เกรดท็อป"` (crystal quality grade) kept intact.
+    - `"แล็ปท็อป"` (laptop computer) kept intact.
+    - `"VO2 Max Top 25%"` (cardiorespiratory fitness percentile) kept intact.
+    - CSS classes (e.g. `top-3`, `top-1/2`) and internal enum keys (`TOPS_NOTES`) kept intact to guarantee zero UI/styling/runtime breaks.
+- **Affected Files & Key Adjustments**:
+  1. **Frontend Components & Pages**:
+     - `AboutPage.jsx`: Updated founder stories, profile cards, image alt tags, quote attributions, and Let's Talk CTA.
+     - `HomePage.jsx`: Updated hero subtitle, 3 gateways cards, personal brand story, reflections header, and contact form subtitle.
+     - `JournalPage.jsx` & `BlogDetailPage.jsx`: Updated filter badges, category tabs, and post author labels to `"Admin A's Notes"` and `"Admin B's Journey"`.
+     - `Navbar.jsx` & `Footer.jsx`: Updated dropdown navigation, mobile drawers, footer links, and copyright signature (`Living Wealth 365 by Admin A & Admin B`).
+     - `LifeMapTeaser.jsx`: Updated personalized reflection callout and Let's Talk button.
+     - `LifePage.jsx`, `WealthPage.jsx`, `WellbeingPage.jsx`, `EarthEnergyPage.jsx`: Updated consultation text, wellness tips, and contact modal instructions.
+     - `AdminBlogPage.jsx`: Updated CMS author defaults, options dropdowns, and edit state placeholders.
+     - `DashboardLayout.jsx`: Updated CMS sidebar title to `"วารสาร & Admin A's Notes (CMS)"`.
+     - `LanguageContext.jsx`: Updated Thai and English navigation translation keys.
+     - `mockData.js`: Updated all article authors (`'Admin A & Admin B'`, `'Admin A'`, `'Admin B'`), lead notes, and demo admin profiles.
+  2. **Backend & Database**:
+     - `schema.prisma`: Updated model documentation and default author values.
+     - `posts.js`: Updated route creation fallback `authorName` to `'Admin A & Admin B'`.
+     - `seed.js`: Updated user upsert objects (`name`, `email`), article authors, and seed lead notes.
+     - **Live Database Reseed**: Re-executed `npm run seed` against live Supabase PostgreSQL, synchronizing 9 users, 30 posts, 16 minerals, 12 plans, and 10 leads with updated curator profiles.
+  3. **Documentation**:
+     - `README.md`: Updated project overview, 7 pillars explanation, and copyright banner.
+- **Quality Assurance**:
+  - Tests: 10/10 unit tests passing (129ms).
+  - Production Build: Clean Vite production build completed in 871ms.
+  - Vercel Deployment: Live at [https://livingwealth365.vercel.app](https://livingwealth365.vercel.app).
+
+
 
 
 

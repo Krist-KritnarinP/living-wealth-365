@@ -33,7 +33,7 @@ export default function BlogDetailPage() {
           className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:text-secondary transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>กลับไปหน้าวารสาร & Top's Notes</span>
+          <span>กลับไปหน้าวารสาร & Admin A's Notes</span>
         </Link>
 
         {/* Title & Metadata */}
@@ -44,7 +44,7 @@ export default function BlogDetailPage() {
             </span>
             {post.postType && post.postType !== 'ARTICLE' && (
               <span className="badge badge-secondary text-xs font-bold px-3 py-1">
-                {post.postType === 'TOPS_NOTES' ? "Top's Notes" : post.postType === 'JOURNEY' ? "Joy's Journey" : 'Exploring'}
+                {post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : post.postType === 'JOURNEY' ? "Admin B's Journey" : 'Exploring'}
               </span>
             )}
             {post.category && post.category !== post.pillar && (
@@ -69,8 +69,8 @@ export default function BlogDetailPage() {
               <User className="w-4 h-4 text-secondary" />
               {post.authorName ||
                 (typeof post.author === 'object'
-                  ? post.author?.name || post.author?.username || 'Top & Joy'
-                  : post.author || 'Top & Joy')}
+                  ? post.author?.name || post.author?.username || 'Admin A & Admin B'
+                  : post.author || 'Admin A & Admin B')}
             </span>
             <span>•</span>
             <span className="flex items-center gap-1.5">

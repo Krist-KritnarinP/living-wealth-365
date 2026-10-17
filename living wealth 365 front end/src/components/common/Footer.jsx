@@ -22,7 +22,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-sm text-base-content/75 leading-relaxed">
-              แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย <strong>Top & Joy</strong>
+              แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย <strong>Admin A & Admin B</strong>
             </p>
             <div className="p-3 rounded-xl bg-base-200/50 border border-base-300/40 text-xs text-base-content/70 italic flex items-start gap-2">
               <Feather className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
@@ -116,7 +116,7 @@ export default function Footer() {
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  Journal & Top's Notes: วารสารความคิด
+                  Journal & Admin A's Notes: วารสารความคิด
                 </Link>
               </li>
             </ul>
@@ -147,7 +147,7 @@ export default function Footer() {
                   className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2 shadow-xs"
                 >
                   <HeartHandshake className="w-4 h-4" />
-                  นัดหมายพูดคุยกับ Top & Joy (ฟรี)
+                  นัดหมายพูดคุยกับ Admin A & Admin B (ฟรี)
                 </Link>
               </div>
             </div>
@@ -156,7 +156,7 @@ export default function Footer() {
 
         {/* Bottom Copyright */}
         <div className="mt-12 pt-6 border-t border-base-300/60 flex flex-col sm:flex-row items-center justify-between text-xs text-base-content/60 gap-4">
-          <p>© {new Date().getFullYear()} Living Wealth 365 by Top & Joy. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Living Wealth 365 by Admin A & Admin B. All rights reserved.</p>
           <div className="flex items-center gap-6">
             <Link to={ROUTES.ABOUT} className="hover:text-primary transition-colors">เกี่ยวกับเรา</Link>
             <Link to={ROUTES.LIFE} className="hover:text-primary transition-colors">Life Map 6 มิติ</Link>

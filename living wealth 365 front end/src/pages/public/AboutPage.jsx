@@ -43,7 +43,7 @@ export default function AboutPage() {
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed">
-              Living Wealth 365 ถือกำเนิดขึ้นจากความตั้งใจของ <strong>Top & Joy</strong> สองผู้ร่วมก่อตั้ง
+              Living Wealth 365 ถือกำเนิดขึ้นจากความตั้งใจของ <strong>Admin A & Admin B</strong> สองผู้ร่วมก่อตั้ง
               ที่มองเห็นว่าผู้คนในปัจจุบันมักแยกเรื่อง "การเงิน" ออกจาก "สุขภาพจิตใจ" เราจึงสร้างแพลตฟอร์มนี้
               ขึ้นมาเพื่อเป็นสะพานเชื่อมความมั่นคงในโลกกายภาพเข้ากับความสงบในโลกภายใน
             </p>
@@ -60,14 +60,14 @@ export default function AboutPage() {
                 href="#founders"
                 className="btn btn-outline btn-md rounded-2xl font-bold px-6 gap-2"
               >
-                <span>รู้จัก Top & Joy</span>
+                <span>รู้จัก Admin A & Admin B</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. THE STORY OF TOP & JOY */}
+      {/* 2. THE STORY OF ADMIN A & ADMIN B */}
       <section id="founders" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
           <h2 className="text-2xl sm:text-3xl font-black text-primary">
@@ -79,13 +79,13 @@ export default function AboutPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          {/* Top's Profile Card */}
+          {/* Admin A's Profile Card */}
           <div className="p-6 sm:p-8 rounded-3xl zen-surface border border-base-300/60 shadow-xs space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="aspect-square w-32 h-32 rounded-3xl overflow-hidden bg-base-200 border-2 border-secondary/40 shadow-md">
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80"
-                  alt="Top - Life & Wealth Planner"
+                  alt="Admin A - Life & Wealth Planner"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -94,7 +94,7 @@ export default function AboutPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-secondary">
                   Life & Wealth Planner
                 </span>
-                <h3 className="text-2xl font-black text-primary mt-0.5">Top (ท็อป)</h3>
+                <h3 className="text-2xl font-black text-primary mt-0.5">Admin A</h3>
               </div>
 
               <p className="text-sm text-base-content/80 leading-relaxed">
@@ -119,13 +119,13 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Joy's Profile Card */}
+          {/* Admin B's Profile Card */}
           <div className="p-6 sm:p-8 rounded-3xl zen-surface border border-base-300/60 shadow-xs space-y-5 flex flex-col justify-between">
             <div className="space-y-4">
               <div className="aspect-square w-32 h-32 rounded-3xl overflow-hidden bg-base-200 border-2 border-secondary/40 shadow-md">
                 <img
                   src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80"
-                  alt="Joy - Natural Energy & Wellbeing Curator"
+                  alt="Admin B - Natural Energy & Wellbeing Curator"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -134,12 +134,12 @@ export default function AboutPage() {
                 <span className="text-xs font-bold uppercase tracking-wider text-secondary">
                   Natural Energy & Wellbeing Curator
                 </span>
-                <h3 className="text-2xl font-black text-primary mt-0.5">Joy (จอย)</h3>
+                <h3 className="text-2xl font-black text-primary mt-0.5">Admin B</h3>
               </div>
 
               <p className="text-sm text-base-content/80 leading-relaxed">
                 "ธรรมชาติใช้เวลาเป็นร้อยล้านปีเพื่อตกผลึกเป็นแร่ธาตุที่งดงาม เช่นเดียวกับชีวิตคนเราที่ต้องการเวลาในการเติบโตอย่างมั่นคง
-                จอยหลงใหลในพลังงานธรรมชาติ วิทยาศาสตร์แร่ธาตุ และการฟื้นฟูสุขภาพองค์รวมให้กายและใจสอดประสานกัน"
+                Admin B หลงใหลในพลังงานธรรมชาติ วิทยาศาสตร์แร่ธาตุ และการฟื้นฟูสุขภาพองค์รวมให้กายและใจสอดประสานกัน"
               </p>
 
               <div className="space-y-1.5 text-xs text-base-content/70">
@@ -214,12 +214,12 @@ export default function AboutPage() {
             </h2>
             <p className="text-sm text-base-content/75 max-w-lg mx-auto leading-relaxed">
               ไม่ว่าจะเรื่องภาษี การปกป้องสุขภาพ พอร์ตเกษียณ หรือแร่ธาตุธรรมชาติ
-              กรอกข้อมูลด้านล่าง แล้ว Top หรือ Joy จะติดต่อกลับตามเวลาที่คุณสะดวก
+              กรอกข้อมูลด้านล่าง แล้ว Admin A หรือ Admin B จะติดต่อกลับตามเวลาที่คุณสะดวก
             </p>
           </div>
 
           <LeadCaptureForm
-            defaultInterest="Let's Talk กับ Top & Joy (การวางแผนชีวิตและสมดุล 6 มิติ)"
+            defaultInterest="Let's Talk กับ Admin A & Admin B (การวางแผนชีวิตและสมดุล 6 มิติ)"
             onSuccess={() => {}}
           />
         </div>

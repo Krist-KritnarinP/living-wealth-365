@@ -54,7 +54,7 @@ export default function LifePage() {
                 to="/about#talk"
                 className="btn btn-secondary btn-outline btn-md rounded-2xl font-bold px-6 gap-2"
               >
-                <span>ปรึกษาการออกแบบชีวิตกับ Top & Joy</span>
+                <span>ปรึกษาการออกแบบชีวิตกับ Admin A & Admin B</span>
               </Link>
             </div>
           </div>
@@ -118,7 +118,7 @@ export default function LifePage() {
               บทความและบันทึกในหมวด Life
             </h2>
             <p className="text-sm zen-muted mt-1">
-              ตกผลึกทางความคิดจาก Top & Joy เพื่อชีวิตที่เบาใจและมีความหมาย
+              ตกผลึกทางความคิดจาก Admin A & Admin B เพื่อชีวิตที่เบาใจและมีความหมาย
             </p>
           </div>
           <Link
@@ -147,7 +147,7 @@ export default function LifePage() {
                 </div>
                 <div className="flex items-center gap-2 text-xs">
                   <span className="badge badge-sm badge-secondary font-bold">
-                    {post.postType === 'TOPS_NOTES' ? "Top's Notes" : 'Article'}
+                    {post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : 'Article'}
                   </span>
                   <span className="zen-muted">• {post.readTime || '5 นาที'}</span>
                 </div>
@@ -184,7 +184,7 @@ export default function LifePage() {
               to="/about#talk"
               className="btn btn-secondary btn-md sm:btn-lg text-white rounded-2xl font-bold px-8 shadow-md gap-2"
             >
-              <span>นัดหมาย Let's Talk กับ Top & Joy</span>
+              <span>นัดหมาย Let's Talk กับ Admin A & Admin B</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>

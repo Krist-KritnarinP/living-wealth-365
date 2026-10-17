@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 async function main() {
   console.log('🌱 Starting Living Wealth 365 Comprehensive Database Seeding...');
 
-  // 1. Seed Users (Admin, Curators Top & Joy, Customer)
+  // 1. Seed Users (Admin, Curators Admin A & Admin B, Customer)
   const hashedAdminPassword = await bcrypt.hash('Admin1234!', 10);
   const hashedCustomerPassword = await bcrypt.hash('Customer1234!', 10);
 
@@ -29,14 +29,16 @@ async function main() {
   const topUser = await prisma.user.upsert({
     where: { username: 'top_curator' },
     update: {
+      name: 'Admin A (นักวางแผนชีวิตและการเงิน)',
+      email: 'admin-a@livingwealth365.com',
       password: hashedAdminPassword,
       role: 'ADMIN',
     },
     create: {
       username: 'top_curator',
-      email: 'top@livingwealth365.com',
+      email: 'admin-a@livingwealth365.com',
       password: hashedAdminPassword,
-      name: 'Top (นักวางแผนชีวิตและการเงิน)',
+      name: 'Admin A (นักวางแผนชีวิตและการเงิน)',
       phone: '082-111-2222',
       role: 'ADMIN',
     },
@@ -45,14 +47,16 @@ async function main() {
   const joyUser = await prisma.user.upsert({
     where: { username: 'joy_curator' },
     update: {
+      name: 'Admin B (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)',
+      email: 'admin-b@livingwealth365.com',
       password: hashedAdminPassword,
       role: 'ADMIN',
     },
     create: {
       username: 'joy_curator',
-      email: 'joy@livingwealth365.com',
+      email: 'admin-b@livingwealth365.com',
       password: hashedAdminPassword,
-      name: 'Joy (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)',
+      name: 'Admin B (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)',
       phone: '083-333-4444',
       role: 'ADMIN',
     },
@@ -427,7 +431,7 @@ async function main() {
   }
   console.log(`📋 Insurance Plans seeded: ${insurancePlans.length} plans ready`);
 
-  // 3. Seed Earth & Energy (แร่ธาตุ คริสตัล คัดสรรโดย Joy & Top ตามหลักวิทยาศาสตร์และจักระ)
+  // 3. Seed Earth & Energy (แร่ธาตุ คริสตัล คัดสรรโดย Admin B & Admin A ตามหลักวิทยาศาสตร์และจักระ)
   const products = [
     {
       name: 'หินไหมทองจักรพรรดิ (Golden Rutilated Quartz)',
@@ -674,7 +678,7 @@ async function main() {
       category: 'วิถีชีวิต & สมดุล',
       pillar: 'LIFE',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '6 นาที',
       tags: '#LifeDesign #Balance #Longevity #Happiness',
       excerpt: 'สำรวจกรอบความคิด Living Wealth 6 Dimensions: สุขภาพ ความมั่งคั่ง เวลา ความสัมพันธ์ โลกภายใน และเป้าหมายชีวิต เพื่อสร้างชีวิตที่สมบูรณ์แบบในแบบฉบับของคุณ',
@@ -701,9 +705,9 @@ async function main() {
       category: 'บทเรียนชีวิต',
       pillar: 'LIFE',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '4 นาที',
-      tags: '#TopsNotes #SelfReflection #LifePlanning',
+      tags: '#AdminANotes #SelfReflection #LifePlanning',
       excerpt: 'ถ้าคุณไม่กำหนดลำดับความสำคัญในชีวิตตัวเอง คนอื่นจะเข้ามาจัดลำดับความสำคัญให้คุณอย่างแน่นอน บันทึกความคิดจากการทำงานและพูดคุยกับผู้คน',
       content: `เมื่อเข้าสู่วัย 35 สิ่งหนึ่งที่ตกผลึกชัดเจนมากคือ "เวลาไม่ได้ไหลไปข้างหน้าแบบไม่มีวันหมด" อีกต่อไป
 
@@ -726,7 +730,7 @@ async function main() {
       category: 'สถาปัตยกรรมการเงิน',
       pillar: 'WEALTH',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '7 นาที',
       tags: '#WealthArchitecture #Protection #Investment #Estate',
       excerpt: 'การสร้างบ้านต้องมีรากฐานที่มั่นคง การวางแผนการเงินก็เช่นเดียวกัน หากมีแต่การลงทุนโดยไร้การปกป้อง พายุลูกเดียวก็อาจทำให้ทุกอย่างพังทลายลงได้',
@@ -757,7 +761,7 @@ async function main() {
       category: 'การวางแผนภาษี',
       pillar: 'WEALTH',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '6 นาที',
       tags: '#TaxPlanning #ThaiESG #LifeInsurance #TaxRefund',
       excerpt: 'เจาะลึกกลยุทธ์การลดหย่อนภาษี 2568 อย่างเป็นระบบ ไม่ใช่แค่การซื้อเพื่อลดหย่อน แต่เป็นการต่อยอดเงินออมเพื่อความมั่งคั่งระยะยาว',
@@ -783,7 +787,7 @@ async function main() {
       category: 'ศาสตร์แห่งอายุวัฒนะ',
       pillar: 'WELLBEING',
       postType: 'ARTICLE',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '6 นาที',
       tags: '#Longevity #SleepQuality #HealthSanctuary #Biohacking',
       excerpt: 'ไม่ใช่แค่อยู่ให้นานขึ้น แต่คือการอยู่ด้วยความกระปรี้กระเปร่าและปลอดจากโรคเรื้อรัง เจาะลึกวิทยาศาสตร์เบื้องหลังการฟื้นฟูเซลล์และการนอนหลับลึก',
@@ -808,7 +812,7 @@ async function main() {
       category: 'สุขภาพองค์รวม',
       pillar: 'WELLBEING',
       postType: 'ARTICLE',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '5 นาที',
       tags: '#Wellbeing #HomeSanctuary #MindfulLiving',
       excerpt: 'บ้านควรเป็นสถานที่ที่คุณได้ชาร์จพลังงานอย่างแท้จริง เคล็ดลับการปรับสิ่งแวดล้อม กลิ่น แสง และนิสัยประจำวันเพื่อยกระดับคุณภาพชีวิต',
@@ -832,7 +836,7 @@ async function main() {
       category: 'โลกภายใน & สมาธิ',
       pillar: 'INNER_LIFE',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '5 นาที',
       tags: '#InnerLife #Stillness #Mindfulness #MentalClarity',
       excerpt: 'ในยุคที่ทุกอย่างแข่งขันกันแย่งความสนใจของเรา ความเงียบและสมาธิกลายเป็นความหรูหราที่ประเมินค่าไม่ได้',
@@ -853,7 +857,7 @@ async function main() {
       category: 'การเข้าใจตนเอง',
       pillar: 'INNER_LIFE',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '6 นาที',
       tags: '#SelfInquiry #EmotionalWellness #InnerPeace',
       excerpt: 'เมื่อมีความโกรธ ความกลัว หรือความกังวลเกิดขึ้น แทนที่จะผลักไสหรือจมดิ่ง ลองเปลี่ยนมาเป็น "ผู้สังเกตการณ์" อย่างอ่อนโยน',
@@ -878,7 +882,7 @@ async function main() {
       category: 'วิทยาศาสตร์แร่ธาตุ',
       pillar: 'EARTH_ENERGY',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '7 นาที',
       tags: '#MineralScience #Quartz #Piezoelectric #CrystalPhysics',
       excerpt: 'สำรวจแร่ธาตุธรรมชาติผ่านมุมมองวิทยาศาสตร์ ธรณีวิทยา และฟิสิกส์ ทำไมควอตซ์จึงถูกใช้ในนาฬิกาและชิปคอมพิวเตอร์ทั่วโลก',
@@ -899,7 +903,7 @@ async function main() {
       category: 'จักระ & คลื่นความถี่',
       pillar: 'EARTH_ENERGY',
       postType: 'ARTICLE',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '6 นาที',
       tags: '#Chakras #EnergyHealing #Gemstones #HolisticWellness',
       excerpt: 'เข้าใจความเชื่อมโยงระหว่างศูนย์รวมพลังงาน 7 จุดในร่างกาย กับคลื่นความถี่ของสีและแร่ธรรมชาติเพื่อสร้างสมดุลกายใจ',
@@ -924,7 +928,7 @@ async function main() {
       category: 'ประวัติศาสตร์อารยธรรม',
       pillar: 'EARTH_ENERGY',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '5 นาที',
       tags: '#LapisLazuli #History #AncientEgypt #Ultramarine',
       excerpt: 'ย้อนรอยหินสีครามที่ล้ำค่ายิ่งกว่าทองคำในยุคโบราณ ประดับหน้ากากตุตันคาเมน และสีอัลตรามารีนของจิตรกรยุคเรเนสซองส์',
@@ -943,13 +947,13 @@ async function main() {
     // --- PILLAR 6: JOURNAL ---
     {
       slug: 'tops-notes-listening-to-100-conversations',
-      title: "Top's Notes: สิ่งที่เราได้ยินจากการสนทนาเรื่องชีวิตและการเงินกับผู้คนกว่า 100 คน",
-      category: 'บันทึกของท็อป',
+      title: "Admin A's Notes: สิ่งที่เราได้ยินจากการสนทนาเรื่องชีวิตและการเงินกับผู้คนกว่า 100 คน",
+      category: 'บันทึกของ Admin A',
       pillar: 'JOURNAL',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '5 นาที',
-      tags: '#TopsNotes #Conversations #LifeInsights',
+      tags: '#AdminANotes #Conversations #LifeInsights',
       excerpt: 'เมื่อนั่งคุยกันอย่างเปิดใจ คนส่วนใหญ่ไม่ได้กังวลเรื่องผลตอบแทนหุ้น แต่กังวลเรื่องการไม่ได้ใช้ชีวิตกับคนที่พวกเขารัก',
       content: `ตลอด 1 ปีที่ผ่านมา ผมมีโอกาสได้นั่งคุยกับผู้คนหลากหลายสาขาอาชีพ ทั้งแพทย์ ผู้บริหาร เจ้าของกิจการฟรีแลนซ์ และคุณแม่ฟูลไทม์
 
@@ -967,13 +971,13 @@ async function main() {
     },
     {
       slug: 'joys-journey-madagascar-crystal-mines',
-      title: 'Joy’s Journey: การเดินทางสู่แหล่งกำเนิดหินธรรมชาติที่มาดากัสการ์ และสิ่งที่ธรรมชาติสอนเรา',
+      title: "Admin B's Journey: การเดินทางสู่แหล่งกำเนิดหินธรรมชาติที่มาดากัสการ์ และสิ่งที่ธรรมชาติสอนเรา",
       category: 'บันทึกการเดินทาง',
       pillar: 'JOURNAL',
       postType: 'JOURNEY',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '6 นาที',
-      tags: '#JoysJourney #Madagascar #NatureWisdom #Curation',
+      tags: '#AdminBJourney #Madagascar #NatureWisdom #Curation',
       excerpt: 'บันทึกความประทับใจจากการเดินทางไปเลือกสรรผลึกโรสควอตซ์และอัญมณีด้วยตนเอง สัมผัสความบริสุทธิ์ของธรรมชาติและพลังที่แท้จริง',
       content: `มาดากัสการ์คือเกาะที่แยกตัวออกจากทวีปใหญ่มาหลายสิบล้านปี ดินแดนแห่งนี้จึงเปรียบเสมือนกล่องสมบัติทางธรณีวิทยาที่อุดมสมบูรณ์ไปด้วยผลึกแร่ธาตุหายาก
 
@@ -992,7 +996,7 @@ async function main() {
       category: 'การสำรวจความคิด',
       pillar: 'JOURNAL',
       postType: 'EXPLORING',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '4 นาที',
       tags: '#Exploring #LivingWell #Community',
       excerpt: 'พื้นที่แห่งการตั้งคำถามและแลกเปลี่ยนมุมมอง เพื่อให้ทุกๆ 365 วันของคุณมีความหมายและงดงาม',
@@ -1013,13 +1017,13 @@ async function main() {
       category: 'ปรัชญาและเรื่องราวของเรา',
       pillar: 'ABOUT',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '5 นาที',
-      tags: '#AboutUs #Philosophy #TopAndJoy #LivingWealth365',
-      excerpt: 'เรื่องราวของ Top & Joy สองผู้ร่วมก่อตั้งที่เชื่อมั่นว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างงดงาม',
+      tags: '#AboutUs #Philosophy #AdminAAndAdminB #LivingWealth365',
+      excerpt: 'เรื่องราวของ Admin A & Admin B สองผู้ร่วมก่อตั้งที่เชื่อมั่นว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างงดงาม',
       content: `Living Wealth 365 ไม่ใช่บริษัทประกัน และไม่ใช่สำนักมูเตลูเชิงพาณิชย์
 
-เราคือ "Life & Wellbeing Platform" ที่ถือกำเนิดขึ้นจากความตั้งใจของ ท็อป (Top) นักวางแผนการเงินและชีวิตที่เชื่อในความรอบคอบและความมั่นคง และ จอย (Joy) ผู้หลงใหลในความงดงามของแร่ธาตุธรรมชาติ สุขภาพองค์รวม และวิถีชีวิตที่สงบสุข
+เราคือ "Life & Wellbeing Platform" ที่ถือกำเนิดขึ้นจากความตั้งใจของ Admin A นักวางแผนการเงินและชีวิตที่เชื่อในความรอบคอบและความมั่นคง และ Admin B ผู้หลงใหลในความงดงามของแร่ธาตุธรรมชาติ สุขภาพองค์รวม และวิถีชีวิตที่สงบสุข
 
 เราพบว่า ผู้คนมักแยกเรื่อง "การเงิน" ออกจาก "สุขภาพจิตใจ"
 - บางคนมีความมั่งคั่งแต่ใจร้อนรนและสุขภาพเสื่อมถอย
@@ -1041,7 +1045,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'วิถีชีวิต & สมดุล',
       pillar: 'LIFE',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '7 นาที',
       tags: '#LifePlanning #Retirement #Dignity #NonMonetaryAssets',
       excerpt: 'ตัวเลขเงินเก็บในบัญชีอาจช่วยให้คุณจ่ายค่ากินอยู่ได้ แต่สิ่งที่จะทำให้ชีวิตวัยเกษียณมีความหมายและเต็มเปี่ยมด้วยศักดิ์ศรี คือสินทรัพย์ 4 ประการที่เงินซื้อไม่ได้',
@@ -1072,14 +1076,14 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'วิถีชีวิต & สมดุล',
       pillar: 'LIFE',
       postType: 'JOURNEY',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '6 นาที',
       tags: '#UniversalDesign #ActiveAging #LivingSpace #HomeArchitecture',
       excerpt: 'บ้านสำหรับผู้สูงอายุไม่จำเป็นต้องติดราวจับสแตนเลสสีเทาเย็นชาเหมือนหอผู้ป่วย แต่สามารถผสานสุนทรียภาพแห่งความอบอุ่น เข้ากับหลักวิศวกรรมความปลอดภัยได้อย่างลงตัว',
       content: `หลายครอบครัวรอให้เกิดอุบัติเหตุ "ลื่นล้ม" ก่อน ถึงจะเริ่มคิดเรื่องปรับปรุงบ้านสำหรับผู้สูงวัย
 แต่ความจริงคือ อุบัติเหตุในห้องน้ำและบันไดบ้านคือสาเหตุอันดับต้นๆ ที่เปลี่ยนผู้สูงอายุจาก Active Aging ให้กลายเป็นผู้ป่วยติดเตียง
 
-จากประสบการณ์ที่ Top & Joy ได้ร่วมศึกษาและปรับปรุงพื้นที่บ้านพักอาศัย นี่คือ 5 หลักการออกแบบ Universal Design สไตล์ Zen Warmth:
+จากประสบการณ์ที่ Admin A & Admin B ได้ร่วมศึกษาและปรับปรุงพื้นที่บ้านพักอาศัย นี่คือ 5 หลักการออกแบบ Universal Design สไตล์ Zen Warmth:
 
 1. **Zero-Threshold Living (พื้นระนาบเดียวกันทั้งบ้าน):**
 ตัดขอบธรณีประตูและพื้นต่างระดับออกทั้งหมดระหว่างห้องนอน ห้องน้ำ และห้องนั่งเล่น ใช้ระบบรางน้ำสแตนเลสแบบซ่อนใต้กระเบื้อง (Linear Drain) แทนการลดระดับพื้นห้องน้ำ
@@ -1103,7 +1107,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'วิถีชีวิต & สมดุล',
       pillar: 'LIFE',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '5 นาที',
       tags: '#Ikigai #Purpose #LifeDesign #PeaceOfMind',
       excerpt: 'เมื่อเป้าหมายทางการเงินบรรลุแล้ว คำถามที่ใหญ่กว่าตัวเลขจะดังขึ้นมาในใจ: "วันนี้...อะไรคือสิ่งที่คุณตื่นมาทำแล้วมีความสุขอย่างแท้จริง?"',
@@ -1130,7 +1134,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'ความมั่นคงทางการเงิน',
       pillar: 'WEALTH',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '8 นาที',
       tags: '#CorporateTax #KeymanProtection #BusinessContinuity #TaxStrategy',
       excerpt: 'เจาะลึกกลยุทธ์การทำประกันบุคคลสำคัญ (Keyman Protection) ที่ช่วยสร้างเกราะคุ้มครองกระแสเงินสดธุรกิจ พร้อมสิทธิประโยชน์ในการหักค่าใช้จ่ายทางภาษีนิติบุคคลอย่างถูกต้องตามกฎหมาย',
@@ -1157,7 +1161,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'ความมั่นคงทางการเงิน',
       pillar: 'WEALTH',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '9 นาที',
       tags: '#WealthTransfer #EstatePlanning #InheritanceTax #FamilyHarmony',
       excerpt: 'การส่งต่อมรดกไม่ใช่แค่การเขียนพินัยกรรม แต่คือการจัดวางสถาปัตยกรรมทางกฎหมาย การเงิน และความรู้สึก เพื่อให้ความมั่งคั่งกลายเป็นพร ไม่ใช่คำสาปสำหรับรุ่นลูกหลาน',
@@ -1187,7 +1191,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'การลงทุน & เกษียณ',
       pillar: 'WEALTH',
       postType: 'ARTICLE',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '6 นาที',
       tags: '#BucketStrategy #RetirementPortfolio #Inflation #WealthArchitecture',
       excerpt: 'วิธีจัดการพอร์ตเกษียณที่ไม่ต้องกังวลว่าตลาดหุ้นจะตก และไม่ต้องกลัวเงินเฟ้อจะกัดกินมูลค่าเงินสด ด้วยกลยุทธ์จัดพอร์ตแบบ 3 ถัง',
@@ -1272,7 +1276,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'สุขภาพองค์รวม',
       pillar: 'WELLBEING',
       postType: 'JOURNEY',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '5 นาที',
       tags: '#LightHygiene #CircadianRhythm #DeepSleep #Melatonin',
       excerpt: 'แสงสว่างคือตัวควบคุมนาฬิกาชีวภาพที่ทรงพลังที่สุดในร่างกาย การเข้าใจจังหวะของแสงธรรมชาติจะเปลี่ยนการนอนของคุณไปตลอดกาล',
@@ -1280,7 +1284,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
 
 แต่ในสังคมยุคใหม่ เราเปิดไฟขาวจ้าสว่างโร่จนถึงเที่ยงคืน และจ้องหน้าจอสมาร์ทโฟนที่ยิงแสงสีฟ้า 480nm เข้าสู่เรตินาโดยตรง ทำให้สมองเข้าใจผิดว่า "ตอนนี้น่าจะเพิ่งบ่ายสอง" และระงับการหลั่งฮอร์โมนเมลาโทนิน
 
-**การทดลองปรับแสงของ Top & Joy ที่บ้าน:**
+**การทดลองปรับแสงของ Admin A & Admin B ที่บ้าน:**
 - **เช้า (Morning Protocol):** ภายใน 30-60 นาทีหลังตื่นนอน ออกไปรับแสงแดดธรรมชาติ 10-15 นาทีโดยไม่สวมแว่นกันแดด เพื่อสั่งให้สมองหยุดผลิตเมลาโทนินและเริ่มนับถอยหลังสู่การนอนในอีก 16 ชั่วโมงข้างหน้า
 - **เย็น (Sunset Protocol):** ปิดไฟเพดานทั้งหมดหลัง 20:00 น. เปลี่ยนมาใช้โคมไฟตั้งโต๊ะแสงสีส้มอุ่น (2200K - 2700K) ที่อยู่ในระดับต่ำกว่าสายตา
 - **ก่อนนอน:** งดหน้าจออย่างน้อย 60 นาที หรือเปิด Night Shift สีส้มเข้ม
@@ -1298,7 +1302,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'โลกภายใน & สมาธิ',
       pillar: 'INNER_LIFE',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '5 นาที',
       tags: '#Philosophy #Uncertainty #Mindfulness #MentalClarity',
       excerpt: 'ความทุกข์ส่วนใหญ่ของนักลงทุนและคนทำงาน ไม่ได้เกิดจากความไม่แน่นอน แต่เกิดจากความพยายามที่จะ "ควบคุมสิ่งที่ควบคุมไม่ได้"',
@@ -1325,7 +1329,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'โลกภายใน & สมาธิ',
       pillar: 'INNER_LIFE',
       postType: 'ARTICLE',
-      authorName: 'Top & Joy',
+      authorName: 'Admin A & Admin B',
       readTime: '6 นาที',
       tags: '#Mindfulness #BusinessStrategy #Negotiation #EmotionalIntelligence',
       excerpt: 'สมาธิไม่ได้จำกัดอยู่แค่บนเบาะนั่งในวัด แต่คืออาวุธลับในการเจรจาธุรกิจ การบริหารข้อขัดแย้ง และการรักษาความเยือกเย็นในห้องประชุม',
@@ -1352,14 +1356,14 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'การเข้าใจตนเอง',
       pillar: 'INNER_LIFE',
       postType: 'JOURNEY',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '5 นาที',
       tags: '#DigitalDetox #MentalRest #BrainHealth #Focus',
       excerpt: 'สมองของเราไม่ได้ถูกออกแบบมาให้รับการแจ้งเตือนวันละ 200 ครั้ง การตัดการเชื่อมต่อจากโลกออนไลน์ 48 ชั่วโมง จะช่วยรีเซ็ตระบบโดปามีนและความคิดสร้างสรรค์ของคุณ',
       content: `ทุกครั้งที่เสียงแจ้งเตือนโทรศัพท์ดังขึ้น สมองจะหลั่งสารโดปามีน (Dopamine) เล็กๆ ออกมา สร้างวงจรพฤติกรรมเสพติดที่ทำให้เราต้องหยิบมือถือขึ้นมาดูซ้ำแล้วซ้ำเล่า
 ผลลัพธ์คือ สมาธิแตกกระจาย (Continuous Partial Attention) และความรู้สึกเหนื่อยล้าเรื้อรังที่หาสาเหตุไม่ได้
 
-เมื่อเดือนที่ผ่านมา Joy ได้ทดลองทำ "Digital Detox Weekend 48 ชั่วโมง":
+เมื่อเดือนที่ผ่านมา Admin B ได้ทดลองทำ "Digital Detox Weekend 48 ชั่วโมง":
 - ปิดโทรศัพท์และเก็บไว้ในลิ้นชักตั้งแต่เย็นวันศุกร์ 18:00 น. จนถึงเช้าวันจันทร์
 - แจ้งครอบครัวและทีมงานล่วงหน้าสำหรับกรณีฉุกเฉินที่มีเบอร์โทรศัพท์บ้าน
 
@@ -1379,7 +1383,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'วิทยาศาสตร์และพลังงานธรรมชาติ',
       pillar: 'EARTH_ENERGY',
       postType: 'ARTICLE',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '7 นาที',
       tags: '#Amethyst #MineralPhysics #Silica #Chakras #EarthEnergy',
       excerpt: 'เจาะลึกโครงสร้างผลึกควอตซ์สีม่วง จากทฤษฎีการเกิดสีของไอออนเหล็ก (Fe³⁺) ในโครงผลึก SiO₂ สู่การใช้งานในพิธีกรรมบำบัดจิตใจตั้งแต่ยุคกรีกโบราณ',
@@ -1404,7 +1408,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       category: 'วิทยาศาสตร์และพลังงานธรรมชาติ',
       pillar: 'EARTH_ENERGY',
       postType: 'ARTICLE',
-      authorName: 'Joy',
+      authorName: 'Admin B',
       readTime: '6 นาที',
       tags: '#Tourmaline #Pyroelectricity #Piezoelectricity #Grounding #EMF',
       excerpt: 'แบล็คทัวร์มาลีนไม่ได้เป็นเพียงหินกันภัยตามความเชื่อ แต่คือผลึกแร่ธาตุที่มีคุณสมบัติทางไฟฟ้าตามธรรมชาติที่นักฟิสิกส์ให้การยอมรับ',
@@ -1422,16 +1426,16 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       published: true,
       authorId: joyUser.id,
     },
-    // 15. JOURNAL: Top's 10-Year Reflections
+    // 15. JOURNAL: Admin A's 10-Year Reflections
     {
       slug: 'tops-investment-portfolio-10-years-reflections',
-      title: 'บันทึกของ Top: ถอดบทเรียนพอร์ตการลงทุน 10 ปี สิ่งที่เปลี่ยนไปในมุมมองความมั่งคั่ง',
-      category: 'บันทึกและความคิดของ Top',
+      title: 'บันทึกของ Admin A: ถอดบทเรียนพอร์ตการลงทุน 10 ปี สิ่งที่เปลี่ยนไปในมุมมองความมั่งคั่ง',
+      category: 'บันทึกและความคิดของ Admin A',
       pillar: 'JOURNAL',
       postType: 'TOPS_NOTES',
-      authorName: 'Top',
+      authorName: 'Admin A',
       readTime: '8 นาที',
-      tags: '#TopsNotes #InvestmentLessons #10YearReflection #TrueWealth',
+      tags: '#AdminANotes #InvestmentLessons #10YearReflection #TrueWealth',
       excerpt: 'จากวันที่วิ่งไล่ล่าผลตอบแทน 30% ต่อปี สู่การค้นพบว่า "พอร์ตที่ดีที่สุดคือพอร์ตที่ทำให้คุณหลับสนิทในทุกค่ำคืน"',
       content: `ย้อนกลับไปเมื่อ 10 ปีก่อน ในฐานะนักวางแผนการเงินรุ่นใหม่ ผมหมกมุ่นอยู่กับการหาหุ้นที่เติบโตเร็วที่สุด ดูกราฟเทคนิคทั้งวัน และภูมิใจกับการทำผลตอบแทนชนะดัชนีตลาด
 แต่เมื่อกาลเวลาผ่านไป ผ่านวิกฤตเศรษฐกิจ วิกฤตโรคระบาด และได้ให้คำปรึกษากับครอบครัวมหาเศรษฐีมากมาย มุมมองของผมต่อ "ความมั่งคั่ง" ได้เปลี่ยนไปอย่างสิ้นเชิง
@@ -1478,7 +1482,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       interest: 'หินไหมทองจักรพรรดิ (Golden Rutilated Quartz)',
       preferredTime: 'ช่วงเช้า (09:00 - 12:00)',
       status: 'CONTACTED',
-      notes: 'พูดคุยกับคุณจอยแล้ว ลูกค้าสนใจขนาดข้อมือ 16 cm ส่งข้อมูลผลึก SiO2 ทางไลน์เรียบร้อย',
+      notes: 'พูดคุยกับ Admin B แล้ว ลูกค้าสนใจขนาดข้อมือ 16 cm ส่งข้อมูลผลึก SiO2 ทางไลน์เรียบร้อย',
       userId: null,
     },
     {
@@ -1493,7 +1497,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
     {
       name: 'คุณณภัทร สิริวัฒนา',
       phone: '086-777-8899',
-      interest: "Let's Talk กับ Top & Joy (การวางแผนชีวิต 6 มิติ)",
+      interest: "Let's Talk กับ Admin A & Admin B (การวางแผนชีวิต 6 มิติ)",
       preferredTime: 'วันเสาร์-อาทิตย์ (10:00 - 15:00)',
       status: 'CONTACTED',
       notes: 'ต้องการคำแนะนำเรื่องสถาปัตยกรรมการเงินสำหรับครอบครัวที่มีลูกเล็ก 2 คน',
@@ -1523,7 +1527,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
       interest: 'ผลึกอเมทิสต์โพรงธรรมชาติ (Amethyst Cathedral Geode) & จัดวางสตูดิโอ',
       preferredTime: 'ช่วงบ่าย (13:00 - 18:00)',
       status: 'CLOSED',
-      notes: 'นัดหมายคุณจอยเพื่อคัดเลือกผลึก Amethyst อุรุกวัยเกรดพิพิธภัณฑ์ และแท่ง Selenite สำหรับพื้นที่สมาธิในสตูดิโอเรียบร้อย',
+      notes: 'นัดหมาย Admin B เพื่อคัดเลือกผลึก Amethyst อุรุกวัยเกรดพิพิธภัณฑ์ และแท่ง Selenite สำหรับพื้นที่สมาธิในสตูดิโอเรียบร้อย',
       userId: mayMindful.id,
     },
     {
@@ -1547,7 +1551,7 @@ Living Wealth 365 จึงเป็นสะพานเชื่อมระ�
     {
       name: 'คุณพิชญา อมรเวช',
       phone: '082-444-9911',
-      interest: "Let's Talk กับ Top & Joy (การปรับสมดุลชีวิตและการเงิน)",
+      interest: "Let's Talk กับ Admin A & Admin B (การปรับสมดุลชีวิตและการเงิน)",
       preferredTime: 'วันอาทิตย์ (13:00 - 16:00)',
       status: 'NEW',
       notes: 'สนใจแนวคิดสมดุล 6 มิติของชีวิต รู้สึกหมดไฟจากการทำงานประจำ ต้องการวางแผนทิศทางชีวิตใหม่',

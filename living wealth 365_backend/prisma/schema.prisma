@@ -34,14 +34,14 @@ enum ContentPillar {
   INNER_LIFE     // 4. Philosophy, Buddhism, Consciousness, Meditation
   EARTH_ENERGY   // 5. Minerals, Crystals, Chakras, Traditions
   JOURNAL        // 6. Explore & Journal, Books, Tech, Longevity, Travel
-  ABOUT          // 7. Philosophy, Top & Joy
+  ABOUT          // 7. Philosophy, Admin A & Admin B
 }
 
 // ✍️ รูปแบบเนื้อหา
 enum PostType {
   ARTICLE        // บทความวิชาการ / บทความยาว
-  TOPS_NOTES     // 🌟 บันทึกความคิดของ Top (Top's Notes)
-  JOURNEY        // 🌟 เรื่องราวการเดินทางและการทดลองของ Top & Joy
+  TOPS_NOTES     // 🌟 บันทึกความคิดของ Admin A (Admin A's Notes)
+  JOURNEY        // 🌟 เรื่องราวการเดินทางและการทดลองของ Admin B (Admin B's Journey)
   EXPLORING      // สิ่งที่กำลังค้นคว้า / รีวิวหนังสือ / Longevity
 }
 
@@ -85,7 +85,7 @@ model Lead {
   id            String     @id @default(uuid())
   name          String     // ชื่อลูกค้าสำหรับติดต่อ
   phone         String     // เบอร์โทรศัพท์
-  interest      String     // บริการหรือหัวข้อที่สนใจ (เช่น วางแผนชีวิต, ภาษี, ประกัน, พูดคุยกับ Top & Joy)
+  interest      String     // บริการหรือหัวข้อที่สนใจ (เช่น วางแผนชีวิต, ภาษี, ประกัน, พูดคุยกับ Admin A & Admin B)
   preferredTime String?    // ช่วงเวลาที่สะดวกรับสาย
   status        LeadStatus @default(NEW)
   notes         String?    @db.Text // บันทึกจากลูกค้าหรือที่ปรึกษา
@@ -110,8 +110,8 @@ model Post {
   imageUrl    String?       @db.Text
   category    String        @default("การวางแผนการเงิน")
   pillar      ContentPillar @default(JOURNAL) // 🏛️ จัดอยู่ใน 7 เสาหลัก
-  postType    PostType      @default(ARTICLE) // ✍️ บทความ / Top's Notes / Journey
-  authorName  String        @default("Top & Joy") // 👤 ผู้เขียน: Top, Joy, หรือ Top & Joy
+  postType    PostType      @default(ARTICLE) // ✍️ บทความ / Admin A's Notes / Admin B's Journey
+  authorName  String        @default("Admin A & Admin B") // 👤 ผู้เขียน: Admin A, Admin B, หรือ Admin A & Admin B
   readTime    String?       @default("5 นาที")
   tags        String?       // #Tax, #Longevity, #Mindfulness
   published   Boolean       @default(false)
@@ -139,7 +139,7 @@ model Product {
   aspect         EarthAspect  @default(CHAKRA_ENERGY) // 💎 มิติของชิ้นงาน: วิทย์ / ประวัติศาสตร์ / วัฒนธรรม / จักระ
   chakra         String?      // จักระที่สอดคล้อง เช่น จักระ 4 (หัวใจ), จักระ 6 (ตาที่สาม)
   mineralFormula String?      // สูตรโครงสร้างแร่ทางเคมี เช่น SiO2, Cu2CO3(OH)2
-  isCurated      Boolean      @default(true) // ชิ้นงานคัดสรรพิเศษโดย Top & Joy
+  isCurated      Boolean      @default(true) // ชิ้นงานคัดสรรพิเศษโดย Admin A & Admin B
   isActive       Boolean      @default(true)
   
   // Relations

@@ -102,7 +102,7 @@ postsRouter.post('/', authenticateUser, requireAdmin, async (req, res) => {
         category: category || 'การวางแผนการเงิน',
         pillar: pillar || 'JOURNAL',
         postType: postType || 'ARTICLE',
-        authorName: authorName ? authorName.trim() : 'Top & Joy',
+        authorName: authorName ? authorName.trim() : 'Admin A & Admin B',
         readTime: readTime ? readTime.trim() : '5 นาที',
         tags: tags ? tags.trim() : null,
         published: published ?? true,
