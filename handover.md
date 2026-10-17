@@ -2,6 +2,8 @@
 
 ## 1. Project Objective & Scope
 - **Project**: Living Wealth 365
+- **Official GitHub Repository**: `https://github.com/Krist-KritnarinP/living-wealth-365.git` (Remote: `origin`, Branch: `main`)
+- **Mandatory Git Push Protocol**: ทุก Agent ที่เข้ามารับช่วงต่อ ต้องรัน `git commit` และ `git push origin main` ทุกครั้งหลังจบแต่ละขั้นตอนหรือ Milestone เพื่อให้ GitHub Repository ซิงค์ตรงกับโค้ดล่าสุดตลอดเวลา ห้ามปล่อยให้ค้างอยู่เฉพาะ local เด็ดขาด
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
@@ -22,7 +24,7 @@
   - iPad / Tablet (640px - 1024px): 2-3 คอลัมน์ กระจายเต็มขอบจอทั้งแนวตั้งและแนวนอน
   - Desktop (> 1024px): ขยายเต็มตา 100% ไร้ขอบว่างด้านข้าง
 - **Zen Glass Theme**: รองรับ Light Mode (`zen-light`) และ Dark Mode (`zen-dark`) สลับได้ที่ Navbar
-- **Mandatory Git Discipline**: นอกจากบันทึก `handover.md` แล้ว **ต้องทำ Git Commit ทุกครั้ง** หลังจบแต่ละขั้นตอนหรือ Milestone โดยห้ามละเลยเด็ดขาด
+- **Mandatory Git Discipline**: นอกจากบันทึก `handover.md` แล้ว **ต้องทำ Git Commit และ Git Push ขึ้น GitHub (`git push origin main`) ทุกครั้ง** หลังจบแต่ละขั้นตอนหรือ Milestone โดยห้ามละเลยเด็ดขาด เพื่อให้ทุก Agent ทำงานบนฐานโค้ดเดียวกันอย่างสมบูรณ์
 - **Mandatory Pre-Execution Review Protocol (ทวนคำสั่งและสรุปงานก่อนลงมือเสมอ)**: ก่อนลงมือทำโค้ดหรือแก้ไขระบบทุกครั้ง ต้องทวนคำสั่งของผู้ใช้และสรุปแผนงาน/ขั้นตอนทั้งหมดให้ผู้ใช้เห็นภาพก่อนเสมอ ห้ามลงมือทำเองโดยพลการโดยไม่ได้ทวนคำสั่งและสรุปงานก่อนเด็ดขาด
 
 ## 3. Stitch MCP Integration Status
@@ -488,3 +490,8 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **First Push**:
   - Successfully pushed all commits, models, seed data, and frontend components to GitHub (`git push -u origin main`).
   - Verified repository is clean and synchronized.
+- **Handover & Multi-Agent Synchronization**:
+  - Updated Section 1 & Section 2 of `handover.md` to establish the GitHub Repository URL and Mandatory Git Push Protocol at the very top.
+  - Updated `note.md` (Project Overview & Multi-Agent Collaboration Protocol Rule 5) so all incoming agents immediately recognize the GitHub repository and run `git push origin main` after committing.
+  - Updated `note/guidelines.md` across root, backend, and frontend with the mandatory push policy.
+

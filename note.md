@@ -8,6 +8,8 @@
   - Wealth / Opportunity: Warm Gold `#FFB53B`
   - Passion / Protection: Crimson Red `#B62B1C`
   - Background / Canvas: Off-White `#F5F7FA`
+- **Official GitHub Repository**: `https://github.com/Krist-KritnarinP/living-wealth-365.git` (Remote: `origin`, Default Branch: `main`)
+- **Mandatory Git Push Rule**: ทุก Agent ต้อง push งานขึ้น `origin main` ทุกครั้งหลังจาก commit ไม่ทิ้งค้างไว้บน local เด็ดขาด
 
 ## UI / UX Design Mandate (Core Requirement)
 - **Full Screen UI**: ออกแบบและจัดวาง Layout แบบเต็มหน้าจอ (Full Screen Experience 100% Edge-to-Edge) ไม่เหลือขอบว่างซ้าย-ขวา
@@ -48,6 +50,6 @@
 2. **Handover Protocol**: Every agent must read `handover.md` upon taking over the workspace, and update it upon milestone completion.
 3. **Language Boundary**: Both backend and frontend must stay in JavaScript (`.js` and `.jsx`). Do not convert to TypeScript unless explicitly authorized by the user.
 4. **Scope Discipline**: Do NOT create unrequested tables or speculative UI pages unless explicitly instructed by the user. Always keep implementations minimal, cohesive, and directly aligned with the user's prompt.
-5. **Mandatory Git Commit Discipline**: นอกจากอัปเดต `handover.md` แล้ว **ต้องทำ `git commit` ทุกครั้ง** หลังเสร็จสิ้นแต่ละขั้นตอนหรือ Milestone โดยใช้ Commit message ที่ชัดเจนและอธิบายงานที่เปลี่ยน ห้ามละเลยเด็ดขาด เพื่อความต่อเนื่องและปลอดภัยของโค้ดเมื่อมี Agent ตัวอื่นเข้ามาทำงานร่วมต่อ
+5. **Mandatory Git Commit & Push Discipline**: นอกจากอัปเดต `handover.md` แล้ว **ต้องทำ `git commit` และ `git push origin main` ทุกครั้ง** หลังเสร็จสิ้นแต่ละขั้นตอนหรือ Milestone โดยใช้ Commit message ที่ชัดเจนและอธิบายงานที่เปลี่ยน ห้ามละเลยเด็ดขาด เพื่อให้โค้ดบน GitHub Repository ซิงค์กันตลอดเวลาเมื่อมี Agent ตัวอื่นเข้ามาทำงานร่วมต่อ และห้ามทำงานค้างไว้เพียง local เท่านั้น
 6. **Clean Code & Component Refactoring Mandate**: ทุก Agent ต้องเขียนโค้ดตามมาตรฐาน Professional Programmer แยก Component เป็นระเบียบ (Single Responsibility), ห้ามเขียน Monolithic Giant Component ไฟล์เดียวยาวหลายร้อยบรรทัด, แยกโครงสร้างโฟลเดอร์เป็นระบบ (`components/`, `constants/`, `services/`, `hooks/`), และหมั่น Refactor โค้ดให้อ่านง่าย กระชับ ปราศจากโค้ดขยะก่อนส่งมอบงานเสมอ
 7. **Mandatory Pre-Execution Clarification & Summary (ทวนคำสั่งและสรุปแผนงานก่อนลงมือเสมอ)**: ก่อนลงมือปฏิบัติงานทุกครั้ง **ต้องทวนคำสั่งของผู้ใช้ให้ชัดเจน** และ **สรุปแผนงาน/ขั้นตอนที่จะทำทั้งหมดให้ผู้ใช้เห็นภาพก่อนเสมอ** จากนั้นจึงค่อยลงมือทำ ห้ามข้ามขั้นตอนไปแก้ไขโค้ดหรือสร้างไฟล์โดยไม่สรุปให้ผู้ใช้ทราบก่อนโดยเด็ดขาด
