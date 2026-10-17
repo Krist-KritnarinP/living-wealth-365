@@ -495,3 +495,15 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Updated `note.md` (Project Overview & Multi-Agent Collaboration Protocol Rule 5) so all incoming agents immediately recognize the GitHub repository and run `git push origin main` after committing.
   - Updated `note/guidelines.md` across root, backend, and frontend with the mandatory push policy.
 
+## 26. Supabase PostgreSQL Configuration & Migration Preparation
+- **Database Architecture**: Migrated database provider configuration from local MySQL to cloud-hosted **Supabase PostgreSQL**.
+- **Dual-URL Configuration**:
+  - `DATABASE_URL`: Transaction-mode pooler on port 6543 (`?pgbouncer=true`) for Express API and Prisma Client query runtime.
+  - `DIRECT_URL`: Session-mode pooler on port 5432 for Prisma CLI schema pushes, migrations, and DDL operations.
+- **Configured Files**:
+  - `living wealth 365_backend/.env`: Updated with both connection strings, keeping password placeholder `[YOUR-PASSWORD]` for the user to securely input.
+  - `living wealth 365_backend/.env.example`: Updated reference format for Supabase PostgreSQL.
+  - `living wealth 365_backend/prisma/schema.prisma`: Configured `provider = "postgresql"` and `directUrl = env("DIRECT_URL")`.
+- **Validation**: Executed `npx prisma generate` successfully with zero schema errors. Awaiting user password entry to run `prisma db push` and `node prisma/seed.js`.
+
+

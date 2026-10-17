@@ -6,8 +6,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql" // Local MySQL Workbench @ localhost:3306
-  url      = env("DATABASE_URL")
+  provider  = "postgresql" // Supabase PostgreSQL
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ==========================================

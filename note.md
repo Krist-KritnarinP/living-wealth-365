@@ -42,7 +42,8 @@
   - Port: 5173
 - **Backend Directory**: `living wealth 365_backend/`
   - Tech Stack: Node.js, Express.js (ES Modules JavaScript) — **Strictly NO TypeScript (.ts)** per client instruction.
-  - Official Models: `User` (Customer & Admin), `Lead` (Capture & Optional User link), `Post` (Knowledge/Blog), `Product` (Mu-Tae-Lu), `Wishlist` (User-Product bookmark) and Enums: `Role` (CUSTOMER, ADMIN), `LeadStatus` (NEW, CONTACTED, CLOSED, CANCELLED)
+  - Database: **Supabase PostgreSQL** (Dual-URL: `DATABASE_URL` via PgBouncer 6543 for app query runtime, `DIRECT_URL` via Session 5432 for Prisma migrations).
+  - Official Models: `User` (Customer & Admin), `Lead` (Capture & Optional User link), `Post` (Knowledge/Blog), `Product` (Mu-Tae-Lu), `Wishlist` (User-Product bookmark), `InsurancePlan` (Protection Catalog), and Enums: `Role`, `LeadStatus`, `ContentPillar`, `PostType`, `EarthAspect`.
   - Port: 5001
 
 ## Multi-Agent Collaboration Protocol
