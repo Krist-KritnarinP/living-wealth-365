@@ -579,6 +579,17 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: Clean Vite production build completed in 871ms.
   - Vercel Deployment: Live at [https://livingwealth365.vercel.app](https://livingwealth365.vercel.app).
 
+## 30. Role Switcher Simulator Label Update ("Guest" ➔ "USER")
+- **Component**: [`RoleSwitcher.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/RoleSwitcher.jsx)
+- **Change**:
+  - Replaced the first button label (`Guest` / แขก) with `USER` wrapped in `<span className="notranslate" translate="no">USER</span>`.
+  - Updated button title tooltip to `"สลับเป็นมุมมอง USER ทั่วไป"`.
+  - The `notranslate` attribute prevents automated browser translation extensions (e.g. Google Translate) from mutating the label back to "แขก".
+- **Verification**:
+  - Tests: 10/10 passing (171ms).
+  - Production Build: Success (2.23s).
+
+
 
 
 

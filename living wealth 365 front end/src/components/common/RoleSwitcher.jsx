@@ -22,10 +22,10 @@ export default function RoleSwitcher() {
         className={`btn btn-xs rounded-xl ${
           !currentUser ? 'btn-primary' : 'btn-ghost'
         }`}
-        title="สลับเป็นมุมมองบุคคลทั่วไป"
+        title="สลับเป็นมุมมอง USER ทั่วไป"
       >
         <Eye className="w-3.5 h-3.5" />
-        Guest
+        <span className="notranslate" translate="no">USER</span>
       </button>
 
       <button
