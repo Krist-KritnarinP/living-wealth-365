@@ -536,6 +536,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit tests: 10/10 passed (138ms).
   - Production build: Clean bundle build in 999ms.
 
+## 28. Vercel Frontend Deployment Readiness & SPA Routing Configuration
+- **Deployment Strategy**: Single-click Frontend deployment on Vercel connecting to GitHub repository `Krist-KritnarinP/living-wealth-365`.
+- **SPA Routing Fix**:
+  - Created [`living wealth 365 front end/vercel.json`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/vercel.json) with client-side rewrites rule (`"source": "/(.*)" -> "/index.html"`), preventing 404 errors when clients refresh or directly navigate to deep routes (`/wealth`, `/life`, `/about`, etc.).
+- **Vercel Settings**:
+  - Root Directory: `living wealth 365 front end`
+  - Framework Preset: Vite
+  - Build Command: `vite build`
+  - Output Directory: `dist`
+- **Verification**: Clean Vite production build in 842ms.
+
+
 
 
 
