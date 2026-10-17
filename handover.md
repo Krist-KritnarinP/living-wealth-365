@@ -589,6 +589,36 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Tests: 10/10 passing (171ms).
   - Production Build: Success (2.23s).
 
+## 31. Wheel of Life (Life Map) Interactive Gauge Animations & Scenario Presets
+- **Component**: [`LifeMapTeaser.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/LifeMapTeaser.jsx)
+- **Key Enhancements**:
+  1. **Dual-Layer Animated Gauge Bar**:
+     - Dynamic neon track fill with gradient (`linear-gradient(90deg, ${dim.color}88, ${dim.color})`) that expands/contracts smoothly with CSS transition (`0.3s ease-out`).
+     - Animated flowing light tip (`animate-pulse`) at the leading edge of the gauge.
+     - Tactile stepper buttons (`-` and `+`) with bouncy active states for precise, frictionless adjustments on mobile and desktop.
+  2. **Reactive Sliders & Cards**:
+     - Hover/Drag spotlight: When a gauge is adjusted or hovered, the entire card illuminates with an ambient glow halo matching the dimension color (`box-shadow: 0 8px 24px -4px ${dim.color}25`).
+     - Animated status grade chips: Dynamically calculates and displays ratings (`ยอดเยี่ยม ✨`, `มั่นคงดี`, `ปานกลาง`, `ต้องฟื้นฟู`) with color-coded chips.
+     - Bouncing score numerical pill: Grows and scales (`scale-110`) when active.
+  3. **Alive Radar Wheel**:
+     - SVG drop glow filter (`<feGaussianBlur>` + `<feComposite>`) and radial gradient mesh.
+     - Laser beam spotlight along the axis of the actively manipulated dimension.
+     - Animated ping ripple waves (`animate-ping`) radiating around active vertex nodes.
+     - Rotating subtle ambient background aura (`animate-aura-spin-slow`).
+  4. **Circular Speedometer Center Gauge**:
+     - Real-time SVG circular progress ring displaying overall average score with animated `strokeDashoffset` transition (`0.4s cubic-bezier(0.34, 1.56, 0.64, 1)`).
+  5. **Instant Life Scenario Presets**:
+     - Added 4 interactive 1-click presets:
+       - 🌟 **สมดุลในอุดมคติ (Ideal Zen)**
+       - 💼 **วัยสร้างตัว & การเงิน (Work & Wealth)**
+       - 🏡 **ครอบครัว & เวลาสุขสันต์ (Family & Time)**
+       - ⚡ **ฟื้นฟูกาย & ใจ (Health & Recovery)**
+     - Triggers smooth synchronized morphing of all 6 gauge sliders and the radar chart simultaneously.
+- **Verification**:
+  - Tests: 10/10 passing (108ms).
+  - Production Build: Success in 788ms.
+
+
 
 
 
