@@ -7,7 +7,7 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed Cloudflare R2 Storage Usage Meter & Asset Size Inspector (Real-time 5GB Quota progress bar, media file size badges across all upload zones, and full Media Inspector modal).
+- **Status**: Completed Resilient Insurance Plans Management & Vercel Offline Sync (Optimistic UI updates, localStorage persistence, and graceful fallback for `/admin/cms/insurance`).
 
 ## 2. Core UI / UX Implementation in App.jsx & index.css
 - **100% True Full-Screen & Edge-to-Edge Layout**:
@@ -700,6 +700,19 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 923ms.
   - Branch: `main` synchronized with remote `origin/main`.
+
+## 14. Resilient Insurance Plans Management & Vercel Offline Sync (November 9, 2026)
+- **Objective**: Fix status toggling, updating, and creation failures on the live Vercel admin route (`/admin/cms/insurance`).
+- **Root Cause**: `insurancePlansApi` actions in `AuthContext.jsx` were not wrapped in optimistic state updates or try/catch fallback, causing immediate network promise rejections on Vercel preview environments where the local backend is unreachable, alongside missing `localStorage` persistence.
+- **Implementation**:
+  - In [`AuthContext.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/context/AuthContext.jsx):
+    - Added `useEffect` for `lw365_plans` syncing `insurancePlans` to `localStorage`.
+    - Refactored `addInsurancePlan`, `updateInsurancePlan`, and `deleteInsurancePlan` to execute optimistic React state updates immediately with graceful offline try/catch fallback (matching the architecture of `posts` and `products`).
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.06s.
+  - Branch: `main` synchronized with remote `origin/main`.
+
 
 
 

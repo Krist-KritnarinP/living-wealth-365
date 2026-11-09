@@ -83,6 +83,11 @@ export function AuthProvider({ children }) {
     localStorage.setItem('lw365_products', JSON.stringify(products));
   }, [products]);
 
+  // Persist insurance plans
+  useEffect(() => {
+    localStorage.setItem('lw365_plans', JSON.stringify(insurancePlans));
+  }, [insurancePlans]);
+
   // 🔄 ดึงข้อมูล Live จาก Backend API
   const refreshData = useCallback(async () => {
     try {
@@ -294,22 +299,59 @@ export function AuthProvider({ children }) {
     }
   };
 
-  // 📋 Insurance Plans Actions (CRUD)
+  // 📋 Insurance Plans Actions (CRUD with Optimistic UI & Local Fallback)
   const addInsurancePlan = async (planData) => {
-    const newPlan = await insurancePlansApi.create(planData);
+    const newPlan = {
+      id: `plan-${Date.now()}`,
+      slug: (planData.name || 'plan').toLowerCase().replace(/[^a-z0-9ก-๙]+/g, '-') + '-' + Date.now().toString().slice(-4),
+      isActive: true,
+      ...planData,
+    };
     setInsurancePlans((prev) => [newPlan, ...prev]);
+
+    try {
+      const serverPlan = await insurancePlansApi.create(planData);
+      if (serverPlan) {
+        setInsurancePlans((prev) => prev.map((p) => (p.id === newPlan.id ? serverPlan : p)));
+        return serverPlan;
+      }
+    } catch (err) {
+      console.warn('Backend unavailable, saved insurance plan locally:', err?.message);
+    }
     return newPlan;
   };
 
   const updateInsurancePlan = async (planId, updates) => {
-    const updated = await insurancePlansApi.update(planId, updates);
-    setInsurancePlans((prev) => prev.map((p) => (p.id === planId ? updated : p)));
-    return updated;
+    let updatedPlan = null;
+    setInsurancePlans((prev) =>
+      prev.map((p) => {
+        if (p.id === planId) {
+          updatedPlan = { ...p, ...updates };
+          return updatedPlan;
+        }
+        return p;
+      })
+    );
+
+    try {
+      const serverUpdated = await insurancePlansApi.update(planId, updates);
+      if (serverUpdated) {
+        setInsurancePlans((prev) => prev.map((p) => (p.id === planId ? serverUpdated : p)));
+        return serverUpdated;
+      }
+    } catch (err) {
+      console.warn('Backend unavailable, updated insurance plan locally:', err?.message);
+    }
+    return updatedPlan;
   };
 
   const deleteInsurancePlan = async (planId) => {
-    await insurancePlansApi.delete(planId);
     setInsurancePlans((prev) => prev.filter((p) => p.id !== planId));
+    try {
+      await insurancePlansApi.delete(planId);
+    } catch (err) {
+      console.warn('Backend unavailable, deleted insurance plan locally:', err?.message);
+    }
   };
 
   // 📰 Blog Posts Actions
