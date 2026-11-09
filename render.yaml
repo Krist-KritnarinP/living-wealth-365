@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: living-wealth-365-backend
+    runtime: node
+    rootDir: "living wealth 365_backend"
+    plan: free
+    region: singapore # หรือ oregon / frankfurt ตามสะดวก (singapore เร็วสุดสำหรับไทย)
+    buildCommand: npm install && npx prisma generate
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: CORS_ORIGIN
+        value: https://livingwealth365.vercel.app
