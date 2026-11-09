@@ -3,7 +3,7 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { authenticateUser, requireAdmin } from '../middleware/auth.js';
-import { uploadToR2, isR2Configured, R2_BUCKET_NAME, R2_PUBLIC_DOMAIN } from '../lib/r2.js';
+import { uploadToR2, deleteFromR2, isR2Configured, R2_BUCKET_NAME, R2_PUBLIC_DOMAIN } from '../lib/r2.js';
 
 const uploadRouter = express.Router();
 
@@ -153,6 +153,44 @@ uploadRouter.post(
     } catch (error) {
       console.error('[Upload File Error]:', error);
       res.status(500).json({ error: 'เกิดข้อผิดพลาดในการบันทึกไฟล์ขึ้น Cloudflare R2' });
+    }
+  }
+);
+
+/**
+ * DELETE /api/upload/:filename
+ * ลบไฟล์ออกจาก Cloudflare R2 หรือ Local Storage
+ */
+uploadRouter.delete(
+  '/:filename',
+  authenticateUser,
+  requireAdmin,
+  async (req, res) => {
+    try {
+      const { filename } = req.params;
+      const sanitizedFilename = path.basename(filename);
+
+      if (isR2Configured) {
+        await deleteFromR2(sanitizedFilename);
+      }
+
+      // ตรวจสอบและลบจาก local disk ด้วยหากมี
+      const localFilePath = path.join(uploadsDir, sanitizedFilename);
+      if (fs.existsSync(localFilePath)) {
+        try {
+          fs.unlinkSync(localFilePath);
+        } catch (unlinkErr) {
+          console.warn('[Local File Delete Warning]:', unlinkErr.message);
+        }
+      }
+
+      return res.json({
+        message: 'ลบไฟล์ออกจากระบบสำเร็จเรียบร้อย',
+        filename: sanitizedFilename,
+      });
+    } catch (error) {
+      console.error('[Delete File Error]:', error);
+      res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบไฟล์' });
     }
   }
 );
