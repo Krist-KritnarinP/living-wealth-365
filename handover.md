@@ -745,3 +745,20 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Vercel Frontend: Verified `VITE_API_URL` baked into bundle targeting Render backend.
   - Branch: `main` synchronized with remote `origin/main`.
 
+## 21. Self-Healing Authentication & Auto-Renewal Pipeline for Admin Uploads (November 9, 2026)
+- **Objective**: Eliminate HTTP 401 Unauthorized errors during image uploads by enforcing seamless JWT token synchronization and automatic background renewal for Admin sessions.
+- **Root Cause Analysis**:
+  - Legacy mock state stored `lw365_user` in browser localStorage prior to Render backend deployment, leaving `lw365_token` empty.
+  - Asynchronous login calls in `LoginPage.jsx` and `RoleSwitcher.jsx` navigated prior to JWT response fulfillment.
+- **Implemented Architecture**:
+  1. **Axios Response Interceptor Auto-Renewal (`api.js`)**: Automatically intercepts HTTP 401 on authenticated endpoints, requests a fresh JWT token for active Admin sessions, stores it in `localStorage`, and retries the original upload without failing the user experience.
+  2. **Pre-Upload Token Validation Guard (`FileUploadZone.jsx`)**: Verifies token presence before dispatching file upload streams; retrieves valid session proactively if unpopulated.
+  3. **Mount-Time Session Hydration (`AuthContext.jsx`)**: Detects and repairs unsynchronized Admin sessions on application boot.
+  4. **Strict Async-Await Login Pipeline (`LoginPage.jsx` & `RoleSwitcher.jsx`)**: Fully awaits credential validation with spinner feedback before triggering navigation.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 867ms.
+  - Vercel Deployment: Live at `assets/index-roQa9JzP.js`.
+  - Branch: `main` synchronized with remote `origin/main`.
+
+
