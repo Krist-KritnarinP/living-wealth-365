@@ -19,7 +19,7 @@ export default function SecurityConfirmModal({
   isOpen,
   onClose,
   onConfirm,
-  action = 'edit', // 'edit' | 'delete'
+  action = 'edit', // 'edit' | 'edit_auth' | 'delete' | 'status' | 'active'
   title,
   itemName,
   summaryList = [],
@@ -58,6 +58,8 @@ export default function SecurityConfirmModal({
   if (!isOpen) return null;
 
   const isDelete = action === 'delete';
+  const isStatus = action === 'status' || action === 'active';
+  const isEditAuth = !isDelete && !isStatus;
   const isMatch = inputPin.trim() === generatedPin;
 
   const handleConfirmClick = () => {
@@ -70,31 +72,57 @@ export default function SecurityConfirmModal({
 
   const defaultTitle = isDelete
     ? 'ยืนยันการลบข้อมูล (Security PIN Required)'
-    : 'ตรวจสอบรอบสุดท้าย & ยืนยันรหัสความปลอดภัย (Final Check)';
+    : isStatus
+    ? 'ยืนยันการเปลี่ยนสถานะ (Security PIN Required)'
+    : 'ยืนยันรหัสความปลอดภัยเพื่อแก้ไข (Security PIN Required)';
 
   const defaultConfirmText = isDelete
     ? 'ยืนยันการลบข้อมูลถาวร'
-    : 'ยืนยันการบันทึกข้อมูล';
+    : isStatus
+    ? 'ยืนยันเปลี่ยนสถานะ'
+    : 'ยืนยันรหัสเพื่อแก้ไขข้อมูล';
+
+  const badgeText = isDelete
+    ? 'HIGH-RISK DELETE'
+    : isStatus
+    ? 'STATUS CHANGE'
+    : 'AUTHORIZE EDIT';
+
+  const badgeClass = isDelete
+    ? 'badge-error text-white'
+    : isStatus
+    ? 'badge-secondary text-white'
+    : 'badge-primary text-white';
+
+  const iconBgClass = isDelete
+    ? 'bg-error/15 text-error border border-error/20'
+    : isStatus
+    ? 'bg-secondary/15 text-secondary border border-secondary/20'
+    : 'bg-primary/10 text-primary border border-primary/20';
+
+  const buttonClass = isDelete
+    ? 'btn-error text-white'
+    : isStatus
+    ? 'btn-secondary text-white'
+    : 'btn-primary text-white';
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="modal modal-open z-50 animate-fadeIn backdrop-blur-sm"
+      className="modal modal-open z-[100] animate-fadeIn backdrop-blur-sm"
     >
       <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 sm:p-8 space-y-5">
         {/* Modal Header */}
         <div className="flex items-start justify-between gap-3 border-b border-base-300/60 pb-4">
           <div className="flex items-center gap-3">
             <div
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${
-                isDelete
-                  ? 'bg-error/15 text-error border border-error/20'
-                  : 'bg-primary/10 text-primary border border-primary/20'
-              }`}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${iconBgClass}`}
             >
               {isDelete ? (
                 <ShieldAlert className="w-6 h-6 animate-pulse" />
+              ) : isStatus ? (
+                <RotateCcw className="w-6 h-6" />
               ) : (
                 <FileCheck2 className="w-6 h-6" />
               )}
@@ -102,11 +130,9 @@ export default function SecurityConfirmModal({
             <div>
               <div className="flex items-center gap-1.5">
                 <span
-                  className={`badge badge-xs font-black uppercase text-[9px] px-2 py-0.5 ${
-                    isDelete ? 'badge-error text-white' : 'badge-primary text-white'
-                  }`}
+                  className={`badge badge-xs font-black uppercase text-[9px] px-2 py-0.5 ${badgeClass}`}
                 >
-                  {isDelete ? 'HIGH-RISK DELETE' : 'FINAL CHECK'}
+                  {badgeText}
                 </span>
                 <span className="text-[11px] text-base-content/60 font-semibold">
                   2-Step Verification
@@ -224,6 +250,12 @@ export default function SecurityConfirmModal({
                 setInputPin(val);
                 if (hasError) setHasError(false);
               }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && isMatch) {
+                  e.preventDefault();
+                  handleConfirmClick();
+                }
+              }}
               placeholder="กรอกตัวเลข 4 หลัก..."
               className={`input input-bordered w-full text-center text-xl font-black tracking-[0.5em] rounded-xl bg-base-100 transition-all ${
                 isMatch
@@ -263,11 +295,17 @@ export default function SecurityConfirmModal({
             type="button"
             disabled={!isMatch}
             onClick={handleConfirmClick}
-            className={`btn btn-md rounded-2xl font-bold shadow-md transition-all gap-1.5 ${
-              isDelete ? 'btn-error text-white' : 'btn-primary'
-            } ${!isMatch ? 'opacity-40 cursor-not-allowed' : 'hover:scale-[1.02]'}`}
+            className={`btn btn-md rounded-2xl font-bold shadow-md transition-all gap-1.5 ${buttonClass} ${
+              !isMatch ? 'opacity-40 cursor-not-allowed' : 'hover:scale-[1.02]'
+            }`}
           >
-            {isDelete ? <AlertTriangle className="w-4 h-4" /> : <CheckCircle2 className="w-4 h-4" />}
+            {isDelete ? (
+              <AlertTriangle className="w-4 h-4" />
+            ) : isStatus ? (
+              <RotateCcw className="w-4 h-4" />
+            ) : (
+              <CheckCircle2 className="w-4 h-4" />
+            )}
             <span>{confirmButtonText || defaultConfirmText}</span>
           </button>
         </div>

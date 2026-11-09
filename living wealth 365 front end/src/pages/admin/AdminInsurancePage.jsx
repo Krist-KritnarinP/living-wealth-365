@@ -50,11 +50,10 @@ export default function AdminInsurancePage() {
     isActive: true,
   });
 
-  // 🔐 Security 2-Step Verification Modal State
+  // 🔐 Security 2-Step Verification Modal State (Before Active, Edit, Delete)
   const [securityModalOpen, setSecurityModalOpen] = useState(false);
-  const [securityAction, setSecurityAction] = useState('edit'); // 'edit' | 'delete'
-  const [pendingPayload, setPendingPayload] = useState(null);
-  const [planToDelete, setPlanToDelete] = useState(null);
+  const [securityAction, setSecurityAction] = useState('delete'); // 'active' | 'edit_auth' | 'delete'
+  const [pendingTarget, setPendingTarget] = useState(null);
 
   // Filter plans
   const filteredPlans = insurancePlans.filter((plan) => {
@@ -87,53 +86,25 @@ export default function AdminInsurancePage() {
     setModalOpen(true);
   };
 
-  const handleOpenEdit = (plan) => {
-    setEditingPlan(plan);
-    let parsedFeatures = plan.features || '';
-    try {
-      const arr = JSON.parse(plan.features);
-      if (Array.isArray(arr)) parsedFeatures = arr.join('\n');
-    } catch {
-      // Keep as string
-    }
-
-    setFormData({
-      type: plan.type,
-      category: plan.category,
-      categoryName: plan.categoryName,
-      name: plan.name,
-      slug: plan.slug,
-      tagline: plan.tagline || '',
-      coverageAmount: plan.coverageAmount || '',
-      startingPrice: plan.startingPrice || '',
-      features: parsedFeatures,
-      recommendedFor: plan.recommendedFor || '',
-      description: plan.description || '',
-      imageUrl: plan.imageUrl || '',
-      brochureUrl: plan.brochureUrl || '',
-      isActive: plan.isActive ?? true,
-    });
-    setModalOpen(true);
+  // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Active
+  const handleRequestToggleActive = (plan) => {
+    setPendingTarget(plan);
+    setSecurityAction('active');
+    setSecurityModalOpen(true);
   };
 
-  const handleToggleActive = async (plan) => {
-    const newStatus = !plan.isActive;
-    try {
-      await updateInsurancePlan(plan.id, { isActive: newStatus });
-      logActivity({
-        actionType: 'STATUS_CHANGE',
-        entityType: 'INSURANCE_PLAN',
-        targetTitle: plan.name,
-        details: `สลับสถานะแผนประกันเป็น: ${newStatus ? 'เปิดใช้งาน (Active)' : 'ปิดใช้งาน (Inactive)'}`,
-        securityPin: 'AUTO',
-      });
-      showToast(
-        newStatus ? `เปิดใช้งานแผน "${plan.name}" แล้ว` : `ซ่อนแผน "${plan.name}" ชั่วคราวแล้ว`,
-        'success'
-      );
-    } catch {
-      showToast('ไม่สามารถอัปเดตสถานะได้', 'error');
-    }
+  // 🔐 Step 1: Trigger Security PIN BEFORE Opening Edit Screen
+  const handleRequestEdit = (plan) => {
+    setPendingTarget(plan);
+    setSecurityAction('edit_auth');
+    setSecurityModalOpen(true);
+  };
+
+  // 🔐 Step 1: Trigger Security PIN BEFORE Deleting Plan
+  const handleRequestDelete = (plan) => {
+    setPendingTarget(plan);
+    setSecurityAction('delete');
+    setSecurityModalOpen(true);
   };
 
   const handleSubmit = async (e) => {
@@ -150,13 +121,18 @@ export default function AdminInsurancePage() {
         : JSON.stringify([]),
     };
 
-    if (editingPlan) {
-      // 🔐 Step 2: Open Security Verification Modal for Final Check
-      setPendingPayload(payload);
-      setSecurityAction('edit');
-      setSecurityModalOpen(true);
-    } else {
-      try {
+    try {
+      if (editingPlan) {
+        await updateInsurancePlan(editingPlan.id, payload);
+        logActivity({
+          actionType: 'UPDATE',
+          entityType: 'INSURANCE_PLAN',
+          targetTitle: formData.name,
+          details: `บันทึกการแก้ไขข้อมูลแผนประกัน: วงเงิน ${formData.coverageAmount || '-'} • ราคา ${formData.startingPrice || '-'}`,
+          securityPin: 'VERIFIED',
+        });
+        showToast(`อัปเดตแผน "${formData.name}" เรียบร้อยแล้ว`, 'success');
+      } else {
         await addInsurancePlan(payload);
         logActivity({
           actionType: 'CREATE',
@@ -166,46 +142,90 @@ export default function AdminInsurancePage() {
           securityPin: 'AUTO',
         });
         showToast(`เพิ่มแผนใหม่ "${formData.name}" เรียบร้อยแล้ว`, 'success');
-        setModalOpen(false);
-      } catch {
-        showToast('เกิดข้อผิดพลาดในการบันทึกข้อมูล', 'error');
       }
+      setModalOpen(false);
+      setEditingPlan(null);
+      setPendingTarget(null);
+    } catch {
+      showToast('เกิดข้อผิดพลาดในการบันทึกข้อมูล', 'error');
     }
   };
 
   // 🔐 Execute verified action upon matching 4-digit security code
   const handleConfirmSecurityAction = async (pin) => {
-    if (securityAction === 'edit' && editingPlan && pendingPayload) {
+    if (!pendingTarget) return;
+
+    if (securityAction === 'active') {
+      const newStatus = !pendingTarget.isActive;
       try {
-        await updateInsurancePlan(editingPlan.id, pendingPayload);
+        await updateInsurancePlan(pendingTarget.id, { isActive: newStatus });
         logActivity({
-          actionType: 'UPDATE',
+          actionType: 'STATUS_CHANGE',
           entityType: 'INSURANCE_PLAN',
-          targetTitle: formData.name,
-          details: `แก้ไขข้อมูลแผนประกัน: วงเงิน ${formData.coverageAmount || '-'} • ราคา ${formData.startingPrice || '-'}`,
+          targetTitle: pendingTarget.name,
+          details: `ยืนยัน PIN (${pin}) สลับสถานะแผนประกันเป็น: ${newStatus ? 'เปิดใช้งาน (Active)' : 'ปิดใช้งาน (Inactive)'}`,
           securityPin: pin,
         });
-        showToast(`อัปเดตแผน "${formData.name}" เรียบร้อยแล้ว`, 'success');
+        showToast(
+          newStatus ? `ยืนยัน PIN สำเร็จ: เปิดใช้งานแผน "${pendingTarget.name}" แล้ว` : `ยืนยัน PIN สำเร็จ: ปิดใช้งานแผน "${pendingTarget.name}" แล้ว`,
+          'success'
+        );
         setSecurityModalOpen(false);
-        setModalOpen(false);
-        setEditingPlan(null);
-        setPendingPayload(null);
+        setPendingTarget(null);
       } catch {
-        showToast('เกิดข้อผิดพลาดในการบันทึกข้อมูล', 'error');
+        showToast('ไม่สามารถอัปเดตสถานะได้', 'error');
       }
-    } else if (securityAction === 'delete' && planToDelete) {
+    } else if (securityAction === 'edit_auth') {
+      // 🔐 PIN Verified -> Open Edit Modal
+      setEditingPlan(pendingTarget);
+      let parsedFeatures = pendingTarget.features || '';
       try {
-        await deleteInsurancePlan(planToDelete.id);
+        const arr = JSON.parse(pendingTarget.features);
+        if (Array.isArray(arr)) parsedFeatures = arr.join('\n');
+      } catch {
+        // Keep as string
+      }
+
+      setFormData({
+        type: pendingTarget.type,
+        category: pendingTarget.category,
+        categoryName: pendingTarget.categoryName,
+        name: pendingTarget.name,
+        slug: pendingTarget.slug,
+        tagline: pendingTarget.tagline || '',
+        coverageAmount: pendingTarget.coverageAmount || '',
+        startingPrice: pendingTarget.startingPrice || '',
+        features: parsedFeatures,
+        recommendedFor: pendingTarget.recommendedFor || '',
+        description: pendingTarget.description || '',
+        imageUrl: pendingTarget.imageUrl || '',
+        brochureUrl: pendingTarget.brochureUrl || '',
+        isActive: pendingTarget.isActive ?? true,
+      });
+
+      logActivity({
+        actionType: 'UPDATE_AUTH',
+        entityType: 'INSURANCE_PLAN',
+        targetTitle: pendingTarget.name,
+        details: `ยืนยันรหัส PIN (${pin}) สำเร็จ เข้าสู่หน้าจอแก้ไขแผนประกัน`,
+        securityPin: pin,
+      });
+      setSecurityModalOpen(false);
+      setModalOpen(true);
+      showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไข "${pendingTarget.name}"`, 'success');
+    } else if (securityAction === 'delete') {
+      try {
+        await deleteInsurancePlan(pendingTarget.id);
         logActivity({
           actionType: 'DELETE',
           entityType: 'INSURANCE_PLAN',
-          targetTitle: planToDelete.name,
-          details: `ลบแผนประกันภัย "${planToDelete.name}" ออกจากระบบถาวร`,
+          targetTitle: pendingTarget.name,
+          details: `ยืนยัน PIN (${pin}) ลบแผนประกันภัย "${pendingTarget.name}" ออกจากระบบถาวร`,
           securityPin: pin,
         });
-        showToast(`ลบแผน "${planToDelete.name}" สำเร็จ`, 'success');
+        showToast(`ลบแผน "${pendingTarget.name}" สำเร็จ`, 'success');
         setSecurityModalOpen(false);
-        setPlanToDelete(null);
+        setPendingTarget(null);
       } catch {
         showToast('ไม่สามารถลบแผนประกันได้', 'error');
       }
@@ -315,7 +335,7 @@ export default function AdminInsurancePage() {
                       </span>
                       <button
                         type="button"
-                        onClick={() => handleToggleActive(plan)}
+                        onClick={() => handleRequestToggleActive(plan)}
                         className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold ${
                           plan.isActive
                             ? 'bg-emerald-500/15 text-emerald-700 border border-emerald-500/30'
@@ -350,7 +370,7 @@ export default function AdminInsurancePage() {
                 <div className="flex items-center gap-2 pt-1 border-t border-base-300/60">
                   <button
                     type="button"
-                    onClick={() => handleOpenEdit(plan)}
+                    onClick={() => handleRequestEdit(plan)}
                     className="btn btn-sm btn-primary flex-1 rounded-xl font-bold gap-1.5 text-white"
                   >
                     <Edit2 className="w-4 h-4" />
@@ -358,11 +378,7 @@ export default function AdminInsurancePage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => {
-                      setPlanToDelete(plan);
-                      setSecurityAction('delete');
-                      setSecurityModalOpen(true);
-                    }}
+                    onClick={() => handleRequestDelete(plan)}
                     className="btn btn-sm btn-outline btn-error rounded-xl font-bold gap-1.5 px-4"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -453,13 +469,13 @@ export default function AdminInsurancePage() {
                       <td className="whitespace-nowrap text-center">
                         <button
                           type="button"
-                          onClick={() => handleToggleActive(plan)}
+                          onClick={() => handleRequestToggleActive(plan)}
                           className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
                             plan.isActive
                               ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
                               : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
                           }`}
-                          title="คลิกเพื่อสลับสถานะเปิด/ปิด"
+                          title="คลิกเพื่อสลับสถานะเปิด/ปิด (ต้องยืนยันรหัสความปลอดภัย)"
                         >
                           {plan.isActive ? (
                             <>
@@ -478,22 +494,18 @@ export default function AdminInsurancePage() {
                         <div className="inline-flex items-center justify-end gap-2">
                           <button
                             type="button"
-                            onClick={() => handleOpenEdit(plan)}
+                            onClick={() => handleRequestEdit(plan)}
                             className="btn btn-xs sm:btn-sm btn-primary rounded-xl font-bold gap-1 text-white shadow-xs"
-                            title="แก้ไขแผน"
+                            title="ยืนยันรหัสเพื่อแก้ไขแผน"
                           >
                             <Edit2 className="w-3.5 h-3.5" />
                             <span>แก้ไข</span>
                           </button>
                           <button
                             type="button"
-                            onClick={() => {
-                              setPlanToDelete(plan);
-                              setSecurityAction('delete');
-                              setSecurityModalOpen(true);
-                            }}
+                            onClick={() => handleRequestDelete(plan)}
                             className="btn btn-xs sm:btn-sm btn-outline btn-error rounded-xl font-bold gap-1"
-                            title="ลบแผน"
+                            title="ยืนยันรหัสเพื่อลบแผน"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                             <span>ลบ</span>
@@ -697,32 +709,52 @@ export default function AdminInsurancePage() {
         <SecurityConfirmModal
           isOpen={securityModalOpen}
           action={securityAction}
-          itemName={securityAction === 'delete' ? planToDelete?.name : formData.name}
+          itemName={pendingTarget?.name}
           title={
             securityAction === 'delete'
-              ? `ยืนยันการลบแผนประกัน "${planToDelete?.name}"`
-              : `ตรวจสอบรอบสุดท้ายก่อนบันทึกแผน "${formData.name}"`
+              ? `ยืนยันการลบแผนประกัน "${pendingTarget?.name}"`
+              : securityAction === 'active'
+              ? `ยืนยันเปลี่ยนสถานะแผน "${pendingTarget?.name}"`
+              : `ยืนยันรหัสความปลอดภัยเพื่อแก้ไขแผน "${pendingTarget?.name}"`
           }
-          warningText="การลบแผนประกันนี้จะส่งผลให้ไม่ปรากฏบนหน้าเว็บอีกต่อไป กรุณากรอกรหัส 4 หลักเพื่อยืนยันความปลอดภัย"
+          warningText={
+            securityAction === 'delete'
+              ? 'การลบแผนประกันนี้จะส่งผลให้ไม่ปรากฏบนหน้าเว็บอีกต่อไป กรุณากรอกรหัส 4 หลักเพื่อยืนยันความปลอดภัย'
+              : undefined
+          }
           summaryList={
-            securityAction === 'edit'
+            securityAction === 'active'
               ? [
-                  { label: 'ชื่อแผนประกัน', value: formData.name },
-                  { label: 'หมวดหมู่', value: formData.categoryName || formData.type },
-                  { label: 'วงเงินความคุ้มครอง', value: formData.coverageAmount || '-' },
-                  { label: 'ราคาเริ่มต้น', value: formData.startingPrice || '-' },
+                  { label: 'แผนประกัน', value: pendingTarget?.name },
                   {
-                    label: 'สถานะบนเว็บ',
-                    value: formData.isActive ? 'เปิดใช้งาน (Visible)' : 'ปิดใช้งาน (Hidden)',
+                    label: 'สถานะปัจจุบัน',
+                    value: pendingTarget?.isActive ? 'เปิดใช้งาน (Active)' : 'ปิดใช้งาน (Inactive)',
+                  },
+                  {
+                    label: 'สถานะใหม่ที่จะเปลี่ยน',
+                    value: pendingTarget?.isActive ? 'ปิดใช้งาน (Inactive)' : 'เปิดใช้งาน (Active)',
                   },
                 ]
+              : securityAction === 'edit_auth'
+              ? [
+                  { label: 'แผนประกัน', value: pendingTarget?.name },
+                  { label: 'หมวดหมู่', value: pendingTarget?.categoryName || pendingTarget?.type },
+                  { label: 'วงเงินความคุ้มครอง', value: pendingTarget?.coverageAmount || '-' },
+                  { label: 'ราคาเริ่มต้น', value: pendingTarget?.startingPrice || '-' },
+                ]
               : []
+          }
+          confirmButtonText={
+            securityAction === 'delete'
+              ? 'ยืนยันการลบข้อมูลถาวร'
+              : securityAction === 'active'
+              ? 'ยืนยันเปลี่ยนสถานะ'
+              : 'ยืนยันรหัสเพื่อเข้าแก้ไข'
           }
           onConfirm={handleConfirmSecurityAction}
           onClose={() => {
             setSecurityModalOpen(false);
-            if (securityAction === 'delete') setPlanToDelete(null);
-            if (securityAction === 'edit') setPendingPayload(null);
+            setPendingTarget(null);
           }}
         />
       </div>

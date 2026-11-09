@@ -4,8 +4,9 @@ import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
-import ConfirmModal from '../../components/common/ConfirmModal';
 import FileUploadZone from '../../components/common/FileUploadZone';
+import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
+import { logActivity } from '../../utils/activityLogger';
 import { resolveAssetUrl } from '../../api';
 
 export default function AdminBlogPage() {
@@ -15,7 +16,11 @@ export default function AdminBlogPage() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingPost, setEditingPost] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null);
+
+  // 🔐 Security 2-Step Verification Modal State
+  const [securityModalOpen, setSecurityModalOpen] = useState(false);
+  const [securityAction, setSecurityAction] = useState('delete'); // 'active' | 'edit_auth' | 'delete'
+  const [pendingTarget, setPendingTarget] = useState(null);
 
   const [formData, setFormData] = useState({
     title: '',
@@ -47,30 +52,48 @@ export default function AdminBlogPage() {
     setModalOpen(true);
   };
 
-  const handleOpenEdit = (post) => {
-    setEditingPost(post);
-    setFormData({
-      title: post.title || '',
-      category: post.category || 'การวางแผนภาษี',
-      pillar: post.pillar || 'JOURNAL',
-      postType: post.postType || 'ARTICLE',
-      authorName: post.authorName || (typeof post.author === 'string' ? post.author : 'Admin A & Admin B'),
-      tags: post.tags || '',
-      excerpt: post.excerpt || '',
-      content: post.content || '',
-      imageUrl: post.imageUrl || '',
-      readTime: post.readTime || '5 นาที',
-    });
-    setModalOpen(true);
+  // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Publish/Active
+  const handleRequestTogglePublish = (post) => {
+    setPendingTarget(post);
+    setSecurityAction('active');
+    setSecurityModalOpen(true);
+  };
+
+  // 🔐 Step 1: Trigger Security PIN BEFORE Opening Edit Screen
+  const handleRequestEdit = (post) => {
+    setPendingTarget(post);
+    setSecurityAction('edit_auth');
+    setSecurityModalOpen(true);
+  };
+
+  // 🔐 Step 1: Trigger Security PIN BEFORE Deleting Post
+  const handleRequestDelete = (post) => {
+    setPendingTarget(post);
+    setSecurityAction('delete');
+    setSecurityModalOpen(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingPost) {
       updatePost(editingPost.id, formData);
+      logActivity({
+        actionType: 'UPDATE',
+        entityType: 'ARTICLE',
+        targetTitle: formData.title,
+        details: `บันทึกการแก้ไขบทความ: หมวดหมู่ ${formData.category}`,
+        securityPin: 'VERIFIED',
+      });
       showToast(`อัปเดตบทความ "${formData.title}" เรียบร้อยแล้ว!`, 'success');
     } else {
       addPost(formData);
+      logActivity({
+        actionType: 'CREATE',
+        entityType: 'ARTICLE',
+        targetTitle: formData.title,
+        details: `สร้างบทความใหม่: ${formData.title} • หมวดหมู่ ${formData.category}`,
+        securityPin: 'AUTO',
+      });
       showToast('สร้างบทความใหม่เรียบร้อยแล้ว!', 'success');
     }
     setFormData({
@@ -85,19 +108,61 @@ export default function AdminBlogPage() {
     setModalOpen(false);
   };
 
-  const handleTogglePublish = (post) => {
-    updatePost(post.id, { published: !post.published });
-    showToast(
-      post.published ? 'เปลี่ยนสถานะเป็นฉบับร่างแล้ว' : 'เผยแพร่บทความเรียบร้อยแล้ว!',
-      'info'
-    );
-  };
+  const handleConfirmSecurityAction = (pin) => {
+    if (!pendingTarget) return;
 
-  const handleConfirmDelete = () => {
-    if (deleteTarget) {
-      deletePost(deleteTarget.id);
+    if (securityAction === 'active') {
+      const newStatus = !pendingTarget.published;
+      updatePost(pendingTarget.id, { published: newStatus });
+      logActivity({
+        actionType: 'STATUS_CHANGE',
+        entityType: 'ARTICLE',
+        targetTitle: pendingTarget.title,
+        details: `ยืนยัน PIN (${pin}) สลับสถานะบทความเป็น: ${newStatus ? 'เผยแพร่สู่สาธารณะ' : 'ฉบับร่าง (ซ่อน)'}`,
+        securityPin: pin,
+      });
+      showToast(
+        newStatus ? 'เผยแพร่บทความเรียบร้อยแล้ว!' : 'เปลี่ยนสถานะเป็นฉบับร่างแล้ว',
+        'info'
+      );
+      setSecurityModalOpen(false);
+      setPendingTarget(null);
+    } else if (securityAction === 'edit_auth') {
+      setEditingPost(pendingTarget);
+      setFormData({
+        title: pendingTarget.title || '',
+        category: pendingTarget.category || 'การวางแผนภาษี',
+        pillar: pendingTarget.pillar || 'JOURNAL',
+        postType: pendingTarget.postType || 'ARTICLE',
+        authorName: pendingTarget.authorName || (typeof pendingTarget.author === 'string' ? pendingTarget.author : 'Admin A & Admin B'),
+        tags: pendingTarget.tags || '',
+        excerpt: pendingTarget.excerpt || '',
+        content: pendingTarget.content || '',
+        imageUrl: pendingTarget.imageUrl || '',
+        readTime: pendingTarget.readTime || '5 นาที',
+      });
+      logActivity({
+        actionType: 'UPDATE_AUTH',
+        entityType: 'ARTICLE',
+        targetTitle: pendingTarget.title,
+        details: `ยืนยันรหัส PIN (${pin}) สำเร็จ เข้าสู่หน้าจอแก้ไขบทความ`,
+        securityPin: pin,
+      });
+      setSecurityModalOpen(false);
+      setModalOpen(true);
+      showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไขบทความ "${pendingTarget.title}"`, 'success');
+    } else if (securityAction === 'delete') {
+      deletePost(pendingTarget.id);
+      logActivity({
+        actionType: 'DELETE',
+        entityType: 'ARTICLE',
+        targetTitle: pendingTarget.title,
+        details: `ยืนยัน PIN (${pin}) ลบบทความ "${pendingTarget.title}" ออกจากระบบ`,
+        securityPin: pin,
+      });
       showToast(t('deleteSuccess'), 'info');
-      setDeleteTarget(null);
+      setSecurityModalOpen(false);
+      setPendingTarget(null);
     }
   };
 
@@ -199,13 +264,13 @@ export default function AdminBlogPage() {
                   <td className="whitespace-nowrap text-center">
                     <button
                       type="button"
-                      onClick={() => handleTogglePublish(post)}
+                      onClick={() => handleRequestTogglePublish(post)}
                       className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
                         post.published
                           ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
                           : 'bg-slate-500/15 text-slate-600 hover:bg-slate-500/25 border border-slate-500/30 dark:bg-slate-500/20 dark:text-slate-300'
                       }`}
-                      title="คลิกเพื่อสลับสถานะ"
+                      title="คลิกเพื่อสลับสถานะเผยแพร่ (ต้องยืนยันรหัสความปลอดภัย)"
                     >
                       {post.published ? (
                         <>
@@ -224,17 +289,17 @@ export default function AdminBlogPage() {
                     <div className="flex items-center justify-end gap-1">
                       <button
                         type="button"
-                        onClick={() => handleOpenEdit(post)}
+                        onClick={() => handleRequestEdit(post)}
                         className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
-                        title="แก้ไขบทความ"
+                        title="ยืนยันรหัสเพื่อแก้ไขบทความ"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         type="button"
-                        onClick={() => setDeleteTarget(post)}
+                        onClick={() => handleRequestDelete(post)}
                         className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
-                        title="ลบบทความ"
+                        title="ยืนยันรหัสเพื่อลบบทความ"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -402,13 +467,56 @@ export default function AdminBlogPage() {
           </div>
         )}
 
-        {/* Delete Confirmation Modal (Replaces window.confirm) */}
-        <ConfirmModal
-          isOpen={!!deleteTarget}
-          title="ยืนยันการลบบทความ"
-          message={`คุณต้องการลบบทความ "${deleteTarget?.title}" ออกจากระบบใช่หรือไม่?`}
-          onConfirm={handleConfirmDelete}
-          onCancel={() => setDeleteTarget(null)}
+        {/* 🔐 Security 2-Step Verification Modal for Active, Edit, and Delete */}
+        <SecurityConfirmModal
+          isOpen={securityModalOpen}
+          action={securityAction}
+          itemName={pendingTarget?.title}
+          title={
+            securityAction === 'delete'
+              ? `ยืนยันการลบบทความ "${pendingTarget?.title}"`
+              : securityAction === 'active'
+              ? `ยืนยันเปลี่ยนสถานะเผยแพร่บทความ "${pendingTarget?.title}"`
+              : `ยืนยันรหัสความปลอดภัยเพื่อแก้ไขบทความ "${pendingTarget?.title}"`
+          }
+          warningText={
+            securityAction === 'delete'
+              ? 'การลบบทความนี้จะทำให้ไม่แสดงผลในคลังความรู้อีกต่อไป กรุณากรอกรหัส 4 หลักเพื่อยืนยันความปลอดภัย'
+              : undefined
+          }
+          summaryList={
+            securityAction === 'active'
+              ? [
+                  { label: 'ชื่อบทความ', value: pendingTarget?.title },
+                  {
+                    label: 'สถานะปัจจุบัน',
+                    value: pendingTarget?.published ? 'เผยแพร่แล้ว' : 'ฉบับร่าง',
+                  },
+                  {
+                    label: 'สถานะใหม่ที่จะเปลี่ยน',
+                    value: pendingTarget?.published ? 'ฉบับร่าง (ซ่อน)' : 'เผยแพร่สู่สาธารณะ',
+                  },
+                ]
+              : securityAction === 'edit_auth'
+              ? [
+                  { label: 'ชื่อบทความ', value: pendingTarget?.title },
+                  { label: 'หมวดหมู่', value: pendingTarget?.category },
+                  { label: 'ผู้เขียน', value: pendingTarget?.authorName || pendingTarget?.author || '-' },
+                ]
+              : []
+          }
+          confirmButtonText={
+            securityAction === 'delete'
+              ? 'ยืนยันการลบบทความถาวร'
+              : securityAction === 'active'
+              ? 'ยืนยันเปลี่ยนสถานะ'
+              : 'ยืนยันรหัสเพื่อเข้าแก้ไข'
+          }
+          onConfirm={handleConfirmSecurityAction}
+          onClose={() => {
+            setSecurityModalOpen(false);
+            setPendingTarget(null);
+          }}
         />
       </div>
     </DashboardLayout>

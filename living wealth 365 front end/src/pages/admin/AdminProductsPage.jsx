@@ -4,8 +4,9 @@ import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
-import ConfirmModal from '../../components/common/ConfirmModal';
 import FileUploadZone from '../../components/common/FileUploadZone';
+import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
+import { logActivity } from '../../utils/activityLogger';
 import { resolveAssetUrl } from '../../api';
 
 export default function AdminProductsPage() {
@@ -15,7 +16,11 @@ export default function AdminProductsPage() {
 
   const [modalOpen, setModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [deleteTarget, setDeleteTarget] = useState(null);
+
+  // 🔐 Security 2-Step Verification Modal State
+  const [securityModalOpen, setSecurityModalOpen] = useState(false);
+  const [securityAction, setSecurityAction] = useState('delete'); // 'active' | 'edit_auth' | 'delete'
+  const [pendingTarget, setPendingTarget] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -47,30 +52,48 @@ export default function AdminProductsPage() {
     setModalOpen(true);
   };
 
-  const handleOpenEdit = (prod) => {
-    setEditingProduct(prod);
-    setFormData({
-      name: prod.name || '',
-      category: prod.category || 'อำนาจ & ความมั่งคั่ง',
-      price: prod.price || '',
-      stoneType: prod.stoneType || '',
-      aspect: prod.aspect || 'SCIENCE',
-      chakra: prod.chakra || '',
-      mineralFormula: prod.mineralFormula || '',
-      description: prod.description || '',
-      imageUrl: prod.imageUrl || '',
-      dayOfWeek: prod.dayOfWeek || prod.dayMatch || 'วันพฤหัสบดี, วันจันทร์',
-    });
-    setModalOpen(true);
+  // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Active
+  const handleRequestToggleActive = (prod) => {
+    setPendingTarget(prod);
+    setSecurityAction('active');
+    setSecurityModalOpen(true);
+  };
+
+  // 🔐 Step 1: Trigger Security PIN BEFORE Opening Edit Screen
+  const handleRequestEdit = (prod) => {
+    setPendingTarget(prod);
+    setSecurityAction('edit_auth');
+    setSecurityModalOpen(true);
+  };
+
+  // 🔐 Step 1: Trigger Security PIN BEFORE Deleting Product
+  const handleRequestDelete = (prod) => {
+    setPendingTarget(prod);
+    setSecurityAction('delete');
+    setSecurityModalOpen(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editingProduct) {
       updateProduct(editingProduct.id, formData);
+      logActivity({
+        actionType: 'UPDATE',
+        entityType: 'PRODUCT',
+        targetTitle: formData.name,
+        details: `บันทึกการแก้ไขสินค้า: ราคา ${formData.price} • หมวดหมู่ ${formData.category}`,
+        securityPin: 'VERIFIED',
+      });
       showToast(`อัปเดตสินค้า "${formData.name}" เรียบร้อยแล้ว!`, 'success');
     } else {
       addProduct(formData);
+      logActivity({
+        actionType: 'CREATE',
+        entityType: 'PRODUCT',
+        targetTitle: formData.name,
+        details: `สร้างสินค้ามงคลใหม่: ราคา ${formData.price} • หมวดหมู่ ${formData.category}`,
+        securityPin: 'AUTO',
+      });
       showToast('เพิ่มสินค้าหินมงคลใหม่สำเร็จ!', 'success');
     }
     setFormData({
@@ -86,19 +109,61 @@ export default function AdminProductsPage() {
     setModalOpen(false);
   };
 
-  const handleToggleActive = (prod) => {
-    updateProduct(prod.id, { isActive: !prod.isActive });
-    showToast(
-      prod.isActive ? 'ซ่อนสินค้าจากหน้าเว็บแล้ว' : 'เปิดแสดงสินค้าบนหน้าเว็บแล้ว!',
-      'info'
-    );
-  };
+  const handleConfirmSecurityAction = (pin) => {
+    if (!pendingTarget) return;
 
-  const handleConfirmDelete = () => {
-    if (deleteTarget) {
-      deleteProduct(deleteTarget.id);
+    if (securityAction === 'active') {
+      const newStatus = !pendingTarget.isActive;
+      updateProduct(pendingTarget.id, { isActive: newStatus });
+      logActivity({
+        actionType: 'STATUS_CHANGE',
+        entityType: 'PRODUCT',
+        targetTitle: pendingTarget.name,
+        details: `ยืนยัน PIN (${pin}) สลับสถานะสินค้าเป็น: ${newStatus ? 'เปิดแสดงผล' : 'ปิดซ่อน'}`,
+        securityPin: pin,
+      });
+      showToast(
+        newStatus ? 'เปิดแสดงสินค้าบนหน้าเว็บแล้ว!' : 'ซ่อนสินค้าจากหน้าเว็บแล้ว',
+        'info'
+      );
+      setSecurityModalOpen(false);
+      setPendingTarget(null);
+    } else if (securityAction === 'edit_auth') {
+      setEditingProduct(pendingTarget);
+      setFormData({
+        name: pendingTarget.name || '',
+        category: pendingTarget.category || 'อำนาจ & ความมั่งคั่ง',
+        price: pendingTarget.price || '',
+        stoneType: pendingTarget.stoneType || '',
+        aspect: pendingTarget.aspect || 'SCIENCE',
+        chakra: pendingTarget.chakra || '',
+        mineralFormula: pendingTarget.mineralFormula || '',
+        description: pendingTarget.description || '',
+        imageUrl: pendingTarget.imageUrl || '',
+        dayOfWeek: pendingTarget.dayOfWeek || pendingTarget.dayMatch || 'วันพฤหัสบดี, วันจันทร์',
+      });
+      logActivity({
+        actionType: 'UPDATE_AUTH',
+        entityType: 'PRODUCT',
+        targetTitle: pendingTarget.name,
+        details: `ยืนยันรหัส PIN (${pin}) สำเร็จ เข้าสู่หน้าจอแก้ไขสินค้า`,
+        securityPin: pin,
+      });
+      setSecurityModalOpen(false);
+      setModalOpen(true);
+      showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไขสินค้า "${pendingTarget.name}"`, 'success');
+    } else if (securityAction === 'delete') {
+      deleteProduct(pendingTarget.id);
+      logActivity({
+        actionType: 'DELETE',
+        entityType: 'PRODUCT',
+        targetTitle: pendingTarget.name,
+        details: `ยืนยัน PIN (${pin}) ลบสินค้า "${pendingTarget.name}" ออกจากระบบ`,
+        securityPin: pin,
+      });
       showToast(t('deleteSuccess'), 'info');
-      setDeleteTarget(null);
+      setSecurityModalOpen(false);
+      setPendingTarget(null);
     }
   };
 
@@ -192,13 +257,13 @@ export default function AdminProductsPage() {
                   <td className="whitespace-nowrap text-center">
                     <button
                       type="button"
-                      onClick={() => handleToggleActive(prod)}
+                      onClick={() => handleRequestToggleActive(prod)}
                       className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
                         prod.isActive
                           ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
                           : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
                       }`}
-                      title="คลิกเพื่อสลับสถานะ"
+                      title="คลิกเพื่อสลับสถานะ (ต้องยืนยันรหัสความปลอดภัย)"
                     >
                       {prod.isActive ? (
                         <>
@@ -217,17 +282,17 @@ export default function AdminProductsPage() {
                     <div className="flex items-center justify-end gap-1">
                       <button
                         type="button"
-                        onClick={() => handleOpenEdit(prod)}
+                        onClick={() => handleRequestEdit(prod)}
                         className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
-                        title="แก้ไขสินค้า"
+                        title="ยืนยันรหัสเพื่อแก้ไขสินค้า"
                       >
                         <Edit2 className="w-4 h-4" />
                       </button>
                       <button
                         type="button"
-                        onClick={() => setDeleteTarget(prod)}
+                        onClick={() => handleRequestDelete(prod)}
                         className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
-                        title="ลบสินค้า"
+                        title="ยืนยันรหัสเพื่อลบสินค้า"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -391,13 +456,56 @@ export default function AdminProductsPage() {
           </div>
         )}
 
-        {/* Delete Confirmation Modal (Replaces window.confirm) */}
-        <ConfirmModal
-          isOpen={!!deleteTarget}
-          title="ยืนยันการลบสินค้า"
-          message={`คุณต้องการลบสินค้า "${deleteTarget?.name}" ออกจากระบบใช่หรือไม่?`}
-          onConfirm={handleConfirmDelete}
-          onCancel={() => setDeleteTarget(null)}
+        {/* 🔐 Security 2-Step Verification Modal for Active, Edit, and Delete */}
+        <SecurityConfirmModal
+          isOpen={securityModalOpen}
+          action={securityAction}
+          itemName={pendingTarget?.name}
+          title={
+            securityAction === 'delete'
+              ? `ยืนยันการลบสินค้า "${pendingTarget?.name}"`
+              : securityAction === 'active'
+              ? `ยืนยันเปลี่ยนสถานะสินค้า "${pendingTarget?.name}"`
+              : `ยืนยันรหัสความปลอดภัยเพื่อแก้ไขสินค้า "${pendingTarget?.name}"`
+          }
+          warningText={
+            securityAction === 'delete'
+              ? 'การลบสินค้านี้จะทำให้ไม่แสดงผลในแคตตาล็อกอีกต่อไป กรุณากรอกรหัส 4 หลักเพื่อยืนยันความปลอดภัย'
+              : undefined
+          }
+          summaryList={
+            securityAction === 'active'
+              ? [
+                  { label: 'ชื่อสินค้า', value: pendingTarget?.name },
+                  {
+                    label: 'สถานะปัจจุบัน',
+                    value: pendingTarget?.isActive ? 'เปิดแสดงผล' : 'ปิดซ่อน',
+                  },
+                  {
+                    label: 'สถานะใหม่ที่จะเปลี่ยน',
+                    value: pendingTarget?.isActive ? 'ปิดซ่อน' : 'เปิดแสดงผล',
+                  },
+                ]
+              : securityAction === 'edit_auth'
+              ? [
+                  { label: 'ชื่อสินค้า', value: pendingTarget?.name },
+                  { label: 'หมวดหมู่', value: pendingTarget?.category },
+                  { label: 'ราคา', value: `${pendingTarget?.price} บาท` },
+                ]
+              : []
+          }
+          confirmButtonText={
+            securityAction === 'delete'
+              ? 'ยืนยันการลบสินค้าถาวร'
+              : securityAction === 'active'
+              ? 'ยืนยันเปลี่ยนสถานะ'
+              : 'ยืนยันรหัสเพื่อเข้าแก้ไข'
+          }
+          onConfirm={handleConfirmSecurityAction}
+          onClose={() => {
+            setSecurityModalOpen(false);
+            setPendingTarget(null);
+          }}
         />
       </div>
     </DashboardLayout>
