@@ -125,6 +125,12 @@ export const uploadApi = {
       })
       .then((res) => res.data);
   },
+  deleteFile: (filenameOrUrl) => {
+    if (!filenameOrUrl) return Promise.resolve();
+    // ดึงชื่อไฟล์จาก URL (เช่น https://pub-...r2.dev/xyz.webp -> xyz.webp)
+    const filename = filenameOrUrl.split('/').pop().split('?')[0];
+    return api.delete(`/upload/${filename}`).then((res) => res.data);
+  },
 };
 
 // 🔗 Helper for resolving relative asset URLs

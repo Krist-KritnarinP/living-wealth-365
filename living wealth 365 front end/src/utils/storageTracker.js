@@ -50,6 +50,29 @@ export function recordUploadedMedia(url, sizeInBytes, originalSizeInBytes = null
 }
 
 /**
+ * Remove an uploaded file record from tracked storage
+ */
+export function removeStoredMedia(url) {
+  if (!url) return;
+  try {
+    const current = getStoredMediaSizes();
+    if (current[url]) {
+      delete current[url];
+      localStorage.setItem(STORAGE_SIZES_KEY, JSON.stringify(current));
+    }
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('lw365:storage_updated', {
+          detail: { deletedUrl: url },
+        })
+      );
+    }
+  } catch (e) {
+    console.error('Failed to remove media size', e);
+  }
+}
+
+/**
  * Estimate or retrieve the size of an image URL (fallback to realistic ~220 KB for WebP)
  */
 export function getAssetSize(url, storedSizes = null) {

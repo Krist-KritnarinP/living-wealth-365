@@ -12,11 +12,12 @@ import {
   Image as ImageIcon,
   ArrowUpDown,
   Maximize2,
+  Trash2,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
-import { computeStorageStats, formatBytes } from '../../utils/storageTracker';
-import { resolveAssetUrl } from '../../api';
+import { computeStorageStats, formatBytes, removeStoredMedia } from '../../utils/storageTracker';
+import { resolveAssetUrl, uploadApi } from '../../api';
 
 export default function StorageUsageCard({ compact = false }) {
   const { posts, products, insurancePlans = [] } = useAuth();
@@ -46,6 +47,20 @@ export default function StorageUsageCard({ compact = false }) {
       siteContent: content,
     });
   }, [posts, products, insurancePlans, content, updateTick]);
+
+  const handleDeleteR2Asset = async (asset) => {
+    if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบไฟล์ "${asset.title}" ออกจาก Cloudflare R2 อย่างถาวร?`)) {
+      return;
+    }
+    try {
+      await uploadApi.deleteFile(asset.url);
+      removeStoredMedia(asset.url);
+      setUpdateTick((prev) => prev + 1);
+    } catch (err) {
+      console.error('Failed to delete asset from R2', err);
+      alert('เกิดข้อผิดพลาดในการลบไฟล์จาก R2: ' + (err.message || ''));
+    }
+  };
 
   // Filter and sort modal assets
   const filteredAssets = useMemo(() => {
@@ -365,6 +380,17 @@ export default function StorageUsageCard({ compact = false }) {
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
                         </a>
+
+                        {asset.isR2 && (
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteR2Asset(asset)}
+                            className="btn btn-ghost btn-xs btn-circle text-error hover:bg-error/10"
+                            title="ลบไฟล์ออกจาก Cloudflare R2"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
                       </div>
                     </div>
                   );

@@ -775,5 +775,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: `vite build` completed cleanly in 832ms.
   - Branch: `main` synchronized with remote `origin/main`.
 
+## 23. Automatic Old File Cleanup & Orphan Purging on Cloudflare R2 (November 9, 2026)
+- **Objective**: Automatically delete superseded or cleared image files from Cloudflare R2 so replacement uploads do not leave behind orphaned storage waste.
+- **Implemented Architecture**:
+  1. **Upload Replace Detection (`FileUploadZone.jsx`)**: When a user uploads a new image to replace an existing Cloudflare R2 asset, the previous file URL is automatically deleted via `uploadApi.deleteFile` and purged from `storageTracker.js`.
+  2. **Clear & Remove Trigger (`FileUploadZone.jsx`)**: Clicking the trash icon (`handleClear`) immediately purges the active image file from Cloudflare R2 bucket.
+  3. **Direct Storage Modal Management (`StorageUsageCard.jsx`)**: Added direct "ลบออกจาก R2" delete action button inside the full asset browser modal to give administrators manual purge control over any stored R2 asset.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 2.34s.
+  - Live Purge Test: Successfully deleted orphaned 4.52 MB probe file (`DJI_20250327120028_0066_V-1794226692613-805381.jpeg`) via `DELETE /api/upload/:filename`; confirmed HTTP 404 on R2 public CDN.
+  - Branch: `main` synchronized with remote `origin/main`.
+
+
 
 

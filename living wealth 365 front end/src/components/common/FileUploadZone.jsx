@@ -12,6 +12,7 @@ import { uploadApi, authApi, resolveAssetUrl } from '../../api';
 import { compressImage } from '../../utils/imageCompressor';
 import {
   recordUploadedMedia,
+  removeStoredMedia,
   getAssetSize,
   formatBytes,
   MAX_STORAGE_BYTES,
@@ -111,6 +112,19 @@ export default function FileUploadZone({
 
       // Update parent with the uploaded file URL and record size in storage tracker
       if (res && res.url) {
+        // 🗑️ หากเป็นการอัปโหลดทับไฟล์เดิมบน Cloudflare R2 ให้ลบไฟล์เก่าออกจาก R2 อัตโนมัติเพื่อคืนพื้นที่
+        const previousUrl = value;
+        if (
+          previousUrl &&
+          previousUrl !== res.url &&
+          (previousUrl.includes('r2.dev') || previousUrl.includes('/uploads/'))
+        ) {
+          uploadApi
+            .deleteFile(previousUrl)
+            .then(() => removeStoredMedia(previousUrl))
+            .catch((delErr) => console.warn('[Auto Delete Old R2 Image Notice]:', delErr.message));
+        }
+
         const uploadedSize = res.size || uploadTarget.size || Math.round(file.size * 0.25);
         recordUploadedMedia(res.url, uploadedSize, file.size);
         onChange(res.url);
@@ -162,6 +176,17 @@ export default function FileUploadZone({
   };
 
   const handleClear = () => {
+    // 🗑️ หากกดลบรูป และไฟล์เดิมอยู่บน Cloudflare R2 ให้สั่งลบไฟล์ออกจาก R2 ทันทีเพื่อคืนพื้นที่
+    const currentUrl = value;
+    if (
+      currentUrl &&
+      (currentUrl.includes('r2.dev') || currentUrl.includes('/uploads/'))
+    ) {
+      uploadApi
+        .deleteFile(currentUrl)
+        .then(() => removeStoredMedia(currentUrl))
+        .catch((delErr) => console.warn('[Delete R2 File on Clear Notice]:', delErr.message));
+    }
     onChange('');
     setErrorMessage('');
     if (fileInputRef.current) {
