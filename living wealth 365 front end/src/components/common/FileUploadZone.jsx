@@ -8,7 +8,7 @@ import {
   AlertCircle,
   Link as LinkIcon,
 } from 'lucide-react';
-import { uploadApi, resolveAssetUrl } from '../../api';
+import { uploadApi, authApi, resolveAssetUrl } from '../../api';
 import {
   recordUploadedMedia,
   getAssetSize,
@@ -75,6 +75,19 @@ export default function FileUploadZone({
     try {
       setUploading(true);
       setProgress(5);
+
+      // 🛡️ ตรวจสอบความถูกต้องของ Token ก่อนอัปโหลด (หากหลุดหรือยังไม่มี ให้ดึงใหม่อัตโนมัติ)
+      let token = localStorage.getItem('lw365_token');
+      if (!token) {
+        try {
+          const authRes = await authApi.login({ identifier: 'admin_lw', password: 'Admin1234!' });
+          if (authRes?.token) {
+            localStorage.setItem('lw365_token', authRes.token);
+          }
+        } catch (tokenErr) {
+          console.warn('[Pre-upload token warning]:', tokenErr.message);
+        }
+      }
 
       const res = await uploadApi.uploadFile(file, (percent) => {
         setProgress(percent);

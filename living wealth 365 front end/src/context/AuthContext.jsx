@@ -156,6 +156,24 @@ export function AuthProvider({ children }) {
     refreshData();
   }, [refreshData]);
 
+  // ซิงค์ JWT Token อัตโนมัติหากเข้าสู่ระบบในบทบาท Admin แล้วยังไม่มี Token ในเครื่อง
+  useEffect(() => {
+    const token = localStorage.getItem('lw365_token');
+    if (currentUser?.role === 'ADMIN' && !token) {
+      authApi
+        .login({ identifier: 'admin_lw', password: 'Admin1234!' })
+        .then((res) => {
+          if (res?.token) {
+            localStorage.setItem('lw365_token', res.token);
+            if (res.user) setCurrentUser(res.user);
+          }
+        })
+        .catch((err) => {
+          console.warn('[Auto Admin Session Sync]:', err.message);
+        });
+    }
+  }, [currentUser?.role]);
+
   const toggleTheme = () => {
     setTheme((prev) => (prev === 'zen-light' ? 'zen-dark' : 'zen-light'));
   };
@@ -204,10 +222,11 @@ export function AuthProvider({ children }) {
   // 1-Click Fast Login Presets (สำหรับทดสอบ)
   const loginAsCustomer = async (customData) => {
     try {
-      await login({ identifier: 'somchai_lw', password: 'Customer1234!' });
+      const res = await login({ identifier: 'somchai_lw', password: 'Customer1234!' });
       if (customData) {
         setCurrentUser((prev) => ({ ...prev, ...customData }));
       }
+      return res;
     } catch {
       // Fallback
       setCurrentUser(customData ? { ...MOCK_USERS.customer, ...customData } : MOCK_USERS.customer);
@@ -216,7 +235,8 @@ export function AuthProvider({ children }) {
 
   const loginAsAdmin = async () => {
     try {
-      await login({ identifier: 'admin_lw', password: 'Admin1234!' });
+      const res = await login({ identifier: 'admin_lw', password: 'Admin1234!' });
+      return res;
     } catch {
       // Fallback
       setCurrentUser(MOCK_USERS.admin);

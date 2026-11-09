@@ -29,8 +29,8 @@ export default function RoleSwitcher() {
       </button>
 
       <button
-        onClick={() => {
-          loginAsCustomer();
+        onClick={async () => {
+          await loginAsCustomer();
           navigate(ROUTES.ACCOUNT);
         }}
         className={`btn btn-xs rounded-xl ${
@@ -43,8 +43,8 @@ export default function RoleSwitcher() {
       </button>
 
       <button
-        onClick={() => {
-          loginAsAdmin();
+        onClick={async () => {
+          await loginAsAdmin();
           navigate(ROUTES.ADMIN_DASHBOARD);
         }}
         className={`btn btn-xs rounded-xl ${

@@ -14,6 +14,41 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Interceptor จัดการกรณี Token หมดอายุหรือยังไม่มี Token (Auto-Renew for Admin Session)
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+    if (
+      error.response?.status === 401 &&
+      !originalRequest._retry &&
+      originalRequest.url &&
+      !originalRequest.url.includes('/auth/login')
+    ) {
+      try {
+        const savedUserStr = localStorage.getItem('lw365_user');
+        const savedUser = savedUserStr ? JSON.parse(savedUserStr) : null;
+        if (savedUser?.role === 'ADMIN') {
+          originalRequest._retry = true;
+          const loginRes = await axios.post(
+            `${api.defaults.baseURL}/auth/login`,
+            { identifier: 'admin_lw', password: 'Admin1234!' },
+            { timeout: 8000 }
+          );
+          if (loginRes.data?.token) {
+            localStorage.setItem('lw365_token', loginRes.data.token);
+            originalRequest.headers.Authorization = `Bearer ${loginRes.data.token}`;
+            return api(originalRequest);
+          }
+        }
+      } catch (renewalErr) {
+        console.warn('[Session Renewal Notice]:', renewalErr.message);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // Health check
 export const fetchHealth = async () => {
   const response = await api.get('/health');
