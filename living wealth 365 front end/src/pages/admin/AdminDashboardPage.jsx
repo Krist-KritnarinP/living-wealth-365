@@ -22,6 +22,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import StatusBadge from '../../components/common/StatusBadge';
 import DashboardLayout from '../../components/common/DashboardLayout';
+import StorageUsageCard from '../../components/admin/StorageUsageCard';
 
 export default function AdminDashboardPage() {
   const { leads, updateLeadStatus } = useAuth();
@@ -179,6 +180,9 @@ export default function AdminDashboardPage() {
             </div>
           </div>
         </div>
+
+        {/* 📊 Cloudflare R2 Storage & Image Size Inspector */}
+        <StorageUsageCard />
 
         {/* CRM Pipeline Table Card */}
         <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs space-y-6">

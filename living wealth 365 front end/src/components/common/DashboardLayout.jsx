@@ -23,6 +23,7 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import { ROUTES } from '../../constants/routes';
 import BrandLogo from './BrandLogo';
+import StorageUsageCard from '../admin/StorageUsageCard';
 
 export default function DashboardLayout({ children, type = 'customer' }) {
   const { currentUser, logout, theme, toggleTheme, wishlist, leads, posts, products, insurancePlans = [] } = useAuth();
@@ -216,6 +217,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
             </Link>
           </div>
         </div>
+
+        {/* Compact Storage Meter for Admin */}
+        {type === 'admin' && !collapsed && (
+          <div className="px-3 pb-2">
+            <StorageUsageCard compact={true} />
+          </div>
+        )}
 
         {/* Sidebar User Footer */}
         <div className="p-3 border-t border-base-300/60 bg-base-200/30">

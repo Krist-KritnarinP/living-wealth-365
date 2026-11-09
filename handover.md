@@ -7,7 +7,7 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed Tax Planning & Calculator Elevation (Dedicated `/tax` route & page, interactive Homepage Tax Teaser simulator, and clean Navbar navigation under Learning).
+- **Status**: Completed Cloudflare R2 Storage Usage Meter & Asset Size Inspector (Real-time 5GB Quota progress bar, media file size badges across all upload zones, and full Media Inspector modal).
 
 ## 2. Core UI / UX Implementation in App.jsx & index.css
 - **100% True Full-Screen & Edge-to-Edge Layout**:
@@ -682,6 +682,25 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed in 2.09s (0 errors).
   - Branch: `main` synchronized with remote `origin/main`.
+
+## 13. Cloudflare R2 Storage Usage Meter & Asset Size Inspector (November 9, 2026)
+- **Objective**: Provide comprehensive visibility and control over Cloudflare R2 storage usage to strictly enforce the 5.00 GB free tier safety ceiling.
+- **Storage Utility Engine (`storageTracker.js`)**:
+  - Implemented `src/utils/storageTracker.js` computing real-time media assets, total used bytes/MB, 5 GB quota progress percentage, remaining capacity, and formatting helpers.
+  - Implemented `recordUploadedMedia(url, sizeInBytes, originalSize)` for persisting exact size measurements of new uploads into local tracking state.
+- **Admin Dashboard Storage Card (`StorageUsageCard.jsx`)**:
+  - Integrated into [`AdminDashboardPage.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/pages/admin/AdminDashboardPage.jsx) featuring:
+    - Real-time progress bar with status color thresholds (<70% green healthy, 70-85% amber warning, >85% red critical).
+    - Metrics: Total storage used vs 5,000 MB limit, remaining MB/GB, total asset count, average size per image, and zero-dollar cost estimate.
+    - Full Media Asset Inspector modal with search, category filtering, size sorting (descending/ascending), thumbnails, and individual file size badges.
+  - Added compact mini-progress widget in [`DashboardLayout.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/DashboardLayout.jsx) sidebar for at-a-glance monitoring across all admin CMS pages.
+- **Individual File Size Badges (`FileUploadZone.jsx`)**:
+  - Enhanced upload zone across all CMS pages (Blog, Products, Insurance, Site Customizer) to immediately display file size badges (e.g. `📦 215 KB`, `WebP`) alongside preview thumbnails.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 923ms.
+  - Branch: `main` synchronized with remote `origin/main`.
+
 
 
 

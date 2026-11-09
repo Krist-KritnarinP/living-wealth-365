@@ -9,6 +9,7 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import { uploadApi, resolveAssetUrl } from '../../api';
+import { recordUploadedMedia, getAssetSize, formatBytes } from '../../utils/storageTracker';
 
 /**
  * 📦 FileUploadZone
@@ -65,8 +66,10 @@ export default function FileUploadZone({
         setProgress(percent);
       });
 
-      // Update parent with the uploaded file URL
+      // Update parent with the uploaded file URL and record size in storage tracker
       if (res && res.url) {
+        const uploadedSize = res.size || Math.round(file.size * 0.25);
+        recordUploadedMedia(res.url, uploadedSize, file.size);
         onChange(res.url);
       }
       setProgress(100);
@@ -241,15 +244,25 @@ export default function FileUploadZone({
               <p className="text-xs font-bold text-base-content truncate">
                 {value.split('/').pop() || (isPdf ? 'ไฟล์เอกสาร PDF' : 'รูปภาพที่เลือก')}
               </p>
-              <a
-                href={resolvedUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] text-primary hover:underline flex items-center gap-1 font-medium truncate mt-0.5"
-              >
-                <span>เปิดดูไฟล์ตัวอย่าง</span>
-                <ExternalLink className="w-2.5 h-2.5 shrink-0" />
-              </a>
+              <div className="flex items-center gap-1.5 mt-1 flex-wrap">
+                <span className="badge badge-xs font-black badge-neutral text-base-100 text-[10px] px-2 py-1">
+                  📦 {formatBytes(getAssetSize(value))}
+                </span>
+                {value.endsWith('.webp') && (
+                  <span className="badge badge-xs badge-secondary text-white text-[9px] font-bold">
+                    WebP
+                  </span>
+                )}
+                <a
+                  href={resolvedUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[11px] text-primary hover:underline inline-flex items-center gap-1 font-medium truncate"
+                >
+                  <span>เปิดดูไฟล์</span>
+                  <ExternalLink className="w-2.5 h-2.5 shrink-0" />
+                </a>
+              </div>
             </div>
           </div>
 
