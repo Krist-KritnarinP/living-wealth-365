@@ -26,6 +26,16 @@ export default function StorageUsageCard({ compact = false }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('ALL');
   const [sortBy, setSortBy] = useState('size-desc'); // 'size-desc' | 'size-asc' | 'name'
+  const [updateTick, setUpdateTick] = useState(0);
+
+  // ⚡ Listen for real-time storage changes across the app
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setUpdateTick((prev) => prev + 1);
+    };
+    window.addEventListener('lw365:storage_updated', handleStorageUpdate);
+    return () => window.removeEventListener('lw365:storage_updated', handleStorageUpdate);
+  }, []);
 
   // Compute stats reactively
   const stats = useMemo(() => {
@@ -35,7 +45,7 @@ export default function StorageUsageCard({ compact = false }) {
       insurancePlans,
       siteContent: content,
     });
-  }, [posts, products, insurancePlans, content]);
+  }, [posts, products, insurancePlans, content, updateTick]);
 
   // Filter and sort modal assets
   const filteredAssets = useMemo(() => {

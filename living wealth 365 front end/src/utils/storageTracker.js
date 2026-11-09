@@ -35,6 +35,15 @@ export function recordUploadedMedia(url, sizeInBytes, originalSizeInBytes = null
       updatedAt: new Date().toISOString(),
     };
     localStorage.setItem(STORAGE_SIZES_KEY, JSON.stringify(current));
+
+    // ⚡ Reactive event to notify StorageUsageCard and Admin Dashboard
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('lw365:storage_updated', {
+          detail: { url, sizeInBytes },
+        })
+      );
+    }
   } catch (e) {
     console.error('Failed to record media size', e);
   }

@@ -9,7 +9,13 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import { uploadApi, resolveAssetUrl } from '../../api';
-import { recordUploadedMedia, getAssetSize, formatBytes } from '../../utils/storageTracker';
+import {
+  recordUploadedMedia,
+  getAssetSize,
+  formatBytes,
+  MAX_STORAGE_BYTES,
+  getStoredMediaSizes,
+} from '../../utils/storageTracker';
 
 /**
  * 📦 FileUploadZone
@@ -55,6 +61,14 @@ export default function FileUploadZone({
 
     if (file.size > 25 * 1024 * 1024) {
       setErrorMessage('ไฟล์มีขนาดเกินกำหนด (สูงสุดไม่เกิน 25MB)');
+      return;
+    }
+
+    // 🛡️ 5 GB Hard Cap Enforcement on Cloudflare R2
+    const stored = getStoredMediaSizes();
+    const totalCurrentBytes = Object.values(stored).reduce((sum, item) => sum + (item?.size || 0), 0);
+    if (totalCurrentBytes + file.size > MAX_STORAGE_BYTES) {
+      setErrorMessage('พื้นที่จัดเก็บ Cloudflare R2 เต็มโควตา 5 GB แล้ว กรุณาลบไฟล์ที่ไม่ใช้งานออกก่อนอัปโหลดเพิ่ม');
       return;
     }
 

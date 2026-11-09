@@ -725,15 +725,20 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: `vite build` completed cleanly in 818ms.
   - Branch: `main` synchronized with remote `origin/main`.
 
-
-
-
-
-
-
-
-
-
-
-
+## 20. Cloudflare R2 Direct Upload & Reactive Admin Storage Bar Coupling (November 9, 2026)
+- **Objective**: Establish direct image uploading to Cloudflare R2 storage bucket coupled with real-time Admin Storage Usage Bar tracking and a strict 5 GB quota hard cap.
+- **Backend Architecture (`living wealth 365_backend`)**:
+  - Integrated `@aws-sdk/client-s3` in `src/lib/r2.js` connecting to Cloudflare R2 via S3-compatible API (`https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`).
+  - Added seamless dual-mode support in `src/routes/upload.js`:
+    - **Cloudflare R2 Mode**: Automatically uploads file stream to R2 bucket when credentials (`R2_ACCOUNT_ID`, `R2_ACCESS_KEY_ID`, `R2_SECRET_ACCESS_KEY`, `R2_BUCKET_NAME`) exist, returning permanent public URL (`https://pub-10dc92b49894448a9fe11f81ccc1e577.r2.dev/...`).
+    - **Local Disk Fallback**: Preserves zero-dependency local disk storage (`uploads/`) for offline development or missing keys.
+    - Added `GET /api/upload/status` returning storage mode, active bucket, and public domain.
+- **Frontend Reactive Storage Coupling (`living wealth 365 front end`)**:
+  - **Storage Event Broadcasting**: In `storageTracker.js`, `recordUploadedMedia` dispatches `window.dispatchEvent(new CustomEvent('lw365:storage_updated'))`.
+  - **Real-Time Bar Updates**: In `StorageUsageCard.jsx`, listens to `lw365:storage_updated` to instantly re-calculate and re-render storage metrics (Used MB/GB, %, item counts) without requiring a full page refresh.
+  - **5 GB Hard Cap Enforcement**: In `FileUploadZone.jsx`, checks total storage usage before allowing file upload. Rejects file and alerts administrator if quota would exceed 5 GB (`5,368,709,120` bytes).
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 787ms.
+  - Branch: `main` synchronized with remote `origin/main`.
 
