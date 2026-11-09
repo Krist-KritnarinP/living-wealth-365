@@ -9,6 +9,7 @@ import {
   Link as LinkIcon,
 } from 'lucide-react';
 import { uploadApi, authApi, resolveAssetUrl } from '../../api';
+import { compressImage } from '../../utils/imageCompressor';
 import {
   recordUploadedMedia,
   getAssetSize,
@@ -89,13 +90,28 @@ export default function FileUploadZone({
         }
       }
 
-      const res = await uploadApi.uploadFile(file, (percent) => {
+      // ⚡ บีบอัดภาพอัตโนมัติ (Client-Side Auto Compression) ก่อนส่งขึ้น Cloudflare R2
+      let uploadTarget = file;
+      if (!isPdf && file.type?.startsWith('image/')) {
+        try {
+          const compressionResult = await compressImage(file, {
+            maxWidth: 1920,
+            maxHeight: 1920,
+            quality: 0.82,
+          });
+          uploadTarget = compressionResult.file;
+        } catch (compErr) {
+          console.warn('[Image Auto Compression Notice]:', compErr);
+        }
+      }
+
+      const res = await uploadApi.uploadFile(uploadTarget, (percent) => {
         setProgress(percent);
       });
 
       // Update parent with the uploaded file URL and record size in storage tracker
       if (res && res.url) {
-        const uploadedSize = res.size || Math.round(file.size * 0.25);
+        const uploadedSize = res.size || uploadTarget.size || Math.round(file.size * 0.25);
         recordUploadedMedia(res.url, uploadedSize, file.size);
         onChange(res.url);
       }

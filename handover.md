@@ -761,4 +761,19 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Vercel Deployment: Live at `assets/index-roQa9JzP.js`.
   - Branch: `main` synchronized with remote `origin/main`.
 
+## 22. Automatic Client-Side Image Compression Pipeline (November 9, 2026)
+- **Objective**: Implement automatic client-side image compression to convert heavy smartphone/camera photos (3MB-20MB) to lightweight modern WebP (~200KB-400KB) before uploading to Cloudflare R2.
+- **Implemented Architecture**:
+  - Created `src/utils/imageCompressor.js` using native HTML5 Canvas API with bilinear smoothing.
+  - Automatically downscales images exceeding 1920px max width/height while preserving aspect ratio.
+  - Re-encodes with quality `0.82` into modern `image/webp` (or `image/jpeg`).
+  - Skips PDFs, SVGs, and animated GIFs to prevent format degradation.
+  - Skips already small images (< 150 KB) to maintain optimal clarity.
+  - Integrated seamlessly into `FileUploadZone.jsx` before dispatching to `uploadApi.uploadFile`.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 832ms.
+  - Branch: `main` synchronized with remote `origin/main`.
+
+
 
