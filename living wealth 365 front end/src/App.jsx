@@ -120,6 +120,14 @@ function AppShell() {
 
           {/* 🔒 3. Admin Routes (Role: ADMIN) */}
           <Route
+            path={ROUTES.ADMIN}
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <Navigate to={ROUTES.ADMIN_DASHBOARD} replace />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path={ROUTES.ADMIN_DASHBOARD}
             element={
               <ProtectedRoute requiredRole="ADMIN">

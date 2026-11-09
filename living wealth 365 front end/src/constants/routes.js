@@ -34,6 +34,7 @@ export const ROUTES = {
   ACCOUNT_WISHLIST: '/account/wishlist',
 
   // ⚙️ Admin CMS & Operations
+  ADMIN: '/admin',
   ADMIN_DASHBOARD: '/admin/dashboard',
   ADMIN_CUSTOMIZER: '/admin/customizer',
   ADMIN_INSURANCE: '/admin/cms/insurance',

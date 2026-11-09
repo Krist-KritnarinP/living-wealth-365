@@ -49,10 +49,8 @@ authRouter.post('/register', async (req, res) => {
     // แฮชรหัสผ่านด้วย bcryptjs (salt rounds: 10)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // กำหนด Role: หากอีเมลหรือ username มีคำว่า admin ให้เป็น ADMIN สำหรับทดสอบ (หรือ CUSTOMER เริ่มต้น)
-    const role = (email.toLowerCase().includes('admin') || username.toLowerCase().includes('admin')) 
-      ? 'ADMIN' 
-      : 'CUSTOMER';
+    // กำหนด Role: ผู้ใช้งานที่สมัครผ่านฟอร์มสาธารณะจะได้รับสิทธิ์ CUSTOMER เสมอ เพื่อความปลอดภัย (ป้องกัน Privilege Escalation)
+    const role = 'CUSTOMER';
 
     // บันทึกลงฐานข้อมูล MySQL
     const newUser = await prisma.user.create({

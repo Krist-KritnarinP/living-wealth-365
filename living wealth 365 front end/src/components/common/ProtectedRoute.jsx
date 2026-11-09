@@ -1,12 +1,14 @@
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
 
 export default function ProtectedRoute({ children, requiredRole }) {
   const { currentUser } = useAuth();
+  const location = useLocation();
 
   if (!currentUser) {
-    return <Navigate to={ROUTES.LOGIN} replace />;
+    const redirectParam = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`${ROUTES.LOGIN}?redirect=${redirectParam}`} replace />;
   }
 
   if (requiredRole && currentUser.role !== requiredRole) {

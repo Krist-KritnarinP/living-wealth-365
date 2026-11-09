@@ -7,7 +7,7 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed Balanced Typography Scale (reduced ~30% for ideal comfort) while preserving True 100% Full-Screen Edge-to-Edge UI Layout.
+- **Status**: Completed Security Hardening & Admin Gateway Routing (Fixed registration privilege escalation backdoor, enforced strictly CUSTOMER role on public signup, added `/admin` protected routing with return redirect).
 
 ## 2. Core UI / UX Implementation in App.jsx & index.css
 - **100% True Full-Screen & Edge-to-Edge Layout**:
@@ -648,6 +648,25 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Test Suite: 15/15 passing (`node --test tests/*.test.js`) in 122ms.
   - Production Build: `vite build` completed cleanly in 859ms with zero errors.
   - Vercel Auto-deploy: Live at [https://livingwealth365.vercel.app](https://livingwealth365.vercel.app).
+
+## 11. Security Hardening & Admin Gateway Routing (November 9, 2026)
+- **Security Audit & QA/QC Completed**:
+  - Comprehensive QA/QC & Security report generated at `QAQC_SECURITY_REPORT.md`.
+  - Audited dependencies, static code patterns, CORS, and role assignment logic.
+- **[CRITICAL] Privilege Escalation Hotfix in Registration**:
+  - File: `living wealth 365_backend/src/routes/auth.js`
+  - Removed dev backdoor that auto-granted `ADMIN` role if username or email contained `"admin"`.
+  - Replaced with strict `role = 'CUSTOMER'` for all public registrations. Admin accounts can only be provisioned through secure database seeds or internal administrative provisioning.
+- **Dedicated Admin Gateway Route (`/admin`)**:
+  - Files: `living wealth 365 front end/src/constants/routes.js`, `src/App.jsx`, and `src/components/common/ProtectedRoute.jsx`
+  - Added explicit route `ROUTES.ADMIN: '/admin'` redirecting directly to `/admin/dashboard` under `<ProtectedRoute requiredRole="ADMIN">`.
+  - In `ProtectedRoute.jsx`: Enhanced unauthorized redirect to preserve origin URL in `?redirect=` query param.
+  - Non-authenticated visitors attempting to access `/admin` or `/admin/dashboard` are redirected to `/login?redirect=...` and returned cleanly upon login. Normal `CUSTOMER` users attempting access are redirected to `/account`.
+- **Verification**:
+  - Test Suite: 15/15 passing (`node --test tests/*.test.js`).
+  - Production Build: `vite build` completed cleanly in 1.11s with zero errors.
+  - Branch: `main` synchronized with remote `origin/main`.
+
 
 
 
