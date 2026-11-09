@@ -3,7 +3,14 @@ import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
 import { authenticateUser, requireAdmin } from '../middleware/auth.js';
-import { uploadToR2, deleteFromR2, isR2Configured, R2_BUCKET_NAME, R2_PUBLIC_DOMAIN } from '../lib/r2.js';
+import {
+  uploadToR2,
+  deleteFromR2,
+  getR2StorageUsage,
+  isR2Configured,
+  R2_BUCKET_NAME,
+  R2_PUBLIC_DOMAIN,
+} from '../lib/r2.js';
 
 const uploadRouter = express.Router();
 
@@ -75,6 +82,41 @@ uploadRouter.get('/status', (req, res) => {
     publicDomain: R2_PUBLIC_DOMAIN,
     maxFileSizeMB: 25,
   });
+});
+
+/**
+ * GET /api/upload/storage
+ * ดึงสถิติพื้นที่จัดเก็บจริงแบบเรียลไทม์ 100% ตรงจาก Cloudflare R2 Bucket
+ */
+uploadRouter.get('/storage', async (req, res) => {
+  try {
+    if (isR2Configured) {
+      const stats = await getR2StorageUsage();
+      const maxBytes = 5 * 1024 * 1024 * 1024; // 5 GB
+      return res.json({
+        success: true,
+        ...stats,
+        maxBytes,
+        maxMB: 5000,
+        usagePercent: Number(((stats.totalBytes / maxBytes) * 100).toFixed(4)),
+      });
+    }
+
+    return res.json({
+      success: true,
+      storage: 'LOCAL',
+      totalBytes: 0,
+      totalMB: 0,
+      totalCount: 0,
+      objects: [],
+      maxBytes: 5 * 1024 * 1024 * 1024,
+      maxMB: 5000,
+      usagePercent: 0,
+    });
+  } catch (error) {
+    console.error('[Get Storage Error]:', error);
+    res.status(500).json({ error: 'ไม่สามารถดึงข้อมูล Storage จาก Cloudflare R2 ได้' });
+  }
 });
 
 /**

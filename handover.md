@@ -787,6 +787,17 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Live Purge Test: Successfully deleted orphaned 4.52 MB probe file (`DJI_20250327120028_0066_V-1794226692613-805381.jpeg`) via `DELETE /api/upload/:filename`; confirmed HTTP 404 on R2 public CDN.
   - Branch: `main` synchronized with remote `origin/main`.
 
-
-
+## 24. Direct Byte-for-Byte Cloudflare R2 Bucket Sync for Storage Usage Bar (November 9, 2026)
+- **Objective**: Ensure the Admin Storage Usage Bar reflects the exact 100% real byte-for-byte storage of the Cloudflare R2 bucket (`livingwealth365-assets`) rather than relying on estimated asset metrics.
+- **Backend Architecture (`living wealth 365_backend`)**:
+  - In `src/lib/r2.js`: implemented `getR2StorageUsage()` utilizing `ListObjectsV2Command` from `@aws-sdk/client-s3` to query the live R2 bucket, summing exact byte counts and mapping active objects with timestamps.
+  - In `src/routes/upload.js`: added `GET /api/upload/storage` returning totalBytes, totalMB, objectCount, objects list, maxBytes (5 GB), and calculated usagePercent.
+- **Frontend Reactive Integration (`living wealth 365 front end`)**:
+  - In `api.js`: added `uploadApi.getStorageStats()`.
+  - In `StorageUsageCard.jsx`: prioritized `effectiveStats` powered by live R2 queries, dynamically refreshing upon `lw365:storage_updated` events.
+  - In Modal Inspector: lists only files physically stored on Cloudflare R2 with their real file sizes, dates, and direct delete capabilities.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 2.28s.
+  - Branch: `main` synchronized with remote `origin/main`.
 

@@ -131,6 +131,7 @@ export const uploadApi = {
     const filename = filenameOrUrl.split('/').pop().split('?')[0];
     return api.delete(`/upload/${filename}`).then((res) => res.data);
   },
+  getStorageStats: () => api.get('/upload/storage').then((res) => res.data),
 };
 
 // 🔗 Helper for resolving relative asset URLs

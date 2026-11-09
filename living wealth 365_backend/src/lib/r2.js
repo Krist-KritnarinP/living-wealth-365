@@ -1,4 +1,9 @@
-import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import {
+  S3Client,
+  PutObjectCommand,
+  DeleteObjectCommand,
+  ListObjectsV2Command,
+} from '@aws-sdk/client-s3';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -78,6 +83,52 @@ export async function deleteFromR2(filename) {
     await r2Client.send(command);
   } catch (err) {
     console.error('[Cloudflare R2 Delete Error]:', err);
+  }
+}
+
+/**
+ * List all objects and compute exact real storage size directly from Cloudflare R2
+ */
+export async function getR2StorageUsage() {
+  if (!isR2Configured || !r2Client) {
+    return {
+      storage: 'LOCAL',
+      totalBytes: 0,
+      totalMB: 0,
+      totalCount: 0,
+      objects: [],
+    };
+  }
+
+  try {
+    const command = new ListObjectsV2Command({
+      Bucket: R2_BUCKET_NAME,
+      MaxKeys: 1000,
+    });
+
+    const response = await r2Client.send(command);
+    const contents = response.Contents || [];
+
+    const totalBytes = contents.reduce((sum, item) => sum + (item.Size || 0), 0);
+    const objects = contents.map((item) => ({
+      key: item.Key,
+      filename: item.Key,
+      size: item.Size,
+      lastModified: item.LastModified,
+      url: `${R2_PUBLIC_DOMAIN}/${item.Key}`,
+    }));
+
+    return {
+      storage: 'CLOUDFLARE_R2',
+      bucket: R2_BUCKET_NAME,
+      totalBytes,
+      totalMB: Number((totalBytes / (1024 * 1024)).toFixed(3)),
+      totalCount: objects.length,
+      objects,
+    };
+  } catch (err) {
+    console.error('[Cloudflare R2 ListObjects Error]:', err);
+    throw err;
   }
 }
 

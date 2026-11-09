@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {
   HardDrive,
   Sparkles,
@@ -28,17 +28,42 @@ export default function StorageUsageCard({ compact = false }) {
   const [categoryFilter, setCategoryFilter] = useState('ALL');
   const [sortBy, setSortBy] = useState('size-desc'); // 'size-desc' | 'size-asc' | 'name'
   const [updateTick, setUpdateTick] = useState(0);
+  const [r2Stats, setR2Stats] = useState(null);
+  const [loadingR2, setLoadingR2] = useState(false);
+
+  // 🔄 ดึงข้อมูลสถิติพื้นที่จริง 100% จาก Cloudflare R2 Bucket
+  const fetchLiveR2Storage = useCallback(() => {
+    setLoadingR2(true);
+    uploadApi
+      .getStorageStats()
+      .then((data) => {
+        if (data?.success) {
+          setR2Stats(data);
+        }
+      })
+      .catch((err) => {
+        console.warn('[R2 Live Storage Fetch Notice]:', err.message);
+      })
+      .finally(() => {
+        setLoadingR2(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetchLiveR2Storage();
+  }, [fetchLiveR2Storage]);
 
   // ⚡ Listen for real-time storage changes across the app
   useEffect(() => {
     const handleStorageUpdate = () => {
       setUpdateTick((prev) => prev + 1);
+      fetchLiveR2Storage();
     };
     window.addEventListener('lw365:storage_updated', handleStorageUpdate);
     return () => window.removeEventListener('lw365:storage_updated', handleStorageUpdate);
-  }, []);
+  }, [fetchLiveR2Storage]);
 
-  // Compute stats reactively
+  // Compute stats reactively (Local estimation fallback)
   const stats = useMemo(() => {
     return computeStorageStats({
       posts,
@@ -48,6 +73,68 @@ export default function StorageUsageCard({ compact = false }) {
     });
   }, [posts, products, insurancePlans, content, updateTick]);
 
+  // 🌟 Effective Stats: ให้ความสำคัญกับข้อมูลจริงจาก Cloudflare R2 Bucket ก่อนเสมอ
+  const effectiveStats = useMemo(() => {
+    if (r2Stats && r2Stats.storage === 'CLOUDFLARE_R2') {
+      const totalBytes = r2Stats.totalBytes || 0;
+      const maxBytes = r2Stats.maxBytes || 5 * 1024 * 1024 * 1024;
+      const maxStorageMB = 5000;
+      const totalSizeMB = Number((totalBytes / (1024 * 1024)).toFixed(2));
+      const totalSizeGB = Number((totalBytes / (1024 * 1024 * 1024)).toFixed(3));
+      const usagePercent = Number(((totalBytes / maxBytes) * 100).toFixed(4));
+      const remainingBytes = Math.max(0, maxBytes - totalBytes);
+      const remainingMB = Math.round(remainingBytes / (1024 * 1024));
+
+      let status = 'HEALTHY';
+      let statusText = 'ซิงค์สดจาก Cloudflare R2 (ฟรี 100%)';
+      let statusColor = 'badge-success text-white';
+      let progressColor = 'progress-success';
+
+      if (usagePercent >= 85) {
+        status = 'CRITICAL';
+        statusText = 'ใกล้เต็มโควตา 5 GB';
+        statusColor = 'badge-error text-white';
+        progressColor = 'progress-error';
+      } else if (usagePercent >= 60) {
+        status = 'MODERATE';
+        statusText = 'ใช้งานปานกลาง';
+        statusColor = 'badge-warning text-warning-content';
+        progressColor = 'progress-warning';
+      }
+
+      const r2Assets = (r2Stats.objects || []).map((obj) => ({
+        id: obj.url,
+        url: obj.url,
+        title: obj.filename,
+        category: 'Cloudflare R2 Bucket',
+        type: obj.filename.endsWith('.pdf') ? 'pdf' : 'image',
+        sizeBytes: obj.size,
+        originalSizeBytes: obj.size,
+        isR2: true,
+        updatedAt: obj.lastModified,
+      }));
+
+      return {
+        totalSizeBytes: totalBytes,
+        totalSizeMB,
+        totalSizeGB,
+        maxStorageMB,
+        usagePercent,
+        remainingBytes,
+        remainingMB,
+        totalCount: r2Assets.length,
+        status,
+        statusText,
+        statusColor,
+        progressColor,
+        assets: r2Assets,
+        isLiveR2: true,
+      };
+    }
+
+    return stats;
+  }, [r2Stats, stats]);
+
   const handleDeleteR2Asset = async (asset) => {
     if (!window.confirm(`คุณแน่ใจหรือไม่ว่าต้องการลบไฟล์ "${asset.title}" ออกจาก Cloudflare R2 อย่างถาวร?`)) {
       return;
@@ -56,6 +143,7 @@ export default function StorageUsageCard({ compact = false }) {
       await uploadApi.deleteFile(asset.url);
       removeStoredMedia(asset.url);
       setUpdateTick((prev) => prev + 1);
+      fetchLiveR2Storage();
     } catch (err) {
       console.error('Failed to delete asset from R2', err);
       alert('เกิดข้อผิดพลาดในการลบไฟล์จาก R2: ' + (err.message || ''));
@@ -64,7 +152,7 @@ export default function StorageUsageCard({ compact = false }) {
 
   // Filter and sort modal assets
   const filteredAssets = useMemo(() => {
-    let list = stats.assets.filter((a) => {
+    let list = (effectiveStats.assets || []).filter((a) => {
       const matchSearch =
         a.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         a.url.toLowerCase().includes(searchTerm.toLowerCase());
@@ -81,7 +169,7 @@ export default function StorageUsageCard({ compact = false }) {
     }
 
     return list;
-  }, [stats.assets, searchTerm, categoryFilter, sortBy]);
+  }, [effectiveStats.assets, searchTerm, categoryFilter, sortBy]);
 
   // Compact Mini Bar (for sidebar or top bar)
   if (compact) {
@@ -93,16 +181,16 @@ export default function StorageUsageCard({ compact = false }) {
             <span>Storage (R2 5GB)</span>
           </span>
           <span className="font-black text-primary">
-            {stats.usagePercent}%
+            {effectiveStats.usagePercent}%
           </span>
         </div>
         <progress
-          className={`progress ${stats.progressColor} w-full h-1.5`}
-          value={stats.usagePercent}
+          className={`progress ${effectiveStats.progressColor} w-full h-1.5`}
+          value={effectiveStats.usagePercent}
           max="100"
         />
         <div className="flex justify-between text-[10px] text-base-content/60">
-          <span>{stats.totalSizeMB} MB</span>
+          <span>{effectiveStats.totalSizeMB} MB</span>
           <span>5,000 MB</span>
         </div>
       </div>
@@ -132,8 +220,8 @@ export default function StorageUsageCard({ compact = false }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className={`badge badge-sm font-bold ${stats.statusColor}`}>
-              {stats.statusText}
+            <span className={`badge badge-sm font-bold ${effectiveStats.statusColor}`}>
+              {effectiveStats.statusText}
             </span>
             <button
               type="button"
@@ -142,7 +230,7 @@ export default function StorageUsageCard({ compact = false }) {
             >
               <span>ตรวจสอบขนาดรูปรายชิ้น</span>
               <span className="badge badge-xs badge-secondary text-white font-bold">
-                {stats.totalCount}
+                {effectiveStats.totalCount}
               </span>
             </button>
           </div>
@@ -154,26 +242,28 @@ export default function StorageUsageCard({ compact = false }) {
             <div className="flex items-center gap-2">
               <span className="font-bold text-primary">ใช้ไปแล้ว:</span>
               <span className="font-black text-secondary text-base sm:text-lg">
-                {stats.totalSizeMB} MB
+                {effectiveStats.totalSizeMB < 1 && effectiveStats.totalSizeBytes > 0
+                  ? `${formatBytes(effectiveStats.totalSizeBytes)}`
+                  : `${effectiveStats.totalSizeMB} MB`}
               </span>
               <span className="text-xs text-base-content/60">
-                / {stats.maxStorageMB.toLocaleString()} MB (5 GB)
+                / {effectiveStats.maxStorageMB.toLocaleString()} MB (5 GB)
               </span>
             </div>
             <div className="text-right">
               <span className="font-bold text-base-content/75">
-                คงเหลือ: <span className="text-primary font-black">{stats.remainingMB > 1000 ? `${(stats.remainingMB / 1024).toFixed(2)} GB` : `${stats.remainingMB} MB`}</span>
+                คงเหลือ: <span className="text-primary font-black">{effectiveStats.remainingMB > 1000 ? `${(effectiveStats.remainingMB / 1024).toFixed(2)} GB` : `${effectiveStats.remainingMB} MB`}</span>
               </span>
               <span className="text-xs text-base-content/50 ml-1.5">
-                ({(100 - stats.usagePercent).toFixed(1)}% ว่าง)
+                ({(100 - effectiveStats.usagePercent).toFixed(1)}% ว่าง)
               </span>
             </div>
           </div>
 
           {/* DaisyUI Progress Bar */}
           <progress
-            className={`progress ${stats.progressColor} w-full h-3 rounded-full transition-all duration-300`}
-            value={stats.usagePercent}
+            className={`progress ${effectiveStats.progressColor} w-full h-3 rounded-full transition-all duration-300`}
+            value={effectiveStats.usagePercent}
             max="100"
             aria-label="Storage Usage Progress"
           />
@@ -186,10 +276,10 @@ export default function StorageUsageCard({ compact = false }) {
               จำนวนไฟล์ทั้งหมด
             </span>
             <span className="text-base sm:text-lg font-black text-primary">
-              {stats.totalCount} ชิ้น
+              {effectiveStats.totalCount} ชิ้น
             </span>
             <span className="text-[10px] text-base-content/60 block">
-              รูปภาพ & เอกสาร PDF
+              {effectiveStats.isLiveR2 ? 'บน Cloudflare R2 จริง' : 'รูปภาพ & เอกสาร PDF'}
             </span>
           </div>
 
@@ -198,7 +288,7 @@ export default function StorageUsageCard({ compact = false }) {
               ขนาดเฉลี่ยต่อรูป
             </span>
             <span className="text-base sm:text-lg font-black text-primary">
-              {stats.totalCount > 0 ? formatBytes(stats.totalSizeBytes / stats.totalCount) : '0 KB'}
+              {effectiveStats.totalCount > 0 ? formatBytes(effectiveStats.totalSizeBytes / effectiveStats.totalCount) : '0 KB'}
             </span>
             <span className="text-[10px] text-success font-medium block">
               ✨ บีบอัด WebP คมชัดสูง
@@ -210,7 +300,7 @@ export default function StorageUsageCard({ compact = false }) {
               รองรับรูปเพิ่มได้อีก
             </span>
             <span className="text-base sm:text-lg font-black text-secondary">
-              ~{Math.round(stats.remainingMB / 0.25).toLocaleString()} รูป
+              ~{Math.round(effectiveStats.remainingMB / 0.25).toLocaleString()} รูป
             </span>
             <span className="text-[10px] text-base-content/60 block">
               (เฉลี่ย ~250 KB/รูป)
@@ -401,7 +491,7 @@ export default function StorageUsageCard({ compact = false }) {
             {/* Modal Footer */}
             <div className="flex items-center justify-between pt-3 border-t border-base-300/60 text-xs shrink-0">
               <span className="text-base-content/65">
-                แสดงผล <strong>{filteredAssets.length}</strong> จากทั้งหมด <strong>{stats.totalCount}</strong> ชิ้น
+                แสดงผล <strong>{filteredAssets.length}</strong> จากทั้งหมด <strong>{effectiveStats.totalCount}</strong> ชิ้น
               </span>
               <button
                 type="button"
