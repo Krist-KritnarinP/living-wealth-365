@@ -740,5 +740,8 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Verification**:
   - Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 787ms.
+  - Live Render Status: `GET /api/upload/status` confirmed `CLOUDFLARE_R2` active with bucket `livingwealth365-assets`.
+  - Live End-to-End Test: Successfully uploaded probe file to `https://pub-10dc92b49894448a9fe11f81ccc1e577.r2.dev`, verified 200 OK via Cloudflare CDN, and cleaned up with authenticated `DELETE /api/upload/:filename` returning 404 (0 orphan files).
+  - Vercel Frontend: Verified `VITE_API_URL` baked into bundle targeting Render backend.
   - Branch: `main` synchronized with remote `origin/main`.
 
