@@ -107,7 +107,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  to="/wealth?tab=calculator"
+                  to={ROUTES.TAX}
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>

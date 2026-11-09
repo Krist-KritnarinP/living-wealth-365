@@ -15,11 +15,12 @@ export const ROUTES = {
   JOURNAL_DETAIL: (slug = ':slug') => `/journal/${slug}`,
   ABOUT: '/about',
 
-  // 🔄 Backwards Compatibility & Shortlinks
+  // 🔄 Backwards Compatibility & Direct Gateways
   BLOG: '/journal',
   BLOG_DETAIL: (slug = ':slug') => `/journal/${slug}`,
   MUTELU: '/earth-energy',
-  TAX_CALCULATOR: '/wealth?tab=calculator',
+  TAX: '/tax',
+  TAX_CALCULATOR: '/tax',
   INSURANCE_LIFE: '/wealth?tab=protection',
   INSURANCE_NON_LIFE: '/wealth?tab=protection',
 

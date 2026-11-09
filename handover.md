@@ -7,7 +7,7 @@
 - **Objective**: Clean project scaffolding separating Frontend (`living wealth 365 front end`) and Backend (`living wealth 365_backend`) using pure React JS / Node.js (JavaScript, without TypeScript).
   - Frontend: React 19 (Vite, JavaScript), Tailwind CSS 4 + daisyUI 5 (Zen Glass theme installed).
   - Backend: Node.js Express (JavaScript), base `schema.prisma` configuration initialized.
-- **Status**: Completed Security Hardening & Admin Gateway Routing (Fixed registration privilege escalation backdoor, enforced strictly CUSTOMER role on public signup, added `/admin` protected routing with return redirect).
+- **Status**: Completed Tax Planning & Calculator Elevation (Dedicated `/tax` route & page, interactive Homepage Tax Teaser simulator, and clean Navbar navigation under Learning).
 
 ## 2. Core UI / UX Implementation in App.jsx & index.css
 - **100% True Full-Screen & Edge-to-Edge Layout**:
@@ -666,6 +666,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Test Suite: 15/15 passing (`node --test tests/*.test.js`).
   - Production Build: `vite build` completed cleanly in 1.11s with zero errors.
   - Branch: `main` synchronized with remote `origin/main`.
+
+## 12. Tax Planning & Calculator Elevation (November 9, 2026)
+- **Objective**: Surface the Personal Income Tax Calculator (ภ.ง.ด. 90/91 engine) into prominent entry points across the application without intrusive badges.
+- **Dedicated Route & Standalone Page**:
+  - Created [`TaxPlanningPage.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/pages/public/TaxPlanningPage.jsx) mounted at `/tax` (`ROUTES.TAX`).
+  - Added shortlink redirects for `/tax-calculator` and `/tax-planning` directly pointing to `/tax`.
+  - Page features breadcrumbs, Pillar 2 Wealth context, 4 key deduction highlight metrics, and full `<TaxCalculator hideHeader={false} />`.
+- **Navbar Integration**:
+  - Updated Learning gateway dropdown in [`Navbar.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/common/Navbar.jsx) to add "วางแผนและคำนวณภาษี 2568" with `Calculator` icon (no Hot badge per user spec).
+- **Homepage Interactive Tax Teaser**:
+  - Created [`TaxTeaser.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/components/tax/TaxTeaser.jsx) and placed as Section 4 on [`HomePage.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/pages/public/HomePage.jsx).
+  - Provides quick interactive salary slider, preset buttons, estimated marginal bracket, baseline tax, and potential tax savings with AIA deductions, linking directly to the full calculator.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed in 2.09s (0 errors).
+  - Branch: `main` synchronized with remote `origin/main`.
+
 
 
 

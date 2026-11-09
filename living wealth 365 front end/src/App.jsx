@@ -25,6 +25,7 @@ import EarthEnergyPage from './pages/public/EarthEnergyPage';
 import JournalPage from './pages/public/JournalPage';
 import BlogDetailPage from './pages/public/BlogDetailPage';
 import AboutPage from './pages/public/AboutPage';
+import TaxPlanningPage from './pages/public/TaxPlanningPage';
 
 // Auth & Utility Pages
 import LoginPage from './pages/public/LoginPage';
@@ -78,6 +79,7 @@ function AppShell() {
           <Route path={ROUTES.JOURNAL} element={<JournalPage />} />
           <Route path="/journal/:slug" element={<BlogDetailPage />} />
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />
+          <Route path={ROUTES.TAX} element={<TaxPlanningPage />} />
 
           {/* 🔄 Backwards Compatibility & Shortlinks */}
           <Route path="/insurance/life" element={<Navigate to="/wealth?tab=protection" replace />} />
@@ -85,7 +87,8 @@ function AppShell() {
           <Route path="/mutelu" element={<Navigate to="/earth-energy" replace />} />
           <Route path="/blog" element={<Navigate to="/journal" replace />} />
           <Route path="/blog/:slug" element={<BlogDetailPage />} />
-          <Route path="/tax-calculator" element={<Navigate to="/wealth?tab=calculator" replace />} />
+          <Route path="/tax-calculator" element={<Navigate to={ROUTES.TAX} replace />} />
+          <Route path="/tax-planning" element={<Navigate to={ROUTES.TAX} replace />} />
 
           {/* 🔑 Auth & Utility */}
           <Route path={ROUTES.LOGIN} element={<LoginPage />} />

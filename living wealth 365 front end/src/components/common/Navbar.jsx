@@ -20,7 +20,8 @@ import {
   Coins,
   Brain,
   Feather,
-  Info
+  Info,
+  Calculator
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -109,10 +110,15 @@ export default function Navbar() {
       items: [
         {
           label: language === 'th' ? 'Wealth (สถาปัตยกรรมการเงิน)' : 'Wealth Architecture',
-          desc: language === 'th' ? 'การปกป้อง พอร์ตเกษียณ และโปรแกรมคำนวณภาษี' : 'Protection, annuity & tax calculator',
+          desc: language === 'th' ? 'การปกป้อง พอร์ตเกษียณ และแผนความคุ้มครองชีวิต' : 'Protection, annuity & life coverage plans',
           path: ROUTES.WEALTH,
           icon: Coins,
-          badge: 'Tax Calc',
+        },
+        {
+          label: language === 'th' ? 'วางแผนและคำนวณภาษี 2568' : 'Tax Planning & Calculator',
+          desc: language === 'th' ? 'คำนวณภาษีเงินได้บุคคลธรรมดาและสิทธิลดหย่อน AIA' : 'Personal income tax engine & tax-saving strategies',
+          path: ROUTES.TAX,
+          icon: Calculator,
         },
         {
           label: language === 'th' ? 'Inner Life (โลกภายใน & สมาธิ)' : 'Inner Life & Stillness',

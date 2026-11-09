@@ -16,6 +16,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
 import { ROUTES } from '../../constants/routes';
 import LifeMapTeaser from '../../components/common/LifeMapTeaser';
+import TaxTeaser from '../../components/tax/TaxTeaser';
 import ProductCard from '../../components/mutelu/ProductCard';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 import EditableText from '../../components/common/EditableText';
@@ -409,6 +410,11 @@ export default function HomePage() {
       {/* 📊 3. INTERACTIVE 6-DIMENSION LIFE MAP TEASER */}
       <section id="lifemap" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LifeMapTeaser standalone={false} />
+      </section>
+
+      {/* 🧮 4. INTERACTIVE PERSONAL TAX PLANNING TEASER */}
+      <section id="tax-teaser" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
+        <TaxTeaser />
       </section>
 
       {/* 👤 4. ADMIN A & ADMIN B PERSONAL BRAND NARRATIVE */}
