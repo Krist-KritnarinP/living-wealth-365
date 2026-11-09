@@ -302,222 +302,128 @@ export default function AdminInsurancePage() {
           </div>
         </div>
 
-        {/* Mobile & Tablet Card View (Visible below lg) */}
-        <div className="block lg:hidden space-y-4">
-          {filteredPlans.length === 0 ? (
-            <div className="text-center py-12 text-base-content/60 zen-surface rounded-3xl border border-base-300">
-              ไม่พบแผนประกันที่ตรงกับเงื่อนไขการค้นหา
-            </div>
-          ) : (
-            filteredPlans.map((plan) => (
-              <div
-                key={plan.id}
-                className="zen-surface rounded-2xl border border-base-300 p-4 space-y-3.5 shadow-xs"
-              >
-                <div className="flex items-start gap-3">
-                  {plan.imageUrl ? (
-                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
-                      <img
-                        src={resolveAssetUrl(plan.imageUrl)}
-                        alt={plan.name}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-16 h-16 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
-                      <ShieldCheck className="w-8 h-8" />
-                    </div>
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-base-200 border border-base-300 text-base-content/80">
+        {/* Plans Table */}
+        <div className="zen-surface rounded-3xl p-6 border border-base-300/60 shadow-xs overflow-x-auto">
+          <table className="table table-zebra w-full text-xs sm:text-sm">
+            <thead>
+              <tr className="border-b border-base-300 text-base-content/70">
+                <th className="min-w-[200px]">แผนประกันภัย</th>
+                <th className="whitespace-nowrap">หมวดหมู่</th>
+                <th className="whitespace-nowrap">วงเงินคุ้มครอง</th>
+                <th className="whitespace-nowrap">ราคาเริ่มต้น</th>
+                <th className="whitespace-nowrap text-center min-w-[130px]">สถานะ</th>
+                <th className="text-right whitespace-nowrap">การจัดการ</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredPlans.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="text-center py-12 text-base-content/60">
+                    ไม่พบแผนประกันที่ตรงกับเงื่อนไขการค้นหา
+                  </td>
+                </tr>
+              ) : (
+                filteredPlans.map((plan) => (
+                  <tr key={plan.id} className="hover:bg-base-200/50">
+                    <td>
+                      <div className="flex items-center gap-3">
+                        {plan.imageUrl ? (
+                          <div className="w-12 h-12 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
+                            <img
+                              src={resolveAssetUrl(plan.imageUrl)}
+                              alt={plan.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
+                            <ShieldCheck className="w-6 h-6" />
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <div className="font-bold text-primary flex items-center gap-2">
+                            <span className="truncate">{plan.name}</span>
+                            {plan.brochureUrl && (
+                              <a
+                                href={resolveAssetUrl(plan.brochureUrl)}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="badge badge-secondary badge-outline text-[10px] font-bold py-1 px-2 gap-1 shrink-0 hover:bg-secondary hover:text-white transition-colors"
+                                title="คลิกเพื่อเปิดดูไฟล์โบรชัวร์ PDF"
+                              >
+                                <FileText className="w-3 h-3" />
+                                PDF
+                              </a>
+                            )}
+                          </div>
+                          {plan.tagline && (
+                            <div className="text-xs text-base-content/60 line-clamp-1 max-w-sm mt-0.5">
+                              {plan.tagline}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                    <td className="whitespace-nowrap">
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80 whitespace-nowrap">
                         {plan.categoryName}
                       </span>
+                    </td>
+                    <td className="whitespace-nowrap font-bold text-primary">
+                      {plan.coverageAmount || '-'}
+                    </td>
+                    <td className="whitespace-nowrap font-black text-secondary">
+                      {plan.startingPrice || '-'}
+                    </td>
+                    <td className="whitespace-nowrap text-center">
                       <button
                         type="button"
                         onClick={() => handleRequestToggleActive(plan)}
-                        className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-bold ${
+                        className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
                           plan.isActive
-                            ? 'bg-emerald-500/15 text-emerald-700 border border-emerald-500/30'
-                            : 'bg-rose-500/15 text-rose-700 border border-rose-500/30'
+                            ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
+                            : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
                         }`}
+                        title="คลิกเพื่อสลับสถานะเปิด/ปิด (ต้องยืนยันรหัสความปลอดภัย)"
                       >
-                        {plan.isActive ? 'เปิดใช้งาน' : 'ปิดใช้งาน'}
+                        {plan.isActive ? (
+                          <>
+                            <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                            <span>เปิดใช้งาน</span>
+                          </>
+                        ) : (
+                          <>
+                            <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
+                            <span>ปิดใช้งาน</span>
+                          </>
+                        )}
                       </button>
-                    </div>
-                    <h4 className="font-bold text-primary text-base mt-1 line-clamp-1">
-                      {plan.name}
-                    </h4>
-                    {plan.tagline && (
-                      <p className="text-xs text-base-content/60 line-clamp-1 mt-0.5">
-                        {plan.tagline}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2 p-2.5 rounded-xl bg-base-200/50 text-xs">
-                  <div>
-                    <span className="text-base-content/60 block text-[10px]">วงเงินคุ้มครอง</span>
-                    <span className="font-bold text-primary truncate block">{plan.coverageAmount || '-'}</span>
-                  </div>
-                  <div>
-                    <span className="text-base-content/60 block text-[10px]">ราคาเริ่มต้น</span>
-                    <span className="font-black text-secondary truncate block">{plan.startingPrice || '-'}</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2 pt-1 border-t border-base-300/60">
-                  <button
-                    type="button"
-                    onClick={() => handleRequestEdit(plan)}
-                    className="btn btn-sm btn-primary flex-1 rounded-xl font-bold gap-1.5 text-white"
-                  >
-                    <Edit2 className="w-4 h-4" />
-                    <span>แก้ไขแผน</span>
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleRequestDelete(plan)}
-                    className="btn btn-sm btn-outline btn-error rounded-xl font-bold gap-1.5 px-4"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                    <span>ลบ</span>
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
-        </div>
-
-        {/* Desktop Plans Table */}
-        <div className="hidden lg:block zen-surface rounded-3xl border border-base-300 overflow-hidden shadow-xs">
-          <div className="overflow-x-auto">
-            <table className="table table-zebra w-full">
-              <thead>
-                <tr className="bg-base-200/50 text-base-content/80 text-xs uppercase font-black">
-                  <th className="py-4 pl-6 min-w-[240px]">แผนประกันภัย</th>
-                  <th className="whitespace-nowrap">หมวดหมู่</th>
-                  <th className="whitespace-nowrap">วงเงินคุ้มครอง</th>
-                  <th className="whitespace-nowrap">ราคาเริ่มต้น</th>
-                  <th className="whitespace-nowrap text-center min-w-[130px]">สถานะ</th>
-                  <th className="text-right pr-6 whitespace-nowrap min-w-[170px] sticky right-0 bg-base-200 z-10 shadow-[-6px_0_10px_-2px_rgba(0,0,0,0.06)]">
-                    การจัดการ
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-base-300/40 text-sm">
-                {filteredPlans.length === 0 ? (
-                  <tr>
-                    <td colSpan={6} className="text-center py-12 text-base-content/60">
-                      ไม่พบแผนประกันที่ตรงกับเงื่อนไขการค้นหา
                     </td>
-                  </tr>
-                ) : (
-                  filteredPlans.map((plan) => (
-                    <tr key={plan.id} className="hover:bg-base-200/30 transition-colors">
-                      <td className="py-4 pl-6">
-                        <div className="flex items-center gap-3">
-                          {plan.imageUrl ? (
-                            <div className="w-12 h-12 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
-                              <img
-                                src={resolveAssetUrl(plan.imageUrl)}
-                                alt={plan.name}
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
-                              <ShieldCheck className="w-6 h-6" />
-                            </div>
-                          )}
-                          <div className="min-w-0">
-                            <div className="font-bold text-primary text-base flex items-center gap-2">
-                              <span className="truncate">{plan.name}</span>
-                              {plan.brochureUrl && (
-                                <a
-                                  href={resolveAssetUrl(plan.brochureUrl)}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="badge badge-secondary badge-outline text-[10px] font-bold py-1 px-2 gap-1 shrink-0 hover:bg-secondary hover:text-white transition-colors"
-                                  title="คลิกเพื่อเปิดดูไฟล์โบรชัวร์ PDF"
-                                >
-                                  <FileText className="w-3 h-3" />
-                                  PDF
-                                </a>
-                              )}
-                            </div>
-                            {plan.tagline && (
-                              <div className="text-xs text-base-content/60 line-clamp-1 max-w-sm mt-0.5">
-                                {plan.tagline}
-                              </div>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap">
-                        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80 whitespace-nowrap">
-                          {plan.categoryName}
-                        </span>
-                      </td>
-                      <td className="whitespace-nowrap font-bold text-primary">
-                        {plan.coverageAmount || '-'}
-                      </td>
-                      <td className="whitespace-nowrap font-black text-secondary">
-                        {plan.startingPrice || '-'}
-                      </td>
-                      <td className="whitespace-nowrap text-center">
+                    <td className="text-right whitespace-nowrap">
+                      <div className="flex items-center justify-end gap-1">
                         <button
                           type="button"
-                          onClick={() => handleRequestToggleActive(plan)}
-                          className={`inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs hover:shadow-sm cursor-pointer select-none ${
-                            plan.isActive
-                              ? 'bg-emerald-500/15 text-emerald-700 hover:bg-emerald-500/25 border border-emerald-500/30 dark:bg-emerald-500/20 dark:text-emerald-300'
-                              : 'bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 border border-rose-500/30 dark:bg-rose-500/20 dark:text-rose-300'
-                          }`}
-                          title="คลิกเพื่อสลับสถานะเปิด/ปิด (ต้องยืนยันรหัสความปลอดภัย)"
+                          onClick={() => handleRequestEdit(plan)}
+                          className="btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10"
+                          title="ยืนยันรหัสเพื่อแก้ไขแผน"
                         >
-                          {plan.isActive ? (
-                            <>
-                              <CheckCircle className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
-                              <span>เปิดใช้งาน</span>
-                            </>
-                          ) : (
-                            <>
-                              <XCircle className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400 shrink-0" />
-                              <span>ปิดใช้งาน</span>
-                            </>
-                          )}
+                          <Edit2 className="w-4 h-4" />
                         </button>
-                      </td>
-                      <td className="text-right pr-6 whitespace-nowrap sticky right-0 bg-base-100 z-10 shadow-[-6px_0_10px_-2px_rgba(0,0,0,0.06)]">
-                        <div className="inline-flex items-center justify-end gap-2">
-                          <button
-                            type="button"
-                            onClick={() => handleRequestEdit(plan)}
-                            className="btn btn-xs sm:btn-sm btn-primary rounded-xl font-bold gap-1 text-white shadow-xs"
-                            title="ยืนยันรหัสเพื่อแก้ไขแผน"
-                          >
-                            <Edit2 className="w-3.5 h-3.5" />
-                            <span>แก้ไข</span>
-                          </button>
-                          <button
-                            type="button"
-                            onClick={() => handleRequestDelete(plan)}
-                            className="btn btn-xs sm:btn-sm btn-outline btn-error rounded-xl font-bold gap-1"
-                            title="ยืนยันรหัสเพื่อลบแผน"
-                          >
-                            <Trash2 className="w-3.5 h-3.5" />
-                            <span>ลบ</span>
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
+                        <button
+                          type="button"
+                          onClick={() => handleRequestDelete(plan)}
+                          className="btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10"
+                          title="ยืนยันรหัสเพื่อลบแผน"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
 
         {/* Add / Edit Plan Modal */}

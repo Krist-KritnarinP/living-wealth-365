@@ -707,21 +707,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   2. **Edit**: Open the edit modal or modify any record (Insurance Plans, Products, Blog posts).
   3. **Delete**: Permanently delete any record.
 - **Key Enhancements**:
-  - **`SecurityConfirmModal.jsx`**:
-    - Enhanced to support `action = 'active' | 'status'`, `action = 'edit_auth' | 'edit'`, and `action = 'delete'`.
-    - Added Enter key shortcut support (`onKeyDown` triggers confirm on Enter when 4 digits match).
-    - Elevated z-index to `z-[100]` to always stay on top of all UI layers.
-  - **`AdminInsurancePage.jsx`**:
-    - `handleRequestToggleActive`: Requires 4-digit PIN before toggling plan status.
-    - `handleRequestEdit`: Requires 4-digit PIN before unlocking and opening the edit form.
-    - `handleRequestDelete`: Requires 4-digit PIN before deleting any plan.
-  - **`AdminProductsPage.jsx`**:
-    - Replaced unverified modal with `SecurityConfirmModal` and full `activityLogger` audit logging for active toggle, edit authorization, and delete.
-  - **`AdminBlogPage.jsx`**:
-    - Replaced unverified modal with `SecurityConfirmModal` and full `activityLogger` audit logging for publish/draft toggle, edit authorization, and delete.
+  - `SecurityConfirmModal.jsx` elevated to `z-[100]` with Enter key confirmation shortcut.
+  - Applied across `AdminInsurancePage.jsx`, `AdminProductsPage.jsx`, and `AdminBlogPage.jsx`.
+
+## 17. Unified CMS Action Buttons & Table Theme Consistency (November 9, 2026)
+- **Objective**: Standardize the Edit and Delete action buttons and table styling across all Admin CMS modules (`/admin/cms/insurance`, `/admin/cms/products`, and `/admin/blog`) so that Insurance Plans match the exact theme and aesthetic of the other CMS pages.
+- **Key Enhancements**:
+  - In [`AdminInsurancePage.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/pages/admin/AdminInsurancePage.jsx):
+    - Aligned Edit button to circle ghost icon button: `btn btn-ghost btn-circle btn-sm text-primary hover:bg-primary/10` with `<Edit2 className="w-4 h-4" />`.
+    - Aligned Delete button to circle ghost icon button: `btn btn-ghost btn-circle btn-sm text-error hover:bg-error/10` with `<Trash2 className="w-4 h-4" />`.
+    - Wrapped action buttons in `<div className="flex items-center justify-end gap-1">` matching Products and Blog pages.
+    - Unified table card container to `zen-surface rounded-3xl p-6 border border-base-300/60 shadow-xs overflow-x-auto` with `<table className="table table-zebra w-full text-xs sm:text-sm">`.
+    - Maintained full 4-digit Security PIN verification and activity logging before active, edit, and delete.
 - **Verification**:
   - Unit Tests: 15/15 passed (`npm test -- --run`).
-  - Production Build: `vite build` completed cleanly in 3.65s.
+  - Production Build: `vite build` completed cleanly in 1.65s.
   - Branch: `main` synchronized with remote `origin/main`.
 
 
