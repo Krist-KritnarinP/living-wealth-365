@@ -17,6 +17,7 @@ import {
   X,
   ShieldCheck,
   Sliders,
+  History,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
@@ -115,6 +116,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       icon: Sliders,
       badge: 'Live',
       badgeColor: 'badge-accent text-white font-bold',
+    },
+    {
+      title: 'ประวัติการทำงาน (Activity Log)',
+      path: ROUTES.ADMIN_ACTIVITY_LOG,
+      icon: History,
+      badge: 'Audit',
+      badgeColor: 'badge-neutral text-base-100 font-bold',
     },
   ];
 

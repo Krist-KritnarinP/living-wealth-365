@@ -701,16 +701,31 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: `vite build` completed cleanly in 923ms.
   - Branch: `main` synchronized with remote `origin/main`.
 
-## 14. Resilient Insurance Plans Management & Vercel Offline Sync (November 9, 2026)
-- **Objective**: Fix status toggling, updating, and creation failures on the live Vercel admin route (`/admin/cms/insurance`).
-- **Root Cause**: `insurancePlansApi` actions in `AuthContext.jsx` were not wrapped in optimistic state updates or try/catch fallback, causing immediate network promise rejections on Vercel preview environments where the local backend is unreachable, alongside missing `localStorage` persistence.
-- **Implementation**:
-  - In [`AuthContext.jsx`](file:///Users/kritnarinp/Desktop/living%20wealth%20365/living%20wealth%20365%20front%20end/src/context/AuthContext.jsx):
-    - Added `useEffect` for `lw365_plans` syncing `insurancePlans` to `localStorage`.
-    - Refactored `addInsurancePlan`, `updateInsurancePlan`, and `deleteInsurancePlan` to execute optimistic React state updates immediately with graceful offline try/catch fallback (matching the architecture of `posts` and `products`).
+## 15. Enterprise 2-Step Security Verification PIN & Admin Activity Log System (November 9, 2026)
+- **Objective**:
+  1. Add 2-step verification modal requiring a randomized 4-digit numeric security code before confirming any EDIT (Final Check) or DELETE action in admin panels.
+  2. Implement an Activity Logger and Admin Activity Log Dashboard (`/admin/activity-log`) recording all administrative actions (CREATE, UPDATE, DELETE, STATUS_CHANGE) with timestamps, admin identifier, details, and security PIN audit trails.
+  3. Resolve hidden/missing Edit & Delete buttons in Insurance Plans management (`/admin/cms/insurance`) with sticky right-aligned action columns and responsive mobile cards.
+  4. Clarify Cloudflare R2 bucket configuration: "On Demand Migration" is **disabled/unneeded** as files are uploaded directly to R2 without an Amazon S3/GCS origin.
+- **Key Deliverables**:
+  - **Security Modal (`SecurityConfirmModal.jsx`)**:
+    - Generates dynamic 4-digit PIN (1000-9999) with 1-click refresh button.
+    - Prevents action confirmation until exact 4 digits are typed.
+    - Edit Mode: Displays "Final Check" summary box of pending changes.
+    - Delete Mode: Displays prominent high-risk warning alerts.
+  - **Activity Log Engine (`activityLogger.js`)**:
+    - Records user, action type, entity type, target title, details, and security PIN into persistent storage (`lw365_activity_logs_v1`).
+    - Dispatches custom `lw365:activity_log_updated` window events for real-time dashboard reactivity.
+  - **Activity Log Dashboard (`AdminActivityLogPage.jsx`)**:
+    - Route: `/admin/activity-log` (Added to `routes.js`, `App.jsx`, and `DashboardLayout.jsx` navigation).
+    - Features: Summary KPIs, filter tabs (ALL, UPDATE, DELETE, CREATE, STATUS), real-time search, JSON audit export, and clear log history with confirmation.
+  - **Insurance Plans Management UI (`AdminInsurancePage.jsx`)**:
+    - Table actions column set to `sticky right-0` with prominent labeled buttons (`[ ✏️ แก้ไข ]` and `[ 🗑️ ลบ ]`).
+    - Added responsive Mobile Card View (`block lg:hidden`) ensuring effortless editing on tablets and mobile devices.
+    - Wired `SecurityConfirmModal` to both Edit (Final Check) and Delete workflows.
 - **Verification**:
   - Unit Tests: 15/15 passed (`npm test -- --run`).
-  - Production Build: `vite build` completed cleanly in 1.06s.
+  - Production Build: `vite build` completed cleanly in 781ms.
   - Branch: `main` synchronized with remote `origin/main`.
 
 

@@ -43,6 +43,7 @@ import AdminSiteCustomizerPage from './pages/admin/AdminSiteCustomizerPage';
 import AdminInsurancePage from './pages/admin/AdminInsurancePage';
 import AdminBlogPage from './pages/admin/AdminBlogPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
+import AdminActivityLogPage from './pages/admin/AdminActivityLogPage';
 
 // Helper to scroll to top on route change
 function ScrollToTop() {
@@ -167,6 +168,14 @@ function AppShell() {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminInsurancePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.ADMIN_ACTIVITY_LOG}
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminActivityLogPage />
               </ProtectedRoute>
             }
           />

@@ -41,4 +41,5 @@ export const ROUTES = {
   ADMIN_INSURANCE: '/admin/cms/insurance',
   ADMIN_BLOG: '/admin/cms/blog',
   ADMIN_PRODUCTS: '/admin/cms/products',
+  ADMIN_ACTIVITY_LOG: '/admin/activity-log',
 };
