@@ -49,7 +49,7 @@ export default function CopyToLineSection() {
   };
 
   return (
-    <div className="w-full rounded-3xl zen-surface border border-secondary/30 p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden">
+    <div className="w-full rounded-3xl zen-surface hover-card-elevate border border-secondary/30 p-6 sm:p-10 lg:p-12 shadow-sm relative overflow-hidden transition-all duration-300">
       {/* Decorative background glow */}
       <div className="absolute top-0 right-0 w-80 h-80 bg-secondary/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20"></div>
 

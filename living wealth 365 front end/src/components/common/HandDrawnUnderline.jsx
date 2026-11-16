@@ -13,9 +13,10 @@ export default function HandDrawnUnderline({ children, className = '', color = '
         <path
           d="M 2 11 C 35 3, 75 14, 158 5"
           stroke={color}
-          strokeWidth="3.2"
+          strokeWidth="3.4"
           strokeLinecap="round"
           strokeLinejoin="round"
+          className="animate-draw-line"
         />
       </svg>
     </span>

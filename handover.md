@@ -837,22 +837,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Simulated high-concurrency requests exceeding max window: confirmed HTTP 429 Too Many Requests triggers precisely at the 11th request.
   - Unit Tests: 15/15 frontend tests passing cleanly (`npm test -- --run`).
 
-## 27. Modern Interactive UI (deTeam Editorial Benchmark) & Responsive Text-Scaling (November 16, 2026)
+## 28. Clean Micro-Interactions & Animated Motion Effects (November 16, 2026)
 - **Status**: **Completed & Verified**
-- **Objective**: Modernize the Living Wealth 365 presentation layer with engaging editorial features inspired by `deteam.co.th` while preserving the Serene Prosperity branding, and eliminate responsive text-clipping/swallowing across all devices and font-zoom settings.
-- **Key Deliverables**:
-  1. **HandDrawnUnderline (`HandDrawnUnderline.jsx`)**: Organic SVG highlight curve accentuating key statements with human warmth.
-  2. **HeroStatTiles (`HeroStatTiles.jsx`)**: Modern 4-metric badge grid in Hero (`10+ ปี`, `100+ ครอบครัว`, `6 มิติ Life Map`, `฿0 ค่าบริการ`).
-  3. **HeroInteractiveFocus (`HeroInteractiveFocus.jsx`)**: Interactive Life & Wealth Focus Explorer in Hero allowing visitors to select their life focus and age stage to see real-time curated strategies from Top & Joy.
-  4. **CopyToLineSection (`CopyToLineSection.jsx`)**: One-click consultation helper formatting personalized LINE messages with quick topic switching and direct LINE OA integration.
-  5. **Ultra-Flexible Responsive & Text-Scaling (`index.css`)**:
-     - Reset `html { font-size: 100%; text-size-adjust: 100%; }` to honor OS accessibility font zooming.
-     - Enforced global `overflow-wrap: break-word; word-break: break-word` and dynamic multi-device fluid sizing.
-     - Standardized `.btn` and `.badge` with `height: auto` and `white-space: normal` to guarantee zero text truncation across phones, tablets, desktops, and 4K TV displays.
-  6. **Founder Persona Alignment**: Replaced all remaining occurrences of "Admin A & Admin B" across the frontend (`HomePage`, `AboutPage`, `JournalPage`, `LifePage`, `mockData`, `LanguageContext`) with **"Top"** (Life & Wealth Planner) and **"Joy"** (Natural Energy & Wellbeing Curator).
+- **Objective**: Deliver subtle, modern interactive flair and motion effects (similar to deTeam) without adding heavy bundle weight or degrading performance:
+  1. **Native Animated Number Counting (`HeroStatTiles.jsx`)**: Zero-dependency counting hook utilizing `requestAnimationFrame` and `IntersectionObserver` with a cubic ease-out curve (`1 - (1 - progress)^3`). Dynamically animates key metrics (`0 -> 10+ ปี`, `0 -> 100+ ครอบครัว`, `0 -> 6 มิติ`, `฿0`) as soon as the user scrolls into view.
+  2. **Hand-Drawn SVG Underline Drawing Animation (`HandDrawnUnderline.jsx` & `index.css`)**: Added `@keyframes draw-svg-line` animating `stroke-dashoffset` from 220 to 0 over 1.4s with smooth cubic bezier curve, creating an organic hand-drawn highlighter stroke on the Hero headline.
+  3. **Hover Micro-Interactions & Depth (`index.css`)**:
+     - `.hover-card-elevate`: Smooth `-4px` vertical lift and subtle Serene Prosperity dual shadow (`rgba(2, 62, 141, 0.12)` + `rgba(255, 181, 59, 0.10)`). Applied to Hero Stat Tiles, Core Gateways (Living, Learning, Connecting), and CopyToLineSection.
+     - `.hover-icon-spin`: Subtle scale (1.18x) and gentle 6-degree rotation when hovering over cards and action badges.
+  4. **Dynamic Card Pop-In Micro-Interaction (`HeroInteractiveFocus.jsx`)**: Added `@keyframes pop-in` keyed to selected categories and age stages, giving instant visual feedback with an energetic pop-in scale animation upon switching selections.
+  5. **Reduced Motion Accessibility (`@media (prefers-reduced-motion: reduce)`)**: Respects users with vestibular motion sensitivity by disabling intense transitions when requested by OS settings.
 - **Verification**:
-  - Unit Tests: 15/15 passing (`npm test -- --run`).
-  - Production Build: `vite build` cleanly completed in 870ms.
+  - Unit Tests: 15/15 passed in 115ms (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 820ms.
+  - Zero added external libraries (0 KB extra bundle overhead).
+
 
 
 

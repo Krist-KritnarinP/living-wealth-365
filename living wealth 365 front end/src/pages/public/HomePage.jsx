@@ -174,9 +174,9 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {/* Gateway 1: Living */}
-          <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs hover:border-secondary transition-all flex flex-col justify-between group">
+          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center hover-icon-spin shrink-0">
                 <Activity className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
@@ -245,9 +245,9 @@ export default function HomePage() {
           </div>
 
           {/* Gateway 2: Learning */}
-          <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs hover:border-secondary transition-all flex flex-col justify-between group">
+          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 flex items-center justify-center hover-icon-spin shrink-0">
                 <Coins className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
@@ -316,9 +316,9 @@ export default function HomePage() {
           </div>
 
           {/* Gateway 3: Connecting */}
-          <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs hover:border-secondary transition-all flex flex-col justify-between group">
+          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
             <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center">
+              <div className="w-12 h-12 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center hover-icon-spin shrink-0">
                 <HeartHandshake className="w-6 h-6" />
               </div>
               <span className="text-xs font-bold uppercase tracking-wider text-secondary block">

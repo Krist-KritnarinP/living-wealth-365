@@ -165,15 +165,17 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all cursor-pointer ${
+                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all duration-200 cursor-pointer group ${
                   isSelected
-                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.01]'
-                    : 'bg-base-200/50 text-base-content/80 border-base-300/60 hover:bg-base-200 hover:border-secondary/60'
+                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.02]'
+                    : 'bg-base-200/50 text-base-content/80 border-base-300/60 hover:bg-base-200 hover:border-secondary/60 hover:scale-[1.01]'
                 }`}
               >
                 <div
-                  className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 ${
-                    isSelected ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+                  className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                    isSelected
+                      ? 'bg-white/20 text-white scale-110'
+                      : 'bg-primary/10 text-primary group-hover:scale-110'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -209,10 +211,10 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
                 key={age.id}
                 type="button"
                 onClick={() => setActiveAge(age.id)}
-                className={`py-2 px-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                className={`py-2 px-2.5 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
                   isSelected
-                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs'
-                    : 'bg-base-200/50 text-base-content/75 border-base-300/60 hover:bg-base-200'
+                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs scale-[1.02]'
+                    : 'bg-base-200/50 text-base-content/75 border-base-300/60 hover:bg-base-200 hover:scale-[1.01]'
                 }`}
               >
                 <p className="text-xs sm:text-sm font-bold leading-tight">{age.label}</p>
@@ -223,10 +225,13 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
         </div>
       </div>
 
-      {/* Result Card: Dynamic Live Recommendation (เหมือน deTeam) */}
-      <div className="zen-surface rounded-2xl p-4 sm:p-5 border-2 border-secondary/40 shadow-md space-y-3 relative overflow-hidden">
+      {/* Result Card: Dynamic Live Recommendation (พร้อม Micro-interaction Pop-in) */}
+      <div
+        key={key}
+        className="zen-surface hover-card-elevate rounded-2xl p-4 sm:p-5 border-2 border-secondary/40 shadow-md space-y-3 relative overflow-hidden animate-pop-in"
+      >
         <div className="flex items-center justify-between gap-2">
-          <span className="badge badge-secondary badge-sm font-bold text-[10px] tracking-wide">
+          <span className="badge badge-secondary badge-sm font-bold text-[10px] tracking-wide animate-pulse">
             {currentRec.tag}
           </span>
           <div className="flex items-center gap-1.5 text-xs text-base-content/70">
@@ -251,10 +256,10 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
         <button
           type="button"
           onClick={handleConsult}
-          className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-2 shadow-xs"
+          className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-2 shadow-xs hover:scale-[1.01] active:scale-[0.99] transition-transform group"
         >
           <span>ปรึกษาแนวทางนี้กับ {currentRec.advisor} ฟรี</span>
-          <ArrowRight className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </button>
       </div>
     </div>
