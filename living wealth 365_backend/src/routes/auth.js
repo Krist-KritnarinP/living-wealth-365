@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { prisma } from '../lib/prisma.js';
 import { signToken } from '../lib/jwt.js';
 import { authenticateUser } from '../middleware/auth.js';
+import { authLimiter } from '../middleware/rateLimiter.js';
 
 export const authRouter = Router();
 
@@ -10,7 +11,7 @@ export const authRouter = Router();
  * 1. POST /api/auth/register
  * สมัครสมาชิกใหม่ (รองรับ Username, Full Name, Email, Phone, BirthDate, Password >= 8 chars)
  */
-authRouter.post('/register', async (req, res) => {
+authRouter.post('/register', authLimiter, async (req, res) => {
   try {
     const { username, name, email, phone, birthDate, password } = req.body;
 
@@ -97,7 +98,7 @@ authRouter.post('/register', async (req, res) => {
  * 2. POST /api/auth/login
  * เข้าสู่ระบบ (รองรับทั้งการใช้ Username หรือ Email)
  */
-authRouter.post('/login', async (req, res) => {
+authRouter.post('/login', authLimiter, async (req, res) => {
   try {
     const { identifier, email, username, password } = req.body;
     const loginKey = (identifier || email || username || '').trim().toLowerCase();

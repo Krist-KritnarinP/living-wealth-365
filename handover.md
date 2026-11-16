@@ -824,4 +824,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: `vite build` completed cleanly with 0 errors.
   - Git Tree: Clean, 0 uncommitted changes, synchronized with `origin/main`.
 
+## 26. API Security Hardening: Rate Limiting on Leads & Authentication (November 16, 2026)
+- **Status**: **Completed & Verified**
+- **Objective**: Prevent denial-of-service, spam form flooding, and brute-force credential attacks on public endpoints without disrupting normal human browsing or testing.
+- **Backend Implementation (`living wealth 365_backend`)**:
+  - Installed `express-rate-limit` dependency.
+  - Created `src/middleware/rateLimiter.js`:
+    - `leadLimiter`: limits consultation request submissions (`POST /api/leads`) to 10 requests per 15-minute window per IP. Returns HTTP 429 with user-friendly Thai security message.
+    - `authLimiter`: limits login and registration attempts (`POST /api/auth/login`, `POST /api/auth/register`) to 20 attempts per 15-minute window per IP to block automated brute-forcing.
+  - Attached middlewares to `src/routes/leads.js` and `src/routes/auth.js`.
+- **Verification**:
+  - Simulated high-concurrency requests exceeding max window: confirmed HTTP 429 Too Many Requests triggers precisely at the 11th request.
+  - Unit Tests: 15/15 frontend tests passing cleanly (`npm test -- --run`).
+
+
 

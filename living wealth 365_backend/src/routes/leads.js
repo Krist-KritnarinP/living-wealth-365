@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { prisma } from '../lib/prisma.js';
 import { optionalUser, authenticateUser, requireAdmin } from '../middleware/auth.js';
+import { leadLimiter } from '../middleware/rateLimiter.js';
 
 export const leadsRouter = Router();
 
@@ -8,7 +9,7 @@ export const leadsRouter = Router();
  * 1. POST /api/leads
  * ส่งแบบฟอร์มขอคำปรึกษา / ขอติดต่อกลับ (สาธารณะ หรือสมาชิกล็อกอิน)
  */
-leadsRouter.post('/', optionalUser, async (req, res) => {
+leadsRouter.post('/', leadLimiter, optionalUser, async (req, res) => {
   try {
     const { name, phone, interest, preferredTime, notes } = req.body;
 
