@@ -127,7 +127,7 @@ export default function Navbar() {
           icon: Brain,
         },
         {
-          label: language === 'th' ? "Journal & Admin A's Notes" : "Journal & Admin A's Notes",
+          label: language === 'th' ? "Journal & Top's Notes" : "Journal & Top's Notes",
           desc: language === 'th' ? 'บันทึกความคิด การค้นพบ และเรื่องราวการเดินทาง' : 'Thoughts, book explorations & travel notes',
           path: ROUTES.JOURNAL,
           icon: Feather,
@@ -140,7 +140,7 @@ export default function Navbar() {
       icon: MessageCircle,
       items: [
         {
-          label: language === 'th' ? 'About Admin A & B' : 'About Admin A & B',
+          label: language === 'th' ? 'About คุณท็อป & คุณจอย' : 'About คุณท็อป & คุณจอย',
           desc: language === 'th' ? 'ปรัชญา A Life Well Planned. A Life Well Lived.' : 'Our philosophy & curated journey',
           path: ROUTES.ABOUT,
           icon: Info,

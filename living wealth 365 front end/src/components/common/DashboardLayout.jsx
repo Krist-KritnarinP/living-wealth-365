@@ -97,7 +97,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       badgeColor: 'badge-primary text-white',
     },
     {
-      title: "วารสาร & Admin A's Notes (CMS)",
+      title: "วารสาร & Top's Notes (CMS)",
       path: ROUTES.ADMIN_BLOG,
       icon: FileText,
       badge: posts.length,

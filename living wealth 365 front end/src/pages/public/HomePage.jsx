@@ -20,6 +20,10 @@ import TaxTeaser from '../../components/tax/TaxTeaser';
 import ProductCard from '../../components/mutelu/ProductCard';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 import EditableText from '../../components/common/EditableText';
+import HandDrawnUnderline from '../../components/common/HandDrawnUnderline';
+import HeroStatTiles from '../../components/common/HeroStatTiles';
+import HeroInteractiveFocus from '../../components/common/HeroInteractiveFocus';
+import CopyToLineSection from '../../components/common/CopyToLineSection';
 
 export default function HomePage() {
   const { products, posts } = useAuth();
@@ -35,14 +39,20 @@ export default function HomePage() {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleSelectFocus = (focusItem) => {
+    setSelectedProduct({
+      name: `${focusItem.category}: ${focusItem.topic} (ที่ปรึกษา: ${focusItem.advisor})`,
+    });
+  };
+
   return (
-    <div className="w-full space-y-20 lg:space-y-28 py-6">
+    <div className="w-full space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-6">
       {/* 🌟 1. HERO HOOK: "วันนี้...อะไรคือสิ่งที่คุณอยากรักษาไว้?" */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="w-full rounded-3xl zen-surface border border-base-300/60 p-6 sm:p-10 lg:p-16 relative overflow-hidden shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="w-full rounded-3xl zen-surface border border-base-300/60 p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6">
+            <div className="lg:col-span-7 space-y-5">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
                 <Sparkles className="w-4 h-4 shrink-0" />
                 <EditableText
@@ -52,19 +62,21 @@ export default function HomePage() {
                 />
               </div>
 
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.15] tracking-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.18] tracking-tight">
                 <EditableText
                   fieldKey="hero.titleLine1"
                   label="Hero หัวข้อ บรรทัด 1"
                   fallback="วันนี้... อะไรคือสิ่งที่คุณ"
                 />{' '}
                 <br />
-                <EditableText
-                  fieldKey="hero.titleLine2"
-                  label="Hero หัวข้อ บรรทัด 2 (เน้นสีทอง)"
-                  fallback="อยากรักษาไว้มากที่สุด?"
-                  className="text-secondary"
-                />
+                <HandDrawnUnderline color="#FFB53B">
+                  <EditableText
+                    fieldKey="hero.titleLine2"
+                    label="Hero หัวข้อ บรรทัด 2 (เน้นสีทอง)"
+                    fallback="อยากรักษาไว้มากที่สุด?"
+                    className="text-secondary"
+                  />
+                </HandDrawnUnderline>
               </h1>
 
               <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed max-w-2xl">
@@ -72,16 +84,16 @@ export default function HomePage() {
                   fieldKey="hero.description"
                   label="Hero คำบรรยายหลัก"
                   multiline
-                  fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย Admin A & Admin B"
+                  fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย คุณท็อป & คุณจอย"
                 />
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href={content?.hero?.primaryBtnLink || '#lifemap'}
                   className="btn btn-primary btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 shadow-md gap-2"
                 >
-                  <Compass className="w-5 h-5" />
+                  <Compass className="w-5 h-5 shrink-0" />
                   <EditableText
                     fieldKey="hero.primaryBtnText"
                     label="ข้อความปุ่มหลัก Hero"
@@ -96,14 +108,14 @@ export default function HomePage() {
                   <EditableText
                     fieldKey="hero.secondaryBtnText"
                     label="ข้อความปุ่มรอง Hero"
-                    fallback="รู้จัก Admin A & Admin B"
+                    fallback="รู้จักคุณท็อป & คุณจอย"
                   />
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 shrink-0" />
                 </Link>
               </div>
 
               {/* Trust Indicators */}
-              <div className="pt-4 flex flex-wrap items-center gap-4 sm:gap-8 text-xs sm:text-sm font-semibold text-base-content/70">
+              <div className="pt-1 flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-base-content/70">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
                   <EditableText
@@ -121,45 +133,14 @@ export default function HomePage() {
                   />
                 </div>
               </div>
+
+              {/* 📊 Key Metric Tiles (เหมือน deTeam) */}
+              <HeroStatTiles />
             </div>
 
-            {/* Right Visual Mood */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-base-100">
-                <img
-                  src={
-                    content?.hero?.imageUrl ||
-                    'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&auto=format&fit=crop&q=80'
-                  }
-                  alt="Living Wealth 365 Harmony & Balance"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-primary/80 via-primary/20 to-transparent flex items-end p-6">
-                  <div className="text-white space-y-1">
-                    <span className="text-xs uppercase tracking-widest font-bold text-secondary block">
-                      <EditableText
-                        fieldKey="hero.imageBadge"
-                        label="การ์ดรูปภาพ Badge"
-                        fallback="Fellow Travelers"
-                      />
-                    </span>
-                    <h3 className="text-xl font-bold">
-                      <EditableText
-                        fieldKey="hero.imageTitle"
-                        label="การ์ดรูปภาพ หัวข้อ"
-                        fallback="สุขภาพดี • การเงินมั่นคง • จิตใจสงบสุข"
-                      />
-                    </h3>
-                    <p className="text-xs text-white/80">
-                      <EditableText
-                        fieldKey="hero.imageSubtitle"
-                        label="การ์ดรูปภาพ คำบรรยายย่อย"
-                        fallback="Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ"
-                      />
-                    </p>
-                  </div>
-                </div>
-              </div>
+            {/* Right Interactive Focus Explorer (เหมือน deTeam) */}
+            <div className="lg:col-span-5 flex justify-center w-full">
+              <HeroInteractiveFocus onSelectFocus={handleSelectFocus} />
             </div>
           </div>
         </div>
@@ -313,7 +294,7 @@ export default function HomePage() {
                   <EditableText
                     fieldKey="gateways.learning.point3"
                     label="Gateway 2 หัวข้อย่อย 3"
-                    fallback="Journal: บันทึกความคิดของ Admin A & Admin B"
+                    fallback="Journal: บันทึกความคิดของคุณท็อป & คุณจอย"
                   />
                 </li>
               </ul>
@@ -359,7 +340,7 @@ export default function HomePage() {
                   fieldKey="gateways.connecting.desc"
                   label="Gateway 3 คำอธิบาย"
                   multiline
-                  fallback="ทำความรู้จักเรื่องราวของ Admin A & Admin B และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
+                  fallback="ทำความรู้จักเรื่องราวของคุณท็อป & คุณจอย และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
                 />
               </p>
               <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
@@ -429,11 +410,11 @@ export default function HomePage() {
                     content?.narrative?.adminAImage ||
                     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'
                   }
-                  alt="Admin A - Life & Wealth Planner"
+                  alt="คุณท็อป - Life & Wealth Planner"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">{content?.brand?.adminAName || 'Admin A'}</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminAName || 'คุณท็อป'}</span>
                   <span className="text-[10px] text-secondary">
                     {content?.brand?.adminARole || 'Life & Wealth Planner'}
                   </span>
@@ -446,11 +427,11 @@ export default function HomePage() {
                     content?.narrative?.adminBImage ||
                     'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80'
                   }
-                  alt="Admin B - Natural Energy & Wellbeing Curator"
+                  alt="คุณจอย - Natural Energy & Wellbeing Curator"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">{content?.brand?.adminBName || 'Admin B'}</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminBName || 'คุณจอย'}</span>
                   <span className="text-[10px] text-secondary">
                     {content?.brand?.adminBRole || 'Energy & Wellbeing'}
                   </span>
@@ -489,7 +470,7 @@ export default function HomePage() {
                   fieldKey="narrative.body"
                   label="Narrative เนื้อหาความเชื่อ"
                   multiline
-                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
+                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง คุณท็อป และ คุณจอย เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
                 />
               </p>
 
@@ -588,7 +569,7 @@ export default function HomePage() {
               <EditableText
                 fieldKey="journal.title"
                 label="หมวดวารสาร หัวข้อ"
-                fallback="วารสารความคิดและ Admin A's Notes"
+                fallback="วารสารความคิดและ Top's Notes"
               />
             </h2>
             <p className="text-sm zen-muted">
@@ -633,7 +614,7 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs zen-muted">
-                    <span>{post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : 'Article'}</span>
+                    <span>{post.postType === 'TOPS_NOTES' ? "Top's Notes" : 'Article'}</span>
                     <span>• {post.readTime || '5 นาที'}</span>
                   </div>
                   <h3 className="text-lg font-black text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
@@ -656,19 +637,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🤝 7. LET'S TALK FORM SECTION */}
+      {/* 💬 7. COPY-TO-LINE CONSULTATION HELPER SECTION (เหมือน deTeam) */}
+      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        <CopyToLineSection />
+      </section>
+
+      {/* 🤝 8. LET'S TALK FORM SECTION */}
       <section id="talk-form" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <LeadCaptureForm
           selection={selectedProduct}
           defaultInterest={
             selectedProduct
               ? `แร่ธาตุ: ${selectedProduct.name}`
-              : `Let's Talk กับ ${content?.brand?.adminAName || 'Admin A'} & ${content?.brand?.adminBName || 'Admin B'} (การวางแผนชีวิตและสมดุล 6 มิติ)`
+              : `Let's Talk กับ ${content?.brand?.adminAName || 'คุณท็อป'} & ${content?.brand?.adminBName || 'คุณจอย'} (การวางแผนชีวิตและสมดุล 6 มิติ)`
           }
           title={content?.leadForm?.title || 'พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?'}
           subtitle={
             content?.leadForm?.subtitle ||
-            'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
+            'คุณท็อป & คุณจอย พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
           }
         />
       </section>

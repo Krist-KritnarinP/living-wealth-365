@@ -1,0 +1,262 @@
+import { useState } from 'react';
+import { Shield, TrendingUp, Compass, Gem, ArrowRight, UserCheck, Sparkles, Check } from 'lucide-react';
+
+export default function HeroInteractiveFocus({ onSelectFocus }) {
+  const [activeCategory, setActiveCategory] = useState('INSURANCE');
+  const [activeAge, setActiveAge] = useState('31_45');
+
+  const categories = [
+    { id: 'INSURANCE', label: 'ประกันสุขภาพ & ชีวิต', icon: Shield, advisor: 'คุณท็อป' },
+    { id: 'WEALTH', label: 'ลดหย่อนภาษี & เกษียณ', icon: TrendingUp, advisor: 'คุณท็อป' },
+    { id: 'LIFEMAP', label: 'สมดุลชีวิต 6 มิติ', icon: Compass, advisor: 'คุณท็อป & คุณจอย' },
+    { id: 'ENERGY', label: 'คริสตัล & พลังธรรมชาติ', icon: Gem, advisor: 'คุณจอย' },
+  ];
+
+  const ageStages = [
+    { id: '20_30', label: '20–30 ปี', sub: 'วัยเริ่มต้นสร้างตัว' },
+    { id: '31_45', label: '31–45 ปี', sub: 'ความมั่นคงครอบครัว' },
+    { id: '46_PLUS', label: '46+ ปี', sub: 'เกษียณ & ส่งต่อมรดก' },
+  ];
+
+  const recommendations = {
+    'INSURANCE_20_30': {
+      title: 'ประกันสุขภาพเหมาจ่ายเบี้ยเริ่มต้น + อุบัติเหตุ',
+      strategy: 'ปกป้องเงินเก็บก้อนแรกไม่ให้รั่วไหลจากค่ารักษาพยาบาล รพ.เอกชน ด้วยเบี้ยเริ่มต้นที่เข้าถึงง่าย',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“เริ่มทำประกันสุขภาพตั้งแต่วันที่สุขภาพแข็งแรง จะได้เบี้ยที่คุ้มค่าที่สุดและไม่มีข้อยกเว้นโรค”',
+      tag: 'แผนแนะนำ: AIA Health Happy เหมาจ่าย 1–5 ล้าน',
+    },
+    'INSURANCE_31_45': {
+      title: 'ประกันเหมาจ่ายวงเงินสูง 15–25 ล้าน + โรคร้ายแรง Multi-Pay',
+      strategy: 'สร้างเกราะป้องกันค่ารักษาพยาบาลขั้นสูงและโรคร้ายแรง ครอบคลุมภาระเสาหลักของครอบครัว',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“การมีวงเงินเหมาจ่ายหลักสิบล้าน ช่วยให้เราเลือกการรักษาและแพทย์ที่ดีที่สุดได้โดยไม่กระทบสินทรัพย์ครอบครัว”',
+      tag: 'แผนแนะนำ: AIA Health Happy / Infinite Care 25 ล้าน',
+    },
+    'INSURANCE_46_PLUS': {
+      title: 'ความคุ้มครองสุขภาพระยะยาว + ส่งต่อมรดกเงินสดปลอดภาษี',
+      strategy: 'เน้นคุ้มครองสุขภาพยาวนานถึงวัยเกษียณ พร้อมทุนชีวิตเพื่อส่งต่อมรดกให้ทายาทโดยตรงแบบไร้ข้อพิพาท',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“วางแผนสุขภาพล่วงหน้าในวัยนี้ คือของขวัญที่ประเสริฐที่สุดที่ไม่ทิ้งภาระให้ลูกหลาน”',
+      tag: 'แผนแนะนำ: ประกันตลอดชีพ + สัญญาคุ้มครองสุขภาพต่อเนื่อง',
+    },
+
+    'WEALTH_20_30': {
+      title: 'บริหารภาษีเริ่มต้น + ลงทุนอัตโนมัติ DCA',
+      strategy: 'ใช้สิทธิลดหย่อนประกันชีวิต 100,000 แรก ควบคู่กองทุนประหยัดภาษีสร้างวินัยการเงิน',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“ทุกบาทที่ประหยัดภาษีได้ คือผลตอบแทนที่การันตี 100% ตั้งแต่วันแรกที่วางแผน”',
+      tag: 'เครื่องมือ: Tax Planner & DCA Roadmap',
+    },
+    'WEALTH_31_45': {
+      title: 'กลยุทธ์ลดหย่อนภาษีขั้นสูง + พอร์ตเกษียณบำนาญ',
+      strategy: 'ใช้สิทธิลดหย่อนเต็มเพดาน (ประกันบำนาญ + กองทุนรวม) เตรียมกระแสเงินสดหลังอายุ 60',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“เงินบำนาญการันตี คือฐานรากที่ทำให้เรากล้าใช้ชีวิตในวัยเกษียณได้อย่างมีศักดิ์ศรี”',
+      tag: 'แผนแนะนำ: ประกันบำนาญลดหย่อนภาษี 200,000 บ.',
+    },
+    'WEALTH_46_PLUS': {
+      title: 'การจัดสรรพอร์ตลดความเสี่ยง & วางแผนส่งมอบมรดก',
+      strategy: 'เปลี่ยนสินทรัพย์เสี่ยงสู่สินทรัพย์การันตีเงินต้น และออกแบบการส่งต่อเงินสดตามเจตนารมณ์',
+      advisor: 'คุณท็อป',
+      role: 'Life & Wealth Planner',
+      quote: '“ส่งมอบมรดกอย่างฉลาด คือส่งมอบทั้งความมั่งคั่งและความสงบสุขในครอบครัว”',
+      tag: 'เครื่องมือ: Legacy & Wealth Transfer Architecture',
+    },
+
+    'LIFEMAP_20_30': {
+      title: 'Life Map: ค้นหาคุณค่าและทิศทางชีวิตที่แท้จริง',
+      strategy: 'ประเมินสมดุล 6 มิติ (งาน, เงิน, สุขภาพ, ความสัมพันธ์, จิตใจ, จิตวิญญาณ) ป้องกันภาวะ Burnout',
+      advisor: 'คุณท็อป & คุณจอย',
+      role: 'Life Architecture Curators',
+      quote: '“เป้าหมายที่ชัดเจนตั้งแต่วัยสร้างตัว จะช่วยให้เราไม่หลงทางตามกระแสสังคม”',
+      tag: 'เครื่องมือ: Life Map 6 Dimensions Self-Check',
+    },
+    'LIFEMAP_31_45': {
+      title: 'Life Map: สร้างสมดุลครอบครัว งาน และการดูแลสุขภาพ',
+      strategy: 'จัดสรรเวลาและพลังงาน (Energy Management) ให้สามารถเติบโตในหน้าที่การงานควบคู่กับสุขภาพที่ยืนยาว',
+      advisor: 'คุณท็อป & คุณจอย',
+      role: 'Life Architecture Curators',
+      quote: '“ความสำเร็จที่แท้จริง คือการกลับบ้านมาแล้วยังมีพลังและรอยยิ้มให้กับคนที่เรารัก”',
+      tag: 'เครื่องมือ: Holistic Wellbeing Sanctuary Blueprint',
+    },
+    'LIFEMAP_46_PLUS': {
+      title: 'Life Map: การออกแบบชีวิตบทที่สอง (Life After 60)',
+      strategy: 'เตรียมความพร้อมทั้งกาย ใจ และสังคม สู่การใช้ชีวิตหลังเกษียณอย่างมีความหมาย มีคุณค่า และสงบสุข',
+      advisor: 'คุณท็อป & คุณจอย',
+      role: 'Life Architecture Curators',
+      quote: '“วัยเกษียณไม่ใช่จุดสิ้นสุดการทำงาน แต่คือจุดเริ่มต้นของการใช้ชีวิตตามใจปรารถนา”',
+      tag: 'เครื่องมือ: Second Half of Life Roadmap',
+    },
+
+    'ENERGY_20_30': {
+      title: 'คริสตัลเสริมโฟกัส สมาธิ และความมั่นคงทางอารมณ์',
+      strategy: 'คัดสรรหินควอตซ์ธรรมชาติและลาพิส ลาซูลี เสริมจักระที่ 3 และ 6 ช่วยในการตัดสินใจและสร้างสรรค์งาน',
+      advisor: 'คุณจอย',
+      role: 'Natural Energy & Wellbeing Curator',
+      quote: '“หินธรรมชาติคือคลื่นความถี่ที่บริสุทธิ์ ช่วยคืนความสงบนิ่งให้จิตใจในวันที่วุ่นวาย”',
+      tag: 'ผลึกแนะนำ: ไหมดำ / ลาพิส ลาซูลี / ควอตซ์ใสธรรมชาติ',
+    },
+    'ENERGY_31_45': {
+      title: 'หินไหมทองจักรพรรดิ เสริมภาวะผู้นำ & ปกป้องพลังงานลบ',
+      strategy: 'ผลึกรูไทล์ธรรมชาติที่มีคุณสมบัติเพียโซอิเล็กทริก เสริมจักระมณีปุระ เพื่อความมั่นคงทางจิตใจและอำนาจการเจรจา',
+      advisor: 'คุณจอย',
+      role: 'Natural Energy & Wellbeing Curator',
+      quote: '“พลังของหินไม่ใช่เรื่องไสยศาสตร์ แต่คือความสอดคล้องระหว่างแร่ธาตุธรรมชาติกับคลื่นความคิดในตัวเรา”',
+      tag: 'ผลึกแนะนำ: หินไหมทองคัดเกรดธรรมชาติ / มาลาไคต์',
+    },
+    'ENERGY_46_PLUS': {
+      title: 'ผลึกเพื่อการเจริญสติ การผ่อนคลาย และการนอนหลับลึก',
+      strategy: 'หินอเมทิสต์แท้และหินโรสควอตซ์มาดากัสการ์ เชื่อมโยงจักระหัวใจและจักระตาที่สาม เสริมสมาธิภาวนา',
+      advisor: 'คุณจอย',
+      role: 'Natural Energy & Wellbeing Curator',
+      quote: '“การจัดวางผลึกหินในห้องนอนช่วยปรับพลังงานรอบตัวให้สงบ หลับสบาย และตื่นมารับวันใหม่อย่างสดชื่น”',
+      tag: 'ผลึกแนะนำ: อเมทิสต์เกรดพรีเมียม / หินแท้ประจำวันเกิด',
+    },
+  };
+
+  const key = `${activeCategory}_${activeAge}`;
+  const currentRec = recommendations[key] || recommendations['INSURANCE_31_45'];
+
+  const handleConsult = () => {
+    if (onSelectFocus) {
+      onSelectFocus({
+        category: categories.find((c) => c.id === activeCategory)?.label,
+        stage: ageStages.find((a) => a.id === activeAge)?.label,
+        topic: currentRec.title,
+        advisor: currentRec.advisor,
+      });
+    }
+    const el = document.getElementById('talk-form');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="w-full bg-base-100/80 rounded-3xl p-5 sm:p-7 border border-base-300/80 shadow-lg backdrop-blur-md space-y-5">
+      {/* Header Badge */}
+      <div className="flex items-center justify-between gap-2 border-b border-base-300/50 pb-3">
+        <div className="flex items-center gap-2">
+          <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
+          <span className="text-xs sm:text-sm font-bold text-primary tracking-wide">
+            EXPLORER: จำลองแนวทางที่เหมาะกับคุณทันที
+          </span>
+        </div>
+        <span className="text-[11px] sm:text-xs text-base-content/60 font-medium">
+          ปรับเปลี่ยนได้อิสระ
+        </span>
+      </div>
+
+      {/* Step 1: Select Focus */}
+      <div className="space-y-2">
+        <label className="text-xs font-bold text-base-content/75 uppercase tracking-wider block">
+          1. เลือกมิติที่คุณอยากดูแลเป็นอันดับแรก:
+        </label>
+        <div className="grid grid-cols-2 gap-2">
+          {categories.map((cat) => {
+            const Icon = cat.icon;
+            const isSelected = activeCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                onClick={() => setActiveCategory(cat.id)}
+                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.01]'
+                    : 'bg-base-200/50 text-base-content/80 border-base-300/60 hover:bg-base-200 hover:border-secondary/60'
+                }`}
+              >
+                <div
+                  className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 ${
+                    isSelected ? 'bg-white/20 text-white' : 'bg-primary/10 text-primary'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-xs sm:text-sm font-bold truncate leading-tight">
+                    {cat.label}
+                  </p>
+                  <span
+                    className={`text-[10px] block truncate ${
+                      isSelected ? 'text-white/80' : 'text-base-content/60'
+                    }`}
+                  >
+                    ดูแลโดย {cat.advisor}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Step 2: Select Age Range */}
+      <div className="space-y-2">
+        <label className="text-xs font-bold text-base-content/75 uppercase tracking-wider block">
+          2. ช่วงวัยในปัจจุบันของคุณ:
+        </label>
+        <div className="grid grid-cols-3 gap-2">
+          {ageStages.map((age) => {
+            const isSelected = activeAge === age.id;
+            return (
+              <button
+                key={age.id}
+                type="button"
+                onClick={() => setActiveAge(age.id)}
+                className={`py-2 px-2.5 rounded-xl border text-center transition-all cursor-pointer ${
+                  isSelected
+                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs'
+                    : 'bg-base-200/50 text-base-content/75 border-base-300/60 hover:bg-base-200'
+                }`}
+              >
+                <p className="text-xs sm:text-sm font-bold leading-tight">{age.label}</p>
+                <p className="text-[10px] text-base-content/60 truncate">{age.sub}</p>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Result Card: Dynamic Live Recommendation (เหมือน deTeam) */}
+      <div className="zen-surface rounded-2xl p-4 sm:p-5 border-2 border-secondary/40 shadow-md space-y-3 relative overflow-hidden">
+        <div className="flex items-center justify-between gap-2">
+          <span className="badge badge-secondary badge-sm font-bold text-[10px] tracking-wide">
+            {currentRec.tag}
+          </span>
+          <div className="flex items-center gap-1.5 text-xs text-base-content/70">
+            <UserCheck className="w-3.5 h-3.5 text-primary" />
+            <span>ที่ปรึกษา: <strong className="text-primary">{currentRec.advisor}</strong></span>
+          </div>
+        </div>
+
+        <div>
+          <h4 className="text-sm sm:text-base font-black text-primary leading-snug">
+            {currentRec.title}
+          </h4>
+          <p className="text-xs text-base-content/80 mt-1 leading-relaxed">
+            {currentRec.strategy}
+          </p>
+        </div>
+
+        <blockquote className="bg-base-200/60 rounded-xl p-2.5 text-xs italic text-base-content/70 border-l-2 border-secondary">
+          {currentRec.quote}
+        </blockquote>
+
+        <button
+          type="button"
+          onClick={handleConsult}
+          className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-2 shadow-xs"
+        >
+          <span>ปรึกษาแนวทางนี้กับ {currentRec.advisor} ฟรี</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+}

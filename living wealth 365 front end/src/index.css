@@ -93,21 +93,29 @@
 
 @layer base {
   html {
-    font-size: 16px; /* Reduced by ~30% from 19px for comfortable, well-balanced readability */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    font-size: 100%; /* Respect user's device/browser accessibility font scaling */
     width: 100%;
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
   }
   body {
     background: var(--color-base-100);
     color: var(--color-base-content);
     line-height: 1.65;
-    font-size: 1rem; /* ~16px-17px clean readable base text */
+    font-size: 1rem;
     width: 100%;
     min-height: 100vh;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+  }
+  /* Ultra-flexible responsive typography: prevents text clipping across all zooms & devices */
+  p, h1, h2, h3, h4, h5, h6, span, a, label, li, td, th {
+    overflow-wrap: break-word;
+    word-break: normal;
   }
   :where(a, button, input, select, textarea, [tabindex]):focus-visible {
     outline: 2px solid var(--color-primary);
@@ -128,13 +136,27 @@
     border: 1px solid var(--zen-field-border);
     font-size: 0.95rem;
     min-height: 2.75rem;
+    height: auto;
   }
   .btn {
     min-height: 2.75rem;
+    height: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     box-shadow: none;
     transition-property: background-color, border-color, color, transform;
     transition-duration: 150ms;
     font-size: 0.95rem;
+    white-space: normal;
+    word-break: break-word;
+  }
+  .badge {
+    height: auto;
+    min-height: 1.5rem;
+    white-space: normal;
+    word-break: break-word;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
   }
   .btn:active:not(:disabled) { transform: scale(0.98); }
   @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
@@ -143,6 +165,22 @@
       -webkit-backdrop-filter: blur(12px);
       backdrop-filter: blur(12px);
     }
+  }
+
+  /* 🎨 Editorial Hand-Drawn Highlights & Underlines (Inspired by Warm Editorial Fintech) */
+  .hand-drawn-underline {
+    position: relative;
+    display: inline-block;
+    white-space: normal;
+  }
+  .hand-drawn-underline svg {
+    position: absolute;
+    left: -2%;
+    bottom: -0.32em;
+    width: 104%;
+    height: 0.42em;
+    overflow: visible;
+    pointer-events: none;
   }
 }
 
