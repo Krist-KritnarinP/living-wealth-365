@@ -972,6 +972,24 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 2.16s.
 
+## 37. Apple HIG Liquid Glass Spec (Mask-Composite Rim + Fluid Translucency) & Header Overflow Fix (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Issues Resolved**:
+  - Header buttons could overflow at `1024px–1279px` (`lg:`) or when logged in with long user names lacking `max-w` / `truncate`.
+  - Earlier glass fill (`0.48` opacity) looked milky rather than translucent and lacked the directional 135° Apple Liquid Glass rim highlight.
+- **Improvements Delivered**:
+  1. **Zero-Overflow Responsive Navbar (`Navbar.jsx`)**:
+     - Shifted desktop inline menu breakpoint from `lg:` (`1024px`) to `xl:` (`1280px`) so `1024px–1279px` tablets/small laptops cleanly use the frosted mobile/tablet drawer without crowding.
+     - Added `max-w-[165px] truncate` and `rounded-full` to user profile pills so long user names never push header controls off-screen.
+  2. **Apple HIG Liquid Glass Spec (`index.css`, `HeroInteractiveFocus.jsx`, `HomePage.jsx`)**:
+     - Tuned true glass translucency (`rgba(255, 255, 255, 0.36)` light / `rgba(20, 30, 44, 0.40)` dark) with `backdrop-filter: blur(22px) saturate(215%)` and richer bokeh glow behind it.
+     - Implemented `mask-composite: exclude` diagonal 135° light-catching rim on `.zen-surface::before`, paired with exact pixel cursor-tracking light beam on `.liquid-glass-interactive::after` (`--mouse-x`, `--mouse-y` in `px`).
+     - Enforced Apple HIG 0-nesting glass rule (`HeroInteractiveFocus` result panel uses matte-solid `bg-base-100/92`) and added `@media (prefers-reduced-transparency: reduce)` accessibility fallback.
+- **Verification**:
+  - Frontend Unit Tests: 15/15 passed in 133ms (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 908ms.
+
+
 
 
 

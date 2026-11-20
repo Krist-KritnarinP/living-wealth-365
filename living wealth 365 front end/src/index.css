@@ -45,17 +45,17 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
-  --zen-glass: rgba(255, 255, 255, 0.48);
-  --zen-dropdown-bg: rgba(255, 255, 255, 0.97);
-  --zen-glass-border: rgba(255, 255, 255, 0.72);
-  --zen-specular: rgba(255, 255, 255, 0.95);
-  --zen-caustic: rgba(2, 62, 141, 0.07);
-  --zen-shadow: 0 12px 36px rgba(2, 62, 141, 0.08), 0 2px 6px rgba(24, 40, 59, 0.04);
-  --zen-elevate-shadow: 0 24px 48px -10px rgba(2, 62, 141, 0.16), 0 8px 24px -4px rgba(255, 181, 59, 0.18);
-  --zen-bokeh-blue: rgba(2, 62, 141, 0.28);
-  --zen-bokeh-sky: rgba(56, 189, 248, 0.24);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.38);
-  --zen-bokeh-emerald: rgba(16, 185, 129, 0.20);
+  --zen-glass: rgba(255, 255, 255, 0.36);
+  --zen-dropdown-bg: rgba(255, 255, 255, 0.96);
+  --zen-glass-border: rgba(255, 255, 255, 0.65);
+  --zen-specular: rgba(255, 255, 255, 0.96);
+  --zen-caustic: rgba(2, 62, 141, 0.08);
+  --zen-shadow: 0 12px 40px 0 rgba(2, 62, 141, 0.09), inset 0 0 0 0.5px rgba(255, 255, 255, 0.65);
+  --zen-elevate-shadow: 0 24px 52px -10px rgba(2, 62, 141, 0.18), 0 8px 24px -4px rgba(255, 181, 59, 0.20);
+  --zen-bokeh-blue: rgba(2, 62, 141, 0.34);
+  --zen-bokeh-sky: rgba(56, 189, 248, 0.30);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.44);
+  --zen-bokeh-emerald: rgba(16, 185, 129, 0.24);
   --zen-muted: #475569;
   --zen-field-border: #94A3B8;
 }
@@ -94,23 +94,25 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
-  --zen-glass: rgba(22, 32, 46, 0.52);
+  --zen-glass: rgba(20, 30, 44, 0.40);
   --zen-dropdown-bg: rgba(16, 24, 34, 0.97);
   --zen-glass-border: rgba(255, 255, 255, 0.18);
-  --zen-specular: rgba(255, 255, 255, 0.28);
-  --zen-caustic: rgba(0, 0, 0, 0.25);
-  --zen-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
-  --zen-elevate-shadow: 0 24px 48px -10px rgba(0, 0, 0, 0.6), 0 8px 22px -2px rgba(255, 181, 59, 0.20);
-  --zen-bokeh-blue: rgba(96, 165, 250, 0.26);
-  --zen-bokeh-sky: rgba(56, 189, 248, 0.20);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.26);
-  --zen-bokeh-emerald: rgba(52, 211, 153, 0.18);
+  --zen-specular: rgba(255, 255, 255, 0.30);
+  --zen-caustic: rgba(0, 0, 0, 0.28);
+  --zen-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.40), inset 0 0 0 0.5px rgba(255, 255, 255, 0.18);
+  --zen-elevate-shadow: 0 24px 52px -10px rgba(0, 0, 0, 0.65), 0 8px 24px -2px rgba(255, 181, 59, 0.22);
+  --zen-bokeh-blue: rgba(96, 165, 250, 0.32);
+  --zen-bokeh-sky: rgba(56, 189, 248, 0.26);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.30);
+  --zen-bokeh-emerald: rgba(52, 211, 153, 0.22);
   --zen-muted: #CBD5E1;
   --zen-field-border: #788DA5;
 }
 
 :root {
   --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+  --fluid-ease: cubic-bezier(0.25, 1, 0.5, 1);
+  --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 @layer base {
@@ -183,21 +185,42 @@
     padding-bottom: 0.25rem;
   }
   .btn:active:not(:disabled) { transform: scale(0.98); }
-  @supports (backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px)) {
+  @supports (backdrop-filter: blur(22px)) or (-webkit-backdrop-filter: blur(22px)) {
     .zen-surface {
+      position: relative;
       background: var(--zen-glass);
-      -webkit-backdrop-filter: blur(20px) saturate(200%);
-      backdrop-filter: blur(20px) saturate(200%);
+      -webkit-backdrop-filter: blur(22px) saturate(215%);
+      backdrop-filter: blur(22px) saturate(215%);
       border: 1px solid var(--zen-glass-border);
       box-shadow:
         var(--zen-shadow),
         inset 0 1.5px 1px 0 var(--zen-specular),
         inset 0 -2px 6px 0 var(--zen-caustic);
     }
+    /* Apple HIG Liquid Glass 135° Caustic Gradient Specular Rim */
+    .zen-surface::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.85) 0%,
+        rgba(255, 255, 255, 0.08) 48%,
+        rgba(255, 255, 255, 0.35) 100%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
     .liquid-glass-solid {
+      position: relative;
       background: var(--zen-dropdown-bg);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(36px) saturate(200%);
+      backdrop-filter: blur(36px) saturate(200%);
       border: 1px solid var(--zen-glass-border);
       box-shadow:
         var(--zen-elevate-shadow),
@@ -205,29 +228,33 @@
     }
   }
 
-  /*  Apple Liquid Glass Cursor-Tracking Specular Highlight */
+  /*  Apple Liquid Glass Cursor-Tracking Light Beam (uses ::after to preserve ::before rim) */
   .liquid-glass-interactive {
     position: relative;
     overflow: hidden;
   }
-  .liquid-glass-interactive::before {
+  .liquid-glass-interactive::after {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
     background: radial-gradient(
-      circle 280px at var(--mouse-x, 50%) var(--mouse-y, 15%),
+      circle 520px at var(--mouse-x, 50%) var(--mouse-y, 15%),
       rgba(255, 255, 255, 0.42) 0%,
       rgba(255, 255, 255, 0.08) 45%,
-      transparent 75%
+      transparent 70%
     );
     opacity: 0;
-    transition: opacity 0.35s ease;
+    transition: opacity 220ms var(--fluid-ease);
     z-index: 1;
   }
-  .liquid-glass-interactive:hover::before {
+  .liquid-glass-interactive:hover::after {
     opacity: 1;
+  }
+  .liquid-glass-interactive:active {
+    transform: scale(0.985);
+    transition: transform 120ms var(--spring-bounce);
   }
   .liquid-glass-interactive > * {
     position: relative;
@@ -355,6 +382,22 @@
     animation: none;
     stroke-dashoffset: 0;
     opacity: 1;
+  }
+  .liquid-glass-interactive:hover::after {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .zen-surface,
+  .liquid-glass-solid {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--zen-surface) !important;
+  }
+  .zen-surface::before,
+  .liquid-glass-interactive::after {
+    display: none;
   }
 }
 

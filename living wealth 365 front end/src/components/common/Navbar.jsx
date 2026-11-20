@@ -182,8 +182,8 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Gateway Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
+        {/* Desktop Gateway Navigation Links (xl: 1280px+ to guarantee zero overflow on 1024px tablets) */}
+        <div className="hidden xl:flex items-center gap-1 2xl:gap-1.5 shrink-0">
           <Link
             to={ROUTES.HOME}
             className={`px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-colors ${
@@ -299,10 +299,10 @@ export default function Navbar() {
           {/* Bilingual Switcher (TH / EN) */}
           <button
             onClick={toggleLanguage}
-            className="btn btn-ghost btn-sm rounded-xl font-bold gap-1 px-2.5 border border-base-300/40 hidden sm:inline-flex"
+            className="btn btn-ghost btn-sm rounded-full font-bold gap-1 px-2.5 border border-base-300/40 hidden sm:inline-flex whitespace-nowrap shrink-0"
             title="สลับภาษา / Switch Language"
           >
-            <Globe className="w-4 h-4 text-primary" />
+            <Globe className="w-4 h-4 text-primary shrink-0" />
             <span className="text-xs uppercase font-black text-secondary">
               {language === 'th' ? '🇹🇭 TH' : '🇬🇧 EN'}
             </span>
@@ -311,7 +311,7 @@ export default function Navbar() {
           {/* Theme Toggle */}
           <button
             onClick={toggleTheme}
-            className="btn btn-ghost btn-circle btn-sm sm:btn-md hidden sm:inline-flex"
+            className="btn btn-ghost btn-circle btn-sm sm:btn-md hidden sm:inline-flex shrink-0"
             title="สลับโหมดสว่าง / มืด"
             aria-label="Toggle Theme"
           >
@@ -327,36 +327,39 @@ export default function Navbar() {
             currentUser.role === 'ADMIN' ? (
               <Link
                 to={ROUTES.ADMIN_DASHBOARD}
-                className="btn btn-secondary btn-sm text-white font-bold gap-1 px-3 sm:px-4 rounded-xl shadow-xs"
+                className="btn btn-secondary btn-sm text-white font-bold gap-1.5 px-3 sm:px-4 rounded-full shadow-xs whitespace-nowrap shrink-0"
               >
-                <Shield className="w-4 h-4" />
+                <Shield className="w-4 h-4 shrink-0" />
                 <span className="hidden md:inline">{t('adminCrm')}</span>
                 <span className="md:hidden">CRM</span>
               </Link>
             ) : (
               <Link
                 to={ROUTES.ACCOUNT}
-                className="btn btn-primary btn-outline btn-sm font-bold gap-1 px-3 sm:px-4 rounded-xl"
+                className="btn btn-primary btn-outline btn-sm font-bold gap-1.5 px-3 sm:px-4 rounded-full whitespace-nowrap shrink-0 max-w-[165px]"
+                title={currentUser.name || t('account')}
               >
-                <User className="w-4 h-4" />
-                <span className="hidden md:inline">{currentUser.name || t('account')}</span>
+                <User className="w-4 h-4 shrink-0" />
+                <span className="hidden md:inline truncate">
+                  {currentUser.name || t('account')}
+                </span>
                 <span className="md:hidden">{t('account')}</span>
               </Link>
             )
           ) : (
             <Link
               to={ROUTES.LOGIN}
-              className="btn btn-primary btn-sm font-bold gap-1 px-3 sm:px-4 rounded-xl shadow-xs"
+              className="btn btn-primary btn-sm font-bold gap-1.5 px-3 sm:px-4 rounded-full shadow-xs whitespace-nowrap shrink-0"
             >
-              <LogIn className="w-4 h-4" />
+              <LogIn className="w-4 h-4 shrink-0" />
               <span>{t('login')}</span>
             </Link>
           )}
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile / Tablet Menu Toggle Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="btn btn-ghost btn-circle btn-sm lg:hidden"
+            className="btn btn-ghost btn-circle btn-sm xl:hidden shrink-0"
             aria-label="เปิดเมนูการนำทาง"
             aria-expanded={mobileMenuOpen}
           >
@@ -365,13 +368,13 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer Dropdown */}
+      {/* Mobile / Tablet Drawer Dropdown */}
       {mobileMenuOpen && (
         <div
           role="dialog"
           aria-modal="true"
           aria-label="เมนูบนมือถือ"
-          className="lg:hidden mt-2 p-4 sm:p-5 rounded-2xl liquid-glass-solid flex flex-col gap-4 animate-pop-in max-h-[85vh] overflow-y-auto"
+          className="xl:hidden mt-2 p-4 sm:p-5 rounded-3xl liquid-glass-solid flex flex-col gap-4 animate-pop-in max-h-[85vh] overflow-y-auto"
         >
           {/* Quick Toolbar on Mobile */}
           <div className="flex sm:hidden items-center justify-between pb-3 border-b border-base-300/60">

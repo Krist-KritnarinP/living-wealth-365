@@ -138,10 +138,10 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
 
   const handleGlassMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
   };
 
   return (
@@ -240,10 +240,10 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
           </div>
         </div>
 
-        {/* Right: Dynamic Live Recommendation Panel (5 cols) */}
+        {/* Right: Dynamic Live Recommendation Panel (Matte-solid inset per Apple HIG 0-nesting rule) */}
         <div
           key={key}
-          className="lg:col-span-5 bg-base-100/75 rounded-2xl p-5 sm:p-6 border border-secondary/40 flex flex-col justify-between space-y-4 relative animate-pop-in min-w-0"
+          className="lg:col-span-5 bg-base-100/92 rounded-2xl p-5 sm:p-6 border border-secondary/40 shadow-sm flex flex-col justify-between space-y-4 relative animate-pop-in min-w-0"
         >
           <div className="space-y-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2">

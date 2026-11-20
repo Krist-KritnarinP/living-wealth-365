@@ -48,10 +48,10 @@ export default function HomePage() {
 
   const handleGlassMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
   };
 
   return (
@@ -110,7 +110,8 @@ export default function HomePage() {
 
             <Link
               to={content?.hero?.secondaryBtnLink || ROUTES.ABOUT}
-              className="btn zen-surface text-primary hover:text-secondary btn-lg rounded-full font-bold px-8 hover:scale-[1.03] transition-[transform,color] duration-200 gap-2 text-base sm:text-lg"
+              onMouseMove={handleGlassMove}
+              className="btn zen-surface liquid-glass-interactive text-primary hover:text-secondary btn-lg rounded-full font-bold px-8 hover:scale-[1.03] transition-[transform,color] duration-200 gap-2 text-base sm:text-lg"
             >
               <EditableText
                 fieldKey="hero.secondaryBtnText"
