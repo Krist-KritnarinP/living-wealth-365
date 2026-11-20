@@ -11,6 +11,13 @@
 @import "tailwindcss";
 @plugin "daisyui" { themes: false; }
 
+@theme {
+  --text-xs: 0.875rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.1875rem;
+}
+
 @plugin "daisyui/theme" {
   name: "zen-light";
   default: true;
@@ -52,12 +59,12 @@
   --zen-caustic: rgba(2, 62, 141, 0.09);
   --zen-shadow: 0 14px 40px -6px rgba(2, 62, 141, 0.12), 0 2px 10px rgba(24, 40, 59, 0.04);
   --zen-elevate-shadow: 0 26px 56px -10px rgba(2, 62, 141, 0.20), 0 10px 26px -4px rgba(255, 181, 59, 0.22);
-  --zen-bokeh-blue: rgba(2, 62, 141, 0.42);
-  --zen-bokeh-sky: rgba(56, 189, 248, 0.38);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.52);
-  --zen-bokeh-emerald: rgba(16, 185, 129, 0.28);
-  --zen-muted: #334155;
-  --zen-field-border: #94A3B8;
+  --zen-bokeh-blue: rgba(2, 62, 141, 0.36);
+  --zen-bokeh-sky: rgba(56, 189, 248, 0.32);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.36);
+  --zen-bokeh-emerald: rgba(16, 185, 129, 0.24);
+  --zen-muted: #1E293B;
+  --zen-field-border: #64748B;
 }
 
 @plugin "daisyui/theme" {
@@ -131,12 +138,31 @@
     background: var(--color-base-100);
     color: var(--color-base-content);
     line-height: 1.65;
-    font-size: 1rem;
+    font-size: var(--text-base);
     width: 100%;
     min-height: 100vh;
     margin: 0;
     padding: 0;
     overflow-x: clip;
+  }
+  /* High-Contrast QC for Thai legibility over Liquid Glass & Bokeh */
+  [data-theme="zen-light"] .text-secondary:not(.btn):not(.badge):not(.bg-primary *) {
+    color: #B45D00;
+  }
+  [data-theme="zen-light"] .text-amber-500,
+  [data-theme="zen-light"] .text-amber-500\/80 {
+    color: #B45D00;
+  }
+  [data-theme="zen-light"] .text-base-content\/50,
+  [data-theme="zen-light"] .text-base-content\/60,
+  [data-theme="zen-light"] .text-base-content\/65,
+  [data-theme="zen-light"] .text-base-content\/70 {
+    color: rgba(24, 40, 59, 0.84);
+  }
+  [data-theme="zen-dark"] .text-base-content\/50,
+  [data-theme="zen-dark"] .text-base-content\/60,
+  [data-theme="zen-dark"] .text-base-content\/65 {
+    color: rgba(232, 237, 244, 0.84);
   }
   /* Ultra-flexible responsive typography: prevents text clipping across all zooms & devices */
   p, h1, h2, h3, h4, h5, h6, span, a, label, li, td, th {

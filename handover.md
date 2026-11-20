@@ -1020,6 +1020,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.93s.
 
+## 40. Global Typography Scale Boost & High-Contrast QC Over Liquid Glass (November 20, 2026)
+- **Status**: **Completed & Verified in Headless Chromium**
+- **Issues Resolved**:
+  - Thai body and sub-label text (`text-xs` 12px, `text-sm` 14px) appeared too small for comfortable reading across Hero, Account, and Admin dashboards.
+  - Light-mode golden text (`#FFB53B` via `.text-secondary` / `.text-amber-500`) and faint `/50`–`/70` muted labels blended into warm-gold Bokeh and translucent Liquid Glass surfaces.
+- **Improvements Applied (`index.css`)**:
+  - Upgraded Tailwind v4 font-size tokens inside `@theme` (`--text-xs: 0.875rem` [14px], `--text-sm: 0.9375rem` [15px], `--text-base: 1.0625rem` [17px], `--text-lg: 1.1875rem` [19px]) so every page's text scales up crisply without inflating `rem` layout/padding widths.
+  - Darkened light-mode `.text-secondary` (outside dark buttons/badges) and `.text-amber-500` to crisp high-contrast Amber Gold (`#B45D00`), calibrated `--zen-bokeh-gold` (`0.36`), and raised muted `/50`–`/70` text contrast to `84%` in both `zen-light` and `zen-dark`.
+- **Browser QC Verification (`http://127.0.0.1:4173/`)**:
+  - `1536x900` (`/` logged in as `คุณสมชาย ใจดี`): `0` overflows, `0` wraps, `0` overlaps (`Living Wealth 365` `right=345.32`, `หน้าหลัก` `left=361.32`).
+  - `1280x800` (`/` logged in as `คุณสมชาย ใจดี`): `0` overflows (`1228.42 <= 1232`), `0` wraps, `0` overlaps, `horizontalScrollDelta=0`.
+  - `/admin/dashboard` (`1536x900`): `65.94px` clean clearance between Sidebar brand text (`right=181.06`) and `<` collapse button (`left=247`), crisp KPI contrast (`#B45D00`) over Liquid Glass.
+- **Build & Unit Tests**: 15/15 passed (`npm test -- --run`), `vite build` completed cleanly in 2.65s.
+
+
 
 
 
