@@ -81,7 +81,8 @@ export default function Navbar() {
   const gateways = [
     {
       id: 'living',
-      title: language === 'th' ? (content?.gateways?.living?.title || 'Living (วิถีชีวิต)') : 'Living',
+      title: 'Living',
+      thaiSub: '(วิถีชีวิต)',
       icon: Sparkles,
       items: [
         {
@@ -108,7 +109,8 @@ export default function Navbar() {
     },
     {
       id: 'learning',
-      title: language === 'th' ? (content?.gateways?.learning?.title || 'Learning (การเรียนรู้)') : 'Learning',
+      title: 'Learning',
+      thaiSub: '(การเรียนรู้)',
       icon: BookOpen,
       items: [
         {
@@ -139,7 +141,8 @@ export default function Navbar() {
     },
     {
       id: 'connecting',
-      title: language === 'th' ? (content?.gateways?.connecting?.title || 'Connecting (เพื่อนร่วมทาง)') : 'Connecting',
+      title: 'Connecting',
+      thaiSub: '(เพื่อนร่วมทาง)',
       icon: MessageCircle,
       items: [
         {
@@ -160,36 +163,32 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-14 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
+    <header className="w-full max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-10 xl:px-12 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
       <nav
         aria-label="เมนูหลัก"
-        className="zen-surface w-full px-3 sm:px-5 py-2.5 rounded-full flex items-center justify-between gap-2 transition-[box-shadow,background-color] duration-300"
+        className="zen-surface w-full px-2.5 sm:px-5 py-2 rounded-full flex items-center justify-between gap-1.5 sm:gap-3 transition-[box-shadow,background-color] duration-300"
       >
         {/* Brand Logo & Identity */}
         <Link
           to={ROUTES.HOME}
-          className="flex items-center gap-2.5 group shrink-0"
+          className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0 min-w-0"
           aria-label="Living Wealth 365 หน้าแรก"
         >
-          <BrandLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
-          <div className="flex flex-col shrink-0 notranslate" translate="no">
-            <span className="text-base sm:text-lg xl:text-xl font-black tracking-tight text-primary leading-tight whitespace-nowrap notranslate" translate="no">
-              Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
-            </span>
-            <span className="hidden 2xl:block text-[11px] font-semibold tracking-wide zen-muted whitespace-nowrap notranslate" translate="no">
-              {content?.brand?.slogan || 'A LIFE WELL PLANNED. A LIFE WELL LIVED.'}
-            </span>
-          </div>
+          <BrandLogo collapsed={true} size="sm" className="sm:hidden shrink-0" />
+          <BrandLogo size="sm" className="hidden sm:block sm:h-9 w-auto group-hover:scale-105 transition-transform duration-300 shrink-0" />
+          <span className="hidden min-[360px]:inline text-sm sm:text-lg xl:text-xl font-black tracking-tight text-primary leading-tight whitespace-nowrap notranslate" translate="no">
+            Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
+          </span>
         </Link>
 
-        {/* Desktop Gateway Navigation Links (xl: 1280px+ to guarantee zero overflow on 1024px tablets) */}
-        <div className="hidden xl:flex items-center gap-1 2xl:gap-1.5 shrink-0">
+        {/* Desktop Gateway Navigation Links (xl: 1280px+) */}
+        <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-1.5 min-w-0">
           <Link
             to={ROUTES.HOME}
-            className={`px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-colors ${
+            className={`px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
               isActive(ROUTES.HOME) && location.pathname === '/'
-                ? 'bg-primary/12 text-primary font-bold'
-                : 'text-base-content/85 hover:bg-base-200/60 hover:text-primary'
+                ? 'bg-primary/14 text-primary font-bold shadow-xs'
+                : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
             }`}
           >
             {t('home')}
@@ -204,15 +203,22 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setOpenDropdown(isOpen ? null : gw.id)}
-                  className={`px-3 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
+                  className={`px-3 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 cursor-pointer ${
                     hasActiveChild || isOpen
-                      ? 'bg-primary/12 text-primary font-bold'
-                      : 'text-base-content/85 hover:bg-base-200/60 hover:text-primary'
+                      ? 'bg-primary/14 text-primary font-bold shadow-xs'
+                      : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
                   }`}
                   aria-expanded={isOpen}
                 >
                   <gw.icon className="w-4 h-4 opacity-75 shrink-0" />
-                  <span>{gw.title}</span>
+                  <span>
+                    {gw.title}
+                    {language === 'th' && (
+                      <span className="hidden min-[1420px]:inline font-medium opacity-80 ml-1">
+                        {gw.thaiSub}
+                      </span>
+                    )}
+                  </span>
                   <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -261,7 +267,7 @@ export default function Navbar() {
         </div>
 
         {/* Action Items */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
           {/* Shopping Cart Button */}
           <button
             type="button"
@@ -349,9 +355,9 @@ export default function Navbar() {
           ) : (
             <Link
               to={ROUTES.LOGIN}
-              className="btn btn-primary btn-sm font-bold gap-1.5 px-3 sm:px-4 rounded-full shadow-xs whitespace-nowrap shrink-0"
+              className="btn btn-primary btn-sm text-xs sm:text-sm font-bold gap-1 sm:gap-1.5 px-2.5 sm:px-4 rounded-full shadow-xs whitespace-nowrap shrink-0"
             >
-              <LogIn className="w-4 h-4 shrink-0" />
+              <LogIn className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>{t('login')}</span>
             </Link>
           )}
@@ -435,9 +441,9 @@ export default function Navbar() {
           {/* Gateways Breakdown */}
           {gateways.map((gw) => (
             <div key={gw.id} className="flex flex-col gap-1.5">
-              <div className="px-3 py-1 text-xs font-bold uppercase tracking-wider text-secondary flex items-center gap-1.5">
+              <div className="px-3 py-1 text-xs font-bold text-secondary flex items-center gap-1.5">
                 <gw.icon className="w-3.5 h-3.5" />
-                <span>{gw.title}</span>
+                <span>{gw.title} {language === 'th' ? gw.thaiSub : ''}</span>
               </div>
               <div className="grid grid-cols-1 gap-1 pl-2">
                 {gw.items.map((item) => (

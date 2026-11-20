@@ -989,6 +989,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed in 133ms (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 908ms.
 
+## 38. Browser-Verified Zero-Overflow Liquid Glass Navbar Across All Viewports (November 20, 2026)
+- **Status**: **Completed & Verified in Headless Chromium**
+- **Root Cause Fixed**:
+  1. Wide 40-char English slogan inside `<nav>` plus flex `shrink-0` across all 3 header clusters caused the right-side CTA button to protrude past the pill border on `1280px–1440px` screens and overlap sibling menu items at `1280px`.
+  2. Wide horizontal `BrandLogo` + wordmark text exceeded `351px`–`355px` inner capsule width on `375px` mobile screens.
+- **Fixes Applied (`Navbar.jsx`)**:
+  - Removed slogan from `<nav>` capsule (preserved in Hero badge and Footer).
+  - Compacted top-level Gateway titles (`Living`, `Learning`, `Connecting`) at `1280px–1419px` (`xl:`), showing full Thai subtitles `(วิถีชีวิต)`, `(การเรียนรู้)`, `(เพื่อนร่วมทาง)` at `min-[1420px]:inline`.
+  - Rendered square collapsed icon (`BrandLogo collapsed={true}`) on mobile `< 640px` and compact button padding (`px-2.5 text-xs`), hiding text wordmark gracefully below `360px`.
+- **Browser Verification Results (`http://127.0.0.1:4173/`)**:
+  - `1440x900`: `0` overflows (`69..1371` within `48..1392`), `0` overlaps, `0` line wraps.
+  - `1280x800`: `0` overflows (`69..1211` within `48..1232`), `0` overlaps (`36px` clearances), `horizontalScrollDelta = 0`.
+  - `375x812`: `0` overflows (`21..354` within `10..365`), `0` overlaps, `horizontalScrollDelta = 0`.
+  - `320x568`: `0` overflows (`21..299` within `10..310`), `0` overlaps, `horizontalScrollDelta = 0`.
+- **Build & Unit Tests**: 15/15 passed (`npm test -- --run`), `vite build` clean in 1.43s.
+
+
 
 
 
