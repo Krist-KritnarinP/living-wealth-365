@@ -1120,7 +1120,34 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
     - Verified Pillar 5 badge is crisp navy with solid border (`528.74 × 24.28px`).
     - Verified click on product card opens `/earth-energy/product/:id` with full 4-dimension detail.
     - Verified click on "เพิ่มลงในตะกร้า" flies item clone to `#nav-cart-btn`, pulses cart icon, increments badge to `1`, shows success toast, and `CartDrawer` remains closed.
-    - Verified `/wealth?tab=protection` Plan Cards titles, features bullets, and footer text wrap cleanly with zero clipping.
+
+## 48. Universal Live Audience Preview & 1-Click Cover Framing Across All Admin CMS (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **User Request Addressed**:
+  1. *"ไม่เห็นมีปุ่มให้แก้ไข profile ภาพปกเลยอยู่ตรงไหน อะ"*: Admins could not easily find or adjust cover framing on existing items.
+  2. *"ก่อนบันทึกต้อง preview เนื้อหา ทั้งหมดแบบ เป็นหน้าเดียวกับ ที่ ผู้ชมดู ก่อนที่จะกดบันทึกได้ด้วย นะ เพิ่มเติม ตรงนี้ทุกอันที่ แอดมิน เพิ่มหรือแก้ไข เลย ทุก หัวข้อเลย สำคัญมากๆ"*: Mandatory requirement for full audience-faithful live preview before saving across ALL Admin CMS sections (Blog/Articles, Insurance Plans, and Products/Minerals).
+- **Core Architectural & UI Additions**:
+  1. **1-Click Quick Cover Framing Modal (`QuickFrameModal.jsx`)**:
+     - Built standalone modal allowing admins to adjust cover image focal point, fit mode (`เต็มกรอบ (Cover)` vs `เห็นทั้งภาพ (Contain)`), presets (`ด้านบน`, `ตรงกลาง`, `ด้านล่าง`, `รีเซ็ตเฟรม`), and fine zoom/sliders directly from any table row.
+     - Added dedicated, prominent `[ปรับเฟรมปก]` button with `Move` icon to every table row across all 3 CMS pages (`AdminBlogPage.jsx`, `AdminInsurancePage.jsx`, `AdminProductsPage.jsx`).
+  2. **Audience-Faithful Live Previews (`BlogLivePreview.jsx`, `InsuranceLivePreview.jsx`, `ProductLivePreview.jsx`)**:
+     - **Blog Live Preview (`BlogLivePreview.jsx`)**: Exact 1:1 match to public `BlogDetailPage.jsx`—Hero header, breadcrumb, 16:9 framed cover honoring focal points, author meta (`Admin A & Admin B`), reading time, blockquote excerpt, formatted headings, numbered lists, highlighted takeaway card (*"Living Wealth 365 — A Life Well Planned. A Life Well Lived."*), and author sign-off card.
+     - **Insurance Live Preview (`InsuranceLivePreview.jsx`)**: Exact 1:1 match to public `InsurancePlanDetailPage.jsx`—Category badges, AIA Authorized tag, 16:9 framed hospital/care imagery, coverage amount badge, starting premium box, 4-point bulleted features card, suitability footer, and official PDF brochure button.
+     - **Product Live Preview (`ProductLivePreview.jsx`)**: Exact 1:1 match to public `ProductDetailPage.jsx`—Curated mineral badge, authenticity guarantee, pricing with VAT/certification note, 4 scientific and energetic spec tiles (Formula e.g. `SiO₂`, Chakra, Day of Week, Stone Type), 4 dimensions of mineral curation, and consultation action card for Admin B.
+  3. **Unified Edit Modal Tabs & Save Guard**:
+     - Added tab switcher at modal top: `[📝 ฟอร์มข้อมูล]` vs `[👁️ ตัวอย่างแบบผู้ชม]`.
+     - When switching to preview, modal box expands automatically from `max-w-2xl` to `max-w-4xl` (`transition-all duration-300`) for responsive, uncompressed desktop viewing.
+     - Added `[👁️ ดูตัวอย่างแบบผู้ชม (Preview)]` button directly adjacent to the final save button in all 3 CMS forms, allowing admins to inspect the exact audience appearance with 1 click before confirming and committing changes.
+     - Upgraded modal dialogs with `role="dialog"`, `aria-modal="true"`, and `z-[60]`/`z-[70]` layering above background toasts.
+- **Verification**:
+  - **Unit Tests**: 23/23 tests passed (`npm test -- --run`).
+  - **Production Build**: Clean Vite build (`npm run build` in 1.82s).
+  - **Browser QA Verification (Subagent `bf97e3ff-8d1d-44da-83a4-ee718a759ccf`)**:
+    - Authenticated via 1-Click Admin login.
+    - Verified `[ปรับเฟรมปก]` button opens `QuickFrameModal` on `/admin/cms/blog` with 16:9 crop guide, focal presets, and zoom slider.
+    - Verified article edit modal switches cleanly to `👁️ ตัวอย่างแบบผู้ชม` displaying the exact public `BlogDetailPage` layout.
+    - Verified insurance plan edit modal switches cleanly to `👁️ ตัวอย่างแบบผู้ชม` displaying the exact public `InsurancePlanDetailPage` layout.
+    - Verified product edit modal switches cleanly to `👁️ ตัวอย่างแบบผู้ชม` displaying the exact public `ProductDetailPage` layout.
 
 
 

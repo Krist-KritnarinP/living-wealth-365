@@ -17,7 +17,7 @@ export const INITIAL_PRODUCTS = [
     mineralFormula: 'SiO₂ with TiO₂ Rutile Needles',
     isCurated: true,
     description: 'ผลึกควอตซ์ธรรมชาติที่มีแร่รูไทล์สีทองสว่างภายใน ตัวแทนของความมั่นคงและความมั่งคั่ง',
-    imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?w=800&auto=format&fit=crop&q=80',
     isActive: true,
   },
 ];

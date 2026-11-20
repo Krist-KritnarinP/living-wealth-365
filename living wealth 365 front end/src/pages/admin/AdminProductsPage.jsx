@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Trash2, CheckCircle2, XCircle, Shield, Edit2 } from 'lucide-react';
+import { Plus, Trash2, CheckCircle2, XCircle, Shield, Edit2, Move, Eye } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
@@ -8,6 +8,8 @@ import FileUploadZone from '../../components/common/FileUploadZone';
 import CoverFramePicker from '../../components/common/CoverFramePicker';
 import FramedImage from '../../components/common/FramedImage';
 import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
+import QuickFrameModal from '../../components/admin/QuickFrameModal';
+import ProductLivePreview from '../../components/admin/preview/ProductLivePreview';
 import { logActivity } from '../../utils/activityLogger';
 import { resolveAssetUrl } from '../../api';
 
@@ -17,7 +19,12 @@ export default function AdminProductsPage() {
   const { showToast } = useToast();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTab, setModalTab] = useState('form'); // 'form' | 'preview'
   const [editingProduct, setEditingProduct] = useState(null);
+
+  // 🖼️ Quick Frame Modal State
+  const [quickFrameTarget, setQuickFrameTarget] = useState(null);
+  const [quickFrameOpen, setQuickFrameOpen] = useState(false);
 
   // 🔐 Security 2-Step Verification Modal State
   const [securityModalOpen, setSecurityModalOpen] = useState(false);
@@ -51,7 +58,26 @@ export default function AdminProductsPage() {
       imageUrl: '',
       dayOfWeek: 'วันพฤหัสบดี, วันจันทร์',
     });
+    setModalTab('form');
     setModalOpen(true);
+  };
+
+  // 🖼️ Quick Cover Frame Handlers
+  const handleOpenQuickFrame = (prod) => {
+    setQuickFrameTarget(prod);
+    setQuickFrameOpen(true);
+  };
+
+  const handleSaveQuickFrame = (framedUrl) => {
+    if (!quickFrameTarget) return;
+    updateProduct(quickFrameTarget.id, { imageUrl: framedUrl });
+    logActivity({
+      actionType: 'UPDATE',
+      entityType: 'PRODUCT',
+      targetTitle: quickFrameTarget.name,
+      details: 'ปรับแต่งเฟรมและจุดโฟกัสภาพสินค้าแบบด่วน',
+    });
+    showToast(`อัปเดตเฟรมภาพสินค้า "${quickFrameTarget.name}" สำเร็จ`, 'success');
   };
 
   // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Active
@@ -152,6 +178,7 @@ export default function AdminProductsPage() {
         securityPin: pin,
       });
       setSecurityModalOpen(false);
+      setModalTab('form');
       setModalOpen(true);
       showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไขสินค้า "${pendingTarget.name}"`, 'success');
     } else if (securityAction === 'delete') {
@@ -277,7 +304,16 @@ export default function AdminProductsPage() {
                     </button>
                   </td>
                   <td className="text-right whitespace-nowrap">
-                    <div className="flex items-center justify-end gap-1">
+                    <div className="flex items-center justify-end gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenQuickFrame(prod)}
+                        className="btn btn-ghost btn-xs text-secondary hover:bg-secondary/15 gap-1 rounded-lg border border-secondary/30"
+                        title="ปรับแต่งเฟรมและจุดโฟกัสภาพสินค้า"
+                      >
+                        <Move className="w-3.5 h-3.5" />
+                        <span className="font-bold text-[11px]">ปรับเฟรมปก</span>
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleRequestEdit(prod)}
@@ -304,12 +340,52 @@ export default function AdminProductsPage() {
 
         {/* New Product Modal */}
         {modalOpen && (
-          <div className="modal modal-open z-50">
-            <div className="modal-box max-w-2xl rounded-3xl liquid-glass-solid">
-              <h3 className="font-bold text-lg text-primary">
-                {editingProduct ? 'แก้ไขข้อมูลแร่ธาตุ / สินค้า' : 'เพิ่มแร่ธาตุ / สินค้าคัดสรรใหม่'}
-              </h3>
-              <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
+          <div role="dialog" aria-modal="true" className="modal modal-open z-[60]">
+            <div className={`modal-box rounded-3xl liquid-glass-solid max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4 transition-all duration-300 ${
+              modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
+            }`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-base-300 pb-3">
+                <div>
+                  <h3 className="font-bold text-lg text-primary">
+                    {editingProduct ? 'แก้ไขข้อมูลแร่ธาตุ / สินค้า' : 'เพิ่มแร่ธาตุ / สินค้าคัดสรรใหม่'}
+                  </h3>
+                  <p className="text-xs text-base-content/65">
+                    {modalTab === 'preview'
+                      ? 'ตรวจสอบหน้าตาสินค้าจริงแบบเดียวกับที่ผู้ชมเว็บไซต์เห็น ก่อนกดบันทึก'
+                      : 'กรอกรายละเอียดและปรับแต่งเฟรมรูปภาพสินค้า'}
+                  </p>
+                </div>
+
+                {/* View Mode Switcher Tabs */}
+                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-base-200/80 border border-base-300/40">
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('form')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                      modalTab === 'form'
+                        ? 'bg-primary text-white shadow-xs'
+                        : 'text-base-content/70 hover:text-primary'
+                    }`}
+                  >
+                    📝 ฟอร์มข้อมูล
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('preview')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      modalTab === 'preview'
+                        ? 'bg-secondary text-secondary-content shadow-xs font-black'
+                        : 'text-base-content/70 hover:text-secondary'
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>👁️ ตัวอย่างแบบผู้ชม</span>
+                  </button>
+                </div>
+              </div>
+              <form onSubmit={handleSubmit} className="space-y-4 text-xs sm:text-sm">
+                {modalTab === 'form' ? (
+                  <>
                 <div className="grid grid-cols-2 gap-4 w-full">
                   <div className="flex flex-col gap-1.5 w-full">
                     <label className="text-xs font-bold text-base-content/80">ชื่อแร่ธาตุ / ชิ้นงาน</label>
@@ -442,8 +518,14 @@ export default function AdminProductsPage() {
                     label="ปรับแต่งเฟรมและจุดโฟกัสภาพสินค้า (Focal Point & Framing)"
                   />
                 )}
+                  </>
+                ) : (
+                  <div className="space-y-4">
+                    <ProductLivePreview product={formData} />
+                  </div>
+                )}
 
-                <div className="modal-action">
+                <div className="modal-action pt-4 border-t border-base-300 flex items-center justify-between">
                   <button
                     type="button"
                     onClick={() => setModalOpen(false)}
@@ -451,12 +533,34 @@ export default function AdminProductsPage() {
                   >
                     {t('cancel')}
                   </button>
-                  <button
-                    type="submit"
-                    className="btn btn-sm btn-secondary text-white rounded-xl font-bold"
-                  >
-                    {editingProduct ? 'บันทึกการแก้ไข' : `${t('save')} สินค้า`}
-                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {modalTab === 'form' ? (
+                      <button
+                        type="button"
+                        onClick={() => setModalTab('preview')}
+                        className="btn btn-sm btn-outline btn-secondary rounded-xl font-bold gap-1.5"
+                      >
+                        <Eye className="w-4 h-4" />
+                        <span>ดูตัวอย่างแบบผู้ชม (Preview)</span>
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setModalTab('form')}
+                        className="btn btn-sm btn-outline rounded-xl font-bold gap-1.5"
+                      >
+                        <span>← กลับไปฟอร์มแก้ไข</span>
+                      </button>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="btn btn-sm btn-primary rounded-xl font-bold shadow-sm"
+                    >
+                      {editingProduct ? 'ยืนยัน & บันทึกการแก้ไข' : `${t('save')} สินค้า`}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -514,6 +618,18 @@ export default function AdminProductsPage() {
             setSecurityModalOpen(false);
             setPendingTarget(null);
           }}
+        />
+
+        {/* 🖼️ Quick Cover Frame Modal */}
+        <QuickFrameModal
+          isOpen={quickFrameOpen}
+          onClose={() => {
+            setQuickFrameOpen(false);
+            setQuickFrameTarget(null);
+          }}
+          itemTitle={quickFrameTarget?.name}
+          imageUrl={quickFrameTarget?.imageUrl}
+          onSave={handleSaveQuickFrame}
         />
       </div>
     </DashboardLayout>

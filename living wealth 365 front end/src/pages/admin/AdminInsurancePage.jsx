@@ -12,13 +12,18 @@ import {
   Check,
   FileText,
   Image as ImageIcon,
+  Move,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import FileUploadZone from '../../components/common/FileUploadZone';
+import CoverFramePicker from '../../components/common/CoverFramePicker';
+import FramedImage from '../../components/common/FramedImage';
 import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
+import QuickFrameModal from '../../components/admin/QuickFrameModal';
+import InsuranceLivePreview from '../../components/admin/preview/InsuranceLivePreview';
 import { logActivity } from '../../utils/activityLogger';
 import { resolveAssetUrl } from '../../api';
 
@@ -32,7 +37,12 @@ export default function AdminInsurancePage() {
 
   // Modal State for Add / Edit
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTab, setModalTab] = useState('form'); // 'form' | 'preview'
   const [editingPlan, setEditingPlan] = useState(null);
+
+  // 🖼️ Quick Frame Modal State
+  const [quickFrameTarget, setQuickFrameTarget] = useState(null);
+  const [quickFrameOpen, setQuickFrameOpen] = useState(false);
   const [formData, setFormData] = useState({
     type: 'LIFE',
     category: 'HEALTH',
@@ -83,7 +93,26 @@ export default function AdminInsurancePage() {
       brochureUrl: '',
       isActive: true,
     });
+    setModalTab('form');
     setModalOpen(true);
+  };
+
+  // 🖼️ Quick Cover Frame Handlers
+  const handleOpenQuickFrame = (plan) => {
+    setQuickFrameTarget(plan);
+    setQuickFrameOpen(true);
+  };
+
+  const handleSaveQuickFrame = (framedUrl) => {
+    if (!quickFrameTarget) return;
+    updateInsurancePlan(quickFrameTarget.id, { imageUrl: framedUrl });
+    logActivity({
+      actionType: 'UPDATE',
+      entityType: 'INSURANCE',
+      targetTitle: quickFrameTarget.name,
+      details: 'ปรับแต่งเฟรมและจุดโฟกัสภาพปกแผนประกันแบบด่วน',
+    });
+    showToast(`อัปเดตเฟรมภาพปกแผนประกัน "${quickFrameTarget.name}" สำเร็จ`, 'success');
   };
 
   // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Active
@@ -211,6 +240,7 @@ export default function AdminInsurancePage() {
         securityPin: pin,
       });
       setSecurityModalOpen(false);
+      setModalTab('form');
       setModalOpen(true);
       showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไข "${pendingTarget.name}"`, 'success');
     } else if (securityAction === 'delete') {
@@ -329,10 +359,11 @@ export default function AdminInsurancePage() {
                       <div className="flex items-center gap-3">
                         {plan.imageUrl ? (
                           <div className="w-12 h-12 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
-                            <img
-                              src={resolveAssetUrl(plan.imageUrl)}
+                            <FramedImage
+                              src={plan.imageUrl}
                               alt={plan.name}
                               className="w-full h-full object-cover"
+                              fallback="https://images.unsplash.com/photo-1516549655169-df83a0774514?w=400&auto=format&fit=crop&q=80"
                             />
                           </div>
                         ) : (
@@ -400,7 +431,16 @@ export default function AdminInsurancePage() {
                       </button>
                     </td>
                     <td className="text-right whitespace-nowrap">
-                      <div className="flex items-center justify-end gap-1">
+                      <div className="flex items-center justify-end gap-1.5">
+                        <button
+                          type="button"
+                          onClick={() => handleOpenQuickFrame(plan)}
+                          className="btn btn-ghost btn-xs text-secondary hover:bg-secondary/15 gap-1 rounded-lg border border-secondary/30"
+                          title="ปรับแต่งเฟรมและจุดโฟกัสภาพปกแผนประกัน"
+                        >
+                          <Move className="w-3.5 h-3.5" />
+                          <span className="font-bold text-[11px]">ปรับเฟรมปก</span>
+                        </button>
                         <button
                           type="button"
                           onClick={() => handleRequestEdit(plan)}
@@ -428,13 +468,53 @@ export default function AdminInsurancePage() {
 
         {/* Add / Edit Plan Modal */}
         {modalOpen && (
-          <div role="dialog" aria-modal="true" className="modal modal-open z-50 animate-fadeIn">
-            <div className="modal-box rounded-3xl liquid-glass-solid shadow-2xl max-w-2xl p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto">
-              <h3 className="text-xl font-black text-primary border-b border-base-300 pb-3">
-                {editingPlan ? 'แก้ไขแผนประกันภัย' : 'เพิ่มแผนประกันภัยใหม่'}
-              </h3>
+          <div role="dialog" aria-modal="true" className="modal modal-open z-[60] animate-fadeIn">
+            <div className={`modal-box rounded-3xl liquid-glass-solid shadow-2xl p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto transition-all duration-300 ${
+              modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
+            }`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-base-300 pb-3">
+                <div>
+                  <h3 className="text-xl font-black text-primary">
+                    {editingPlan ? 'แก้ไขแผนประกันภัย' : 'เพิ่มแผนประกันภัยใหม่'}
+                  </h3>
+                  <p className="text-xs text-base-content/65">
+                    {modalTab === 'preview'
+                      ? 'ตรวจสอบหน้าตาแผนประกันจริงแบบเดียวกับที่ผู้ชมเว็บไซต์เห็น ก่อนกดบันทึก'
+                      : 'กรอกรายละเอียดและปรับแต่งเฟรมรูปภาพหน้าปก'}
+                  </p>
+                </div>
+
+                {/* View Mode Switcher Tabs */}
+                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-base-200/80 border border-base-300/40">
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('form')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                      modalTab === 'form'
+                        ? 'bg-primary text-white shadow-xs'
+                        : 'text-base-content/70 hover:text-primary'
+                    }`}
+                  >
+                    📝 ฟอร์มข้อมูล
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('preview')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      modalTab === 'preview'
+                        ? 'bg-secondary text-secondary-content shadow-xs font-black'
+                        : 'text-base-content/70 hover:text-secondary'
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>👁️ ตัวอย่างแบบผู้ชม</span>
+                  </button>
+                </div>
+              </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
+                {modalTab === 'form' ? (
+                  <>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
                   {/* Type */}
                   <div className="flex flex-col gap-1.5 w-full">
@@ -572,6 +652,13 @@ export default function AdminInsurancePage() {
                   />
                 </div>
 
+                {/* Interactive Cover Framing Picker */}
+                <CoverFramePicker
+                  value={formData.imageUrl}
+                  onChange={(framedUrl) => setFormData((prev) => ({ ...prev, imageUrl: framedUrl }))}
+                  label="🖼️ ปรับแต่งเฟรมหน้าปกแผนประกัน (จุดโฟกัส / ระยะซูม 16:9)"
+                />
+
                 {/* Status Toggle */}
                 <div className="pt-2">
                   <label className="inline-flex items-center gap-3 cursor-pointer select-none">
@@ -586,22 +673,50 @@ export default function AdminInsurancePage() {
                     </span>
                   </label>
                 </div>
+              </>
+            ) : (
+              <div className="space-y-4">
+                <InsuranceLivePreview plan={formData} />
+              </div>
+            )}
 
-                <div className="modal-action pt-4 border-t border-base-300 flex items-center justify-end gap-2">
+            <div className="modal-action pt-4 border-t border-base-300 flex items-center justify-between">
+              <button
+                type="button"
+                onClick={() => setModalOpen(false)}
+                className="btn btn-ghost rounded-xl font-bold"
+              >
+                ยกเลิก
+              </button>
+
+              <div className="flex items-center gap-2">
+                {modalTab === 'form' ? (
                   <button
                     type="button"
-                    onClick={() => setModalOpen(false)}
-                    className="btn btn-ghost rounded-xl font-bold"
+                    onClick={() => setModalTab('preview')}
+                    className="btn btn-outline btn-secondary rounded-xl font-bold gap-1.5"
                   >
-                    ยกเลิก
+                    <Eye className="w-4 h-4" />
+                    <span>ดูตัวอย่างแบบผู้ชม (Preview)</span>
                   </button>
+                ) : (
                   <button
-                    type="submit"
-                    className="btn btn-primary rounded-xl font-bold text-white shadow-md"
+                    type="button"
+                    onClick={() => setModalTab('form')}
+                    className="btn btn-outline rounded-xl font-bold gap-1.5"
                   >
-                    บันทึกข้อมูล
+                    <span>← กลับไปฟอร์มแก้ไข</span>
                   </button>
-                </div>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn btn-primary rounded-xl font-bold text-white shadow-md"
+                >
+                  {editingPlan ? 'ยืนยัน & บันทึกการแก้ไข' : 'บันทึก & เผยแพร่แผนประกัน'}
+                </button>
+              </div>
+            </div>
               </form>
             </div>
             <div
@@ -662,6 +777,18 @@ export default function AdminInsurancePage() {
             setSecurityModalOpen(false);
             setPendingTarget(null);
           }}
+        />
+
+        {/* 🖼️ Quick Cover Frame Modal */}
+        <QuickFrameModal
+          isOpen={quickFrameOpen}
+          onClose={() => {
+            setQuickFrameOpen(false);
+            setQuickFrameTarget(null);
+          }}
+          itemTitle={quickFrameTarget?.name}
+          imageUrl={quickFrameTarget?.imageUrl}
+          onSave={handleSaveQuickFrame}
         />
       </div>
     </DashboardLayout>

@@ -654,7 +654,7 @@ async function main() {
       mineralFormula: 'CaSO₄·2H₂O (Hydrous Calcium Sulfate)',
       isCurated: true,
       description: 'แร่ยิปซัมโครงสร้างเส้นใยขนานที่มีความเงาคล้ายผ้าไหมซาติน ขึ้นชื่อเรื่องคุณสมบัติในการล้างพลังงานลบตกค้างในพื้นที่อยู่อาศัยและชำระล้างพลังงานของหินชิ้นอื่น ช่วยให้ความคิดปลอดโปร่งและสร้างบรรยากาศที่บริสุทธิ์รอบตัว',
-      imageUrl: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800&auto=format&fit=crop&q=80',
+      imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80',
       isActive: true,
     },
   ];

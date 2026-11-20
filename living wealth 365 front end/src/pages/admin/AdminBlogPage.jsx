@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Trash2, Eye, EyeOff, Shield, Edit2 } from 'lucide-react';
+import { Plus, Trash2, Eye, EyeOff, Shield, Edit2, Move } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
@@ -8,6 +8,8 @@ import FileUploadZone from '../../components/common/FileUploadZone';
 import CoverFramePicker from '../../components/common/CoverFramePicker';
 import FramedImage from '../../components/common/FramedImage';
 import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
+import QuickFrameModal from '../../components/admin/QuickFrameModal';
+import BlogLivePreview from '../../components/admin/preview/BlogLivePreview';
 import { logActivity } from '../../utils/activityLogger';
 
 export default function AdminBlogPage() {
@@ -16,7 +18,12 @@ export default function AdminBlogPage() {
   const { showToast } = useToast();
 
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTab, setModalTab] = useState('form'); // 'form' | 'preview'
   const [editingPost, setEditingPost] = useState(null);
+
+  // 🖼️ Quick Frame Modal State
+  const [quickFrameTarget, setQuickFrameTarget] = useState(null);
+  const [quickFrameOpen, setQuickFrameOpen] = useState(false);
 
   // 🔐 Security 2-Step Verification Modal State
   const [securityModalOpen, setSecurityModalOpen] = useState(false);
@@ -50,7 +57,26 @@ export default function AdminBlogPage() {
       imageUrl: '',
       readTime: '5 นาที',
     });
+    setModalTab('form');
     setModalOpen(true);
+  };
+
+  // 🖼️ Quick Cover Frame Handler
+  const handleOpenQuickFrame = (post) => {
+    setQuickFrameTarget(post);
+    setQuickFrameOpen(true);
+  };
+
+  const handleSaveQuickFrame = (framedUrl) => {
+    if (!quickFrameTarget) return;
+    updatePost(quickFrameTarget.id, { imageUrl: framedUrl });
+    logActivity({
+      actionType: 'UPDATE',
+      entityType: 'ARTICLE',
+      targetTitle: quickFrameTarget.title,
+      details: 'ปรับแต่งเฟรมและจุดโฟกัสภาพปกบทความแบบด่วน',
+    });
+    showToast(`อัปเดตเฟรมภาพปกบทความ "${quickFrameTarget.title}" สำเร็จ`, 'success');
   };
 
   // 🔐 Step 1: Trigger Security PIN BEFORE Toggling Publish/Active
@@ -150,6 +176,7 @@ export default function AdminBlogPage() {
         securityPin: pin,
       });
       setSecurityModalOpen(false);
+      setModalTab('form');
       setModalOpen(true);
       showToast(`รหัสถูกต้อง! เปิดสิทธิ์แก้ไขบทความ "${pendingTarget.title}"`, 'success');
     } else if (securityAction === 'delete') {
@@ -282,7 +309,16 @@ export default function AdminBlogPage() {
                     </button>
                   </td>
                   <td className="text-right whitespace-nowrap">
-                    <div className="flex items-center justify-end gap-1">
+                    <div className="flex items-center justify-end gap-1.5">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenQuickFrame(post)}
+                        className="btn btn-ghost btn-xs text-secondary hover:bg-secondary/15 gap-1 rounded-lg border border-secondary/30"
+                        title="ปรับแต่งเฟรมและจุดโฟกัสภาพปกบทความ"
+                      >
+                        <Move className="w-3.5 h-3.5" />
+                        <span className="font-bold text-[11px]">ปรับเฟรมปก</span>
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleRequestEdit(post)}
@@ -309,156 +345,195 @@ export default function AdminBlogPage() {
 
         {/* New Post Modal */}
         {modalOpen && (
-          <div className="modal modal-open z-[60]">
-            <div className="modal-box max-w-2xl rounded-3xl liquid-glass-solid max-h-[88vh] overflow-y-auto p-6 sm:p-8">
-              <div className="flex items-center justify-between gap-3 border-b border-base-300/60 pb-3">
-                <h3 className="font-bold text-lg text-primary">
-                  {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(false)}
-                  className="btn btn-circle btn-ghost btn-sm"
-                  aria-label="ปิดหน้าต่าง"
-                >
-                  ✕
-                </button>
+          <div className="modal modal-open z-[60]" role="dialog" aria-modal="true">
+            <div className={`modal-box rounded-3xl liquid-glass-solid max-h-[90vh] overflow-y-auto p-6 sm:p-8 transition-all duration-300 ${
+              modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
+            }`}>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-base-300/60 pb-3">
+                <div>
+                  <h3 className="font-black text-lg text-primary">
+                    {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
+                  </h3>
+                  <p className="text-xs text-base-content/65">
+                    {modalTab === 'preview'
+                      ? 'ตรวจสอบหน้าตาบทความจริงแบบเดียวกับที่ผู้ชมเว็บไซต์เห็น ก่อนกดบันทึก'
+                      : 'กรอกรายละเอียดและปรับแต่งเฟรมรูปภาพหน้าปก'}
+                  </p>
+                </div>
+
+                {/* View Mode Switcher Tabs */}
+                <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-base-200/80 border border-base-300/40">
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('form')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                      modalTab === 'form'
+                        ? 'bg-primary text-white shadow-xs'
+                        : 'text-base-content/70 hover:text-primary'
+                    }`}
+                  >
+                    📝 ฟอร์มแก้ไข
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setModalTab('preview')}
+                    className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${
+                      modalTab === 'preview'
+                        ? 'bg-secondary text-secondary-content shadow-xs font-black'
+                        : 'text-base-content/70 hover:text-secondary'
+                    }`}
+                  >
+                    <Eye className="w-3.5 h-3.5" />
+                    <span>👁️ ตัวอย่างแบบผู้ชม</span>
+                  </button>
+                </div>
               </div>
+
               <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
-                <div className="flex flex-col gap-1.5 w-full">
-                  <label className="text-xs font-bold text-base-content/80">ชื่อหัวข้อบทความ</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="เช่น สมดุล 6 มิติของชีวิต..."
-                    value={formData.title}
-                    onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="input input-bordered w-full rounded-xl bg-base-100"
-                  />
-                </div>
+                {modalTab === 'form' ? (
+                  <>
+                    <div className="flex flex-col gap-1.5 w-full">
+                      <label className="text-xs font-bold text-base-content/80">ชื่อหัวข้อบทความ</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="เช่น สมดุล 6 มิติของชีวิต..."
+                        value={formData.title}
+                        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                        className="input input-bordered w-full rounded-xl bg-base-100"
+                      />
+                    </div>
 
-                {/* Pillar & Post Type */}
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">เสาหลัก (Pillar)</label>
-                    <select
-                      value={formData.pillar}
-                      onChange={(e) => setFormData({ ...formData, pillar: e.target.value })}
-                      className="select select-bordered w-full rounded-xl bg-base-100"
-                    >
-                      <option value="LIFE">1. LIFE (สมดุลชีวิต 6 มิติ)</option>
-                      <option value="WEALTH">2. WEALTH (สถาปัตยกรรมการเงิน)</option>
-                      <option value="WELLBEING">3. WELLBEING (อายุวัฒนะ & สุขภาพ)</option>
-                      <option value="INNER_LIFE">4. INNER_LIFE (โลกภายใน & สมาธิ)</option>
-                      <option value="EARTH_ENERGY">5. EARTH_ENERGY (แร่ธาตุธรรมชาติ)</option>
-                      <option value="JOURNAL">6. JOURNAL (วารสาร & ความคิด)</option>
-                      <option value="ABOUT">7. ABOUT (ปรัชญา & เรื่องราว)</option>
-                    </select>
-                  </div>
+                    {/* Pillar & Post Type */}
+                    <div className="grid grid-cols-2 gap-4 w-full">
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">เสาหลัก (Pillar)</label>
+                        <select
+                          value={formData.pillar}
+                          onChange={(e) => setFormData({ ...formData, pillar: e.target.value })}
+                          className="select select-bordered w-full rounded-xl bg-base-100"
+                        >
+                          <option value="LIFE">1. LIFE (สมดุลชีวิต 6 มิติ)</option>
+                          <option value="WEALTH">2. WEALTH (สถาปัตยกรรมการเงิน)</option>
+                          <option value="WELLBEING">3. WELLBEING (อายุวัฒนะ & สุขภาพ)</option>
+                          <option value="INNER_LIFE">4. INNER_LIFE (โลกภายใน & สมาธิ)</option>
+                          <option value="EARTH_ENERGY">5. EARTH_ENERGY (แร่ธาตุธรรมชาติ)</option>
+                          <option value="JOURNAL">6. JOURNAL (วารสาร & ความคิด)</option>
+                          <option value="ABOUT">7. ABOUT (ปรัชญา & เรื่องราว)</option>
+                        </select>
+                      </div>
 
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">รูปแบบเนื้อหา (Type)</label>
-                    <select
-                      value={formData.postType}
-                      onChange={(e) => setFormData({ ...formData, postType: e.target.value })}
-                      className="select select-bordered w-full rounded-xl bg-base-100"
-                    >
-                      <option value="ARTICLE">บทความทั่วไป (Article)</option>
-                      <option value="TOPS_NOTES">Admin A's Notes (บันทึกของ Admin A)</option>
-                      <option value="JOURNEY">Admin B's Journey (บันทึกการเดินทางของ Admin B)</option>
-                      <option value="EXPLORING">Exploring (การสำรวจร่วมกัน)</option>
-                    </select>
-                  </div>
-                </div>
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">รูปแบบเนื้อหา (Type)</label>
+                        <select
+                          value={formData.postType}
+                          onChange={(e) => setFormData({ ...formData, postType: e.target.value })}
+                          className="select select-bordered w-full rounded-xl bg-base-100"
+                        >
+                          <option value="ARTICLE">บทความทั่วไป (Article)</option>
+                          <option value="TOPS_NOTES">Admin A's Notes (บันทึกของ Admin A)</option>
+                          <option value="JOURNEY">Admin B's Journey (บันทึกการเดินทางของ Admin B)</option>
+                          <option value="EXPLORING">Exploring (การสำรวจร่วมกัน)</option>
+                        </select>
+                      </div>
+                    </div>
 
-                {/* Author & Read Time */}
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">ผู้เขียน (Author)</label>
-                    <input
-                      type="text"
-                      value={formData.authorName}
-                      onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                      placeholder="เช่น Admin A & Admin B, Admin A, หรือ Admin B"
-                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    {/* Author & Read Time */}
+                    <div className="grid grid-cols-2 gap-4 w-full">
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">ผู้เขียน (Author)</label>
+                        <input
+                          type="text"
+                          value={formData.authorName}
+                          onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
+                          placeholder="เช่น Admin A & Admin B, Admin A, หรือ Admin B"
+                          className="input input-bordered w-full rounded-xl bg-base-100"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">เวลาที่ใช้อ่าน</label>
+                        <input
+                          type="text"
+                          value={formData.readTime}
+                          onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
+                          className="input input-bordered w-full rounded-xl bg-base-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Category & Tags */}
+                    <div className="grid grid-cols-2 gap-4 w-full">
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">หมวดหมู่ย่อย</label>
+                        <input
+                          type="text"
+                          value={formData.category}
+                          onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                          placeholder="เช่น การวางแผนภาษี, สุขภาพระดับเซลล์"
+                          className="input input-bordered w-full rounded-xl bg-base-100"
+                        />
+                      </div>
+
+                      <div className="flex flex-col gap-1.5 w-full">
+                        <label className="text-xs font-bold text-base-content/80">แท็ก (Tags)</label>
+                        <input
+                          type="text"
+                          value={formData.tags}
+                          onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
+                          placeholder="เช่น #Tax #Longevity #Balance"
+                          className="input input-bordered w-full rounded-xl bg-base-100"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Cover Image Upload Zone */}
+                    <FileUploadZone
+                      label="รูปภาพหน้าปกบทความ (Cover Image)"
+                      accept="image"
+                      value={formData.imageUrl}
+                      onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+                      helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพปกจากคอมพิวเตอร์ หรือใส่ URL รูปภาพ"
                     />
-                  </div>
 
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">เวลาที่ใช้อ่าน</label>
-                    <input
-                      type="text"
-                      value={formData.readTime}
-                      onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
-                      className="input input-bordered w-full rounded-xl bg-base-100"
+                    {/* Interactive Cover Framing Picker */}
+                    <CoverFramePicker
+                      value={formData.imageUrl}
+                      onChange={(framedUrl) => setFormData({ ...formData, imageUrl: framedUrl })}
+                      label="🖼️ ปรับแต่งเฟรมหน้าปกบทความ (ตั้งจุดโฟกัส / ระยะซูม 16:9)"
                     />
+
+                    <div className="flex flex-col gap-1.5 w-full">
+                      <label className="text-xs font-bold text-base-content/80">คำโปรยสั้นๆ (Excerpt)</label>
+                      <textarea
+                        rows={2}
+                        required
+                        value={formData.excerpt}
+                        onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+                        className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
+                      ></textarea>
+                    </div>
+
+                    <div className="flex flex-col gap-1.5 w-full">
+                      <label className="text-xs font-bold text-base-content/80">เนื้อหาบทความ</label>
+                      <textarea
+                        rows={7}
+                        required
+                        placeholder="พิมพ์เนื้อหาบทความ..."
+                        value={formData.content}
+                        onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                        className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
+                      ></textarea>
+                    </div>
+                  </>
+                ) : (
+                  <div className="space-y-4">
+                    <BlogLivePreview post={formData} />
                   </div>
-                </div>
+                )}
 
-                {/* Category & Tags */}
-                <div className="grid grid-cols-2 gap-4 w-full">
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">หมวดหมู่ย่อย</label>
-                    <input
-                      type="text"
-                      value={formData.category}
-                      onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      placeholder="เช่น การวางแผนภาษี, สุขภาพระดับเซลล์"
-                      className="input input-bordered w-full rounded-xl bg-base-100"
-                    />
-                  </div>
-
-                  <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">แท็ก (Tags)</label>
-                    <input
-                      type="text"
-                      value={formData.tags}
-                      onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                      placeholder="เช่น #Tax #Longevity #Balance"
-                      className="input input-bordered w-full rounded-xl bg-base-100"
-                    />
-                  </div>
-                </div>
-
-                {/* Cover Image Upload Zone */}
-                <FileUploadZone
-                  label="รูปภาพหน้าปกบทความ (Cover Image)"
-                  accept="image"
-                  value={formData.imageUrl}
-                  onChange={(url) => setFormData({ ...formData, imageUrl: url })}
-                  helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพปกจากคอมพิวเตอร์ หรือใส่ URL รูปภาพ"
-                />
-
-                {/* Interactive Cover Framing Picker (Add & Edit) */}
-                <CoverFramePicker
-                  value={formData.imageUrl}
-                  onChange={(framedUrl) => setFormData({ ...formData, imageUrl: framedUrl })}
-                />
-
-                <div className="flex flex-col gap-1.5 w-full">
-                  <label className="text-xs font-bold text-base-content/80">คำโปรยสั้นๆ (Excerpt)</label>
-                  <textarea
-                    rows={2}
-                    required
-                    value={formData.excerpt}
-                    onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                    className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
-                  ></textarea>
-                </div>
-
-                <div className="flex flex-col gap-1.5 w-full">
-                  <label className="text-xs font-bold text-base-content/80">เนื้อหาบทความ</label>
-                  <textarea
-                    rows={6}
-                    required
-                    placeholder="พิมพ์เนื้อหาบทความ..."
-                    value={formData.content}
-                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    className="textarea textarea-bordered w-full rounded-xl bg-base-100 leading-relaxed"
-                  ></textarea>
-                </div>
-
-                <div className="modal-action">
+                {/* Modal Actions */}
+                <div className="modal-action flex items-center justify-between border-t border-base-300/60 pt-4">
                   <button
                     type="button"
                     onClick={() => setModalOpen(false)}
@@ -466,12 +541,34 @@ export default function AdminBlogPage() {
                   >
                     {t('cancel')}
                   </button>
-                  <button
-                    type="submit"
-                    className="btn btn-sm btn-primary rounded-xl font-bold"
-                  >
-                    {editingPost ? 'บันทึกการแก้ไข' : `${t('save')} & เผยแพร่`}
-                  </button>
+
+                  <div className="flex items-center gap-2">
+                    {modalTab === 'form' ? (
+                      <button
+                        type="button"
+                        onClick={() => setModalTab('preview')}
+                        className="btn btn-sm btn-outline btn-secondary rounded-xl font-bold gap-1.5"
+                      >
+                        <Eye className="w-4 h-4" />
+                        <span>ดูตัวอย่างแบบผู้ชม (Preview)</span>
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setModalTab('form')}
+                        className="btn btn-sm btn-outline rounded-xl font-bold gap-1.5"
+                      >
+                        <span>← กลับไปฟอร์มแก้ไข</span>
+                      </button>
+                    )}
+
+                    <button
+                      type="submit"
+                      className="btn btn-sm btn-primary rounded-xl font-bold shadow-sm"
+                    >
+                      {editingPost ? 'ยืนยัน & บันทึกการแก้ไข' : `${t('save')} & เผยแพร่บทความ`}
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
@@ -529,6 +626,17 @@ export default function AdminBlogPage() {
             setSecurityModalOpen(false);
             setPendingTarget(null);
           }}
+        />
+        {/* 🖼️ Quick Cover Frame Modal */}
+        <QuickFrameModal
+          isOpen={quickFrameOpen}
+          onClose={() => {
+            setQuickFrameOpen(false);
+            setQuickFrameTarget(null);
+          }}
+          itemTitle={quickFrameTarget?.title}
+          imageUrl={quickFrameTarget?.imageUrl}
+          onSave={handleSaveQuickFrame}
         />
       </div>
     </DashboardLayout>

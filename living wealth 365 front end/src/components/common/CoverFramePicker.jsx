@@ -12,18 +12,37 @@ import {
  * CoverFramePicker — Live interactive 16:9 cover framing preview for Admin CMS.
  * Lets admin drag/click focal point, switch cover vs. contain, and tune zoom.
  */
-export default function CoverFramePicker({ value = '', onChange }) {
+export default function CoverFramePicker({
+  value = '',
+  imageUrl = '',
+  onChange,
+  label = 'ปรับเฟรมรูปปกหน้าการ์ด (Cover Framing Preview 16:9)',
+}) {
   const previewRef = useRef(null);
   const [dragging, setDragging] = useState(false);
 
-  if (!value || !value.trim()) return null;
+  const actualValue = value || imageUrl || '';
 
-  const parsed = parseImageFrame(value);
+  if (!actualValue || !actualValue.trim()) {
+    return (
+      <div className="rounded-2xl border border-dashed border-base-300 bg-base-200/30 p-4 text-center space-y-1">
+        <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-base-content/70">
+          <Move className="w-4 h-4 text-secondary" />
+          <span>{label}</span>
+        </div>
+        <p className="text-[11px] text-base-content/50">
+          กรุณาอัปโหลดรูปภาพหรือระบุ URL รูปภาพด้านบน เพื่อเปิดใช้งานเครื่องมือปรับจุดโฟกัสและเฟรมภาพ 16:9
+        </p>
+      </div>
+    );
+  }
+
+  const parsed = parseImageFrame(actualValue);
   const previewSrc = resolveAssetUrl(parsed.cleanUrl);
-  const previewStyle = getImageFrameStyle(value);
+  const previewStyle = getImageFrameStyle(actualValue);
 
   const updateFrame = (patch) => {
-    const nextUrl = encodeImageFrame(value, patch);
+    const nextUrl = encodeImageFrame(actualValue, patch);
     if (onChange) onChange(nextUrl);
   };
 
@@ -42,7 +61,7 @@ export default function CoverFramePicker({ value = '', onChange }) {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2 text-xs font-bold text-primary">
           <Move className="w-4 h-4 text-secondary shrink-0" />
-          <span>ปรับเฟรมรูปปกหน้าการ์ด (Cover Framing Preview 16:9)</span>
+          <span>{label}</span>
         </div>
 
         <div className="flex items-center gap-1.5">
