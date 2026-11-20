@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../context/ToastContext';
 import { ROUTES } from '../../constants/routes';
 import { resolveAssetUrl } from '../../api';
+import { stripImageFrame } from '../../utils/imageFrame';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 
 export default function BlogDetailPage() {
@@ -96,7 +97,7 @@ export default function BlogDetailPage() {
         <div className="w-full rounded-3xl overflow-hidden shadow-lg border border-base-300 bg-base-200/40 flex justify-center">
           <img
             src={resolveAssetUrl(
-              post.imageUrl,
+              stripImageFrame(post.imageUrl),
               'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80'
             )}
             alt={post.title}

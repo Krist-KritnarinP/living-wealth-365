@@ -20,6 +20,7 @@ import PlanCard from '../../components/insurance/PlanCard';
 import TaxCalculator from '../../components/tax/TaxCalculator';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 import { CATEGORY_GROUPS } from '../../utils/insuranceInfographic';
+import FramedImage from '../../components/common/FramedImage';
 
 export default function WealthPage() {
   const location = useLocation();
@@ -334,10 +335,10 @@ export default function WealthPage() {
             >
               <div className="space-y-3">
                 <div className="aspect-video w-full rounded-2xl overflow-hidden bg-base-200">
-                  <img
+                  <FramedImage
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex items-center gap-2 text-xs">

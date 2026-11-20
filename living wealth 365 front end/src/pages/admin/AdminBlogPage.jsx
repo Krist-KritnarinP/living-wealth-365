@@ -5,9 +5,10 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import FileUploadZone from '../../components/common/FileUploadZone';
+import CoverFramePicker from '../../components/common/CoverFramePicker';
+import FramedImage from '../../components/common/FramedImage';
 import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
 import { logActivity } from '../../utils/activityLogger';
-import { resolveAssetUrl } from '../../api';
 
 export default function AdminBlogPage() {
   const { posts, addPost, updatePost, deletePost } = useAuth();
@@ -211,18 +212,13 @@ export default function AdminBlogPage() {
                 <tr key={post.id} className="hover:bg-base-200/50">
                   <td>
                     <div className="flex items-center gap-3">
-                      <img
-                        src={resolveAssetUrl(
-                          post.imageUrl,
-                          'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&auto=format&fit=crop&q=80'
-                        )}
-                        alt={post.title}
-                        className="w-12 h-12 rounded-xl object-cover shrink-0 bg-base-200 border border-base-300"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=400&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-base-200 border border-base-300">
+                        <FramedImage
+                          src={post.imageUrl}
+                          alt={post.title}
+                          className="w-full h-full"
+                        />
+                      </div>
                       <div>
                         <div className="font-bold text-primary max-w-sm truncate">
                           {post.title}
@@ -313,11 +309,21 @@ export default function AdminBlogPage() {
 
         {/* New Post Modal */}
         {modalOpen && (
-          <div className="modal modal-open z-50">
-            <div className="modal-box max-w-2xl rounded-3xl liquid-glass-solid">
-              <h3 className="font-bold text-lg text-primary">
-                {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
-              </h3>
+          <div className="modal modal-open z-[60]">
+            <div className="modal-box max-w-2xl rounded-3xl liquid-glass-solid max-h-[88vh] overflow-y-auto p-6 sm:p-8">
+              <div className="flex items-center justify-between gap-3 border-b border-base-300/60 pb-3">
+                <h3 className="font-bold text-lg text-primary">
+                  {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
+                </h3>
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="btn btn-circle btn-ghost btn-sm"
+                  aria-label="ปิดหน้าต่าง"
+                >
+                  ✕
+                </button>
+              </div>
               <form onSubmit={handleSubmit} className="space-y-4 mt-4 text-xs sm:text-sm">
                 <div className="flex flex-col gap-1.5 w-full">
                   <label className="text-xs font-bold text-base-content/80">ชื่อหัวข้อบทความ</label>
@@ -421,6 +427,12 @@ export default function AdminBlogPage() {
                   value={formData.imageUrl}
                   onChange={(url) => setFormData({ ...formData, imageUrl: url })}
                   helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพปกจากคอมพิวเตอร์ หรือใส่ URL รูปภาพ"
+                />
+
+                {/* Interactive Cover Framing Picker (Add & Edit) */}
+                <CoverFramePicker
+                  value={formData.imageUrl}
+                  onChange={(framedUrl) => setFormData({ ...formData, imageUrl: framedUrl })}
                 />
 
                 <div className="flex flex-col gap-1.5 w-full">

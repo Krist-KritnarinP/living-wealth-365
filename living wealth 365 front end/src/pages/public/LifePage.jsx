@@ -15,6 +15,7 @@ import {
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
 import LifeMapTeaser from '../../components/common/LifeMapTeaser';
+import FramedImage from '../../components/common/FramedImage';
 
 export default function LifePage() {
   const { posts } = useAuth();
@@ -139,10 +140,10 @@ export default function LifePage() {
             >
               <div className="space-y-3">
                 <div className="aspect-video w-full rounded-2xl overflow-hidden bg-base-200">
-                  <img
+                  <FramedImage
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
                 <div className="flex items-center gap-2 text-xs">

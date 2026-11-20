@@ -1086,6 +1086,17 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Verification**:
   - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` passed cleanly.
 
+## 46. Admin Post Cover Image Framing Picker & Non-Destructive Focal Store (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Framing Utility & `<FramedImage />` Component (`src/utils/imageFrame.js`, `src/components/common/FramedImage.jsx`, `src/api.js`)**: Encodes/parses non-destructive cover framing metadata via URL fragment (`#lwframe=fit:<cover|contain>;x:<0..100>;y:<0..100>;zoom:<1..2>`), requiring zero database migrations and preserving Cloudflare R2 / external CDN HTTP requests (plus stripping `#...` cleanly in `uploadApi.deleteFile`).
+  2. **Interactive Admin `<CoverFramePicker />` (`src/components/common/CoverFramePicker.jsx`, `src/pages/admin/AdminBlogPage.jsx`)**: Added live interactive `16:9` cover framing preview inside the Admin Blog Create/Edit modal supporting click/drag focal point selection, `เต็มกรอบ (Cover)` vs. `เห็นทั้งภาพ (Contain)` fit modes, quick presets (`ด้านบน`, `ตรงกลาง`, `ด้านล่าง`, `รีเซ็ตเฟรม`), fine `X / Y / Zoom` sliders, and scrollable modal sizing (`max-h-[88vh] overflow-y-auto z-[60]`).
+  3. **Unified Card Cover Rendering**: Wired `<FramedImage />` across `JournalPage.jsx`, `BlogPage.jsx`, `HomePage.jsx`, `LifePage.jsx`, `WealthPage.jsx`, `WellbeingPage.jsx`, `InnerLifePage.jsx`, and `AdminBlogPage.jsx`, plus stripped frame hash cleanly in `BlogDetailPage.jsx`. Applied `fit:cover;x:50;y:12` framing to the live EP.01 retirement article cover in Supabase DB.
+- **Verification**:
+  - Unit Tests: 21/21 passed (`npm test -- --run`, including 3 new `tests/imageFrame.test.js` assertions).
+  - Browser QA (`http://localhost:5173/`): Verified EP.01 framed card cover on `/journal` (`object-position: 50% 12%`) and live interactive presets/sliders/toggles inside `/admin/cms/blog` Edit modal.
+  - Production Build: `vite build` passed cleanly.
+
 
 
 

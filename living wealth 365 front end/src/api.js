@@ -132,7 +132,7 @@ export const uploadApi = {
   deleteFile: (filenameOrUrl) => {
     if (!filenameOrUrl) return Promise.resolve();
     // ดึงชื่อไฟล์จาก URL (เช่น https://pub-...r2.dev/xyz.webp -> xyz.webp)
-    const filename = filenameOrUrl.split('/').pop().split('?')[0];
+    const filename = filenameOrUrl.split('#')[0].split('/').pop().split('?')[0];
     return api.delete(`/upload/${filename}`).then((res) => res.data);
   },
   getStorageStats: () => api.get('/upload/storage').then((res) => res.data),

@@ -24,6 +24,7 @@ import HandDrawnUnderline from '../../components/common/HandDrawnUnderline';
 import HeroInteractiveFocus from '../../components/common/HeroInteractiveFocus';
 import CopyToLineSection from '../../components/common/CopyToLineSection';
 import RevealOnScroll from '../../components/common/RevealOnScroll';
+import FramedImage from '../../components/common/FramedImage';
 
 export default function HomePage() {
   const { products, posts } = useAuth();
@@ -663,10 +664,10 @@ export default function HomePage() {
             >
               <div className="space-y-3">
                 <div className="aspect-16/9 w-full overflow-hidden bg-base-200 rounded-2xl relative">
-                  <img
+                  <FramedImage
                     src={post.imageUrl}
                     alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full transition-transform duration-500 group-hover:scale-105"
                   />
                   <span className="badge badge-primary absolute top-3 left-3 text-xs font-bold shadow-xs">
                     {post.pillar || post.category}

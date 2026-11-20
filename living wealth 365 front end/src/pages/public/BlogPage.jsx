@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
-import { resolveAssetUrl } from '../../api';
+import FramedImage from '../../components/common/FramedImage';
 import TaxCalculator from '../../components/tax/TaxCalculator';
 
 export default function BlogPage() {
@@ -186,17 +186,10 @@ export default function BlogPage() {
                   >
                     <div>
                       <div className="aspect-16/9 w-full overflow-hidden bg-base-200 relative">
-                        <img
-                          src={resolveAssetUrl(
-                            post.imageUrl,
-                            'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80'
-                          )}
+                        <FramedImage
+                          src={post.imageUrl}
                           alt={post.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                          onError={(e) => {
-                            e.currentTarget.src =
-                              'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&auto=format&fit=crop&q=80';
-                          }}
+                          className="w-full h-full transition-transform duration-500 group-hover:scale-105"
                         />
                         <span className="badge badge-primary absolute top-3 left-3 text-xs font-bold shadow-xs">
                           {post.category}
