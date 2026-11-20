@@ -225,42 +225,23 @@
     padding-bottom: 0.25rem;
   }
   .btn:active:not(:disabled) { transform: scale(0.98); }
-  @supports (backdrop-filter: blur(22px)) or (-webkit-backdrop-filter: blur(22px)) {
+  @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
     .zen-surface {
       position: relative;
       background: var(--zen-glass);
-      -webkit-backdrop-filter: blur(22px) saturate(215%);
-      backdrop-filter: blur(22px) saturate(215%);
+      -webkit-backdrop-filter: blur(12px) saturate(165%);
+      backdrop-filter: blur(12px) saturate(165%);
       border: 1px solid var(--zen-glass-border);
       box-shadow:
         var(--zen-shadow),
         inset 0 1.5px 1px 0 var(--zen-specular),
         inset 0 -2px 6px 0 var(--zen-caustic);
     }
-    /* Apple HIG Liquid Glass 135° Caustic Gradient Specular Rim */
-    .zen-surface::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.85) 0%,
-        rgba(255, 255, 255, 0.08) 48%,
-        rgba(255, 255, 255, 0.35) 100%
-      );
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-    }
     .liquid-glass-solid {
       position: relative;
       background: var(--zen-dropdown-bg);
-      -webkit-backdrop-filter: blur(36px) saturate(200%);
-      backdrop-filter: blur(36px) saturate(200%);
+      -webkit-backdrop-filter: blur(18px) saturate(175%);
+      backdrop-filter: blur(18px) saturate(175%);
       border: 1px solid var(--zen-glass-border);
       box-shadow:
         var(--zen-elevate-shadow),
@@ -336,25 +317,6 @@
     transform: scale(1.14) rotate(5deg);
   }
 
-  /* 🫧 Soft Ambient Bokeh Orbs */
-  @keyframes bokeh-float-a {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
-  }
-  @keyframes bokeh-float-b {
-    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-    50% { transform: translate3d(-22px, 20px, 0) scale(0.95); }
-  }
-
-  .bokeh-orb-a {
-    animation: bokeh-float-a 16s ease-in-out infinite;
-    will-change: transform;
-  }
-  .bokeh-orb-b {
-    animation: bokeh-float-b 20s ease-in-out infinite;
-    will-change: transform;
-  }
-
   @keyframes draw-svg-line {
     0% {
       stroke-dashoffset: 220;
@@ -413,8 +375,6 @@
     opacity: 1;
     transform: none;
   }
-  .bokeh-orb-a,
-  .bokeh-orb-b,
   .animate-pop-in {
     animation: none;
   }
@@ -435,7 +395,6 @@
     -webkit-backdrop-filter: none !important;
     background: var(--zen-surface) !important;
   }
-  .zen-surface::before,
   .liquid-glass-interactive::after {
     display: none;
   }

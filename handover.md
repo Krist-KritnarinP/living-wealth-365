@@ -1074,6 +1074,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Browser QA (`http://localhost:5173/`): `1280x800` Navbar `0` overflows / `0` wraps (`21px` margin inside pill), `1440x900` `/wealth` `0` occurrences of `"ดูอินโฟกราฟิก"`/`"Infographics"` across all 10 cards, and `375x812` mobile zero horizontal overflow.
   - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` completed cleanly in 1.70s.
 
+## 45. Liquid Glass GPU & Scroll Compositor Optimization (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Root Cause Identified**:
+  1. `AmbientBokeh.jsx` previously animated 6 full-viewport `blur(58px)` DOM discs continuously at 60fps underneath sticky and scrolled `backdrop-filter: blur(22px) saturate(215%)` `.zen-surface` cards, forcing the browser compositor to re-Gaussian-blur all overlapping glass regions every animation frame.
+  2. `.zen-surface::before` applied `-webkit-mask-composite: xor` / `mask-composite: exclude` on every glass panel, and `HomePage.jsx`'s `handleGlassMove` triggered synchronous `getBoundingClientRect()` reflows on every raw `mousemove`.
+- **Optimizations Applied**:
+  - Replaced `AmbientBokeh.jsx` animated blurred DOM nodes with a single static CSS multi-layer `radial-gradient` optical canvas (`0px` live Gaussian filter cost and zero continuous frame invalidation).
+  - Optimized `.zen-surface` in `src/index.css` (`backdrop-filter: blur(12px) saturate(165%)`, `.liquid-glass-solid` `blur(18px) saturate(175%)`), replaced `.zen-surface::before` mask-composite pass with `inset` box-shadow specular highlights, and removed unused bokeh float keyframes.
+  - Throttled `handleGlassMove` in `HomePage.jsx` with `requestAnimationFrame` (`rafPending` guard).
+- **Verification**:
+  - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` passed cleanly.
+
 
 
 

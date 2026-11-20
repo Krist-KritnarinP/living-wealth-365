@@ -46,11 +46,17 @@ export default function HomePage() {
   };
 
   const handleGlassMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-    e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+    const target = e.currentTarget;
+    if (target.dataset.rafPending === '1') return;
+    target.dataset.rafPending = '1';
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+    requestAnimationFrame(() => {
+      const rect = target.getBoundingClientRect();
+      target.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+      target.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+      target.dataset.rafPending = '0';
+    });
   };
 
   return (
