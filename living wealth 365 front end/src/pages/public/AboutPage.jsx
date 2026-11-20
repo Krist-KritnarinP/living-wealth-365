@@ -32,8 +32,8 @@ export default function AboutPage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full rounded-3xl zen-surface border border-base-300/60 p-6 sm:p-10 lg:p-16 relative overflow-hidden shadow-xs">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
-              <Info className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
+              <Info className="w-4 h-4 text-secondary shrink-0" />
               <span>PILLAR 7: ABOUT US & PHILOSOPHY • ปรัชญาและเพื่อนร่วมทาง</span>
             </div>
 
@@ -205,8 +205,8 @@ export default function AboutPage() {
       <section id="talk" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <div className="w-full p-6 sm:p-10 lg:p-14 rounded-3xl zen-surface space-y-6">
           <div className="text-center space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
-              <Heart className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
+              <Heart className="w-3.5 h-3.5 text-secondary shrink-0" />
               <span>LET'S TALK • นัดหมายสนทนา (ฟรี)</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">

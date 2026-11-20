@@ -1,23 +1,47 @@
-import { Heart, Sparkles, Send, Atom, ShoppingBag } from 'lucide-react';
+import { Heart, Sparkles, Send, Atom, ShoppingBag, Eye } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { useToast } from '../../context/ToastContext';
+import { useNavigate, Link } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
 import { resolveAssetUrl } from '../../api';
+import { flyToCart } from '../../utils/flyToCart';
+import FramedImage from '../common/FramedImage';
 
 export default function ProductCard({ product, onSelectForLead }) {
   const { wishlist, toggleWishlist, currentUser } = useAuth();
   const { addToCart } = useCart();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const isWishlisted = wishlist.includes(product.id);
+  const detailUrl = `/earth-energy/product/${product.id}`;
 
   const handleWishlistClick = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     if (!currentUser) {
       navigate(`${ROUTES.LOGIN}?redirect=${encodeURIComponent(ROUTES.EARTH_ENERGY)}`);
       return;
     }
     toggleWishlist(product.id);
+  };
+
+  const handleAddToCart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const btn = e.currentTarget;
+    const cardImg = btn.closest('.card')?.querySelector('img');
+
+    // Trigger fly-to-cart warp animation to #nav-cart-btn
+    flyToCart({
+      sourceEl: btn || cardImg,
+      imageUrl: resolveAssetUrl(product.imageUrl),
+      targetSelector: '#nav-cart-btn',
+    });
+
+    // Add to cart with openDrawer: false
+    addToCart(product, 1, { openDrawer: false });
+    showToast(`เพิ่ม "${product.name}" ลงในตะกร้าแล้ว`, 'success');
   };
 
   // Aspect Badge Helper
@@ -40,15 +64,13 @@ export default function ProductCard({ product, onSelectForLead }) {
 
   return (
     <div className="card zen-surface hover-card-elevate border border-base-300/60 rounded-3xl overflow-hidden shadow-xs group flex flex-col justify-between min-w-0">
-      {/* Image & Badges Container */}
-      <div className="relative aspect-4/3 w-full overflow-hidden bg-base-200">
-        <img
-          src={resolveAssetUrl(
-            product.imageUrl,
-            'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=80'
-          )}
+      {/* Clickable Image & Badges Container */}
+      <Link to={detailUrl} className="relative aspect-4/3 w-full overflow-hidden bg-base-200 block">
+        <FramedImage
+          src={product.imageUrl}
           alt={product.name}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          fallback="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop&q=80"
         />
 
         {/* Top Badges */}
@@ -65,8 +87,9 @@ export default function ProductCard({ product, onSelectForLead }) {
 
         {/* Favorite Wishlist Button */}
         <button
+          type="button"
           onClick={handleWishlistClick}
-          className="btn btn-circle btn-sm absolute top-3 right-3 bg-base-100/80 backdrop-blur-md border border-base-300 hover:scale-110 transition-transform shadow-xs"
+          className="btn btn-circle btn-sm absolute top-3 right-3 bg-base-100/80 backdrop-blur-md border border-base-300 hover:scale-110 transition-transform shadow-xs z-10"
           title={isWishlisted ? 'ลบออกจากสิ่งที่สนใจ' : '❤️ บันทึกไว้ดูทีหลัง'}
         >
           <Heart
@@ -75,15 +98,17 @@ export default function ProductCard({ product, onSelectForLead }) {
             }`}
           />
         </button>
-      </div>
+      </Link>
 
       {/* Card Content */}
-      <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
-        <div>
-          <div className="flex items-start justify-between gap-2">
-            <h4 className="text-base sm:text-lg font-black text-primary leading-snug group-hover:text-secondary transition-colors">
-              {product.name}
-            </h4>
+      <div className="p-5 flex-1 flex flex-col justify-between space-y-4 min-w-0">
+        <div className="min-w-0">
+          <div className="flex items-start justify-between gap-2 min-w-0">
+            <Link to={detailUrl} className="block flex-1 min-w-0">
+              <h4 className="text-base sm:text-lg font-black text-primary leading-snug group-hover:text-secondary transition-colors break-words [overflow-wrap:anywhere]">
+                {product.name}
+              </h4>
+            </Link>
             {product.price && (
               <div className="text-right shrink-0">
                 <span className="text-base font-extrabold text-secondary">
@@ -95,40 +120,50 @@ export default function ProductCard({ product, onSelectForLead }) {
 
           {/* Mineral Formula & Chakra Tag */}
           {(product.mineralFormula || product.chakra) && (
-            <div className="mt-2 space-y-1">
+            <div className="mt-2 space-y-1 min-w-0">
               {product.mineralFormula && (
                 <div className="text-[11px] font-mono text-base-content/70 flex items-center gap-1.5 truncate">
                   <Atom className="w-3.5 h-3.5 text-info shrink-0" />
-                  <span>สูตรแร่: {product.mineralFormula}</span>
+                  <span className="truncate">สูตรแร่: {product.mineralFormula}</span>
                 </div>
               )}
               {product.chakra && (
                 <div className="text-[11px] font-semibold text-secondary flex items-center gap-1.5 truncate">
                   <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                  <span>{product.chakra}</span>
+                  <span className="truncate">{product.chakra}</span>
                 </div>
               )}
             </div>
           )}
 
-          <p className="text-xs sm:text-sm text-base-content/75 mt-2.5 line-clamp-2 leading-relaxed">
+          <p className="text-xs sm:text-sm text-base-content/75 mt-2.5 line-clamp-2 leading-relaxed break-words [overflow-wrap:anywhere]">
             {product.description}
           </p>
 
-          {product.dayOfWeek && (
-            <div className="mt-3 text-xs font-semibold text-primary/80 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-              <span>สัมพันธ์กับ: {product.dayOfWeek}</span>
-            </div>
-          )}
+          <div className="mt-3 flex items-center justify-between text-xs min-w-0">
+            {product.dayOfWeek ? (
+              <div className="font-semibold text-primary/80 flex items-center gap-1.5 truncate min-w-0">
+                <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                <span className="truncate">สัมพันธ์: {product.dayOfWeek}</span>
+              </div>
+            ) : <span />}
+            <Link
+              to={detailUrl}
+              className="font-bold text-primary hover:text-secondary inline-flex items-center gap-1 shrink-0 ml-auto group-hover:translate-x-0.5 transition-transform"
+            >
+              <span>ดูข้อมูลแร่</span>
+              <span>→</span>
+            </Link>
+          </div>
         </div>
 
         {/* Actions */}
         <div className="pt-2 flex flex-wrap sm:flex-nowrap items-center gap-2">
           <button
             type="button"
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="btn btn-primary btn-sm flex-1 rounded-xl font-bold gap-1.5 min-w-[110px]"
+            title="เพิ่มลงในตะกร้า (ไม่เปิดหน้าต่าง)"
           >
             <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
             <span>ใส่ตะกร้า</span>

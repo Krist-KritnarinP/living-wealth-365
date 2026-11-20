@@ -25,6 +25,7 @@ import InsurancePlanDetailPage from './pages/public/InsurancePlanDetailPage';
 import WellbeingPage from './pages/public/WellbeingPage';
 import InnerLifePage from './pages/public/InnerLifePage';
 import EarthEnergyPage from './pages/public/EarthEnergyPage';
+import ProductDetailPage from './pages/public/ProductDetailPage';
 import JournalPage from './pages/public/JournalPage';
 import BlogDetailPage from './pages/public/BlogDetailPage';
 import AboutPage from './pages/public/AboutPage';
@@ -84,6 +85,8 @@ function AppShell() {
           <Route path={ROUTES.WELLBEING} element={<WellbeingPage />} />
           <Route path={ROUTES.INNER_LIFE} element={<InnerLifePage />} />
           <Route path={ROUTES.EARTH_ENERGY} element={<EarthEnergyPage />} />
+          <Route path="/earth-energy/product/:id" element={<ProductDetailPage />} />
+          <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path={ROUTES.JOURNAL} element={<JournalPage />} />
           <Route path="/journal/:slug" element={<BlogDetailPage />} />
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />

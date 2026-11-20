@@ -311,8 +311,8 @@ export default function StoneCalculator({ onSelectStone }) {
 
         {/* Header Section */}
         <div className="text-center max-w-2xl mx-auto space-y-2 mb-6">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/15 border border-secondary/30 text-secondary text-xs font-bold tracking-wide shadow-xs">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
             <span>ระบบคำนวณหินมงคลเฉพาะบุคคล 365 วัน • เสริมดวงดึงดูดทรัพย์</span>
           </div>
 

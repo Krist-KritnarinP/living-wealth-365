@@ -64,14 +64,14 @@ export default function PlanCard({ plan, onSelectPlan }) {
         </div>
 
         {/* Plan Title & Tagline */}
-        <div className="space-y-1.5">
-          <Link to={detailPath} className="block">
-            <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors leading-snug">
+        <div className="space-y-1.5 min-w-0">
+          <Link to={detailPath} className="block min-w-0">
+            <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors leading-snug break-words [overflow-wrap:anywhere]">
               {plan.name}
             </h3>
           </Link>
           {plan.tagline && (
-            <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed line-clamp-2">
+            <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed break-words [overflow-wrap:anywhere] line-clamp-2">
               {plan.tagline}
             </p>
           )}
@@ -79,26 +79,28 @@ export default function PlanCard({ plan, onSelectPlan }) {
 
         {/* Coverage Amount Box */}
         {plan.coverageAmount && (
-          <div className="p-3.5 rounded-2xl bg-base-200/60 border border-base-300/60">
+          <div className="p-3.5 rounded-2xl bg-base-200/60 border border-base-300/60 min-w-0">
             <span className="text-[11px] font-semibold text-base-content/65 block">
               วงเงินความคุ้มครอง:
             </span>
-            <span className="text-base sm:text-lg font-black text-primary">
+            <span className="text-base sm:text-lg font-black text-primary break-words [overflow-wrap:anywhere]">
               {plan.coverageAmount}
             </span>
           </div>
         )}
 
         {/* Key Features List */}
-        <div className="space-y-2 pt-1">
+        <div className="space-y-2 pt-1 min-w-0">
           <span className="text-xs font-bold text-base-content/80 block">
             จุดเด่นสำคัญ:
           </span>
-          <ul className="space-y-1.5 text-xs text-base-content/80">
+          <ul className="space-y-2 text-xs text-base-content/80 min-w-0">
             {featuresList.slice(0, 3).map((feat, idx) => (
-              <li key={idx} className="flex items-start gap-2">
+              <li key={idx} className="flex items-start gap-2.5 min-w-0">
                 <CheckCircle2 className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                <span className="leading-snug">{feat}</span>
+                <span className="flex-1 min-w-0 break-words [overflow-wrap:anywhere] leading-relaxed">
+                  {feat}
+                </span>
               </li>
             ))}
           </ul>
@@ -106,9 +108,11 @@ export default function PlanCard({ plan, onSelectPlan }) {
 
         {/* Recommended for */}
         {plan.recommendedFor && (
-          <div className="flex items-center gap-1.5 text-xs text-base-content/65 pt-2 border-t border-base-300/40">
-            <Users className="w-3.5 h-3.5 text-secondary shrink-0" />
-            <span className="line-clamp-1">เหมาะสำหรับ: {plan.recommendedFor}</span>
+          <div className="flex items-start gap-1.5 text-xs text-base-content/65 pt-2 border-t border-base-300/40 min-w-0">
+            <Users className="w-3.5 h-3.5 text-secondary shrink-0 mt-0.5" />
+            <span className="flex-1 min-w-0 break-words [overflow-wrap:anywhere] leading-relaxed">
+              เหมาะสำหรับ: {plan.recommendedFor}
+            </span>
           </div>
         )}
       </div>

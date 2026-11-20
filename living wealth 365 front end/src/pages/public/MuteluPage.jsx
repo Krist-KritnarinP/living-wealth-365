@@ -46,8 +46,8 @@ export default function MuteluPage() {
       {/* Header Banner */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full rounded-3xl zen-surface p-8 sm:p-12 lg:p-16 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold">
-            <Sparkles className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black shadow-xs">
+            <Sparkles className="w-4 h-4 text-secondary shrink-0" />
             <span>MU-TAE-LU & AUSPICIOUS PROSPERITY</span>
           </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-primary leading-tight">

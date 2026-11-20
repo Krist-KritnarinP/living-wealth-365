@@ -52,8 +52,8 @@ export default function BlogPage() {
       {/* 🌟 1. Header Banner & Feature Switcher */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full rounded-3xl zen-surface p-6 sm:p-10 lg:p-12 text-center space-y-5">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-bold">
-            <BookOpen className="w-4 h-4 text-secondary" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black shadow-xs">
+            <BookOpen className="w-4 h-4 text-secondary shrink-0" />
             <span>KNOWLEDGE HUB & TAX STRATEGY</span>
           </div>
 

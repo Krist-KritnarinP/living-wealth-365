@@ -59,8 +59,8 @@ export default function JournalPage() {
       {/* 1. HERO BANNER */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full rounded-3xl zen-surface p-6 sm:p-10 lg:p-14 text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold">
-            <Feather className="w-4 h-4" />
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
+            <Feather className="w-4 h-4 text-secondary shrink-0" />
             <span>PILLAR 6: JOURNAL & REFLECTIONS • วารสารความคิด</span>
           </div>
 

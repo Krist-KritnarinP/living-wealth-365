@@ -5,6 +5,8 @@ import { useLanguage } from '../../context/LanguageContext';
 import { useToast } from '../../context/ToastContext';
 import DashboardLayout from '../../components/common/DashboardLayout';
 import FileUploadZone from '../../components/common/FileUploadZone';
+import CoverFramePicker from '../../components/common/CoverFramePicker';
+import FramedImage from '../../components/common/FramedImage';
 import SecurityConfirmModal from '../../components/common/SecurityConfirmModal';
 import { logActivity } from '../../utils/activityLogger';
 import { resolveAssetUrl } from '../../api';
@@ -212,18 +214,14 @@ export default function AdminProductsPage() {
                 <tr key={prod.id} className="hover:bg-base-200/50">
                   <td>
                     <div className="flex items-center gap-3">
-                      <img
-                        src={resolveAssetUrl(
-                          prod.imageUrl,
-                          'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400&auto=format&fit=crop&q=80'
-                        )}
-                        alt={prod.name}
-                        className="w-12 h-12 rounded-xl object-cover shrink-0 bg-base-200 border border-base-300"
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-base-200 border border-base-300">
+                        <FramedImage
+                          src={prod.imageUrl}
+                          alt={prod.name}
+                          className="w-full h-full object-cover"
+                          fallback="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=400&auto=format&fit=crop&q=80"
+                        />
+                      </div>
                       <div>
                         <div className="font-bold text-primary">{prod.name}</div>
                         <div className="text-xs text-base-content/60 max-w-xs truncate">
@@ -434,6 +432,16 @@ export default function AdminProductsPage() {
                   onChange={(url) => setFormData({ ...formData, imageUrl: url })}
                   helpText="คลิกปุ่ม + เพื่ออัปโหลดรูปภาพสินค้า หรือใส่ URL รูปภาพ"
                 />
+
+                {formData.imageUrl && (
+                  <CoverFramePicker
+                    imageUrl={formData.imageUrl}
+                    onChange={(framedUrl) =>
+                      setFormData({ ...formData, imageUrl: framedUrl })
+                    }
+                    label="ปรับแต่งเฟรมและจุดโฟกัสภาพสินค้า (Focal Point & Framing)"
+                  />
+                )}
 
                 <div className="modal-action">
                   <button

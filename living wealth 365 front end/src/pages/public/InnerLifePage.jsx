@@ -64,8 +64,8 @@ export default function InnerLifePage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full rounded-3xl zen-surface border border-base-300/60 p-6 sm:p-10 lg:p-16 relative overflow-hidden shadow-xs">
           <div className="max-w-3xl space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
-              <Brain className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
+              <Brain className="w-4 h-4 text-secondary shrink-0" />
               <span>PILLAR 4: INNER LIFE • ศิลปะแห่งความเงียบสงบ</span>
             </div>
 
@@ -103,8 +103,8 @@ export default function InnerLifePage() {
       <section id="mindfulness" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <div className="w-full p-6 sm:p-10 lg:p-12 rounded-3xl zen-surface text-center space-y-8 relative overflow-hidden">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
-              <Sparkles className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
               <span>DAILY PRACTICE • ฝึกสติวันละนิด</span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">

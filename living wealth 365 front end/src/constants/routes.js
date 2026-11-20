@@ -12,6 +12,7 @@ export const ROUTES = {
   WELLBEING: '/wellbeing',
   INNER_LIFE: '/inner-life',
   EARTH_ENERGY: '/earth-energy',
+  PRODUCT_DETAIL: (id = ':id') => `/earth-energy/product/${id}`,
   JOURNAL: '/journal',
   JOURNAL_DETAIL: (slug = ':slug') => `/journal/${slug}`,
   ABOUT: '/about',

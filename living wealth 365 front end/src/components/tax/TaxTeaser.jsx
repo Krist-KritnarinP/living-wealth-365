@@ -46,8 +46,8 @@ export default function TaxTeaser() {
         {/* Left Column: Context & Interactive Input */}
         <div className="lg:col-span-7 space-y-6">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
-              <Calculator className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
+              <Calculator className="w-4 h-4 text-secondary shrink-0" />
               <span>TAX PLANNING ENGINE • โปรแกรมจำลองภาษี 2568</span>
             </div>
 

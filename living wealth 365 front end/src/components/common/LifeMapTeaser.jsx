@@ -205,8 +205,8 @@ export default function LifeMapTeaser({ standalone = false }) {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-base-300/60 relative z-10">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide mb-2">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide mb-2 shadow-xs">
+            <Sparkles className="w-4 h-4 text-secondary shrink-0" />
             <span>LIVING WEALTH LIFE MAP • ประเมินสมดุล 6 มิติ</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-primary tracking-tight">

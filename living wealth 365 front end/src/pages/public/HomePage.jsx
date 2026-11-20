@@ -66,7 +66,7 @@ export default function HomePage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 pt-4 sm:pt-8 space-y-10 sm:space-y-12">
         {/* Centered Hero Statement */}
         <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full zen-surface text-primary text-sm sm:text-base font-semibold">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-sm sm:text-base font-black shadow-xs">
             <Sparkles className="w-4 h-4 text-secondary shrink-0" />
             <EditableText
               fieldKey="hero.badge"
@@ -497,8 +497,8 @@ export default function HomePage() {
 
             {/* Narrative Content */}
             <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
-                <HeartHandshake className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
+                <HeartHandshake className="w-4 h-4 text-secondary shrink-0" />
                 <EditableText
                   fieldKey="narrative.badge"
                   label="Narrative Badge"
@@ -561,8 +561,8 @@ export default function HomePage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold mb-2">
-              <Gem className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black mb-2 shadow-xs">
+              <Gem className="w-4 h-4 text-secondary shrink-0" />
               <EditableText
                 fieldKey="minerals.badge"
                 label="หมวดแร่ธาตุ Badge"
@@ -613,8 +613,8 @@ export default function HomePage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold mb-2">
-              <Feather className="w-3.5 h-3.5" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black mb-2 shadow-xs">
+              <Feather className="w-4 h-4 text-secondary shrink-0" />
               <EditableText
                 fieldKey="journal.badge"
                 label="หมวดวารสาร Badge"

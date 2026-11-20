@@ -56,8 +56,8 @@ export default function CopyToLineSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
         {/* Left Column: Heading & Value Prop */}
         <div className="lg:col-span-5 space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
             <span>LINE CONSULTATION HELPER</span>
           </div>
 

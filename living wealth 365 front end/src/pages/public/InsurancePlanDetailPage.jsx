@@ -205,11 +205,11 @@ export default function InsurancePlanDetailPage() {
                     {plan.coverageAmount || 'ตามเงื่อนไขกรมธรรม์'}
                   </span>
                 </div>
-                <div className="p-4 rounded-2xl bg-secondary/15 border border-secondary/25">
-                  <span className="text-xs font-bold text-secondary block">
+                <div className="p-4 rounded-2xl bg-amber-500/15 border border-amber-500/35">
+                  <span className="text-xs font-bold text-amber-900 dark:text-amber-200 block">
                     ประมาณการเบี้ยประกันเริ่มต้น
                   </span>
-                  <span className="text-base sm:text-lg font-black text-secondary leading-snug block">
+                  <span className="text-base sm:text-lg font-black text-amber-900 dark:text-amber-300 leading-snug block">
                     {plan.startingPrice || 'คำนวณตามช่วงอายุ'}
                   </span>
                 </div>
@@ -448,8 +448,8 @@ export default function InsurancePlanDetailPage() {
       <section id="consult-plan" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
         <div className="zen-surface rounded-3xl p-6 sm:p-10 lg:p-12 border border-primary/20 shadow-sm space-y-6">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold">
-              <Sparkles className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black shadow-xs">
+              <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
               <span>CUSTOMIZE YOUR COVERAGE • ออกแบบเฉพาะช่วงอายุ</span>
             </span>
             <h2 className="editorial-display text-2xl sm:text-3xl font-black text-primary">

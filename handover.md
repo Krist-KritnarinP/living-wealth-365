@@ -1097,6 +1097,31 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Browser QA (`http://localhost:5173/`): Verified EP.01 framed card cover on `/journal` (`object-position: 50% 12%`) and live interactive presets/sliders/toggles inside `/admin/cms/blog` Edit modal.
   - Production Build: `vite build` passed cleanly.
 
+## 47. High-Contrast Section Badges, PlanCard Boundary Protection, Product Detail Page & Fly-to-Cart Warp (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Fixed Text Overflow & Boundary Clipping in Plan Cards (`PlanCard.jsx`)**:
+     - Applied `break-words [overflow-wrap:anywhere] min-w-0 flex-1 leading-relaxed` across `featuresList`, plan titles, taglines, coverage amount box, and recommended-for footer.
+     - Resolved orphan Thai characters (e.g. `ม์` dangling on new line after `...ต่อรอบปีกรมธรรม์`) and prevented text clipping outside card bounds.
+  2. **High-Contrast Top-Left Section Badges Across ALL Pages**:
+     - Upgraded faint `text-secondary` (`bg-secondary/15`) badges across all 7 content pillars and utility pages to high-contrast, bold, crisp styling (`bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs` with vibrant accent icons).
+     - Applied across `EarthEnergyPage.jsx` (`PILLAR 5: EARTH & ENERGY CURATION`), `WealthPage.jsx` (`PILLAR 2: WEALTH ARCHITECTURE`), `TaxPlanningPage.jsx` (`PILLAR 2: WEALTH & TAX STRATEGY`), `InnerLifePage.jsx` (`PILLAR 4: INNER LIFE`), `WellbeingPage.jsx` (`PILLAR 3: WELLBEING & LONGEVITY`), `JournalPage.jsx` (`PILLAR 6: JOURNAL & REFLECTIONS`), `LifePage.jsx` (`PILLAR 1: LIFE & LIVING`), `AboutPage.jsx` (`PILLAR 7: ABOUT US & PHILOSOPHY`), `HomePage.jsx` (Hero statement, Narrative, Earth & Energy, Journal badges), `LifeMapTeaser.jsx`, `NonLifeInsurancePage.jsx`, `MuteluPage.jsx`, `BlogPage.jsx`, and `InsurancePlanDetailPage.jsx`.
+  3. **Dedicated Product Detail Page (`ProductDetailPage.jsx`, `ROUTES.PRODUCT_DETAIL`, `App.jsx`)**:
+     - Created `/earth-energy/product/:id` (and alias `/product/:id`) displaying full high-res imagery via `<FramedImage />`, aspect badges, pricing with VAT/certificate note, authenticity watermark, 4 scientific and energetic spec tiles (Chemical Formula e.g. `SiO₂`, Chakra, Day of Week, Stone Type), 4 dimensions of mineral curation, related curated products, and direct consultation modal with Admin B.
+     - Linked product card thumbnails and titles in `ProductCard.jsx` directly to the detail page.
+  4. **Fly-to-Cart Warp Animation & CartDrawer Behavior (`flyToCart.js`, `CartContext.jsx`, `ProductCard.jsx`, `ProductDetailPage.jsx`, `Navbar.jsx`, `src/index.css`)**:
+     - Updated `addToCart(product, quantity, { openDrawer: false })` in `CartContext.jsx` so it no longer auto-opens the `CartDrawer` side panel on item addition.
+     - Built `flyToCart.js` creating an animated parabolic flying clone that warps from the clicked button into the Navbar cart icon (`#nav-cart-btn`), scales down, fades out, triggers `.animate-cart-pulse` (bounce & gold glow) on the cart button, increments the badge count, and shows a non-intrusive green toast.
+     - Added `<CoverFramePicker />` and `<FramedImage />` into `AdminProductsPage.jsx` for product cover image framing.
+- **Verification**:
+  - Unit Tests: 23/23 passed (`tests/cartAndProduct.test.js`, `tests/imageFrame.test.js`, `tests/siteCustomizer.test.js`, etc.).
+  - Production Build: `vite build` completed cleanly in 955ms.
+  - Browser QA (`http://localhost:5173/` at 1440x900 Desktop):
+    - Verified Pillar 5 badge is crisp navy with solid border (`528.74 × 24.28px`).
+    - Verified click on product card opens `/earth-energy/product/:id` with full 4-dimension detail.
+    - Verified click on "เพิ่มลงในตะกร้า" flies item clone to `#nav-cart-btn`, pulses cart icon, increments badge to `1`, shows success toast, and `CartDrawer` remains closed.
+    - Verified `/wealth?tab=protection` Plan Cards titles, features bullets, and footer text wrap cleanly with zero clipping.
+
 
 
 

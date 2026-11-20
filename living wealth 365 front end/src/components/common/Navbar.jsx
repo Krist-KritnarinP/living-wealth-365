@@ -271,6 +271,7 @@ export default function Navbar() {
           {/* Shopping Cart Button */}
           <button
             type="button"
+            id="nav-cart-btn"
             onClick={openCart}
             className="btn btn-ghost btn-circle btn-sm sm:btn-md relative"
             title="ตะกร้าสินค้า"
