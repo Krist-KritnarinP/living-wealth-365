@@ -30,7 +30,7 @@ import StorageUsageCard from '../admin/StorageUsageCard';
 
 export default function DashboardLayout({ children, type = 'customer' }) {
   const { currentUser, logout, theme, toggleTheme, wishlist, leads, posts, products, insurancePlans = [] } = useAuth();
-  const { cartCount, openCart } = useCart();
+  const { cartCount } = useCart();
   const { language, toggleLanguage, t } = useLanguage();
   const { showToast } = useToast();
   const location = useLocation();
@@ -81,6 +81,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       icon: Heart,
       badge: wishlist.length > 0 ? wishlist.length : null,
       badgeColor: 'badge-error text-white',
+    },
+    {
+      title: 'ตะกร้าสินค้า',
+      path: ROUTES.ACCOUNT_CART,
+      icon: ShoppingBag,
+      badge: cartCount > 0 ? cartCount : null,
+      badgeColor: 'badge-secondary text-secondary-content',
     },
   ];
 
@@ -215,27 +222,6 @@ export default function DashboardLayout({ children, type = 'customer' }) {
             );
           })}
 
-          {type === 'customer' && (
-            <button
-              type="button"
-              onClick={openCart}
-              className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-2xl font-bold text-sm text-base-content/75 hover:bg-base-200/70 hover:text-primary transition-colors duration-200 cursor-pointer ${
-                collapsed ? 'justify-center px-0' : ''
-              }`}
-              title={collapsed ? 'ตะกร้าสินค้า' : undefined}
-            >
-              <ShoppingBag className="w-5 h-5 shrink-0 text-secondary" />
-              {!collapsed && (
-                <span className="flex-1 text-left truncate">ตะกร้าสินค้า</span>
-              )}
-              {!collapsed && cartCount > 0 && (
-                <span className="badge badge-sm badge-secondary text-secondary-content font-bold shadow-xs">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          )}
-
           <div className="pt-4 mt-4 border-t border-base-300/50">
             <Link
               to={ROUTES.HOME}
@@ -342,27 +328,6 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                   );
                 })}
 
-                {type === 'customer' && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setMobileDrawerOpen(false);
-                      openCart();
-                    }}
-                    className="w-full flex items-center justify-between px-3.5 py-3 rounded-2xl font-bold text-sm text-base-content/80 hover:bg-base-200 cursor-pointer"
-                  >
-                    <div className="flex items-center gap-3">
-                      <ShoppingBag className="w-5 h-5 text-secondary" />
-                      <span>ตะกร้าสินค้า</span>
-                    </div>
-                    {cartCount > 0 && (
-                      <span className="badge badge-sm badge-secondary text-secondary-content font-bold">
-                        {cartCount}
-                      </span>
-                    )}
-                  </button>
-                )}
-
                 <div className="pt-3 border-t border-base-300">
                   <Link
                     to={ROUTES.HOME}
@@ -416,12 +381,11 @@ export default function DashboardLayout({ children, type = 'customer' }) {
           {/* Topbar Action Controls */}
           <div className="flex items-center gap-2">
             {type === 'customer' && (
-              <button
-                type="button"
-                onClick={openCart}
+              <Link
+                to={ROUTES.ACCOUNT_CART}
                 className="btn btn-ghost btn-circle btn-sm relative"
                 title="ตะกร้าสินค้า"
-                aria-label="เปิดตะกร้าสินค้า"
+                aria-label="ไปที่หน้าตะกร้าสินค้า"
               >
                 <ShoppingBag className="w-4 h-4 text-primary" />
                 {cartCount > 0 && (
@@ -429,7 +393,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                     {cartCount}
                   </span>
                 )}
-              </button>
+              </Link>
             )}
 
             {/* Bilingual Switcher (TH / EN) */}

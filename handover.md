@@ -873,8 +873,8 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   4. **Shopping Cart System (`CartContext.jsx`, `CartDrawer.jsx`, `ProductCard.jsx`, `Navbar.jsx`)**:
      - Added `CartProvider` with `localStorage` persistence (`lw365_cart_v1`), `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`, `cartCount`, and `cartTotal`.
      - Added frosted glass slide-over `CartDrawer` with quantity controls and one-click **"ส่งสรุปรายการสั่งซื้อทาง LINE"** (`https://line.me/R/share?text=...`) + clipboard copy.
-     - Added Cart icon & live badge counter to `Navbar` (mobile & desktop), `DashboardLayout` (`/account` sidebar, mobile drawer, and topbar), and **"ใส่ตะกร้า"** action button to `ProductCard`.
-     - Fixed `CartDrawer` to use `showToast` from `ToastContext`.
+     - Added dedicated full-page Cart route `/account/cart` (`AccountCartPage.jsx`) inside `DashboardLayout` sidebar & topbar for complete order review, advisor lead submission, and LINE checkout, while keeping `CartDrawer` for quick peek from public pages.
+     - Fixed `CartDrawer` to use `showToast` from `ToastContext` and added a direct link to `/account/cart`.
 - **HostAtom / Plesk Go-Live DNS Reminder**:
   - Point only web DNS records in Plesk (`A @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`). Do NOT delete or modify `MX` / Mail records so `Merp@livingwealth365.com` continues operating without interruption.
 - **Verification**:

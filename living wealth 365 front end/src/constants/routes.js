@@ -33,6 +33,7 @@ export const ROUTES = {
   ACCOUNT: '/account',
   ACCOUNT_HISTORY: '/account/history',
   ACCOUNT_WISHLIST: '/account/wishlist',
+  ACCOUNT_CART: '/account/cart',
 
   // ⚙️ Admin CMS & Operations
   ADMIN: '/admin',

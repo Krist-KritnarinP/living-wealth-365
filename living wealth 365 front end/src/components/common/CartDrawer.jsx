@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   X,
   ShoppingBag,
@@ -9,9 +10,11 @@ import {
   Copy,
   Check,
   Sparkles,
+  ExternalLink,
 } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useToast } from '../../context/ToastContext';
+import { ROUTES } from '../../constants/routes';
 import { resolveAssetUrl } from '../../api';
 
 export default function CartDrawer() {
@@ -205,6 +208,15 @@ export default function CartDrawer() {
             </button>
 
             <div className="flex items-center justify-between gap-2">
+              <Link
+                to={ROUTES.ACCOUNT_CART}
+                onClick={closeCart}
+                className="btn btn-ghost btn-xs text-primary gap-1"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>เปิดหน้าตะกร้าเต็ม</span>
+              </Link>
+
               <button
                 type="button"
                 onClick={async () => {
@@ -220,7 +232,7 @@ export default function CartDrawer() {
                 className="btn btn-ghost btn-xs text-base-content/70 gap-1"
               >
                 <Copy className="w-3.5 h-3.5" />
-                <span>คัดลอกข้อความ</span>
+                <span>คัดลอก</span>
               </button>
 
               <button
@@ -228,7 +240,7 @@ export default function CartDrawer() {
                 onClick={clearCart}
                 className="btn btn-ghost btn-xs text-error/70 hover:text-error"
               >
-                ล้างตะกร้า
+                ล้าง
               </button>
             </div>
           </div>

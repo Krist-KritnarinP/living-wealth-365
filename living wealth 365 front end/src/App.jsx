@@ -39,6 +39,7 @@ import ThankYouPage from './pages/public/ThankYouPage';
 import AccountDashboardPage from './pages/account/AccountDashboardPage';
 import AccountHistoryPage from './pages/account/AccountHistoryPage';
 import AccountWishlistPage from './pages/account/AccountWishlistPage';
+import AccountCartPage from './pages/account/AccountCartPage';
 
 // Admin Pages
 import AdminDashboardPage from './pages/admin/AdminDashboardPage';
@@ -123,6 +124,14 @@ function AppShell() {
             element={
               <ProtectedRoute requiredRole="CUSTOMER">
                 <AccountWishlistPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.ACCOUNT_CART}
+            element={
+              <ProtectedRoute requiredRole="CUSTOMER">
+                <AccountCartPage />
               </ProtectedRoute>
             }
           />
