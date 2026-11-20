@@ -57,7 +57,7 @@ export default function HeroStatTiles() {
       suffix: '+ ปี',
       prefix: '',
       label: 'ประสบการณ์ที่ปรึกษา',
-      sub: 'คุณท็อป (AIA / การเงิน)',
+      sub: 'Admin A (AIA / การเงิน)',
       icon: ShieldCheck,
       color: 'text-primary',
       bg: 'bg-primary/10',

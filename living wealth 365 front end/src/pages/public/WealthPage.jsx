@@ -19,6 +19,7 @@ import { ROUTES } from '../../constants/routes';
 import PlanCard from '../../components/insurance/PlanCard';
 import TaxCalculator from '../../components/tax/TaxCalculator';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
+import { CATEGORY_GROUPS } from '../../utils/insuranceInfographic';
 
 export default function WealthPage() {
   const location = useLocation();
@@ -43,16 +44,23 @@ export default function WealthPage() {
     }
   }, [location.search]);
 
-  // Filter plans
+  // Filter plans cleanly by AIA categories
   const filteredPlans = insurancePlans.filter((plan) => {
     if (categoryFilter === 'ALL') return true;
-    if (categoryFilter === 'HEALTH') return plan.category === 'HEALTH';
-    if (categoryFilter === 'CRITICAL_ILLNESS') return plan.category === 'CRITICAL_ILLNESS';
-    if (categoryFilter === 'RETIREMENT') return plan.category === 'RETIREMENT';
-    if (categoryFilter === 'TAX') return plan.category === 'TAX';
-    if (categoryFilter === 'NON_LIFE') return plan.type === 'NON_LIFE';
-    return true;
+    return plan.category === categoryFilter || (categoryFilter === 'NON_LIFE' && plan.type === 'NON_LIFE');
   });
+
+  const knownCategories = CATEGORY_GROUPS.map((g) => g.id);
+  const uncategorizedPlans = insurancePlans.filter((plan) => !knownCategories.includes(plan.category));
+
+  const filterTabs = [
+    { id: 'ALL', label: 'ทั้งหมด', count: insurancePlans.length },
+    { id: 'HEALTH', label: 'สุขภาพเหมาจ่าย', count: insurancePlans.filter((p) => p.category === 'HEALTH').length },
+    { id: 'CRITICAL_ILLNESS', label: 'โรคร้ายแรง', count: insurancePlans.filter((p) => p.category === 'CRITICAL_ILLNESS').length },
+    { id: 'WHOLE_LIFE', label: 'ตลอดชีพ & มรดก', count: insurancePlans.filter((p) => p.category === 'WHOLE_LIFE').length },
+    { id: 'RETIREMENT', label: 'เกษียณ & บำนาญ', count: insurancePlans.filter((p) => p.category === 'RETIREMENT').length },
+    { id: 'INVESTMENT_LINKED', label: 'Unit Linked', count: insurancePlans.filter((p) => p.category === 'INVESTMENT_LINKED').length },
+  ];
 
   const wealthPosts = posts.filter((p) => p.pillar === 'WEALTH' || p.category?.includes('การเงิน') || p.category?.includes('ภาษี'));
 
@@ -125,50 +133,111 @@ export default function WealthPage() {
       {activeTab === 'protection' && (
         <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-8 animate-fadeIn">
           {/* Filter Pills */}
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-base-300/60">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-base-300/60">
             <div>
               <h2 className="text-2xl font-black text-primary">
-                โซลูชันการปกป้องและความคุ้มครอง (Protection Solutions)
+                แผนประกัน AIA แยกตามหมวดหมู่ (Protection & Wealth Solutions)
               </h2>
               <p className="text-sm zen-muted mt-0.5">
-                คัดสรรแผนประกันชีวิต สุขภาพ โรคร้ายแรง บำนาญ และวินาศภัยที่ตอบโจทย์ชีวิตจริง
+                กดที่แผนประกันแต่ละใบเพื่อชมหน้า Infographics สรุปเข้าใจง่าย พร้อมดาวน์โหลดโบรชัวร์ AIA (PDF)
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-2xl bg-base-200/80 border border-base-300/40">
-              {[
-                { id: 'ALL', label: 'ทั้งหมด' },
-                { id: 'HEALTH', label: 'สุขภาพเหมาจ่าย' },
-                { id: 'CRITICAL_ILLNESS', label: 'โรคร้ายแรง' },
-                { id: 'RETIREMENT', label: 'เกษียณ & บำนาญ' },
-                { id: 'TAX', label: 'มรดก & ภาษี' },
-                { id: 'NON_LIFE', label: 'วินาศภัย' },
-              ].map((tab) => (
+            <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-base-200/80 border border-base-300/40">
+              {filterTabs.map((tab) => (
                 <button
                   key={tab.id}
                   onClick={() => setCategoryFilter(tab.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+                  className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors flex items-center gap-1.5 ${
                     categoryFilter === tab.id
                       ? 'bg-primary text-white shadow-xs'
                       : 'text-base-content/75 hover:bg-base-100 hover:text-primary'
                   }`}
                 >
-                  {tab.label}
+                  <span>{tab.label}</span>
+                  <span
+                    className={`px-1.5 py-0.5 rounded-full text-[10px] ${
+                      categoryFilter === tab.id ? 'bg-white/20 text-white' : 'bg-base-300/70 text-primary'
+                    }`}
+                  >
+                    {tab.count}
+                  </span>
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-            {filteredPlans.map((plan) => (
-              <PlanCard
-                key={plan.id || plan.slug}
-                plan={plan}
-                onSelectPlan={(p) => setSelectedPlanForModal(p)}
-              />
-            ))}
-          </div>
+          {/* Categorized Plan Groups when ALL, or filtered flat grid */}
+          {categoryFilter === 'ALL' ? (
+            <div className="space-y-12">
+              {CATEGORY_GROUPS.map((group) => {
+                const groupPlans = insurancePlans.filter((p) => p.category === group.id);
+                if (groupPlans.length === 0) return null;
+                return (
+                  <div key={group.id} className="space-y-5">
+                    <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 pb-2 border-b border-base-300/50">
+                      <div className="space-y-1">
+                        <span className="text-[11px] font-bold uppercase tracking-wider text-secondary block">
+                          {group.badge}
+                        </span>
+                        <h3 className="editorial-display text-xl sm:text-2xl font-black text-primary">
+                          {group.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-base-content/70">
+                          {group.subtitle}
+                        </p>
+                      </div>
+                      <span className="badge badge-outline font-bold text-xs px-3 py-2 shrink-0">
+                        {groupPlans.length} แผนแนะนำ
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                      {groupPlans.map((plan) => (
+                        <PlanCard
+                          key={plan.id || plan.slug}
+                          plan={plan}
+                          onSelectPlan={(p) => setSelectedPlanForModal(p)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+
+              {uncategorizedPlans.length > 0 && (
+                <div className="space-y-5">
+                  <div className="flex items-end justify-between pb-2 border-b border-base-300/50">
+                    <h3 className="editorial-display text-xl sm:text-2xl font-black text-primary">
+                      แผนความคุ้มครองเพิ่มเติม (Other Solutions)
+                    </h3>
+                    <span className="badge badge-outline font-bold text-xs px-3 py-2">
+                      {uncategorizedPlans.length} แผน
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    {uncategorizedPlans.map((plan) => (
+                      <PlanCard
+                        key={plan.id || plan.slug}
+                        plan={plan}
+                        onSelectPlan={(p) => setSelectedPlanForModal(p)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {filteredPlans.map((plan) => (
+                <PlanCard
+                  key={plan.id || plan.slug}
+                  plan={plan}
+                  onSelectPlan={(p) => setSelectedPlanForModal(p)}
+                />
+              ))}
+            </div>
+          )}
         </section>
       )}
 
@@ -236,7 +305,8 @@ export default function WealthPage() {
       )}
 
       {/* 3. CURATED WEALTH ARTICLES */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+      {wealthPosts.length > 0 && (
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
@@ -293,7 +363,8 @@ export default function WealthPage() {
             </Link>
           ))}
         </div>
-      </section>
+        </section>
+      )}
 
       {/* 4. PLAN SELECTION MODAL */}
       {selectedPlanForModal && (
@@ -303,7 +374,7 @@ export default function WealthPage() {
               สนใจปรึกษาแผน {selectedPlanForModal.name}
             </h3>
             <p className="py-2 text-sm text-base-content/80">
-              กรอกข้อมูลเพื่อให้ คุณท็อป & คุณจอย หรือทีมที่ปรึกษาติดต่อกลับเพื่อวางแผนเฉพาะบุคคล (ฟรี ไม่มีข้อผูกมัด)
+              กรอกข้อมูลเพื่อให้ Admin A & Admin B หรือทีมที่ปรึกษาติดต่อกลับเพื่อวางแผนเฉพาะบุคคล (ฟรี ไม่มีข้อผูกมัด)
             </p>
 
             <div className="mt-4">

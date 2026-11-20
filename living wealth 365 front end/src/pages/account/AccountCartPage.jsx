@@ -66,7 +66,7 @@ export default function AccountCartPage() {
 
   const handleSendToLine = async () => {
     if (cartItems.length === 0) return;
-    const text = `สวัสดีครับ/ค่ะ สนใจบูชา & สั่งซื้อรายการจาก Living Wealth 365:\n${buildOrderSummary()}\nรบกวนคุณจอยแนะนำรายละเอียดและการจัดส่งครับ/ค่ะ`;
+    const text = `สวัสดีครับ/ค่ะ สนใจบูชา & สั่งซื้อรายการจาก Living Wealth 365:\n${buildOrderSummary()}\nรบกวน Admin B แนะนำรายละเอียดและการจัดส่งครับ/ค่ะ`;
     try {
       await navigator.clipboard.writeText(text);
       showToast('คัดลอกสรุปออเดอร์แล้ว กำลังเปิด LINE...', 'success');
@@ -115,7 +115,7 @@ export default function AccountCartPage() {
                 ยังไม่มีรายการสินค้าในตะกร้า
               </h2>
               <p className="text-sm text-base-content/70 leading-relaxed">
-                เลือกชมผลึกแร่ธาตุธรรมชาติและชิ้นงานมงคลที่คัดสรรโดยคุณจอย แล้วกดเพิ่มลงตะกร้าเพื่อสรุปรายการได้เลยครับ
+                เลือกชมผลึกแร่ธาตุธรรมชาติและชิ้นงานมงคลที่คัดสรรโดย Admin B แล้วกดเพิ่มลงตะกร้าเพื่อสรุปรายการได้เลยครับ
               </p>
             </div>
             <Link

@@ -1045,6 +1045,17 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.63s.
 
+## 42. Admin A & Admin B Name Revert, Live Supabase Post Purge & AIA Insurance Infographic Showcase (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Reverted Persona Names to `Admin A` & `Admin B` Across Frontend & Tests**: Updated `siteCustomizerDefaults.js`, `mockData.js`, `LanguageContext.jsx`, `Navbar.jsx`, `Footer.jsx`, `CartDrawer.jsx`, `CopyToLineSection.jsx`, `HeroInteractiveFocus.jsx`, `HeroStatTiles.jsx`, `LifeMapTeaser.jsx`, `DashboardLayout.jsx`, `HomePage.jsx`, `AboutPage.jsx`, `LifePage.jsx`, `WealthPage.jsx`, `TaxPlanningPage.jsx`, `EarthEnergyPage.jsx`, `JournalPage.jsx`, `BlogDetailPage.jsx`, `AccountCartPage.jsx`, `AdminBlogPage.jsx`, and `tests/siteCustomizer.test.js`. Bumped `SiteCustomizerContext.jsx` storage key to `lw365_site_customizer_v2` so legacy cached names clear automatically.
+  2. **Purged All Blog Posts in Live Supabase DB + Fallback Skeleton**: Deleted all 31 existing posts via Render API (`DELETE /api/posts/:id`), verified `GET /api/posts` returns `0` posts, set `INITIAL_POSTS = []` in `mockData.js`, bumped `AuthContext.jsx` cache keys (`lw365_posts_v2`, `lw365_plans_v2`), wrapped `JournalPage.jsx` filter pills cleanly (`flex-wrap`), and added graceful empty-post handling on `HomePage.jsx` and `WealthPage.jsx`.
+  3. **Updated Live AIA Thailand Insurance Plans + Categories + Cover Photos + Official PDFs**: Synced 10 current AIA Thailand plans into live Supabase PostgreSQL (`insurance_plans`) grouped across 5 categories (`HEALTH`, `CRITICAL_ILLNESS`, `WHOLE_LIFE`, `RETIREMENT`, `INVESTMENT_LINKED`), each paired with a verified HTTP 200 relatable Unsplash cover image and a verified HTTP 200 official `www.aia.co.th` PDF brochure (`brochureUrl`).
+  4. **Added Interactive Infographic Presentation Page (`/wealth/plan/:slug`)**: Built `InsurancePlanDetailPage.jsx` and `src/utils/insuranceInfographic.js`, updated `PlanCard.jsx`, `WealthPage.jsx`, `routes.js`, and `App.jsx`, plus set `DEFAULT_API_BASE` in `api.js` so production builds connect directly to Render even without `.env` overrides. Verified via unit tests (`tests/insuranceInfographic.test.js`) and headless Chromium against live Render API on Desktop (`1440x900`) and Mobile (`375x812`).
+- **Verification**:
+  - Unit Tests: 18/18 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly.
+
 
 
 

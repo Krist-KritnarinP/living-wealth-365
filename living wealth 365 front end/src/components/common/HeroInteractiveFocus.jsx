@@ -6,10 +6,10 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
   const [activeAge, setActiveAge] = useState('31_45');
 
   const categories = [
-    { id: 'INSURANCE', label: 'ประกันสุขภาพ & ชีวิต', icon: Shield, advisor: 'คุณท็อป' },
-    { id: 'WEALTH', label: 'ลดหย่อนภาษี & เกษียณ', icon: TrendingUp, advisor: 'คุณท็อป' },
-    { id: 'LIFEMAP', label: 'สมดุลชีวิต 6 มิติ', icon: Compass, advisor: 'คุณท็อป & คุณจอย' },
-    { id: 'ENERGY', label: 'คริสตัล & พลังธรรมชาติ', icon: Gem, advisor: 'คุณจอย' },
+    { id: 'INSURANCE', label: 'ประกันสุขภาพ & ชีวิต', icon: Shield, advisor: 'Admin A' },
+    { id: 'WEALTH', label: 'ลดหย่อนภาษี & เกษียณ', icon: TrendingUp, advisor: 'Admin A' },
+    { id: 'LIFEMAP', label: 'สมดุลชีวิต 6 มิติ', icon: Compass, advisor: 'Admin A & Admin B' },
+    { id: 'ENERGY', label: 'คริสตัล & พลังธรรมชาติ', icon: Gem, advisor: 'Admin B' },
   ];
 
   const ageStages = [
@@ -22,7 +22,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'INSURANCE_20_30': {
       title: 'ประกันสุขภาพเหมาจ่ายเบี้ยเริ่มต้น + อุบัติเหตุ',
       strategy: 'ปกป้องเงินเก็บก้อนแรกไม่ให้รั่วไหลจากค่ารักษาพยาบาล รพ.เอกชน ด้วยเบี้ยเริ่มต้นที่เข้าถึงง่าย',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“เริ่มทำประกันสุขภาพตั้งแต่วันที่สุขภาพแข็งแรง จะได้เบี้ยที่คุ้มค่าที่สุดและไม่มีข้อยกเว้นโรค”',
       tag: 'แผนแนะนำ: AIA Health Happy เหมาจ่าย 1–5 ล้าน',
@@ -30,7 +30,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'INSURANCE_31_45': {
       title: 'ประกันเหมาจ่ายวงเงินสูง 15–25 ล้าน + โรคร้ายแรง Multi-Pay',
       strategy: 'สร้างเกราะป้องกันค่ารักษาพยาบาลขั้นสูงและโรคร้ายแรง ครอบคลุมภาระเสาหลักของครอบครัว',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“การมีวงเงินเหมาจ่ายหลักสิบล้าน ช่วยให้เราเลือกการรักษาและแพทย์ที่ดีที่สุดได้โดยไม่กระทบสินทรัพย์ครอบครัว”',
       tag: 'แผนแนะนำ: AIA Health Happy / Infinite Care 25 ล้าน',
@@ -38,7 +38,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'INSURANCE_46_PLUS': {
       title: 'ความคุ้มครองสุขภาพระยะยาว + ส่งต่อมรดกเงินสดปลอดภาษี',
       strategy: 'เน้นคุ้มครองสุขภาพยาวนานถึงวัยเกษียณ พร้อมทุนชีวิตเพื่อส่งต่อมรดกให้ทายาทโดยตรงแบบไร้ข้อพิพาท',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“วางแผนสุขภาพล่วงหน้าในวัยนี้ คือของขวัญที่ประเสริฐที่สุดที่ไม่ทิ้งภาระให้ลูกหลาน”',
       tag: 'แผนแนะนำ: ประกันตลอดชีพ + สัญญาคุ้มครองสุขภาพต่อเนื่อง',
@@ -47,7 +47,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'WEALTH_20_30': {
       title: 'บริหารภาษีเริ่มต้น + ลงทุนอัตโนมัติ DCA',
       strategy: 'ใช้สิทธิลดหย่อนประกันชีวิต 100,000 แรก ควบคู่กองทุนประหยัดภาษีสร้างวินัยการเงิน',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“ทุกบาทที่ประหยัดภาษีได้ คือผลตอบแทนที่การันตี 100% ตั้งแต่วันแรกที่วางแผน”',
       tag: 'เครื่องมือ: Tax Planner & DCA Roadmap',
@@ -55,7 +55,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'WEALTH_31_45': {
       title: 'กลยุทธ์ลดหย่อนภาษีขั้นสูง + พอร์ตเกษียณบำนาญ',
       strategy: 'ใช้สิทธิลดหย่อนเต็มเพดาน (ประกันบำนาญ + กองทุนรวม) เตรียมกระแสเงินสดหลังอายุ 60',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“เงินบำนาญการันตี คือฐานรากที่ทำให้เรากล้าใช้ชีวิตในวัยเกษียณได้อย่างมีศักดิ์ศรี”',
       tag: 'แผนแนะนำ: ประกันบำนาญลดหย่อนภาษี 200,000 บ.',
@@ -63,7 +63,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'WEALTH_46_PLUS': {
       title: 'การจัดสรรพอร์ตลดความเสี่ยง & วางแผนส่งมอบมรดก',
       strategy: 'เปลี่ยนสินทรัพย์เสี่ยงสู่สินทรัพย์การันตีเงินต้น และออกแบบการส่งต่อเงินสดตามเจตนารมณ์',
-      advisor: 'คุณท็อป',
+      advisor: 'Admin A',
       role: 'Life & Wealth Planner',
       quote: '“ส่งมอบมรดกอย่างฉลาด คือส่งมอบทั้งความมั่งคั่งและความสงบสุขในครอบครัว”',
       tag: 'เครื่องมือ: Legacy & Wealth Transfer Architecture',
@@ -72,7 +72,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'LIFEMAP_20_30': {
       title: 'Life Map: ค้นหาคุณค่าและทิศทางชีวิตที่แท้จริง',
       strategy: 'ประเมินสมดุล 6 มิติ (งาน, เงิน, สุขภาพ, ความสัมพันธ์, จิตใจ, จิตวิญญาณ) ป้องกันภาวะ Burnout',
-      advisor: 'คุณท็อป & คุณจอย',
+      advisor: 'Admin A & Admin B',
       role: 'Life Architecture Curators',
       quote: '“เป้าหมายที่ชัดเจนตั้งแต่วัยสร้างตัว จะช่วยให้เราไม่หลงทางตามกระแสสังคม”',
       tag: 'เครื่องมือ: Life Map 6 Dimensions Self-Check',
@@ -80,7 +80,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'LIFEMAP_31_45': {
       title: 'Life Map: สร้างสมดุลครอบครัว งาน และการดูแลสุขภาพ',
       strategy: 'จัดสรรเวลาและพลังงาน (Energy Management) ให้สามารถเติบโตในหน้าที่การงานควบคู่กับสุขภาพที่ยืนยาว',
-      advisor: 'คุณท็อป & คุณจอย',
+      advisor: 'Admin A & Admin B',
       role: 'Life Architecture Curators',
       quote: '“ความสำเร็จที่แท้จริง คือการกลับบ้านมาแล้วยังมีพลังและรอยยิ้มให้กับคนที่เรารัก”',
       tag: 'เครื่องมือ: Holistic Wellbeing Sanctuary Blueprint',
@@ -88,7 +88,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'LIFEMAP_46_PLUS': {
       title: 'Life Map: การออกแบบชีวิตบทที่สอง (Life After 60)',
       strategy: 'เตรียมความพร้อมทั้งกาย ใจ และสังคม สู่การใช้ชีวิตหลังเกษียณอย่างมีความหมาย มีคุณค่า และสงบสุข',
-      advisor: 'คุณท็อป & คุณจอย',
+      advisor: 'Admin A & Admin B',
       role: 'Life Architecture Curators',
       quote: '“วัยเกษียณไม่ใช่จุดสิ้นสุดการทำงาน แต่คือจุดเริ่มต้นของการใช้ชีวิตตามใจปรารถนา”',
       tag: 'เครื่องมือ: Second Half of Life Roadmap',
@@ -97,7 +97,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'ENERGY_20_30': {
       title: 'คริสตัลเสริมโฟกัส สมาธิ และความมั่นคงทางอารมณ์',
       strategy: 'คัดสรรหินควอตซ์ธรรมชาติและลาพิส ลาซูลี เสริมจักระที่ 3 และ 6 ช่วยในการตัดสินใจและสร้างสรรค์งาน',
-      advisor: 'คุณจอย',
+      advisor: 'Admin B',
       role: 'Natural Energy & Wellbeing Curator',
       quote: '“หินธรรมชาติคือคลื่นความถี่ที่บริสุทธิ์ ช่วยคืนความสงบนิ่งให้จิตใจในวันที่วุ่นวาย”',
       tag: 'ผลึกแนะนำ: ไหมดำ / ลาพิส ลาซูลี / ควอตซ์ใสธรรมชาติ',
@@ -105,7 +105,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'ENERGY_31_45': {
       title: 'หินไหมทองจักรพรรดิ เสริมภาวะผู้นำ & ปกป้องพลังงานลบ',
       strategy: 'ผลึกรูไทล์ธรรมชาติที่มีคุณสมบัติเพียโซอิเล็กทริก เสริมจักระมณีปุระ เพื่อความมั่นคงทางจิตใจและอำนาจการเจรจา',
-      advisor: 'คุณจอย',
+      advisor: 'Admin B',
       role: 'Natural Energy & Wellbeing Curator',
       quote: '“พลังของหินไม่ใช่เรื่องไสยศาสตร์ แต่คือความสอดคล้องระหว่างแร่ธาตุธรรมชาติกับคลื่นความคิดในตัวเรา”',
       tag: 'ผลึกแนะนำ: หินไหมทองคัดเกรดธรรมชาติ / มาลาไคต์',
@@ -113,7 +113,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     'ENERGY_46_PLUS': {
       title: 'ผลึกเพื่อการเจริญสติ การผ่อนคลาย และการนอนหลับลึก',
       strategy: 'หินอเมทิสต์แท้และหินโรสควอตซ์มาดากัสการ์ เชื่อมโยงจักระหัวใจและจักระตาที่สาม เสริมสมาธิภาวนา',
-      advisor: 'คุณจอย',
+      advisor: 'Admin B',
       role: 'Natural Energy & Wellbeing Curator',
       quote: '“การจัดวางผลึกหินในห้องนอนช่วยปรับพลังงานรอบตัวให้สงบ หลับสบาย และตื่นมารับวันใหม่อย่างสดชื่น”',
       tag: 'ผลึกแนะนำ: อเมทิสต์เกรดพรีเมียม / หินแท้ประจำวันเกิด',

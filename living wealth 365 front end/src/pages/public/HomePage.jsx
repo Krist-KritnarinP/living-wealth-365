@@ -90,7 +90,7 @@ export default function HomePage() {
               fieldKey="hero.description"
               label="Hero คำบรรยายหลัก"
               multiline
-              fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย คุณท็อป & คุณจอย"
+              fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย Admin A & Admin B"
             />
           </p>
 
@@ -115,7 +115,7 @@ export default function HomePage() {
               <EditableText
                 fieldKey="hero.secondaryBtnText"
                 label="ข้อความปุ่มรอง Hero"
-                fallback="รู้จักคุณท็อป & คุณจอย"
+                fallback="รู้จัก Admin A & Admin B"
               />
               <ArrowRight className="w-5 h-5 shrink-0" />
             </Link>
@@ -327,7 +327,7 @@ export default function HomePage() {
                       <EditableText
                         fieldKey="gateways.learning.point3"
                         label="Gateway 2 หัวข้อย่อย 3"
-                        fallback="Journal: บันทึกความคิดคุณท็อป & คุณจอย"
+                        fallback="Journal: บันทึกความคิด Admin A & Admin B"
                       />
                     </span>
                   </div>
@@ -386,7 +386,7 @@ export default function HomePage() {
                       fieldKey="gateways.connecting.desc"
                       label="Gateway 3 คำอธิบาย"
                       multiline
-                      fallback="ทำความรู้จักเรื่องราวของคุณท็อป & คุณจอย และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
+                      fallback="ทำความรู้จักเรื่องราวของ Admin A & Admin B และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
                     />
                   </p>
 
@@ -459,11 +459,11 @@ export default function HomePage() {
                     content?.narrative?.adminAImage ||
                     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80'
                   }
-                  alt="คุณท็อป - Life & Wealth Planner"
+                  alt="Admin A - Life & Wealth Planner"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">{content?.brand?.adminAName || 'คุณท็อป'}</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminAName || 'Admin A'}</span>
                   <span className="text-[10px] text-secondary">
                     {content?.brand?.adminARole || 'Life & Wealth Planner'}
                   </span>
@@ -476,11 +476,11 @@ export default function HomePage() {
                     content?.narrative?.adminBImage ||
                     'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&auto=format&fit=crop&q=80'
                   }
-                  alt="คุณจอย - Natural Energy & Wellbeing Curator"
+                  alt="Admin B - Natural Energy & Wellbeing Curator"
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute bottom-2 left-2 right-2 p-2 rounded-xl bg-black/60 backdrop-blur-md text-white text-center">
-                  <span className="text-xs font-bold block">{content?.brand?.adminBName || 'คุณจอย'}</span>
+                  <span className="text-xs font-bold block">{content?.brand?.adminBName || 'Admin B'}</span>
                   <span className="text-[10px] text-secondary">
                     {content?.brand?.adminBRole || 'Energy & Wellbeing'}
                   </span>
@@ -519,7 +519,7 @@ export default function HomePage() {
                   fieldKey="narrative.body"
                   label="Narrative เนื้อหาความเชื่อ"
                   multiline
-                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง คุณท็อป และ คุณจอย เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
+                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
                 />
               </p>
 
@@ -618,7 +618,7 @@ export default function HomePage() {
               <EditableText
                 fieldKey="journal.title"
                 label="หมวดวารสาร หัวข้อ"
-                fallback="วารสารความคิดและ Top's Notes"
+                fallback="วารสารความคิดและ Admin A's Notes"
               />
             </h2>
             <p className="text-sm zen-muted">
@@ -643,6 +643,11 @@ export default function HomePage() {
           </Link>
         </div>
 
+        {featuredPosts.length === 0 ? (
+          <div className="zen-surface rounded-3xl p-8 text-center text-sm text-base-content/70 border border-base-300/60">
+            กำลังเตรียมบทความชุดใหม่จาก Admin A & Admin B เร็วๆ นี้ครับ
+          </div>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredPosts.map((post) => (
             <Link
@@ -663,7 +668,7 @@ export default function HomePage() {
                 </div>
                 <div className="space-y-1.5">
                   <div className="flex items-center gap-2 text-xs zen-muted">
-                    <span>{post.postType === 'TOPS_NOTES' ? "Top's Notes" : 'Article'}</span>
+                    <span>{post.postType === 'TOPS_NOTES' ? "Admin A's Notes" : 'Article'}</span>
                     <span>• {post.readTime || '5 นาที'}</span>
                   </div>
                   <h3 className="text-lg font-black text-primary group-hover:text-secondary transition-colors line-clamp-2 leading-snug">
@@ -684,6 +689,7 @@ export default function HomePage() {
             </Link>
           ))}
         </div>
+        )}
       </section>
 
       {/* 💬 7. COPY-TO-LINE CONSULTATION HELPER SECTION (เหมือน deTeam) */}
@@ -698,12 +704,12 @@ export default function HomePage() {
           defaultInterest={
             selectedProduct
               ? `แร่ธาตุ: ${selectedProduct.name}`
-              : `Let's Talk กับ ${content?.brand?.adminAName || 'คุณท็อป'} & ${content?.brand?.adminBName || 'คุณจอย'} (การวางแผนชีวิตและสมดุล 6 มิติ)`
+              : `Let's Talk กับ ${content?.brand?.adminAName || 'Admin A'} & ${content?.brand?.adminBName || 'Admin B'} (การวางแผนชีวิตและสมดุล 6 มิติ)`
           }
           title={content?.leadForm?.title || 'พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?'}
           subtitle={
             content?.leadForm?.subtitle ||
-            'คุณท็อป & คุณจอย พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
+            'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
           }
         />
       </section>

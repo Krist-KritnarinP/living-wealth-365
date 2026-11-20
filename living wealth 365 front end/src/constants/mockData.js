@@ -22,25 +22,7 @@ export const INITIAL_PRODUCTS = [
   },
 ];
 
-export const INITIAL_POSTS = [
-  {
-    id: 'post-life-1',
-    slug: 'balance-6-dimensions-of-life',
-    title: 'สมดุล 6 มิติของชีวิต: เมื่อความสำเร็จไม่ได้วัดแค่ตัวเลขในบัญชีธนาคาร',
-    category: 'วิถีชีวิต & สมดุล',
-    pillar: 'LIFE',
-    postType: 'ARTICLE',
-    author: 'คุณท็อป & คุณจอย',
-    authorName: 'คุณท็อป & คุณจอย',
-    publishedAt: '2025-02-15',
-    readTime: '6 นาที',
-    published: true,
-    tags: '#LifeDesign #Balance #Longevity',
-    excerpt: 'สำรวจกรอบความคิด 6 มิติหลัก เพื่อสร้างชีวิตที่มั่นคง มั่งคั่ง และสงบสุขอย่างยั่งยืน',
-    content: 'ชีวิตที่ได้รับการวางแผนมาอย่างดี คือชีวิตที่มีความสมดุลทั้ง 6 มิติ: สุขภาพ การเงิน เวลา ความสัมพันธ์ โลกภายใน และเป้าหมายชีวิต',
-    imageUrl: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop&q=80',
-  },
-];
+export const INITIAL_POSTS = [];
 
 export const INITIAL_LEADS = [];
 
@@ -63,14 +45,14 @@ export const MOCK_USERS = {
   },
   top: {
     id: 'admin-2',
-    name: 'คุณท็อป (นักวางแผนชีวิตและการเงิน)',
+    name: 'Admin A (นักวางแผนชีวิตและการเงิน)',
     email: 'admin-a@livingwealth365.com',
     phone: '082-111-2222',
     role: 'ADMIN',
   },
   joy: {
     id: 'admin-3',
-    name: 'คุณจอย (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)',
+    name: 'Admin B (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)',
     email: 'admin-b@livingwealth365.com',
     phone: '083-333-4444',
     role: 'ADMIN',
@@ -85,17 +67,19 @@ export const INITIAL_INSURANCE_PLANS = [
     category: 'HEALTH',
     categoryName: 'ประกันสุขภาพเหมาจ่าย',
     name: 'AIA Health Happy เหมาเบิ้ลคุ้ม',
-    tagline: 'เหมาจ่ายค่ารักษาพยาบาลสูงสุด 25 ล้านบาท/รอบปีกรมธรรม์',
+    tagline: 'เหมาจ่ายค่ารักษาพยาบาล 1–25 ล้านบาท/ปี เบิ้ลวงเงิน 2x นาน 4 ปี เมื่อพบ 6 โรคร้ายแรง',
     coverageAmount: 'สูงสุด 25,000,000 บาท/ปี',
     startingPrice: 'เริ่มต้น 1,850 บ./เดือน',
     features: JSON.stringify([
-      'เหมาจ่ายค่ารักษาพยาบาลผู้ป่วยใน (IPD) ตามจริง',
-      'เบิ้ลความคุ้มครองเป็น 2 เท่าเมื่อตรวจพบโรคร้ายแรงครั้งแรก',
-      'ลดหย่อนภาษีเงินได้บุคคลธรรมดาสูงสุด 25,000 บาท',
+      'เหมาจ่ายค่ารักษาพยาบาลผู้ป่วยใน (IPD) ตามจริง 1M / 5M / 15M / 25M',
+      'เบิ้ลความคุ้มครองเป็น 2 เท่า นานต่อเนื่อง 4 ปีกรมธรรม์เมื่อพบ 6 โรคร้ายแรง',
+      'คุ้มครองค่าห้อง ค่าอาหาร และค่าบริการพยาบาลสูงสุด 365 วัน',
+      'ลดหย่อนภาษีเงินได้บุคคลธรรมดาหมวดสุขภาพสูงสุด 25,000 บาท/ปี',
     ]),
-    recommendedFor: 'คนวัยทำงานและผู้ที่ต้องการความคุ้มครองสุขภาพระดับพรีเมียม',
-    description: 'แผนประกันสุขภาพเหมาจ่ายยอดนิยม คุ้มครองครบทั้งการผ่าตัด อุบัติเหตุ และค่ารักษาพยาบาล',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&auto=format&fit=crop&q=80',
+    recommendedFor: 'คนวัยทำงานและเสาหลักครอบครัวที่ต้องการความคุ้มครอง รพ. เอกชน',
+    description: 'สัญญาเพิ่มเติมประกันสุขภาพแบบเหมาจ่ายจากเอไอเอ คุ้มครองครบทั้งค่าผ่าตัด ค่ายา และโรคร้ายแรง',
+    imageUrl: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1000&auto=format&fit=crop&q=80',
+    brochureUrl: 'https://www.aia.co.th/content/dam/th-wise/images/th/our-products/si_156_aia-healthy-happy/Brochure%20AIA%20Health%20Happy_Final_27Dec2022_website.pdf.coredownload.inline.pdf',
     isActive: true,
   },
 ];

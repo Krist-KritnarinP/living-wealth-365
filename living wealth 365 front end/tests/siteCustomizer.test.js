@@ -28,8 +28,8 @@ describe('Site Customizer Configuration & Path Helpers', () => {
     }
 
     assert.equal(typeof DEFAULT_SITE_CONTENT.announcement.enabled, 'boolean');
-    assert.equal(DEFAULT_SITE_CONTENT.brand.adminAName, 'คุณท็อป');
-    assert.equal(DEFAULT_SITE_CONTENT.brand.adminBName, 'คุณจอย');
+    assert.equal(DEFAULT_SITE_CONTENT.brand.adminAName, 'Admin A');
+    assert.equal(DEFAULT_SITE_CONTENT.brand.adminBName, 'Admin B');
   });
 
   test('getByPath retrieves deeply nested properties accurately', () => {
@@ -76,6 +76,6 @@ describe('Site Customizer Configuration & Path Helpers', () => {
 
     assert.equal(getByPath(parsed, 'announcement.badge'), 'SPECIAL');
     assert.equal(getByPath(parsed, 'gateways.living.title'), 'หมวดการใช้ชีวิต');
-    assert.equal(getByPath(parsed, 'brand.adminAName'), 'คุณท็อป');
+    assert.equal(getByPath(parsed, 'brand.adminAName'), 'Admin A');
   });
 });

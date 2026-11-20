@@ -8,6 +8,7 @@ export const ROUTES = {
   HOME: '/',
   LIFE: '/life',
   WEALTH: '/wealth',
+  INSURANCE_DETAIL: (slug = ':slug') => `/wealth/plan/${slug}`,
   WELLBEING: '/wellbeing',
   INNER_LIFE: '/inner-life',
   EARTH_ENERGY: '/earth-energy',

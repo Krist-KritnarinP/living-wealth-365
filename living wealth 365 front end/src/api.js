@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+const DEFAULT_API_BASE = import.meta.env.PROD
+  ? 'https://living-wealth-365-backend.onrender.com/api'
+  : 'http://localhost:5001/api';
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5001/api',
-  timeout: 10000,
+  baseURL: import.meta.env.VITE_API_URL || DEFAULT_API_BASE,
+  timeout: 15000,
 });
 
 // Interceptor สำหรับใส่ JWT Token อัตโนมัติในทุก Request
@@ -144,7 +148,7 @@ export const resolveAssetUrl = (url, fallback = '') => {
     import.meta.env.VITE_SERVER_URL ||
     (import.meta.env.VITE_API_URL
       ? import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '')
-      : 'http://localhost:5001');
+      : DEFAULT_API_BASE.replace(/\/api\/?$/, ''));
   return `${serverBase}${url.startsWith('/') ? '' : '/'}${url}`;
 };
 

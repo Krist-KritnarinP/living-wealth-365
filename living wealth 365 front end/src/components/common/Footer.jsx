@@ -30,7 +30,7 @@ export default function Footer() {
                 fieldKey="footer.aboutText"
                 label="Footer คำแนะนำแบรนด์"
                 multiline
-                fallback="แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย คุณท็อป & คุณจอย"
+                fallback="แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย Admin A & Admin B"
               />
             </p>
             <div className="p-3 rounded-xl bg-base-200/50 border border-base-300/40 text-xs text-base-content/70 italic flex items-start gap-2">
@@ -129,7 +129,7 @@ export default function Footer() {
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  Journal & Top's Notes: วารสารความคิด
+                  Journal & Admin A's Notes: วารสารความคิด
                 </Link>
               </li>
             </ul>
@@ -147,7 +147,7 @@ export default function Footer() {
                 <EditableText
                   fieldKey="footer.phone"
                   label="Footer เบอร์โทร"
-                  fallback="082-111-2222 (คุณท็อป) / 083-333-4444 (คุณจอย)"
+                  fallback="082-111-2222 (Admin A) / 083-333-4444 (Admin B)"
                 />
               </div>
               <div className="flex items-center gap-2">
@@ -172,7 +172,7 @@ export default function Footer() {
                   className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2 shadow-xs"
                 >
                   <HeartHandshake className="w-4 h-4" />
-                  นัดหมายพูดคุยกับ {content?.brand?.adminAName || 'คุณท็อป'} & {content?.brand?.adminBName || 'คุณจอย'} (ฟรี)
+                  นัดหมายพูดคุยกับ {content?.brand?.adminAName || 'Admin A'} & {content?.brand?.adminBName || 'Admin B'} (ฟรี)
                 </Link>
               </div>
             </div>
@@ -185,7 +185,7 @@ export default function Footer() {
             <EditableText
               fieldKey="footer.copyright"
               label="Footer ลิขสิทธิ์"
-              fallback={`© ${new Date().getFullYear()} Living Wealth 365 by คุณท็อป & คุณจอย. All rights reserved.`}
+              fallback={`© ${new Date().getFullYear()} Living Wealth 365 by Admin A & Admin B. All rights reserved.`}
             />
           </p>
           <div className="flex items-center gap-6">

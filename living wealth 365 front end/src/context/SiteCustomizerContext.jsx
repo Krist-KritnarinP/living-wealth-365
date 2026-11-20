@@ -8,7 +8,7 @@ import {
 
 export { DEFAULT_SITE_CONTENT, deepMerge, getByPath, setByPath };
 
-const STORAGE_KEY = 'lw365_site_customizer_v1';
+const STORAGE_KEY = 'lw365_site_customizer_v2';
 
 const SiteCustomizerContext = createContext(null);
 

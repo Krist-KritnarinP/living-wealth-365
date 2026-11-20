@@ -51,7 +51,7 @@ export default function CartDrawer() {
     );
     return `สวัสดีครับ/ค่ะ สนใจบูชา & สั่งซื้อรายการจาก Living Wealth 365:\n${lines.join(
       '\n'
-    )}\nยอดรวม: ฿${cartTotal.toLocaleString()}\nรบกวนคุณจอยแนะนำรายละเอียดและการจัดส่งเพิ่มเติมครับ/ค่ะ`;
+    )}\nยอดรวม: ฿${cartTotal.toLocaleString()}\nรบกวน Admin B แนะนำรายละเอียดและการจัดส่งเพิ่มเติมครับ/ค่ะ`;
   };
 
   const handleCopyAndLine = async () => {
@@ -123,7 +123,7 @@ export default function CartDrawer() {
                   ยังไม่มีรายการในตะกร้า
                 </p>
                 <p className="text-xs text-base-content/65 max-w-xs">
-                  เลือกชมผลึกแร่ธาตุและชิ้นงานพลังงานธรรมชาติที่คัดสรรโดยคุณจอย แล้วกดเพิ่มลงตะกร้าได้เลยครับ
+                  เลือกชมผลึกแร่ธาตุและชิ้นงานพลังงานธรรมชาติที่คัดสรรโดย Admin B แล้วกดเพิ่มลงตะกร้าได้เลยครับ
                 </p>
               </div>
             </div>

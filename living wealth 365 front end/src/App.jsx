@@ -21,6 +21,7 @@ import CartDrawer from './components/common/CartDrawer';
 import HomePage from './pages/public/HomePage';
 import LifePage from './pages/public/LifePage';
 import WealthPage from './pages/public/WealthPage';
+import InsurancePlanDetailPage from './pages/public/InsurancePlanDetailPage';
 import WellbeingPage from './pages/public/WellbeingPage';
 import InnerLifePage from './pages/public/InnerLifePage';
 import EarthEnergyPage from './pages/public/EarthEnergyPage';
@@ -79,6 +80,7 @@ function AppShell() {
           <Route path={ROUTES.HOME} element={<HomePage />} />
           <Route path={ROUTES.LIFE} element={<LifePage />} />
           <Route path={ROUTES.WEALTH} element={<WealthPage />} />
+          <Route path="/wealth/plan/:slug" element={<InsurancePlanDetailPage />} />
           <Route path={ROUTES.WELLBEING} element={<WellbeingPage />} />
           <Route path={ROUTES.INNER_LIFE} element={<InnerLifePage />} />
           <Route path={ROUTES.EARTH_ENERGY} element={<EarthEnergyPage />} />

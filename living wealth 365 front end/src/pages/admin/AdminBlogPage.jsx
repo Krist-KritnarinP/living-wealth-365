@@ -27,7 +27,7 @@ export default function AdminBlogPage() {
     category: 'การวางแผนภาษี',
     pillar: 'JOURNAL',
     postType: 'ARTICLE',
-    authorName: 'คุณท็อป & คุณจอย',
+    authorName: 'Admin A & Admin B',
     tags: '',
     excerpt: '',
     content: '',
@@ -42,7 +42,7 @@ export default function AdminBlogPage() {
       category: 'การวางแผนภาษี',
       pillar: 'JOURNAL',
       postType: 'ARTICLE',
-      authorName: 'คุณท็อป & คุณจอย',
+      authorName: 'Admin A & Admin B',
       tags: '',
       excerpt: '',
       content: '',
@@ -134,7 +134,7 @@ export default function AdminBlogPage() {
         category: pendingTarget.category || 'การวางแผนภาษี',
         pillar: pendingTarget.pillar || 'JOURNAL',
         postType: pendingTarget.postType || 'ARTICLE',
-        authorName: pendingTarget.authorName || (typeof pendingTarget.author === 'string' ? pendingTarget.author : 'คุณท็อป & คุณจอย'),
+        authorName: pendingTarget.authorName || (typeof pendingTarget.author === 'string' ? pendingTarget.author : 'Admin A & Admin B'),
         tags: pendingTarget.tags || '',
         excerpt: pendingTarget.excerpt || '',
         content: pendingTarget.content || '',
@@ -249,7 +249,7 @@ export default function AdminBlogPage() {
                     {post.authorName ||
                       (typeof post.author === 'object'
                         ? post.author?.name || post.author?.username
-                        : post.author || 'คุณท็อป & คุณจอย')}
+                        : post.author || 'Admin A & Admin B')}
                   </td>
                   <td className="whitespace-nowrap">
                     {post.publishedAt ||
@@ -358,8 +358,8 @@ export default function AdminBlogPage() {
                       className="select select-bordered w-full rounded-xl bg-base-100"
                     >
                       <option value="ARTICLE">บทความทั่วไป (Article)</option>
-                      <option value="TOPS_NOTES">Top's Notes (บันทึกของ คุณท็อป)</option>
-                      <option value="JOURNEY">Joy's Journey (บันทึกการเดินทางของ คุณจอย)</option>
+                      <option value="TOPS_NOTES">Admin A's Notes (บันทึกของ Admin A)</option>
+                      <option value="JOURNEY">Admin B's Journey (บันทึกการเดินทางของ Admin B)</option>
                       <option value="EXPLORING">Exploring (การสำรวจร่วมกัน)</option>
                     </select>
                   </div>
@@ -373,7 +373,7 @@ export default function AdminBlogPage() {
                       type="text"
                       value={formData.authorName}
                       onChange={(e) => setFormData({ ...formData, authorName: e.target.value })}
-                      placeholder="เช่น คุณท็อป & คุณจอย, คุณท็อป, หรือ คุณจอย"
+                      placeholder="เช่น Admin A & Admin B, Admin A, หรือ Admin B"
                       className="input input-bordered w-full rounded-xl bg-base-100"
                     />
                   </div>

@@ -23,13 +23,15 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  // Data states
+  // Data states (v2 cache keys clear legacy pre-DB mock items cleanly)
   const [insurancePlans, setInsurancePlans] = useState(() => {
-    const saved = localStorage.getItem('lw365_plans');
+    localStorage.removeItem('lw365_plans');
+    const saved = localStorage.getItem('lw365_plans_v2');
     return saved ? JSON.parse(saved) : (INITIAL_INSURANCE_PLANS || []);
   });
   const [posts, setPosts] = useState(() => {
-    const saved = localStorage.getItem('lw365_posts');
+    localStorage.removeItem('lw365_posts');
+    const saved = localStorage.getItem('lw365_posts_v2');
     return saved ? JSON.parse(saved) : INITIAL_POSTS;
   });
   const [products, setProducts] = useState(() => {
@@ -75,7 +77,7 @@ export function AuthProvider({ children }) {
 
   // Persist posts
   useEffect(() => {
-    localStorage.setItem('lw365_posts', JSON.stringify(posts));
+    localStorage.setItem('lw365_posts_v2', JSON.stringify(posts));
   }, [posts]);
 
   // Persist products
@@ -85,7 +87,7 @@ export function AuthProvider({ children }) {
 
   // Persist insurance plans
   useEffect(() => {
-    localStorage.setItem('lw365_plans', JSON.stringify(insurancePlans));
+    localStorage.setItem('lw365_plans_v2', JSON.stringify(insurancePlans));
   }, [insurancePlans]);
 
   // 🔄 ดึงข้อมูล Live จาก Backend API

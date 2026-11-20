@@ -77,7 +77,7 @@ export default function TaxPlanningPage() {
               <div className="p-3 rounded-2xl bg-base-200/50 border border-base-300/40 space-y-1">
                 <span className="text-[11px] font-bold text-secondary uppercase block">คำปรึกษาส่วนตัว</span>
                 <span className="text-sm sm:text-base font-black text-primary">ฟรี ไม่มีข้อผูกมัด</span>
-                <span className="text-[10px] text-base-content/65 block">โดย คุณท็อป & คุณจอย</span>
+                <span className="text-[10px] text-base-content/65 block">โดย Admin A & Admin B</span>
               </div>
             </div>
           </div>
