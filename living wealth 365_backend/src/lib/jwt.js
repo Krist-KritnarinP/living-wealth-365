@@ -2,7 +2,13 @@ import jwt from 'jsonwebtoken';
 
 // ตรวจสอบ JWT Secret ให้มีความยาวอย่างน้อย 10 ตัวอักษรตามมาตรฐานความปลอดภัย
 const getJwtSecret = () => {
-  const secret = process.env.JWT_SECRET || 'livingwealth365_default_secret_key_2026';
+  const secret = process.env.JWT_SECRET;
+  if (!secret) {
+    if (process.env.NODE_ENV === 'production') {
+      throw new Error('[Security Error] JWT_SECRET is required in production environment');
+    }
+    return 'livingwealth365_dev_only_secret_key';
+  }
   if (secret.length < 10) {
     console.warn('[Security Warning] JWT_SECRET ควรมีความยาวอย่างน้อย 10 ตัวอักษรเพื่อความปลอดภัย');
   }

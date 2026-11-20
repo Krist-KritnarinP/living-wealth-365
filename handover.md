@@ -881,6 +881,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 15/15 passed in 204ms (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.38s.
 
+## 31. Custom Domain Migration Prep (`livingwealth365.com`) & Security Hardening (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Live Infrastructure Health Check**:
+  - **Render Backend (`https://living-wealth-365-backend.onrender.com/api/health`)**: HTTP 200 OK (awake, uptime ~43 mins at check). Note: Render Free Tier sleeps after 15 mins of inactivity and cold-starts in ~30–50s.
+  - **Vercel Frontend (`https://livingwealth365.vercel.app`)**: HTTP 200 OK.
+  - **Dependency Security (`npm audit --omit=dev`)**: 0 vulnerabilities on both frontend and backend.
+- **Critical Domain & Security Fixes Applied**:
+  1. **Multi-Origin CORS Whitelist (`living wealth 365_backend/src/index.js`)**: Previously Render CORS allowed only `https://livingwealth365.vercel.app`, which would block API calls once switched to `livingwealth365.com`. Updated `cors()` to whitelist `https://livingwealth365.com`, `https://www.livingwealth365.com`, `https://livingwealth365.vercel.app`, `http://localhost:5173`, and comma-separated `process.env.CORS_ORIGIN`.
+  2. **Production `JWT_SECRET` Enforcement (`living wealth 365_backend/src/lib/jwt.js`)**: Removed hardcoded production fallback secret; throws explicit error in `NODE_ENV=production` if `JWT_SECRET` is unset.
+  3. **Vercel HTTP Security Headers (`living wealth 365 front end/vercel.json`)**: Added `X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`, and `Permissions-Policy`.
+  4. **Demo Exception Preserved**: `RoleSwitcher` demo control remains active as explicitly requested for client preview.
+- **Verification**:
+  - Backend syntax checks (`node --check`) passed.
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.53s.
+
+
 
 
 
