@@ -93,14 +93,14 @@ export default function BlogDetailPage() {
         </div>
 
         {/* Featured Image */}
-        <div className="aspect-16/9 w-full rounded-3xl overflow-hidden shadow-lg border border-base-300">
+        <div className="w-full rounded-3xl overflow-hidden shadow-lg border border-base-300 bg-base-200/40 flex justify-center">
           <img
             src={resolveAssetUrl(
               post.imageUrl,
               'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80'
             )}
             alt={post.title}
-            className="w-full h-full object-cover"
+            className="w-full max-h-[780px] object-contain"
             onError={(e) => {
               e.currentTarget.src =
                 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80';

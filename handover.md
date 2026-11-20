@@ -1056,6 +1056,15 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 18/18 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly.
 
+## 43. First Live Retirement Article Publish & Uncropped Infographic Poster Support (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Cloudflare R2 Upload & Live Supabase DB Seed (`posts`)**: Uploaded the `EP.01` retirement infographic poster (`retirement-planning-ep1-infographic.jpg`) to Cloudflare R2 (`https://pub-10dc92b49894448a9fe11f81ccc1e577.r2.dev/retirement-planning-ep1-infographic-1795182574119-4405.jpg`) and published `"วางแผนชีวิตก่อนเกษียณ ตอนที่ 1 : ก่อนเกษียณ เรารู้หรือยังว่าชีวิตที่ต้องการมีค่าใช้จ่ายเท่าไร?"` (`slug: retirement-planning-ep1-life-before-numbers`, `pillar: WEALTH`, `category: วางแผนเกษียณ`, `postType: ARTICLE`, `authorName: Admin A`) into Supabase DB.
+  2. **`BlogDetailPage.jsx` Full Poster Container**: Replaced forced `aspect-16/9 object-cover` crop on featured article image with `max-h-[780px] object-contain` so infographic posters render uncropped while keeping standard landscape covers intact.
+- **Verification**:
+  - Live `/journal` and `/journal/retirement-planning-ep1-life-before-numbers` verified in headless Chromium (HTTP 200 on R2 image `1024x1126`, uncropped display, zero console/network errors).
+  - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` passed cleanly.
+
 
 
 
