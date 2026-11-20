@@ -45,8 +45,12 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
-  --zen-glass: rgb(255 255 255 / 90%);
-  --zen-shadow: 0 4px 16px rgb(24 40 59 / 7%);
+  --zen-glass: rgb(255 255 255 / 82%);
+  --zen-shadow: 0 4px 20px rgb(24 40 59 / 6%);
+  --zen-elevate-shadow: 0 14px 32px -8px rgba(2, 62, 141, 0.12), 0 4px 12px -2px rgba(255, 181, 59, 0.10);
+  --zen-bokeh-blue: rgba(2, 62, 141, 0.10);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.16);
+  --zen-bokeh-emerald: rgba(35, 100, 73, 0.08);
   --zen-muted: #4B5E73;
   --zen-field-border: #75879C;
 }
@@ -85,8 +89,12 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
-  --zen-glass: rgb(25 35 47 / 92%);
-  --zen-shadow: 0 4px 16px rgb(0 0 0 / 22%);
+  --zen-glass: rgb(25 35 47 / 86%);
+  --zen-shadow: 0 4px 20px rgb(0 0 0 / 22%);
+  --zen-elevate-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.45), 0 4px 12px -2px rgba(255, 181, 59, 0.12);
+  --zen-bokeh-blue: rgba(138, 184, 255, 0.11);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.11);
+  --zen-bokeh-emerald: rgba(141, 215, 178, 0.08);
   --zen-muted: #B0C0D2;
   --zen-field-border: #788DA5;
 }
@@ -100,6 +108,7 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    overflow-x: clip;
   }
   body {
     background: var(--color-base-100);
@@ -110,7 +119,7 @@
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    overflow-x: hidden;
+    overflow-x: clip;
   }
   /* Ultra-flexible responsive typography: prevents text clipping across all zooms & devices */
   p, h1, h2, h3, h4, h5, h6, span, a, label, li, td, th {
@@ -183,7 +192,7 @@
     pointer-events: none;
   }
 
-  /* ✨ Clean Micro-Interactions & Motion Effects */
+  /* ✨ Clean Micro-Interactions & Motion Effects (GPU transform/opacity only) */
   .hover-card-elevate {
     transition: transform 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
                 box-shadow 0.28s cubic-bezier(0.2, 0.8, 0.2, 1),
@@ -191,8 +200,7 @@
   }
   .hover-card-elevate:hover {
     transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 14px 32px -8px rgba(2, 62, 141, 0.12),
-                0 4px 12px -2px rgba(255, 181, 59, 0.10);
+    box-shadow: var(--zen-elevate-shadow);
   }
 
   .hover-icon-spin {
@@ -200,7 +208,26 @@
   }
   .group:hover .hover-icon-spin,
   .hover-card-elevate:hover .hover-icon-spin {
-    transform: scale(1.18) rotate(6deg);
+    transform: scale(1.14) rotate(5deg);
+  }
+
+  /* 🫧 Soft Ambient Bokeh Orbs */
+  @keyframes bokeh-float-a {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(24px, -18px, 0) scale(1.06); }
+  }
+  @keyframes bokeh-float-b {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-22px, 20px, 0) scale(0.95); }
+  }
+
+  .bokeh-orb-a {
+    animation: bokeh-float-a 16s ease-in-out infinite;
+    will-change: transform;
+  }
+  .bokeh-orb-b {
+    animation: bokeh-float-b 20s ease-in-out infinite;
+    will-change: transform;
   }
 
   @keyframes draw-svg-line {
@@ -224,17 +251,31 @@
   }
 
   @keyframes pop-in {
-    0% { transform: scale(0.92); opacity: 0; }
+    0% { transform: scale(0.95); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
   }
 
   .animate-pop-in {
-    animation: pop-in 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .btn { transition: none; }
+  .btn,
+  .hover-card-elevate,
+  .hover-icon-spin {
+    transition: none;
+  }
+  .bokeh-orb-a,
+  .bokeh-orb-b,
+  .animate-pop-in {
+    animation: none;
+  }
+  .animate-draw-line {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
 }
 
 /* 🌐 Google Website Translator Clean Integration Rules */

@@ -852,6 +852,19 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Production Build: `vite build` completed cleanly in 820ms.
   - Zero added external libraries (0 KB extra bundle overhead).
 
+## 29. Hallmark & Anti-Slop-Craft Audit + Modern Minimal Bokeh Redesign (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Audit Findings Resolved**:
+  1. **Card-Inside-a-Card Elimination (Hallmark Floor Rule 11)**: Removed the rigid outer `zen-surface` card box around the Home Hero section, letting typography and the interactive Focus Explorer float directly over the open Bokeh canvas.
+  2. **Soft Ambient Bokeh Atmosphere (`AmbientBokeh.jsx` & `index.css`)**: Added CSS token-driven ambient bokeh orbs (`--zen-bokeh-blue`, `--zen-bokeh-gold`, `--zen-bokeh-emerald`) animated solely with GPU-composited `transform` (`bokeh-orb-a`, `bokeh-orb-b`), zero layout thrashing, and full `prefers-reduced-motion` support.
+  3. **Scroll & Sticky Safety (`index.css`)**: Replaced `overflow-x: hidden` on `html` and `body` with `overflow-x: clip` (Hallmark Floor Rule 4).
+  4. **Eyebrow & Transition Hygiene**: Cleaned tracked uppercase labels into natural sentence-case labels (Hallmark Floor Rule 9) and replaced `transition-all` in Hero interactive cards with explicit property transitions (Hallmark Floor Rule 2).
+  5. **Responsive Precision (320px–1440px+)**: Applied `max-w-[1440px] mx-auto` measure cap on HomePage, added `min-w-0` on grid/flex children, and switched truncated labels to `break-words` so Thai text never clips on narrow mobile or tablet screens.
+- **Verification**:
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.78s.
+
+
 
 
 

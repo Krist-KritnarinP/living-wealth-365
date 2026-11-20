@@ -137,26 +137,25 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
   };
 
   return (
-    <div className="w-full bg-base-100/80 rounded-3xl p-5 sm:p-7 border border-base-300/80 shadow-lg backdrop-blur-md space-y-5">
-      {/* Header Badge */}
-      <div className="flex items-center justify-between gap-2 border-b border-base-300/50 pb-3">
-        <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full bg-secondary animate-pulse"></span>
-          <span className="text-xs sm:text-sm font-bold text-primary tracking-wide">
-            EXPLORER: จำลองแนวทางที่เหมาะกับคุณทันที
+    <div className="w-full zen-surface rounded-3xl p-4 sm:p-6 border border-base-300/60 space-y-5 min-w-0">
+      {/* Header */}
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300/50 pb-3">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="text-xs sm:text-sm font-bold text-primary">
+            สำรวจแนวทางที่เหมาะกับคุณ
           </span>
         </div>
-        <span className="text-[11px] sm:text-xs text-base-content/60 font-medium">
-          ปรับเปลี่ยนได้อิสระ
+        <span className="text-xs text-base-content/60 font-medium">
+          เลือกปรับได้อิสระ
         </span>
       </div>
 
       {/* Step 1: Select Focus */}
       <div className="space-y-2">
-        <label className="text-xs font-bold text-base-content/75 uppercase tracking-wider block">
-          1. เลือกมิติที่คุณอยากดูแลเป็นอันดับแรก:
+        <label className="text-xs font-semibold text-base-content/75 block">
+          1. เลือกมิติที่คุณอยากดูแลเป็นอันดับแรก
         </label>
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {categories.map((cat) => {
             const Icon = cat.icon;
             const isSelected = activeCategory === cat.id;
@@ -165,27 +164,27 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
                 key={cat.id}
                 type="button"
                 onClick={() => setActiveCategory(cat.id)}
-                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-all duration-200 cursor-pointer group ${
+                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer group min-w-0 ${
                   isSelected
-                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.02]'
-                    : 'bg-base-200/50 text-base-content/80 border-base-300/60 hover:bg-base-200 hover:border-secondary/60 hover:scale-[1.01]'
+                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.01]'
+                    : 'bg-base-200/45 text-base-content/85 border-base-300/60 hover:bg-base-200 hover:border-secondary/60'
                 }`}
               >
                 <div
                   className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 ${
                     isSelected
-                      ? 'bg-white/20 text-white scale-110'
-                      : 'bg-primary/10 text-primary group-hover:scale-110'
+                      ? 'bg-white/20 text-white scale-105'
+                      : 'bg-primary/10 text-primary group-hover:scale-105'
                   }`}
                 >
                   <Icon className="w-4 h-4" />
                 </div>
-                <div className="min-w-0">
-                  <p className="text-xs sm:text-sm font-bold truncate leading-tight">
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm font-bold leading-snug break-words">
                     {cat.label}
                   </p>
                   <span
-                    className={`text-[10px] block truncate ${
+                    className={`text-[11px] block leading-tight ${
                       isSelected ? 'text-white/80' : 'text-base-content/60'
                     }`}
                   >
@@ -200,8 +199,8 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
 
       {/* Step 2: Select Age Range */}
       <div className="space-y-2">
-        <label className="text-xs font-bold text-base-content/75 uppercase tracking-wider block">
-          2. ช่วงวัยในปัจจุบันของคุณ:
+        <label className="text-xs font-semibold text-base-content/75 block">
+          2. ช่วงวัยในปัจจุบันของคุณ
         </label>
         <div className="grid grid-cols-3 gap-2">
           {ageStages.map((age) => {
@@ -211,31 +210,31 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
                 key={age.id}
                 type="button"
                 onClick={() => setActiveAge(age.id)}
-                className={`py-2 px-2.5 rounded-xl border text-center transition-all duration-200 cursor-pointer ${
+                className={`py-2 px-2 rounded-xl border text-center transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer min-w-0 ${
                   isSelected
-                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs scale-[1.02]'
-                    : 'bg-base-200/50 text-base-content/75 border-base-300/60 hover:bg-base-200 hover:scale-[1.01]'
+                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs scale-[1.01]'
+                    : 'bg-base-200/45 text-base-content/75 border-base-300/60 hover:bg-base-200'
                 }`}
               >
                 <p className="text-xs sm:text-sm font-bold leading-tight">{age.label}</p>
-                <p className="text-[10px] text-base-content/60 truncate">{age.sub}</p>
+                <p className="text-[10px] sm:text-[11px] text-base-content/65 leading-tight mt-0.5 break-words">{age.sub}</p>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Result Card: Dynamic Live Recommendation (พร้อม Micro-interaction Pop-in) */}
+      {/* Result Inset Panel: Dynamic Live Recommendation (Clean inset, no nested heavy shadow card) */}
       <div
         key={key}
-        className="zen-surface hover-card-elevate rounded-2xl p-4 sm:p-5 border-2 border-secondary/40 shadow-md space-y-3 relative overflow-hidden animate-pop-in"
+        className="bg-base-200/55 rounded-2xl p-4 sm:p-5 border border-secondary/35 space-y-3 relative animate-pop-in"
       >
-        <div className="flex items-center justify-between gap-2">
-          <span className="badge badge-secondary badge-sm font-bold text-[10px] tracking-wide animate-pulse">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="badge badge-secondary badge-sm font-semibold text-[11px]">
             {currentRec.tag}
           </span>
-          <div className="flex items-center gap-1.5 text-xs text-base-content/70">
-            <UserCheck className="w-3.5 h-3.5 text-primary" />
+          <div className="flex items-center gap-1.5 text-xs text-base-content/75">
+            <UserCheck className="w-3.5 h-3.5 text-primary shrink-0" />
             <span>ที่ปรึกษา: <strong className="text-primary">{currentRec.advisor}</strong></span>
           </div>
         </div>
@@ -244,12 +243,12 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
           <h4 className="text-sm sm:text-base font-black text-primary leading-snug">
             {currentRec.title}
           </h4>
-          <p className="text-xs text-base-content/80 mt-1 leading-relaxed">
+          <p className="text-xs sm:text-sm text-base-content/80 mt-1 leading-relaxed">
             {currentRec.strategy}
           </p>
         </div>
 
-        <blockquote className="bg-base-200/60 rounded-xl p-2.5 text-xs italic text-base-content/70 border-l-2 border-secondary">
+        <blockquote className="bg-base-100/70 rounded-xl p-2.5 text-xs italic text-base-content/75 border-l-2 border-secondary">
           {currentRec.quote}
         </blockquote>
 
@@ -259,7 +258,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
           className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-2 shadow-xs hover:scale-[1.01] active:scale-[0.99] transition-transform group"
         >
           <span>ปรึกษาแนวทางนี้กับ {currentRec.advisor} ฟรี</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
         </button>
       </div>
     </div>

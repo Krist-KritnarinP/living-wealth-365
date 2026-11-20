@@ -14,6 +14,7 @@ import ProtectedRoute from './components/common/ProtectedRoute';
 import AnnouncementBar from './components/common/AnnouncementBar';
 import VisualEditBar from './components/common/VisualEditBar';
 import VisualEditModal from './components/common/VisualEditModal';
+import AmbientBokeh from './components/common/AmbientBokeh';
 
 // 🏛️ The 7 Content Pillar Pages
 import HomePage from './pages/public/HomePage';
@@ -62,13 +63,15 @@ function AppShell() {
     location.pathname.startsWith('/admin');
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-base-100 text-base-content antialiased selection:bg-secondary/30 selection:text-secondary">
+    <div className="min-h-screen w-full flex flex-col bg-base-100 text-base-content antialiased selection:bg-secondary/30 selection:text-secondary relative">
+      {!isDashboard && <AmbientBokeh />}
+
       {/* Show marketing announcement bar and navbar only on public pages */}
       {!isDashboard && <AnnouncementBar />}
       {!isDashboard && <Navbar />}
 
       {/* Main Viewport Content */}
-      <main className="flex-1 w-full">
+      <main className="flex-1 w-full relative z-10">
         <Routes>
           {/* 🏛️ 1. The 7 Pillar Public Routes */}
           <Route path={ROUTES.HOME} element={<HomePage />} />

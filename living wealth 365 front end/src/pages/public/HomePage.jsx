@@ -46,102 +46,100 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-6">
-      {/* 🌟 1. HERO HOOK: "วันนี้...อะไรคือสิ่งที่คุณอยากรักษาไว้?" */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="w-full rounded-3xl zen-surface border border-base-300/60 p-6 sm:p-10 lg:p-12 relative overflow-hidden shadow-xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-secondary/15 text-secondary text-xs sm:text-sm font-bold tracking-wide">
-                <Sparkles className="w-4 h-4 shrink-0" />
-                <EditableText
-                  fieldKey="hero.badge"
-                  label="Hero ป้ายหัวข้อ"
-                  fallback="A LIFE WELL PLANNED. A LIFE WELL LIVED."
-                />
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.18] tracking-tight">
-                <EditableText
-                  fieldKey="hero.titleLine1"
-                  label="Hero หัวข้อ บรรทัด 1"
-                  fallback="วันนี้... อะไรคือสิ่งที่คุณ"
-                />{' '}
-                <br />
-                <HandDrawnUnderline color="#FFB53B">
-                  <EditableText
-                    fieldKey="hero.titleLine2"
-                    label="Hero หัวข้อ บรรทัด 2 (เน้นสีทอง)"
-                    fallback="อยากรักษาไว้มากที่สุด?"
-                    className="text-secondary"
-                  />
-                </HandDrawnUnderline>
-              </h1>
-
-              <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed max-w-2xl">
-                <EditableText
-                  fieldKey="hero.description"
-                  label="Hero คำบรรยายหลัก"
-                  multiline
-                  fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย คุณท็อป & คุณจอย"
-                />
-              </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-1">
-                <a
-                  href={content?.hero?.primaryBtnLink || '#lifemap'}
-                  className="btn btn-primary btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 shadow-md gap-2"
-                >
-                  <Compass className="w-5 h-5 shrink-0" />
-                  <EditableText
-                    fieldKey="hero.primaryBtnText"
-                    label="ข้อความปุ่มหลัก Hero"
-                    fallback="สำรวจ Life Map 6 มิติ"
-                  />
-                </a>
-
-                <Link
-                  to={content?.hero?.secondaryBtnLink || ROUTES.ABOUT}
-                  className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-6 sm:px-8 gap-2"
-                >
-                  <EditableText
-                    fieldKey="hero.secondaryBtnText"
-                    label="ข้อความปุ่มรอง Hero"
-                    fallback="รู้จักคุณท็อป & คุณจอย"
-                  />
-                  <ArrowRight className="w-4 h-4 shrink-0" />
-                </Link>
-              </div>
-
-              {/* Trust Indicators */}
-              <div className="pt-1 flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm font-semibold text-base-content/70">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
-                  <EditableText
-                    fieldKey="hero.trust1"
-                    label="ข้อความความน่าเชื่อถือ 1"
-                    fallback="สถาปัตยกรรมการเงิน & ประกัน AIA ได้รับอนุญาต"
-                  />
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
-                  <EditableText
-                    fieldKey="hero.trust2"
-                    label="ข้อความความน่าเชื่อถือ 2"
-                    fallback="วิทยาศาสตร์แร่ธาตุ SiO₂ & สุขภาพ Longevity"
-                  />
-                </div>
-              </div>
-
-              {/* 📊 Key Metric Tiles (เหมือน deTeam) */}
-              <HeroStatTiles />
+    <div className="w-full max-w-[1440px] mx-auto space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-8">
+      {/* 🌟 1. HERO HOOK: "วันนี้...อะไรคือสิ่งที่คุณอยากรักษาไว้?" — Open Bokeh Canvas (No Boxy Outer Card) */}
+      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 pt-2 sm:pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Content */}
+          <div className="lg:col-span-7 min-w-0 space-y-5">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/12 border border-secondary/25 text-secondary text-xs sm:text-sm font-semibold">
+              <Sparkles className="w-3.5 h-3.5 shrink-0" />
+              <EditableText
+                fieldKey="hero.badge"
+                label="Hero ป้ายหัวข้อ"
+                fallback="A life well planned, a life well lived"
+              />
             </div>
 
-            {/* Right Interactive Focus Explorer (เหมือน deTeam) */}
-            <div className="lg:col-span-5 flex justify-center w-full">
-              <HeroInteractiveFocus onSelectFocus={handleSelectFocus} />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-black text-primary leading-[1.18] tracking-tight min-w-0">
+              <EditableText
+                fieldKey="hero.titleLine1"
+                label="Hero หัวข้อ บรรทัด 1"
+                fallback="วันนี้... อะไรคือสิ่งที่คุณ"
+              />{' '}
+              <br />
+              <HandDrawnUnderline color="var(--color-secondary)">
+                <EditableText
+                  fieldKey="hero.titleLine2"
+                  label="Hero หัวข้อ บรรทัด 2 (เน้นสีทอง)"
+                  fallback="อยากรักษาไว้มากที่สุด?"
+                  className="text-secondary"
+                />
+              </HandDrawnUnderline>
+            </h1>
+
+            <p className="text-base sm:text-lg text-base-content/80 leading-relaxed max-w-2xl">
+              <EditableText
+                fieldKey="hero.description"
+                label="Hero คำบรรยายหลัก"
+                multiline
+                fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย คุณท็อป & คุณจอย"
+              />
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <a
+                href={content?.hero?.primaryBtnLink || '#lifemap'}
+                className="btn btn-primary btn-md sm:btn-lg rounded-2xl font-bold px-5 sm:px-7 shadow-sm hover:shadow-md gap-2"
+              >
+                <Compass className="w-5 h-5 shrink-0" />
+                <EditableText
+                  fieldKey="hero.primaryBtnText"
+                  label="ข้อความปุ่มหลัก Hero"
+                  fallback="สำรวจ Life Map 6 มิติ"
+                />
+              </a>
+
+              <Link
+                to={content?.hero?.secondaryBtnLink || ROUTES.ABOUT}
+                className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-5 sm:px-7 gap-2"
+              >
+                <EditableText
+                  fieldKey="hero.secondaryBtnText"
+                  label="ข้อความปุ่มรอง Hero"
+                  fallback="รู้จักคุณท็อป & คุณจอย"
+                />
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </Link>
             </div>
+
+            {/* Trust Indicators */}
+            <div className="pt-1 flex flex-wrap items-center gap-3 sm:gap-6 text-xs sm:text-sm font-medium text-base-content/75">
+              <div className="flex items-center gap-2 min-w-0">
+                <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                <EditableText
+                  fieldKey="hero.trust1"
+                  label="ข้อความความน่าเชื่อถือ 1"
+                  fallback="สถาปัตยกรรมการเงิน & ประกัน AIA ได้รับอนุญาต"
+                />
+              </div>
+              <div className="flex items-center gap-2 min-w-0">
+                <CheckCircle2 className="w-4 h-4 text-success shrink-0" />
+                <EditableText
+                  fieldKey="hero.trust2"
+                  label="ข้อความความน่าเชื่อถือ 2"
+                  fallback="วิทยาศาสตร์แร่ธาตุ SiO₂ & สุขภาพ Longevity"
+                />
+              </div>
+            </div>
+
+            {/* 📊 Key Metric Tiles */}
+            <HeroStatTiles />
+          </div>
+
+          {/* Right Interactive Focus Explorer */}
+          <div className="lg:col-span-5 min-w-0 flex justify-center w-full">
+            <HeroInteractiveFocus onSelectFocus={handleSelectFocus} />
           </div>
         </div>
       </section>
@@ -149,11 +147,11 @@ export default function HomePage() {
       {/* 🧭 2. THREE CORE GATEWAYS: LIVING • LEARNING • CONNECTING */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-          <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+          <span className="text-sm font-semibold text-secondary block">
             <EditableText
               fieldKey="gateways.sectionBadge"
               label="หัวข้อหมวด Gateways (Badge)"
-              fallback="Three Core Gateways"
+              fallback="3 เสาหลักการใช้ชีวิต"
             />
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary">

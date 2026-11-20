@@ -95,16 +95,16 @@ export default function HeroStatTiles() {
   ];
 
   return (
-    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 pt-2">
+    <div className="w-full grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-3 pt-2">
       {stats.map((item, idx) => {
         const Icon = item.icon;
         return (
           <div
             key={idx}
-            className="zen-surface hover-card-elevate rounded-2xl p-3.5 sm:p-4 border border-base-300/60 shadow-xs flex flex-col justify-between cursor-default group"
+            className="zen-surface hover-card-elevate rounded-2xl p-3 sm:p-4 border border-base-300/60 shadow-xs flex flex-col justify-between cursor-default group min-w-0"
           >
-            <div className="flex items-center justify-between gap-2 mb-1.5">
-              <span className="text-xl sm:text-2xl lg:text-3xl font-black text-base-content">
+            <div className="flex items-center justify-between gap-1.5 mb-1.5 min-w-0">
+              <span className="text-lg sm:text-xl lg:text-2xl font-black text-base-content leading-none">
                 <AnimatedNumber
                   target={item.target}
                   prefix={item.prefix}
@@ -121,7 +121,7 @@ export default function HeroStatTiles() {
               <p className="text-xs sm:text-sm font-bold text-base-content leading-snug group-hover:text-primary transition-colors">
                 {item.label}
               </p>
-              <p className="text-[10px] sm:text-xs text-base-content/65 truncate mt-0.5">
+              <p className="text-[11px] text-base-content/65 leading-snug mt-0.5 break-words">
                 {item.sub}
               </p>
             </div>
