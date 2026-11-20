@@ -1065,6 +1065,15 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Live `/journal` and `/journal/retirement-planning-ep1-life-before-numbers` verified in headless Chromium (HTTP 200 on R2 image `1024x1126`, uncropped display, zero console/network errors).
   - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` passed cleanly.
 
+## 44. Clean Card Labels (Remove "Infographic" Copy) & Global Typography Scale Boost (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Removed `"ดูอินโฟกราฟิก"` / `"Infographics"` UI Announcements (`PlanCard.jsx`, `WealthPage.jsx`, `InsurancePlanDetailPage.jsx`)**: Removed the image overlay pill `"ดูอินโฟกราฟิก"`, renamed the card detail action back to `"ดูรายละเอียด"`, upgraded the brochure button to `btn-outline btn-primary` for crisp contrast, updated `WealthPage.jsx` copy, and replaced `"PLAN INFOGRAPHIC"` with `"PLAN OVERVIEW"` on `InsurancePlanDetailPage.jsx`.
+  2. **Global Typography Scale Boost (`src/index.css`, `Navbar.jsx`, `InsurancePlanDetailPage.jsx`)**: Scaled `@theme` type tokens (`--text-xs: 15px`, `--text-sm: 17px`, `--text-base: 19px`, `--text-lg: 22px`, `--text-xl: 25px`, `--text-2xl: 30px`, `--text-3xl: 36px`, `--text-4xl: 44px`, `--text-5xl: 54px`), kept `header nav` responsive sizing at `1280px` (`21px` clearance inside pill), ensured `.badge` height adapts cleanly without clipping Thai diacritics, and adjusted hero coverage summary font sizing to keep single-line metrics unbroken.
+- **Verification**:
+  - Browser QA (`http://localhost:5173/`): `1280x800` Navbar `0` overflows / `0` wraps (`21px` margin inside pill), `1440x900` `/wealth` `0` occurrences of `"ดูอินโฟกราฟิก"`/`"Infographics"` across all 10 cards, and `375x812` mobile zero horizontal overflow.
+  - Unit Tests: 18/18 passed (`npm test -- --run`); Production Build: `vite build` completed cleanly in 1.70s.
+
 
 
 

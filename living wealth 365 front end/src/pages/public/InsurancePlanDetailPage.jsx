@@ -201,7 +201,7 @@ export default function InsurancePlanDetailPage() {
                   <span className="text-xs font-bold text-primary/80 block">
                     วงเงินความคุ้มครองหลัก
                   </span>
-                  <span className="text-lg sm:text-xl font-black text-primary">
+                  <span className="text-base sm:text-lg font-black text-primary leading-snug block">
                     {plan.coverageAmount || 'ตามเงื่อนไขกรมธรรม์'}
                   </span>
                 </div>
@@ -209,7 +209,7 @@ export default function InsurancePlanDetailPage() {
                   <span className="text-xs font-bold text-secondary block">
                     ประมาณการเบี้ยประกันเริ่มต้น
                   </span>
-                  <span className="text-lg sm:text-xl font-black text-secondary">
+                  <span className="text-base sm:text-lg font-black text-secondary leading-snug block">
                     {plan.startingPrice || 'คำนวณตามช่วงอายุ'}
                   </span>
                 </div>
@@ -226,7 +226,7 @@ export default function InsurancePlanDetailPage() {
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-secondary flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
-                <span>PLAN INFOGRAPHIC • สรุปจุดเด่นแบบเข้าใจง่ายใน 30 วินาที</span>
+                <span>PLAN OVERVIEW • สรุปจุดเด่นแบบเข้าใจง่ายใน 30 วินาที</span>
               </span>
               <h2 className="editorial-display text-2xl sm:text-3xl font-black text-primary mt-1">
                 ตัวเลขสำคัญของแผน {plan.name}

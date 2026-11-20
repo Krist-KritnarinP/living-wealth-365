@@ -139,7 +139,7 @@ export default function WealthPage() {
                 แผนประกัน AIA แยกตามหมวดหมู่ (Protection & Wealth Solutions)
               </h2>
               <p className="text-sm zen-muted mt-0.5">
-                กดที่แผนประกันแต่ละใบเพื่อชมหน้า Infographics สรุปเข้าใจง่าย พร้อมดาวน์โหลดโบรชัวร์ AIA (PDF)
+                คลิกที่แผนประกันแต่ละใบเพื่อดูสรุปความคุ้มครองแบบเข้าใจง่าย พร้อมโบรชัวร์ AIA (PDF)
               </p>
             </div>
 

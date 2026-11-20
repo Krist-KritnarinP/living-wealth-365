@@ -166,26 +166,26 @@ export default function Navbar() {
     <header className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
       <nav
         aria-label="เมนูหลัก"
-        className="zen-surface w-full px-3 sm:px-5 lg:px-6 py-2 rounded-full flex items-center justify-between gap-3 sm:gap-4 transition-[box-shadow,background-color] duration-300"
+        className="zen-surface w-full px-3 sm:px-4 lg:px-5 2xl:px-6 py-2 rounded-full flex items-center justify-between gap-2 sm:gap-3 transition-[box-shadow,background-color] duration-300"
       >
         {/* Brand Logo & Identity */}
         <Link
           to={ROUTES.HOME}
-          className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0"
+          className="flex items-center gap-1.5 sm:gap-2 group shrink-0"
           aria-label="Living Wealth 365 หน้าแรก"
         >
           <BrandLogo collapsed={true} size="sm" className="sm:hidden shrink-0" />
-          <BrandLogo size="sm" className="hidden sm:block sm:h-9 w-auto group-hover:scale-105 transition-transform duration-300 shrink-0" />
-          <span className="hidden min-[360px]:inline text-sm sm:text-lg xl:text-xl font-black tracking-tight text-primary leading-tight whitespace-nowrap notranslate" translate="no">
+          <BrandLogo size="sm" className="hidden sm:block sm:h-8 2xl:h-9 w-auto group-hover:scale-105 transition-transform duration-300 shrink-0" />
+          <span className="hidden min-[360px]:inline text-sm sm:text-base 2xl:text-xl font-black tracking-tight text-primary leading-tight whitespace-nowrap notranslate" translate="no">
             Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
           </span>
         </Link>
 
         {/* Desktop Gateway Navigation Links (xl: 1280px+) — shrink-0 prevents center links from colliding into Logo */}
-        <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 shrink-0">
+        <div className="hidden xl:flex items-center justify-center gap-0.5 2xl:gap-2 shrink-0">
           <Link
             to={ROUTES.HOME}
-            className={`px-3.5 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
+            className={`px-2.5 2xl:px-3.5 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
               isActive(ROUTES.HOME) && location.pathname === '/'
                 ? 'bg-primary/14 text-primary font-bold shadow-xs'
                 : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
@@ -203,7 +203,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setOpenDropdown(isOpen ? null : gw.id)}
-                  className={`px-3.5 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 cursor-pointer ${
+                  className={`px-2.5 2xl:px-3.5 py-2 rounded-full text-sm font-semibold flex items-center gap-1 2xl:gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 cursor-pointer ${
                     hasActiveChild || isOpen
                       ? 'bg-primary/14 text-primary font-bold shadow-xs'
                       : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
@@ -267,7 +267,7 @@ export default function Navbar() {
         </div>
 
         {/* Action Items */}
-        <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+        <div className="flex items-center gap-1 2xl:gap-2 shrink-0">
           {/* Shopping Cart Button */}
           <button
             type="button"

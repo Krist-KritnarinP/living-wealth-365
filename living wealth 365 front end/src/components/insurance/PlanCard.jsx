@@ -5,7 +5,6 @@ import {
   Users,
   FileText,
   Download,
-  Sparkles,
 } from 'lucide-react';
 import { resolveAssetUrl } from '../../api';
 
@@ -39,19 +38,15 @@ export default function PlanCard({ plan, onSelectPlan }) {
               e.currentTarget.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-          <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between gap-2">
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-black/55 backdrop-blur-md text-white text-[11px] font-bold">
-              <Sparkles className="w-3 h-3 text-amber-300" />
-              <span>ดูอินโฟกราฟิก</span>
-            </span>
-            {plan.brochureUrl && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/90 text-slate-900 text-[11px] font-bold">
-                <FileText className="w-3 h-3 text-secondary" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
+          {plan.brochureUrl && (
+            <div className="absolute bottom-3 right-4">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 text-primary shadow-xs text-xs font-bold">
+                <FileText className="w-3.5 h-3.5 text-secondary" />
                 <span>PDF</span>
               </span>
-            )}
-          </div>
+            </div>
+          )}
         </Link>
       )}
 
@@ -125,7 +120,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
             href={resolveAssetUrl(plan.brochureUrl)}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-outline btn-secondary btn-sm w-full rounded-xl font-bold gap-1.5 text-xs shadow-xs"
+            className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5 text-xs shadow-xs"
           >
             <FileText className="w-3.5 h-3.5" />
             <span>ดาวน์โหลดโบรชัวร์ AIA (PDF)</span>
@@ -138,8 +133,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
             to={detailPath}
             className="btn btn-outline btn-sm rounded-xl font-bold gap-1 text-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-secondary" />
-            <span>ดูอินโฟกราฟิก</span>
+            <span>ดูรายละเอียด</span>
           </Link>
           <button
             type="button"
