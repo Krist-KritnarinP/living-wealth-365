@@ -24,6 +24,7 @@ import HandDrawnUnderline from '../../components/common/HandDrawnUnderline';
 import HeroStatTiles from '../../components/common/HeroStatTiles';
 import HeroInteractiveFocus from '../../components/common/HeroInteractiveFocus';
 import CopyToLineSection from '../../components/common/CopyToLineSection';
+import RevealOnScroll from '../../components/common/RevealOnScroll';
 
 export default function HomePage() {
   const { products, posts } = useAuth();
@@ -61,7 +62,7 @@ export default function HomePage() {
               />
             </div>
 
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-black text-primary leading-[1.18] tracking-tight min-w-0">
+            <h1 className="editorial-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-primary leading-[1.2] min-w-0">
               <EditableText
                 fieldKey="hero.titleLine1"
                 label="Hero หัวข้อ บรรทัด 1"
@@ -144,247 +145,285 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 🧭 2. THREE CORE GATEWAYS: LIVING • LEARNING • CONNECTING */}
-      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
-          <span className="text-sm font-semibold text-secondary block">
-            <EditableText
-              fieldKey="gateways.sectionBadge"
-              label="หัวข้อหมวด Gateways (Badge)"
-              fallback="3 เสาหลักการใช้ชีวิต"
-            />
-          </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary">
-            <EditableText
-              fieldKey="gateways.sectionTitle"
-              label="หัวข้อหลัก 3 ประตูใหญ่"
-              fallback="3 ประตูสู่การใช้ชีวิตที่สมบูรณ์แบบ"
-            />
-          </h2>
-          <p className="text-sm sm:text-base text-base-content/75">
-            <EditableText
-              fieldKey="gateways.sectionSubtitle"
-              label="คำบรรยายย่อย 3 ประตูใหญ่"
-              fallback="เลือกสำรวจตามมิติที่คุณต้องการดูแลในวันนี้"
-            />
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {/* Gateway 1: Living */}
-          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center hover-icon-spin shrink-0">
-                <Activity className="w-6 h-6" />
-              </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
+      {/* 🧭 2. THREE CORE GATEWAYS: ASYMMETRICAL EDITORIAL BENTO LAYOUT */}
+      <RevealOnScroll>
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-base-300/60 pb-6 mb-8">
+            <div className="space-y-1.5 max-w-2xl">
+              <span className="text-sm font-semibold text-secondary block">
                 <EditableText
-                  fieldKey="gateways.living.badge"
-                  label="Gateway 1 Badge"
-                  fallback="Gateway 01"
+                  fieldKey="gateways.sectionBadge"
+                  label="หัวข้อหมวด Gateways (Badge)"
+                  fallback="3 เสาหลักการใช้ชีวิต"
                 />
               </span>
-              <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
+              <h2 className="editorial-display text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">
                 <EditableText
-                  fieldKey="gateways.living.title"
-                  label="Gateway 1 ชื่อหมวด"
-                  fallback="Living (วิถีชีวิต)"
+                  fieldKey="gateways.sectionTitle"
+                  label="หัวข้อหลัก 3 ประตูใหญ่"
+                  fallback="3 ประตูสู่การใช้ชีวิตที่สมบูรณ์แบบ"
                 />
-              </h3>
-              <p className="text-sm text-base-content/75 leading-relaxed">
-                <EditableText
-                  fieldKey="gateways.living.desc"
-                  label="Gateway 1 คำอธิบาย"
-                  multiline
-                  fallback="การสร้างสมดุลชีวิต 6 มิติ (Life Map), วิทยาศาสตร์การชะลอวัยระดับเซลล์ (Longevity), และแร่ธาตุธรรมชาติคัดสรรตามหลักธรณีวิทยาและพลังจักระ"
-                />
-              </p>
-              <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.living.point1"
-                    label="Gateway 1 หัวข้อย่อย 1"
-                    fallback="Life: การออกแบบเวลา & เกษียณสำราญ"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.living.point2"
-                    label="Gateway 1 หัวข้อย่อย 2"
-                    fallback="Wellbeing: Home Health Sanctuary"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.living.point3"
-                    label="Gateway 1 หัวข้อย่อย 3"
-                    fallback="Earth & Energy: ผลึกแร่ธาตุ & 3D Visualizer"
-                  />
-                </li>
-              </ul>
+              </h2>
             </div>
-
-            <div className="pt-6">
-              <Link
-                to={content?.gateways?.living?.link || ROUTES.LIFE}
-                className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
-              >
-                <EditableText
-                  fieldKey="gateways.living.btnText"
-                  label="Gateway 1 ข้อความปุ่ม"
-                  fallback="สำรวจหมวด Living"
-                />
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
+            <p className="text-sm sm:text-base text-base-content/75 max-w-md">
+              <EditableText
+                fieldKey="gateways.sectionSubtitle"
+                label="คำบรรยายย่อย 3 ประตูใหญ่"
+                fallback="เลือกสำรวจตามมิติที่คุณต้องการดูแลในวันนี้"
+              />
+            </p>
           </div>
 
-          {/* Gateway 2: Learning */}
-          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-amber-500/15 text-amber-600 flex items-center justify-center hover-icon-spin shrink-0">
-                <Coins className="w-6 h-6" />
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            {/* Gateway 01: Featured Anchor Column (Left 5 cols) */}
+            <div className="lg:col-span-5 zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 flex flex-col justify-between group min-w-0">
+              <div className="space-y-5">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="w-11 h-11 rounded-2xl bg-emerald-500/12 text-emerald-600 flex items-center justify-center hover-icon-spin shrink-0">
+                    <Activity className="w-5 h-5" />
+                  </div>
+                  <span className="editorial-display text-3xl font-bold text-base-content/15 select-none">
+                    01
+                  </span>
+                </div>
+
+                <div className="space-y-2">
+                  <span className="text-xs font-semibold text-secondary block">
+                    <EditableText
+                      fieldKey="gateways.living.badge"
+                      label="Gateway 1 Badge"
+                      fallback="มิติที่ 01"
+                    />
+                  </span>
+                  <h3 className="editorial-display text-2xl sm:text-3xl font-bold text-primary group-hover:text-secondary transition-colors">
+                    <EditableText
+                      fieldKey="gateways.living.title"
+                      label="Gateway 1 ชื่อหมวด"
+                      fallback="Living (วิถีชีวิต)"
+                    />
+                  </h3>
+                  <p className="text-sm sm:text-base text-base-content/75 leading-relaxed">
+                    <EditableText
+                      fieldKey="gateways.living.desc"
+                      label="Gateway 1 คำอธิบาย"
+                      multiline
+                      fallback="การสร้างสมดุลชีวิต 6 มิติ (Life Map), วิทยาศาสตร์การชะลอวัยระดับเซลล์ (Longevity), และแร่ธาตุธรรมชาติคัดสรรตามหลักธรณีวิทยาและพลังจักระ"
+                    />
+                  </p>
+                </div>
+
+                <ul className="space-y-2.5 pt-4 border-t border-base-300/40 text-xs sm:text-sm font-medium text-base-content/80">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                    <EditableText
+                      fieldKey="gateways.living.point1"
+                      label="Gateway 1 หัวข้อย่อย 1"
+                      fallback="Life: การออกแบบเวลา & เกษียณสำราญ"
+                    />
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                    <EditableText
+                      fieldKey="gateways.living.point2"
+                      label="Gateway 1 หัวข้อย่อย 2"
+                      fallback="Wellbeing: Home Health Sanctuary"
+                    />
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0 mt-1.5"></span>
+                    <EditableText
+                      fieldKey="gateways.living.point3"
+                      label="Gateway 1 หัวข้อย่อย 3"
+                      fallback="Earth & Energy: ผลึกแร่ธาตุ & พลังงานธรรมชาติ"
+                    />
+                  </li>
+                </ul>
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
-                <EditableText
-                  fieldKey="gateways.learning.badge"
-                  label="Gateway 2 Badge"
-                  fallback="Gateway 02"
-                />
-              </span>
-              <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
-                <EditableText
-                  fieldKey="gateways.learning.title"
-                  label="Gateway 2 ชื่อหมวด"
-                  fallback="Learning (การเรียนรู้)"
-                />
-              </h3>
-              <p className="text-sm text-base-content/75 leading-relaxed">
-                <EditableText
-                  fieldKey="gateways.learning.desc"
-                  label="Gateway 2 คำอธิบาย"
-                  multiline
-                  fallback="สถาปัตยกรรมการเงิน 4 เสาหลัก, การคำนวณและวางแผนภาษีเชิงรุก 2568, และโลกภายใน (Inner Life) เพื่อคืนความเงียบสงบให้จิตใจ"
-                />
-              </p>
-              <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.learning.point1"
-                    label="Gateway 2 หัวข้อย่อย 1"
-                    fallback="Wealth: แผนประกันเหมาจ่าย & ภาษี 2568"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.learning.point2"
-                    label="Gateway 2 หัวข้อย่อย 2"
-                    fallback="Inner Life: ศิลปะแห่งความเงียบสงบ (Stillness)"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.learning.point3"
-                    label="Gateway 2 หัวข้อย่อย 3"
-                    fallback="Journal: บันทึกความคิดของคุณท็อป & คุณจอย"
-                  />
-                </li>
-              </ul>
-            </div>
 
-            <div className="pt-6">
-              <Link
-                to={content?.gateways?.learning?.link || ROUTES.WEALTH}
-                className="btn btn-outline btn-primary btn-sm w-full rounded-xl font-bold gap-1.5"
-              >
-                <EditableText
-                  fieldKey="gateways.learning.btnText"
-                  label="Gateway 2 ข้อความปุ่ม"
-                  fallback="สำรวจหมวด Learning"
-                />
-                <ChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Gateway 3: Connecting */}
-          <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 shadow-xs flex flex-col justify-between group cursor-pointer">
-            <div className="space-y-4">
-              <div className="w-12 h-12 rounded-2xl bg-secondary/15 text-secondary flex items-center justify-center hover-icon-spin shrink-0">
-                <HeartHandshake className="w-6 h-6" />
+              <div className="pt-6">
+                <Link
+                  to={content?.gateways?.living?.link || ROUTES.LIFE}
+                  className="btn btn-outline btn-primary btn-sm sm:btn-md w-full rounded-xl font-bold gap-1.5"
+                >
+                  <EditableText
+                    fieldKey="gateways.living.btnText"
+                    label="Gateway 1 ข้อความปุ่ม"
+                    fallback="สำรวจหมวด Living"
+                  />
+                  <ChevronRight className="w-4 h-4 shrink-0" />
+                </Link>
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-secondary block">
-                <EditableText
-                  fieldKey="gateways.connecting.badge"
-                  label="Gateway 3 Badge"
-                  fallback="Gateway 03"
-                />
-              </span>
-              <h3 className="text-2xl font-black text-primary group-hover:text-secondary transition-colors">
-                <EditableText
-                  fieldKey="gateways.connecting.title"
-                  label="Gateway 3 ชื่อหมวด"
-                  fallback="Connecting (เพื่อนร่วมทาง)"
-                />
-              </h3>
-              <p className="text-sm text-base-content/75 leading-relaxed">
-                <EditableText
-                  fieldKey="gateways.connecting.desc"
-                  label="Gateway 3 คำอธิบาย"
-                  multiline
-                  fallback="ทำความรู้จักเรื่องราวของคุณท็อป & คุณจอย และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
-                />
-              </p>
-              <ul className="space-y-2 pt-2 border-t border-base-300/40 text-xs font-semibold text-base-content/80">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.connecting.point1"
-                    label="Gateway 3 หัวข้อย่อย 1"
-                    fallback="About: จุดเริ่มต้นของ Living Wealth 365"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.connecting.point2"
-                    label="Gateway 3 หัวข้อย่อย 2"
-                    fallback="Fellow Travelers: ปรัชญาไม่ตัดสิน"
-                  />
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
-                  <EditableText
-                    fieldKey="gateways.connecting.point3"
-                    label="Gateway 3 หัวข้อย่อย 3"
-                    fallback="Let's Talk: นัดหมายพูดคุยฟรี 1-on-1"
-                  />
-                </li>
-              </ul>
             </div>
 
-            <div className="pt-6">
-              <Link
-                to={content?.gateways?.connecting?.link || ROUTES.ABOUT}
-                className="btn btn-secondary btn-sm w-full text-white rounded-xl font-bold gap-1.5 shadow-xs"
-              >
-                <EditableText
-                  fieldKey="gateways.connecting.btnText"
-                  label="Gateway 3 ข้อความปุ่ม"
-                  fallback="รู้จักเรา & นัดหมายพูดคุย"
-                />
-                <ChevronRight className="w-4 h-4" />
-              </Link>
+            {/* Right Column: Stacked Editorial Cards 02 & 03 (7 cols) */}
+            <div className="lg:col-span-7 flex flex-col gap-6 min-w-0">
+              {/* Gateway 02: Learning */}
+              <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-7 border border-base-300/60 flex-1 flex flex-col justify-between group min-w-0">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-amber-500/12 text-amber-600 flex items-center justify-center hover-icon-spin shrink-0">
+                        <Coins className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-semibold text-secondary block">
+                          <EditableText
+                            fieldKey="gateways.learning.badge"
+                            label="Gateway 2 Badge"
+                            fallback="มิติที่ 02"
+                          />
+                        </span>
+                        <h3 className="editorial-display text-xl sm:text-2xl font-bold text-primary group-hover:text-secondary transition-colors">
+                          <EditableText
+                            fieldKey="gateways.learning.title"
+                            label="Gateway 2 ชื่อหมวด"
+                            fallback="Learning (การเรียนรู้)"
+                          />
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="editorial-display text-2xl font-bold text-base-content/15 select-none shrink-0">
+                      02
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-base-content/75 leading-relaxed">
+                    <EditableText
+                      fieldKey="gateways.learning.desc"
+                      label="Gateway 2 คำอธิบาย"
+                      multiline
+                      fallback="สถาปัตยกรรมการเงิน 4 เสาหลัก, การคำนวณและวางแผนภาษีเชิงรุก 2568, และโลกภายใน (Inner Life) เพื่อคืนความเงียบสงบให้จิตใจ"
+                    />
+                  </p>
+
+                  <div className="flex flex-wrap gap-x-5 gap-y-1.5 pt-2 text-xs font-medium text-base-content/80">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.learning.point1"
+                        label="Gateway 2 หัวข้อย่อย 1"
+                        fallback="Wealth: แผนประกันเหมาจ่าย & ภาษี 2568"
+                      />
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.learning.point2"
+                        label="Gateway 2 หัวข้อย่อย 2"
+                        fallback="Inner Life: ศิลปะแห่งความเงียบสงบ"
+                      />
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.learning.point3"
+                        label="Gateway 2 หัวข้อย่อย 3"
+                        fallback="Journal: บันทึกความคิดคุณท็อป & คุณจอย"
+                      />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Link
+                    to={content?.gateways?.learning?.link || ROUTES.WEALTH}
+                    className="btn btn-outline btn-primary btn-sm rounded-xl font-bold gap-1.5"
+                  >
+                    <EditableText
+                      fieldKey="gateways.learning.btnText"
+                      label="Gateway 2 ข้อความปุ่ม"
+                      fallback="สำรวจหมวด Learning"
+                    />
+                    <ChevronRight className="w-4 h-4 shrink-0" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Gateway 03: Connecting */}
+              <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-7 border border-secondary/35 flex-1 flex flex-col justify-between group min-w-0">
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-10 h-10 rounded-xl bg-secondary/15 text-secondary flex items-center justify-center hover-icon-spin shrink-0">
+                        <HeartHandshake className="w-5 h-5" />
+                      </div>
+                      <div className="min-w-0">
+                        <span className="text-xs font-semibold text-secondary block">
+                          <EditableText
+                            fieldKey="gateways.connecting.badge"
+                            label="Gateway 3 Badge"
+                            fallback="มิติที่ 03"
+                          />
+                        </span>
+                        <h3 className="editorial-display text-xl sm:text-2xl font-bold text-primary group-hover:text-secondary transition-colors">
+                          <EditableText
+                            fieldKey="gateways.connecting.title"
+                            label="Gateway 3 ชื่อหมวด"
+                            fallback="Connecting (เพื่อนร่วมทาง)"
+                          />
+                        </h3>
+                      </div>
+                    </div>
+                    <span className="editorial-display text-2xl font-bold text-base-content/15 select-none shrink-0">
+                      03
+                    </span>
+                  </div>
+
+                  <p className="text-sm text-base-content/75 leading-relaxed">
+                    <EditableText
+                      fieldKey="gateways.connecting.desc"
+                      label="Gateway 3 คำอธิบาย"
+                      multiline
+                      fallback="ทำความรู้จักเรื่องราวของคุณท็อป & คุณจอย และเปิดพื้นที่พูดคุยอย่างอบอุ่น (Let's Talk) ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อชีวิตคุณ"
+                    />
+                  </p>
+
+                  <div className="flex flex-wrap gap-x-5 gap-y-1.5 pt-2 text-xs font-medium text-base-content/80">
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.connecting.point1"
+                        label="Gateway 3 หัวข้อย่อย 1"
+                        fallback="About: จุดเริ่มต้น Living Wealth 365"
+                      />
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.connecting.point2"
+                        label="Gateway 3 หัวข้อย่อย 2"
+                        fallback="Fellow Travelers: ปรัชญาไม่ตัดสิน"
+                      />
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0"></span>
+                      <EditableText
+                        fieldKey="gateways.connecting.point3"
+                        label="Gateway 3 หัวข้อย่อย 3"
+                        fallback="Let's Talk: นัดหมายพูดคุยฟรี 1-on-1"
+                      />
+                    </span>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Link
+                    to={content?.gateways?.connecting?.link || ROUTES.ABOUT}
+                    className="btn btn-secondary btn-sm text-white rounded-xl font-bold gap-1.5 shadow-xs"
+                  >
+                    <EditableText
+                      fieldKey="gateways.connecting.btnText"
+                      label="Gateway 3 ข้อความปุ่ม"
+                      fallback="รู้จักเรา & นัดหมายพูดคุย"
+                    />
+                    <ChevronRight className="w-4 h-4 shrink-0" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </RevealOnScroll>
 
       {/* 📊 3. INTERACTIVE 6-DIMENSION LIFE MAP TEASER */}
       <section id="lifemap" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">

@@ -99,11 +99,17 @@
   --zen-field-border: #788DA5;
 }
 
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-editorial: 'Noto Serif Thai', Georgia, serif;
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     font-size: 100%; /* Respect user's device/browser accessibility font scaling */
+    font-family: var(--font-sans);
     width: 100%;
     margin: 0;
     padding: 0;
@@ -258,13 +264,35 @@
   .animate-pop-in {
     animation: pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
+
+  /* 🏛️ Quiet Luxury Editorial Display & Scroll Reveal */
+  .editorial-display {
+    font-family: var(--font-editorial);
+    letter-spacing: -0.015em;
+  }
+
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .hover-card-elevate,
-  .hover-icon-spin {
+  .hover-icon-spin,
+  .reveal-on-scroll {
     transition: none;
+  }
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
   }
   .bokeh-orb-a,
   .bokeh-orb-b,

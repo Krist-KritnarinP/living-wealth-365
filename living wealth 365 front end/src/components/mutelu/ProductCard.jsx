@@ -1,11 +1,13 @@
-import { Heart, Sparkles, Send, Atom, Compass, BookOpen, Layers } from 'lucide-react';
+import { Heart, Sparkles, Send, Atom, ShoppingBag } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants/routes';
 import { resolveAssetUrl } from '../../api';
 
 export default function ProductCard({ product, onSelectForLead }) {
   const { wishlist, toggleWishlist, currentUser } = useAuth();
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   const isWishlisted = wishlist.includes(product.id);
 
@@ -37,7 +39,7 @@ export default function ProductCard({ product, onSelectForLead }) {
   const aspectBadge = getAspectBadge(product.aspect);
 
   return (
-    <div className="card zen-surface border border-base-300/60 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+    <div className="card zen-surface hover-card-elevate border border-base-300/60 rounded-3xl overflow-hidden shadow-xs group flex flex-col justify-between min-w-0">
       {/* Image & Badges Container */}
       <div className="relative aspect-4/3 w-full overflow-hidden bg-base-200">
         <img
@@ -122,13 +124,23 @@ export default function ProductCard({ product, onSelectForLead }) {
         </div>
 
         {/* Actions */}
-        <div className="pt-2 flex items-center gap-2">
+        <div className="pt-2 flex flex-wrap sm:flex-nowrap items-center gap-2">
           <button
-            onClick={() => onSelectForLead && onSelectForLead(product)}
-            className="btn btn-secondary btn-outline btn-sm w-full rounded-xl font-bold gap-1.5 hover:btn-secondary hover:text-white"
+            type="button"
+            onClick={() => addToCart(product)}
+            className="btn btn-primary btn-sm flex-1 rounded-xl font-bold gap-1.5 min-w-[110px]"
           >
-            <Send className="w-3.5 h-3.5" />
-            <span>ปรึกษา & บูชาชิ้นงาน</span>
+            <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
+            <span>ใส่ตะกร้า</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => onSelectForLead && onSelectForLead(product)}
+            className="btn btn-secondary btn-outline btn-sm rounded-xl font-bold gap-1.5 hover:btn-secondary hover:text-white shrink-0"
+            title="ปรึกษา & บูชาชิ้นงาน"
+          >
+            <Send className="w-3.5 h-3.5 shrink-0" />
+            <span className="sm:hidden lg:inline">ปรึกษา</span>
           </button>
         </div>
       </div>

@@ -864,6 +864,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.78s.
 
+## 30. Award-Winning Health/Wealth Major Redesign & Shopping Cart Logic (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Design Benchmark**: Synthesized editorial patterns from award-winning Health-Longevity and Private Wealth platforms (Fountain Life, Equinox Circle, Private Family Office Portals) adapted to the Serene Prosperity palette (`#023E8D` & `#FFB53B`):
+  1. **Editorial Typography System (`index.html`, `index.css`)**: Added Google Fonts `Noto Serif Thai` (editorial display headings via `.editorial-display`) paired with `Plus Jakarta Sans` & `Noto Sans Thai` (`display=swap`), using `--font-sans` and `--font-editorial` CSS tokens.
+  2. **Architectural Hairline Stat Ledger (`HeroStatTiles.jsx`)**: Replaced nested stat card boxes with a Quiet Luxury 4-column ledger separated by `1px` hairline dividers (`divide-y sm:divide-y-0 sm:divide-x`) while preserving `AnimatedNumber` scroll-triggered counting.
+  3. **Asymmetrical Editorial Bento Layout (`HomePage.jsx`)**: Redesigned the Three Core Gateways from a generic 3-column card grid into an asymmetrical 5:7 Bento showcase with magazine numbering (`01 / 02 / 03`) and subtle `RevealOnScroll` (`RevealOnScroll.jsx`) IntersectionObserver choreography.
+  4. **Shopping Cart System (`CartContext.jsx`, `CartDrawer.jsx`, `ProductCard.jsx`, `Navbar.jsx`)**:
+     - Added `CartProvider` with `localStorage` persistence (`lw365_cart_v1`), `addToCart`, `removeFromCart`, `updateQuantity`, `clearCart`, `cartCount`, and `cartTotal`.
+     - Added frosted glass slide-over `CartDrawer` with quantity controls and one-click **"ส่งสรุปรายการสั่งซื้อทาง LINE"** (`https://line.me/R/share?text=...`) + clipboard copy.
+     - Added Cart icon & live badge counter to `Navbar` (mobile & desktop) and **"ใส่ตะกร้า"** action button to `ProductCard`.
+- **HostAtom / Plesk Go-Live DNS Reminder**:
+  - Point only web DNS records in Plesk (`A @ -> 76.76.21.21`, `CNAME www -> cname.vercel-dns.com`). Do NOT delete or modify `MX` / Mail records so `Merp@livingwealth365.com` continues operating without interruption.
+- **Verification**:
+  - Unit Tests: 15/15 passed in 204ms (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.38s.
+
+
 
 
 

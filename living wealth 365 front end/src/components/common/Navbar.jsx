@@ -21,9 +21,11 @@ import {
   Brain,
   Feather,
   Info,
-  Calculator
+  Calculator,
+  ShoppingBag
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { useSiteCustomizer } from '../../context/SiteCustomizerContext';
 import { ROUTES } from '../../constants/routes';
@@ -31,6 +33,7 @@ import BrandLogo from './BrandLogo';
 
 export default function Navbar() {
   const { theme, toggleTheme, currentUser, wishlist } = useAuth();
+  const { cartCount, openCart } = useCart();
   const { language, toggleLanguage, t } = useLanguage();
   const { content } = useSiteCustomizer();
   const location = useLocation();
@@ -259,6 +262,22 @@ export default function Navbar() {
 
         {/* Action Items */}
         <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+          {/* Shopping Cart Button */}
+          <button
+            type="button"
+            onClick={openCart}
+            className="btn btn-ghost btn-circle btn-sm sm:btn-md relative"
+            title="ตะกร้าสินค้า"
+            aria-label="เปิดตะกร้าสินค้า"
+          >
+            <ShoppingBag className="w-5 h-5 text-primary" />
+            {cartCount > 0 && (
+              <span className="badge badge-xs badge-secondary text-secondary-content absolute -top-1 -right-1 font-bold text-[10px] min-w-5 h-5 flex items-center justify-center p-0 shadow-xs">
+                {cartCount}
+              </span>
+            )}
+          </button>
+
           {/* Wishlist Icon */}
           <Link
             to={currentUser ? ROUTES.ACCOUNT_WISHLIST : ROUTES.EARTH_ENERGY}

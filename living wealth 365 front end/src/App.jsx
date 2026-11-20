@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { LanguageProvider } from './context/LanguageContext';
 import { ToastProvider } from './context/ToastContext';
 import { SiteCustomizerProvider } from './context/SiteCustomizerContext';
+import { CartProvider } from './context/CartContext';
 import { ROUTES } from './constants/routes';
 
 // Common Components
@@ -15,6 +16,7 @@ import AnnouncementBar from './components/common/AnnouncementBar';
 import VisualEditBar from './components/common/VisualEditBar';
 import VisualEditModal from './components/common/VisualEditModal';
 import AmbientBokeh from './components/common/AmbientBokeh';
+import CartDrawer from './components/common/CartDrawer';
 
 // 🏛️ The 7 Content Pillar Pages
 import HomePage from './pages/public/HomePage';
@@ -191,6 +193,9 @@ function AppShell() {
       {/* Show marketing footer only on public pages */}
       {!isDashboard && <Footer />}
 
+      {/* Shopping Cart Slide-Over Drawer */}
+      <CartDrawer />
+
       {/* Floating Visual Customizer Toolbar & Modal for Admin */}
       <VisualEditBar />
       <VisualEditModal />
@@ -207,10 +212,12 @@ export default function App() {
       <LanguageProvider>
         <ToastProvider>
           <SiteCustomizerProvider>
-            <BrowserRouter>
-              <ScrollToTop />
-              <AppShell />
-            </BrowserRouter>
+            <CartProvider>
+              <BrowserRouter>
+                <ScrollToTop />
+                <AppShell />
+              </BrowserRouter>
+            </CartProvider>
           </SiteCustomizerProvider>
         </ToastProvider>
       </LanguageProvider>

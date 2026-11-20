@@ -95,16 +95,16 @@ export default function HeroStatTiles() {
   ];
 
   return (
-    <div className="w-full grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-3 pt-2">
+    <div className="w-full zen-surface rounded-2xl border border-base-300/60 divide-y sm:divide-y-0 sm:divide-x divide-base-300/60 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mt-2 overflow-hidden">
       {stats.map((item, idx) => {
         const Icon = item.icon;
         return (
           <div
             key={idx}
-            className="zen-surface hover-card-elevate rounded-2xl p-3 sm:p-4 border border-base-300/60 shadow-xs flex flex-col justify-between cursor-default group min-w-0"
+            className="p-3.5 sm:p-4 flex flex-col justify-between group hover:bg-base-200/35 transition-colors duration-200 min-w-0"
           >
-            <div className="flex items-center justify-between gap-1.5 mb-1.5 min-w-0">
-              <span className="text-lg sm:text-xl lg:text-2xl font-black text-base-content leading-none">
+            <div className="flex items-center justify-between gap-2 mb-1 min-w-0">
+              <span className="text-xl sm:text-2xl font-black text-base-content leading-none tracking-tight">
                 <AnimatedNumber
                   target={item.target}
                   prefix={item.prefix}
@@ -112,9 +112,9 @@ export default function HeroStatTiles() {
                 />
               </span>
               <div
-                className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl ${item.bg} ${item.color} flex items-center justify-center shrink-0 hover-icon-spin`}
+                className={`w-7 h-7 rounded-lg ${item.bg} ${item.color} flex items-center justify-center shrink-0 hover-icon-spin`}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 h-3.5" />
               </div>
             </div>
             <div className="min-w-0">
