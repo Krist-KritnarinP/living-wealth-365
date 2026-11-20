@@ -25,7 +25,7 @@ export default function CartDrawer() {
     cartCount,
     cartTotal,
   } = useCart();
-  const { addToast } = useToast();
+  const { showToast } = useToast();
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
@@ -56,10 +56,10 @@ export default function CartDrawer() {
     try {
       await navigator.clipboard.writeText(summary);
       setCopied(true);
-      addToast('คัดลอกสรุปคำสั่งซื้อแล้ว กำลังเปิด LINE...', 'success');
+      showToast('คัดลอกสรุปคำสั่งซื้อแล้ว กำลังเปิด LINE...', 'success');
       setTimeout(() => setCopied(false), 2500);
     } catch {
-      addToast('เปิดหน้าต่าง LINE เพื่อส่งรายการให้ที่ปรึกษา', 'info');
+      showToast('เปิดหน้าต่าง LINE เพื่อส่งรายการให้ที่ปรึกษา', 'info');
     }
     const lineShareUrl = `https://line.me/R/share?text=${encodeURIComponent(
       summary
@@ -211,7 +211,7 @@ export default function CartDrawer() {
                   try {
                     await navigator.clipboard.writeText(buildOrderText());
                     setCopied(true);
-                    addToast('คัดลอกข้อความสรุปรายการแล้ว', 'success');
+                    showToast('คัดลอกข้อความสรุปรายการแล้ว', 'success');
                     setTimeout(() => setCopied(false), 2000);
                   } catch {
                     // ignore
