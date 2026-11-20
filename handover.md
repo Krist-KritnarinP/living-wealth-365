@@ -805,10 +805,12 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Status**: **100% Completed, Verified Live, and Synchronized with GitHub (`origin/main`)**
 - **Canonical Remote Repository**: `https://github.com/Krist-KritnarinP/living-wealth-365.git` (Branch: `main`)
 - **Live Deployments**:
-  - **Frontend**: `https://livingwealth365.vercel.app` (Vercel Production)
+  - **Official Production Domain**: `https://www.livingwealth365.com` (Vercel Production Edge CDN with automated HTTPS & 308 redirect from `https://livingwealth365.com`)
+  - **Frontend Vercel Alias**: `https://livingwealth365.vercel.app`
   - **Backend**: `https://living-wealth-365-backend.onrender.com` (Render Web Service, Singapore)
   - **Storage Bucket**: Cloudflare R2 (`livingwealth365-assets`, `https://pub-10dc92b49894448a9fe11f81ccc1e577.r2.dev`)
   - **Database**: Supabase PostgreSQL over SSL via Prisma ORM
+  - **Corporate Email**: `Merp@livingwealth365.com` (Active on HostAtom Plesk Mail Server via MX `10 mail.livingwealth365.com`)
 - **Summary of Completed Milestones**:
   1. **Render Backend Production Deployment**: Migrated backend to Render with automated health check (`/api/health`) and connected to Supabase PostgreSQL over SSL.
   2. **CMS Action Buttons Theme Alignment**: Standardized action buttons (`btn-ghost btn-circle btn-sm`) across Insurance, Products, and Blog pages to match the Zen Glass design system.
@@ -896,6 +898,25 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Backend syntax checks (`node --check`) passed.
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.53s.
+
+## 32. Official Domain Go-Live (`https://www.livingwealth365.com`) & DNS Cutover (November 20, 2026)
+- **Status**: **100% Completed, Verified Live with SSL, and Synchronized with Remote Repository**
+- **Domain Cutover Architecture**:
+  1. **HostAtom Plesk DNS Zone Configuration**:
+     - `A Record`: `livingwealth365.com.` updated from `203.170.190.22` to `76.76.21.21` (Vercel Anycast IP).
+     - `CNAME Record`: `www.livingwealth365.com.` updated from `livingwealth365.com.` to `cname.vercel-dns.com.`.
+     - **Mail Protection**: Preserved `mail.livingwealth365.com.` (A `203.170.190.22`), MX `10 mail.livingwealth365.com.`, and SPF/DKIM TXT records ensuring corporate email `Merp@livingwealth365.com` operates without disruption.
+  2. **Vercel Production Domain Deployment**:
+     - Configured `www.livingwealth365.com` as primary production target.
+     - Configured `livingwealth365.com` with HTTP 308 permanent redirect to `https://www.livingwealth365.com/`.
+     - Automated Let's Encrypt SSL certificates successfully generated and active.
+  3. **Backend Multi-Origin CORS Integration**:
+     - Render backend actively authorizes requests originating from `https://www.livingwealth365.com` and `https://livingwealth365.com` with `access-control-allow-credentials: true`.
+- **Live Verification**:
+  - `curl -sI https://www.livingwealth365.com`: Returns `HTTP/2 200 OK` with custom security headers (`Permissions-Policy`, `Referrer-Policy: strict-origin-when-cross-origin`).
+  - `curl -sI https://livingwealth365.com`: Returns `HTTP/2 308 Permanent Redirect` directly to `https://www.livingwealth365.com/`.
+  - DNS resolution verified across global resolvers (`76.76.21.21` & `cname.vercel-dns.com`).
+
 
 
 

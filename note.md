@@ -8,7 +8,9 @@
   - Wealth / Opportunity: Warm Gold `#FFB53B`
   - Passion / Protection: Crimson Red `#B62B1C`
   - Background / Canvas: Off-White `#F5F7FA`
+- **Official Production Domain**: `https://www.livingwealth365.com` (Live on Vercel Edge with automated SSL, with 308 redirect from `https://livingwealth365.com`)
 - **Official GitHub Repository**: `https://github.com/Krist-KritnarinP/living-wealth-365.git` (Remote: `origin`, Default Branch: `main`)
+- **DNS & Email Infrastructure**: HostAtom Plesk Nameservers (`th43.hostatom.com`, `th44.hostatom.com`) with active corporate mail `Merp@livingwealth365.com`
 - **Mandatory Git Push Rule**: ทุก Agent ต้อง push งานขึ้น `origin main` ทุกครั้งหลังจาก commit ไม่ทิ้งค้างไว้บน local เด็ดขาด
 
 ## UI / UX Design Mandate (Core Requirement)
