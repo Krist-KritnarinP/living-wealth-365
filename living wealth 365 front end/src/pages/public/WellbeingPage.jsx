@@ -71,7 +71,7 @@ export default function WellbeingPage() {
                 to="/about#talk"
                 className="btn btn-secondary btn-outline btn-md rounded-2xl font-bold px-6 gap-2"
               >
-                <span>ปรึกษาแนวทาง Longevity กับ Admin B</span>
+                <span>ปรึกษาแนวทาง Longevity กับคุณจอย</span>
               </Link>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function WellbeingPage() {
               บทความและวิทยาศาสตร์ในหมวด Wellbeing
             </h2>
             <p className="text-sm zen-muted mt-1">
-              คำแนะนำด้านการนอน การชะลอวัย และสุขภาพองค์รวมโดย Admin B
+              คำแนะนำด้านการนอน การชะลอวัย และสุขภาพองค์รวมโดยคุณจอย
             </p>
           </div>
           <Link

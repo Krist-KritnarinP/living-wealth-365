@@ -49,7 +49,7 @@ export default function AccountCartPage() {
 
     const newLead = addLead({
       name: currentUser?.name || 'ลูกค้าสมาชิก',
-      phone: currentUser?.phone || '081-234-5678',
+      phone: currentUser?.phone || 'ไม่ระบุเบอร์โทร',
       interest: `สั่งซื้อจากตะกร้า: ${itemSummary} (รวม ฿${cartTotal.toLocaleString()})`,
       preferredTime: 'ช่วงบ่าย (13:00 - 17:00)',
       notes: buildOrderSummary(),
