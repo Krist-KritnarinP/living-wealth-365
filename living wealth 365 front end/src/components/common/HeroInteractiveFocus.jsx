@@ -137,129 +137,137 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
   };
 
   return (
-    <div className="w-full zen-surface rounded-3xl p-4 sm:p-6 border border-base-300/60 space-y-5 min-w-0">
+    <div className="w-full zen-surface rounded-3xl p-5 sm:p-8 lg:p-10 space-y-6 min-w-0">
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300/50 pb-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="text-xs sm:text-sm font-bold text-primary">
-            สำรวจแนวทางที่เหมาะกับคุณ
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300/50 pb-4">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <Sparkles className="w-5 h-5 text-secondary shrink-0" />
+          <span className="text-base sm:text-lg font-extrabold text-primary">
+            สำรวจแนวทางที่เหมาะกับคุณทันที
           </span>
         </div>
-        <span className="text-xs text-base-content/60 font-medium">
-          เลือกปรับได้อิสระ
+        <span className="text-sm text-base-content/70 font-medium">
+          ปรับเปลี่ยนได้อิสระตามเป้าหมายชีวิต
         </span>
       </div>
 
-      {/* Step 1: Select Focus */}
-      <div className="space-y-2">
-        <label className="text-xs font-semibold text-base-content/75 block">
-          1. เลือกมิติที่คุณอยากดูแลเป็นอันดับแรก
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {categories.map((cat) => {
-            const Icon = cat.icon;
-            const isSelected = activeCategory === cat.id;
-            return (
-              <button
-                key={cat.id}
-                type="button"
-                onClick={() => setActiveCategory(cat.id)}
-                className={`p-2.5 sm:p-3 rounded-2xl border text-left flex items-center gap-2.5 transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer group min-w-0 ${
-                  isSelected
-                    ? 'bg-primary text-white border-primary shadow-sm scale-[1.01]'
-                    : 'bg-base-200/45 text-base-content/85 border-base-300/60 hover:bg-base-200 hover:border-secondary/60'
-                }`}
-              >
-                <div
-                  className={`w-7 h-7 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 ${
-                    isSelected
-                      ? 'bg-white/20 text-white scale-105'
-                      : 'bg-primary/10 text-primary group-hover:scale-105'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <p className="text-xs sm:text-sm font-bold leading-snug break-words">
-                    {cat.label}
-                  </p>
-                  <span
-                    className={`text-[11px] block leading-tight ${
-                      isSelected ? 'text-white/80' : 'text-base-content/60'
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+        {/* Left: Controls (7 cols) */}
+        <div className="lg:col-span-7 space-y-5 min-w-0">
+          {/* Step 1: Select Focus */}
+          <div className="space-y-2.5">
+            <label className="text-sm sm:text-base font-bold text-base-content/85 block">
+              1. เลือกมิติที่คุณอยากดูแลเป็นอันดับแรก
+            </label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {categories.map((cat) => {
+                const Icon = cat.icon;
+                const isSelected = activeCategory === cat.id;
+                return (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`p-3.5 rounded-2xl border text-left flex items-center gap-3 transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer group min-w-0 ${
+                      isSelected
+                        ? 'bg-primary text-white border-primary shadow-md scale-[1.01]'
+                        : 'bg-base-100/60 text-base-content border-base-300/70 hover:bg-base-100 hover:border-secondary/60'
                     }`}
                   >
-                    ดูแลโดย {cat.advisor}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
+                    <div
+                      className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 ${
+                        isSelected
+                          ? 'bg-white/20 text-white scale-105'
+                          : 'bg-primary/10 text-primary group-hover:scale-105'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm sm:text-base font-bold leading-snug break-words">
+                        {cat.label}
+                      </p>
+                      <span
+                        className={`text-xs sm:text-sm block leading-tight mt-0.5 ${
+                          isSelected ? 'text-white/85' : 'text-base-content/65'
+                        }`}
+                      >
+                        ดูแลโดย {cat.advisor}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
-      {/* Step 2: Select Age Range */}
-      <div className="space-y-2">
-        <label className="text-xs font-semibold text-base-content/75 block">
-          2. ช่วงวัยในปัจจุบันของคุณ
-        </label>
-        <div className="grid grid-cols-3 gap-2">
-          {ageStages.map((age) => {
-            const isSelected = activeAge === age.id;
-            return (
-              <button
-                key={age.id}
-                type="button"
-                onClick={() => setActiveAge(age.id)}
-                className={`py-2 px-2 rounded-xl border text-center transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer min-w-0 ${
-                  isSelected
-                    ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-xs scale-[1.01]'
-                    : 'bg-base-200/45 text-base-content/75 border-base-300/60 hover:bg-base-200'
-                }`}
-              >
-                <p className="text-xs sm:text-sm font-bold leading-tight">{age.label}</p>
-                <p className="text-[10px] sm:text-[11px] text-base-content/65 leading-tight mt-0.5 break-words">{age.sub}</p>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Result Inset Panel: Dynamic Live Recommendation (Clean inset, no nested heavy shadow card) */}
-      <div
-        key={key}
-        className="bg-base-200/55 rounded-2xl p-4 sm:p-5 border border-secondary/35 space-y-3 relative animate-pop-in"
-      >
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <span className="badge badge-secondary badge-sm font-semibold text-[11px]">
-            {currentRec.tag}
-          </span>
-          <div className="flex items-center gap-1.5 text-xs text-base-content/75">
-            <UserCheck className="w-3.5 h-3.5 text-primary shrink-0" />
-            <span>ที่ปรึกษา: <strong className="text-primary">{currentRec.advisor}</strong></span>
+          {/* Step 2: Select Age Range */}
+          <div className="space-y-2.5">
+            <label className="text-sm sm:text-base font-bold text-base-content/85 block">
+              2. ช่วงวัยในปัจจุบันของคุณ
+            </label>
+            <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
+              {ageStages.map((age) => {
+                const isSelected = activeAge === age.id;
+                return (
+                  <button
+                    key={age.id}
+                    type="button"
+                    onClick={() => setActiveAge(age.id)}
+                    className={`py-3 px-3 rounded-2xl border text-center transition-[transform,background-color,border-color,box-shadow] duration-200 cursor-pointer min-w-0 ${
+                      isSelected
+                        ? 'bg-secondary text-secondary-content border-secondary font-bold shadow-sm scale-[1.02]'
+                        : 'bg-base-100/60 text-base-content/80 border-base-300/70 hover:bg-base-100'
+                    }`}
+                  >
+                    <p className="text-sm sm:text-base font-bold leading-tight">{age.label}</p>
+                    <p className="text-xs text-base-content/70 leading-tight mt-1 break-words">{age.sub}</p>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        <div>
-          <h4 className="text-sm sm:text-base font-black text-primary leading-snug">
-            {currentRec.title}
-          </h4>
-          <p className="text-xs sm:text-sm text-base-content/80 mt-1 leading-relaxed">
-            {currentRec.strategy}
-          </p>
-        </div>
-
-        <blockquote className="bg-base-100/70 rounded-xl p-2.5 text-xs italic text-base-content/75 border-l-2 border-secondary">
-          {currentRec.quote}
-        </blockquote>
-
-        <button
-          type="button"
-          onClick={handleConsult}
-          className="btn btn-primary btn-sm w-full rounded-xl font-bold gap-2 shadow-xs hover:scale-[1.01] active:scale-[0.99] transition-transform group"
+        {/* Right: Dynamic Live Recommendation Panel (5 cols) */}
+        <div
+          key={key}
+          className="lg:col-span-5 bg-base-100/75 rounded-2xl p-5 sm:p-6 border border-secondary/40 flex flex-col justify-between space-y-4 relative animate-pop-in min-w-0"
         >
-          <span>ปรึกษาแนวทางนี้กับ {currentRec.advisor} ฟรี</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
-        </button>
+          <div className="space-y-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span className="badge badge-secondary font-bold text-xs sm:text-sm px-3 py-1">
+                {currentRec.tag}
+              </span>
+              <div className="flex items-center gap-1.5 text-sm text-base-content/80">
+                <UserCheck className="w-4 h-4 text-primary shrink-0" />
+                <span>ที่ปรึกษา: <strong className="text-primary">{currentRec.advisor}</strong></span>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="text-lg sm:text-xl font-extrabold text-primary leading-snug">
+                {currentRec.title}
+              </h4>
+              <p className="text-sm sm:text-base text-base-content/85 mt-2 leading-relaxed">
+                {currentRec.strategy}
+              </p>
+            </div>
+
+            <blockquote className="bg-base-200/70 rounded-xl p-3.5 text-sm italic text-base-content/80 border-l-3 border-secondary">
+              {currentRec.quote}
+            </blockquote>
+          </div>
+
+          <button
+            type="button"
+            onClick={handleConsult}
+            className="btn btn-primary btn-md w-full rounded-full font-bold gap-2 shadow-sm hover:scale-[1.01] active:scale-[0.99] transition-transform group text-sm sm:text-base"
+          >
+            <span>ปรึกษาแนวทางนี้กับ {currentRec.advisor} ฟรี</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
+          </button>
+        </div>
       </div>
     </div>
   );

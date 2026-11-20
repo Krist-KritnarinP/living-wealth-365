@@ -45,15 +45,16 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
-  --zen-glass: rgba(255, 255, 255, 0.72);
+  --zen-glass: rgba(255, 255, 255, 0.62);
   --zen-dropdown-bg: rgba(255, 255, 255, 0.97);
-  --zen-glass-border: rgba(255, 255, 255, 0.78);
-  --zen-specular: rgba(255, 255, 255, 0.92);
-  --zen-shadow: 0 8px 32px rgba(2, 62, 141, 0.06), 0 1px 3px rgba(24, 40, 59, 0.04);
-  --zen-elevate-shadow: 0 20px 44px -10px rgba(2, 62, 141, 0.14), 0 8px 20px -4px rgba(255, 181, 59, 0.12);
-  --zen-bokeh-blue: rgba(2, 62, 141, 0.14);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.22);
-  --zen-bokeh-emerald: rgba(35, 100, 73, 0.10);
+  --zen-glass-border: rgba(255, 255, 255, 0.85);
+  --zen-specular: rgba(255, 255, 255, 0.96);
+  --zen-shadow: 0 10px 36px rgba(2, 62, 141, 0.08), 0 2px 6px rgba(24, 40, 59, 0.05);
+  --zen-elevate-shadow: 0 24px 48px -12px rgba(2, 62, 141, 0.18), 0 8px 24px -4px rgba(255, 181, 59, 0.16);
+  --zen-bokeh-blue: rgba(2, 62, 141, 0.28);
+  --zen-bokeh-sky: rgba(56, 189, 248, 0.24);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.36);
+  --zen-bokeh-emerald: rgba(16, 185, 129, 0.20);
   --zen-muted: #475569;
   --zen-field-border: #94A3B8;
 }
@@ -92,16 +93,17 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
-  --zen-glass: rgba(25, 35, 47, 0.74);
+  --zen-glass: rgba(25, 35, 47, 0.65);
   --zen-dropdown-bg: rgba(18, 26, 36, 0.97);
-  --zen-glass-border: rgba(255, 255, 255, 0.14);
-  --zen-specular: rgba(255, 255, 255, 0.18);
-  --zen-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
-  --zen-elevate-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.55), 0 6px 18px -2px rgba(255, 181, 59, 0.14);
-  --zen-bokeh-blue: rgba(138, 184, 255, 0.15);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.14);
-  --zen-bokeh-emerald: rgba(141, 215, 178, 0.10);
-  --zen-muted: #B0C0D2;
+  --zen-glass-border: rgba(255, 255, 255, 0.18);
+  --zen-specular: rgba(255, 255, 255, 0.24);
+  --zen-shadow: 0 10px 36px rgba(0, 0, 0, 0.34);
+  --zen-elevate-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), 0 8px 20px -2px rgba(255, 181, 59, 0.18);
+  --zen-bokeh-blue: rgba(96, 165, 250, 0.26);
+  --zen-bokeh-sky: rgba(56, 189, 248, 0.20);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.24);
+  --zen-bokeh-emerald: rgba(52, 211, 153, 0.18);
+  --zen-muted: #CBD5E1;
   --zen-field-border: #788DA5;
 }
 
@@ -113,7 +115,8 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    font-size: 100%; /* Respect user's device/browser accessibility font scaling */
+    /* Larger, crisp baseline for Thai legibility while preserving user zoom */
+    font-size: clamp(1rem, 0.35vw + 0.94rem, 1.15rem);
     font-family: var(--font-sans);
     width: 100%;
     margin: 0;

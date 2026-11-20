@@ -945,6 +945,20 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.44s.
 
+## 35. Centered DJI Showcase Hero, Visible Luminous Bokeh & Larger Thai Typography Scale (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Issues Resolved**:
+  - Previous Hero still kept the old 2-column split skeleton, and Bokeh orbs (`blur(125px)` at `14%` opacity) were too faint to refract visibly through Liquid Glass cards.
+  - Thai font sizes (`12px`–`14px`) felt small for comfortable reading across screens.
+- **Improvements Delivered**:
+  1. **Centered Cinematic DJI-Style Hero (`HomePage.jsx`)**: Transformed Hero into a full-width centered product-launch stage (`text-4xl sm:text-5xl md:text-6xl lg:text-7xl` display headline), followed by a wide Liquid Glass Spec Strip (`HeroStatTiles.jsx`) and a panoramic 12-column Interactive Focus Console (`HeroInteractiveFocus.jsx`).
+  2. **Luminous Refracting Bokeh (`AmbientBokeh.jsx`, `index.css`)**: Increased bokeh orb vibrancy (`0.24`–`0.36`) with sharper blur (`60px`–`90px`) and sky-cyan accent (`--zen-bokeh-sky`) so Apple Liquid Glass translucency (`0.62` opacity + specular rim) visibly refracts the ambient glow underneath.
+  3. **Larger, Crisp Thai Typography Scale (`index.css`, Hero components)**: Upgraded root base sizing to `clamp(1rem, 0.35vw + 0.94rem, 1.15rem)` and bumped card/control text from `text-xs`/`text-[10px]` up to `text-sm`/`text-base`/`text-lg`.
+- **Verification**:
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.28s.
+
+
 
 
 

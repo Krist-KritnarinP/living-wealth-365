@@ -95,16 +95,16 @@ export default function HeroStatTiles() {
   ];
 
   return (
-    <div className="w-full zen-surface rounded-2xl border border-base-300/60 divide-y sm:divide-y-0 sm:divide-x divide-base-300/60 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 mt-2 overflow-hidden">
+    <div className="w-full zen-surface rounded-3xl divide-y sm:divide-y-0 sm:divide-x divide-base-300/60 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 overflow-hidden">
       {stats.map((item, idx) => {
         const Icon = item.icon;
         return (
           <div
             key={idx}
-            className="p-3.5 sm:p-4 flex flex-col justify-between group hover:bg-base-200/35 transition-colors duration-200 min-w-0"
+            className="p-4 sm:p-5 flex flex-col justify-between group hover:bg-base-100/40 transition-colors duration-200 min-w-0"
           >
-            <div className="flex items-center justify-between gap-2 mb-1 min-w-0">
-              <span className="text-xl sm:text-2xl font-black text-base-content leading-none tracking-tight">
+            <div className="flex items-center justify-between gap-2 mb-2 min-w-0">
+              <span className="text-2xl sm:text-3xl font-black text-primary leading-none tracking-tight">
                 <AnimatedNumber
                   target={item.target}
                   prefix={item.prefix}
@@ -112,16 +112,16 @@ export default function HeroStatTiles() {
                 />
               </span>
               <div
-                className={`w-7 h-7 rounded-lg ${item.bg} ${item.color} flex items-center justify-center shrink-0 hover-icon-spin`}
+                className={`w-8 h-8 rounded-xl ${item.bg} ${item.color} flex items-center justify-center shrink-0 hover-icon-spin`}
               >
-                <Icon className="w-3.5 h-3.5" />
+                <Icon className="w-4 h-4" />
               </div>
             </div>
             <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-bold text-base-content leading-snug group-hover:text-primary transition-colors">
+              <p className="text-sm sm:text-base font-bold text-base-content leading-snug group-hover:text-primary transition-colors">
                 {item.label}
               </p>
-              <p className="text-[11px] text-base-content/65 leading-snug mt-0.5 break-words">
+              <p className="text-xs sm:text-sm text-base-content/70 leading-snug mt-0.5 break-words">
                 {item.sub}
               </p>
             </div>
