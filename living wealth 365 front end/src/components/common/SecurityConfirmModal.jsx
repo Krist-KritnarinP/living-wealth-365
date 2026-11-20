@@ -112,7 +112,7 @@ export default function SecurityConfirmModal({
       aria-modal="true"
       className="modal modal-open z-[100] animate-fadeIn backdrop-blur-sm"
     >
-      <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 sm:p-8 space-y-5">
+      <div className="modal-box rounded-3xl liquid-glass-solid border border-base-300 shadow-2xl max-w-lg p-6 sm:p-8 space-y-5">
         {/* Modal Header */}
         <div className="flex items-start justify-between gap-3 border-b border-base-300/60 pb-4">
           <div className="flex items-center gap-3">

@@ -53,8 +53,8 @@ export default function HomePage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Content */}
           <div className="lg:col-span-7 min-w-0 space-y-5">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/12 border border-secondary/25 text-secondary text-xs sm:text-sm font-semibold">
-              <Sparkles className="w-3.5 h-3.5 shrink-0" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full zen-surface text-primary text-xs sm:text-sm font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
               <EditableText
                 fieldKey="hero.badge"
                 label="Hero ป้ายหัวข้อ"
@@ -62,7 +62,7 @@ export default function HomePage() {
               />
             </div>
 
-            <h1 className="editorial-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] xl:text-6xl font-bold text-primary leading-[1.2] min-w-0">
+            <h1 className="editorial-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] xl:text-6xl font-extrabold text-primary leading-[1.18] min-w-0">
               <EditableText
                 fieldKey="hero.titleLine1"
                 label="Hero หัวข้อ บรรทัด 1"
@@ -79,7 +79,7 @@ export default function HomePage() {
               </HandDrawnUnderline>
             </h1>
 
-            <p className="text-base sm:text-lg text-base-content/80 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-base-content/85 leading-relaxed max-w-2xl">
               <EditableText
                 fieldKey="hero.description"
                 label="Hero คำบรรยายหลัก"
@@ -91,7 +91,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center gap-3 pt-1">
               <a
                 href={content?.hero?.primaryBtnLink || '#lifemap'}
-                className="btn btn-primary btn-md sm:btn-lg rounded-2xl font-bold px-5 sm:px-7 shadow-sm hover:shadow-md gap-2"
+                className="btn btn-primary btn-md sm:btn-lg rounded-full font-bold px-6 sm:px-8 shadow-md hover:shadow-lg hover:scale-[1.02] transition-[transform,box-shadow] duration-200 gap-2"
               >
                 <Compass className="w-5 h-5 shrink-0" />
                 <EditableText
@@ -103,7 +103,7 @@ export default function HomePage() {
 
               <Link
                 to={content?.hero?.secondaryBtnLink || ROUTES.ABOUT}
-                className="btn btn-secondary btn-outline btn-md sm:btn-lg rounded-2xl font-bold px-5 sm:px-7 gap-2"
+                className="btn zen-surface text-primary hover:text-secondary btn-md sm:btn-lg rounded-full font-bold px-6 sm:px-8 hover:scale-[1.02] transition-[transform,color] duration-200 gap-2"
               >
                 <EditableText
                   fieldKey="hero.secondaryBtnText"

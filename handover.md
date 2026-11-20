@@ -929,6 +929,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.14s.
 
+## 34. Apple Liquid Glass & DJI-Inspired Sleek Sans-Serif Redesign + High-Contrast Dropdowns/Modals (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **User Aesthetic Direction**: Transitioned away from serif typography to sleek Apple/DJI geometric Sans-serif (`Plus Jakarta Sans` + `Noto Sans Thai`), paired with **Apple Liquid Glass** translucent surfaces over luminous Serene Prosperity Bokeh, while enforcing strict high-contrast readability inside all dropdowns and modals.
+- **Key Deliverables**:
+  1. **Apple Liquid Glass Surface System (`index.css`, `AmbientBokeh.jsx`)**:
+     - Added Liquid Glass tokens (`--zen-glass`, `--zen-specular`, `--zen-glass-border`, `--zen-dropdown-bg`) for both `zen-light` and `zen-dark`.
+     - Upgraded `.zen-surface` with `backdrop-filter: blur(24px) saturate(180%)` and crisp top specular edge highlight (`inset 0 1px 0 0 var(--zen-specular)`).
+     - Calibrated `AmbientBokeh` with luminous `#023E8D` & `#FFB53B` bokeh light orbs glowing through the glass layers.
+  2. **High-Contrast Dropdowns & Modals (`.liquid-glass-solid`)**:
+     - Created `.liquid-glass-solid` (97% opacity + `blur(32px)`) and applied it to `Navbar` dropdowns, mobile drawer, `CartDrawer`, `ConfirmModal`, `SecurityConfirmModal`, and `VisualEditModal` so text never bleeds into underlying backgrounds.
+  3. **Sleek Modern Sans-Serif Typography (`index.html`, `HomePage.jsx`)**:
+     - Removed `Noto Serif Thai` completely; switched display titles to sleek modern Sans-serif (`letter-spacing: -0.025em`) and pill-shaped (`rounded-full`) Liquid Glass Hero CTAs.
+- **Verification**:
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.44s.
+
+
 
 
 

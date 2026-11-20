@@ -45,14 +45,17 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #FFFFFF;
-  --zen-glass: rgb(255 255 255 / 82%);
-  --zen-shadow: 0 4px 20px rgb(24 40 59 / 6%);
-  --zen-elevate-shadow: 0 14px 32px -8px rgba(2, 62, 141, 0.12), 0 4px 12px -2px rgba(255, 181, 59, 0.10);
-  --zen-bokeh-blue: rgba(2, 62, 141, 0.10);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.16);
-  --zen-bokeh-emerald: rgba(35, 100, 73, 0.08);
-  --zen-muted: #4B5E73;
-  --zen-field-border: #75879C;
+  --zen-glass: rgba(255, 255, 255, 0.72);
+  --zen-dropdown-bg: rgba(255, 255, 255, 0.97);
+  --zen-glass-border: rgba(255, 255, 255, 0.78);
+  --zen-specular: rgba(255, 255, 255, 0.92);
+  --zen-shadow: 0 8px 32px rgba(2, 62, 141, 0.06), 0 1px 3px rgba(24, 40, 59, 0.04);
+  --zen-elevate-shadow: 0 20px 44px -10px rgba(2, 62, 141, 0.14), 0 8px 20px -4px rgba(255, 181, 59, 0.12);
+  --zen-bokeh-blue: rgba(2, 62, 141, 0.14);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.22);
+  --zen-bokeh-emerald: rgba(35, 100, 73, 0.10);
+  --zen-muted: #475569;
+  --zen-field-border: #94A3B8;
 }
 
 @plugin "daisyui/theme" {
@@ -89,19 +92,21 @@
   --depth: 0;
   --noise: 0;
   --zen-surface: #19232F;
-  --zen-glass: rgb(25 35 47 / 86%);
-  --zen-shadow: 0 4px 20px rgb(0 0 0 / 22%);
-  --zen-elevate-shadow: 0 14px 32px -8px rgba(0, 0, 0, 0.45), 0 4px 12px -2px rgba(255, 181, 59, 0.12);
-  --zen-bokeh-blue: rgba(138, 184, 255, 0.11);
-  --zen-bokeh-gold: rgba(255, 181, 59, 0.11);
-  --zen-bokeh-emerald: rgba(141, 215, 178, 0.08);
+  --zen-glass: rgba(25, 35, 47, 0.74);
+  --zen-dropdown-bg: rgba(18, 26, 36, 0.97);
+  --zen-glass-border: rgba(255, 255, 255, 0.14);
+  --zen-specular: rgba(255, 255, 255, 0.18);
+  --zen-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
+  --zen-elevate-shadow: 0 20px 44px -10px rgba(0, 0, 0, 0.55), 0 6px 18px -2px rgba(255, 181, 59, 0.14);
+  --zen-bokeh-blue: rgba(138, 184, 255, 0.15);
+  --zen-bokeh-gold: rgba(255, 181, 59, 0.14);
+  --zen-bokeh-emerald: rgba(141, 215, 178, 0.10);
   --zen-muted: #B0C0D2;
   --zen-field-border: #788DA5;
 }
 
 :root {
   --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-editorial: 'Noto Serif Thai', Georgia, serif;
 }
 
 @layer base {
@@ -174,11 +179,20 @@
     padding-bottom: 0.25rem;
   }
   .btn:active:not(:disabled) { transform: scale(0.98); }
-  @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+  @supports (backdrop-filter: blur(24px)) or (-webkit-backdrop-filter: blur(24px)) {
     .zen-surface {
       background: var(--zen-glass);
-      -webkit-backdrop-filter: blur(12px);
-      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--zen-glass-border);
+      box-shadow: var(--zen-shadow), inset 0 1px 0 0 var(--zen-specular);
+    }
+    .liquid-glass-solid {
+      background: var(--zen-dropdown-bg);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+      backdrop-filter: blur(32px) saturate(180%);
+      border: 1px solid var(--zen-glass-border);
+      box-shadow: var(--zen-elevate-shadow), inset 0 1px 0 0 var(--zen-specular);
     }
   }
 
@@ -265,10 +279,10 @@
     animation: pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   }
 
-  /* 🏛️ Quiet Luxury Editorial Display & Scroll Reveal */
+  /*  Apple / DJI Sleek Modern Display Sans & Scroll Reveal */
   .editorial-display {
-    font-family: var(--font-editorial);
-    letter-spacing: -0.015em;
+    font-family: var(--font-sans);
+    letter-spacing: -0.025em;
   }
 
   .reveal-on-scroll {

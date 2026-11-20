@@ -54,7 +54,7 @@ export default function VisualEditModal() {
       <div className="absolute inset-0" onClick={closeEditModal} />
 
       <div
-        className="relative w-full max-w-xl zen-surface rounded-3xl border border-secondary/40 shadow-2xl p-6 sm:p-8 space-y-5 z-10 animate-scaleUp"
+        className="relative w-full max-w-xl liquid-glass-solid rounded-3xl border border-secondary/40 shadow-2xl p-6 sm:p-8 space-y-5 z-10 animate-pop-in"
         role="dialog"
         aria-modal="true"
         onKeyDown={handleKeyDown}

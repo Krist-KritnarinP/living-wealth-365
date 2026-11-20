@@ -41,7 +41,7 @@ export default function ConfirmModal({
       aria-labelledby="confirm-modal-title"
       className="modal modal-open z-50"
     >
-      <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-md p-6 space-y-4">
+      <div className="modal-box rounded-3xl liquid-glass-solid border border-base-300 shadow-2xl max-w-md p-6 space-y-4">
         <div className="flex items-center gap-3">
           <div
             className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${

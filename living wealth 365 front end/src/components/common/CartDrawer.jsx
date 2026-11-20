@@ -84,7 +84,7 @@ export default function CartDrawer() {
       />
 
       {/* Slide-over Panel */}
-      <aside className="relative z-10 w-full max-w-md h-full zen-surface border-l border-base-300/60 shadow-2xl flex flex-col justify-between animate-pop-in">
+      <aside className="relative z-10 w-full max-w-md h-full liquid-glass-solid border-l border-base-300/60 shadow-2xl flex flex-col justify-between animate-pop-in">
         {/* Header */}
         <div className="p-5 border-b border-base-300/50 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2.5 min-w-0">

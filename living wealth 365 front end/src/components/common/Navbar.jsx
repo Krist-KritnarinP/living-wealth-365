@@ -216,9 +216,9 @@ export default function Navbar() {
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
 
-                {/* Dropdown Menu */}
+                {/* Dropdown Menu — High-contrast solid liquid glass */}
                 {isOpen && (
-                  <div className="absolute top-full left-0 mt-2 w-80 p-2 rounded-2xl zen-surface border border-base-300 shadow-xl flex flex-col gap-1 z-50 animate-fadeIn">
+                  <div className="absolute top-full left-0 mt-2 w-80 p-2 rounded-2xl liquid-glass-solid flex flex-col gap-1 z-50 animate-pop-in">
                     {gw.items.map((item) => {
                       const ItemIcon = item.icon;
                       return (
@@ -371,7 +371,7 @@ export default function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="เมนูบนมือถือ"
-          className="lg:hidden mt-2 p-4 sm:p-5 rounded-2xl zen-surface border border-base-300 shadow-2xl flex flex-col gap-4 animate-fadeIn max-h-[85vh] overflow-y-auto"
+          className="lg:hidden mt-2 p-4 sm:p-5 rounded-2xl liquid-glass-solid flex flex-col gap-4 animate-pop-in max-h-[85vh] overflow-y-auto"
         >
           {/* Quick Toolbar on Mobile */}
           <div className="flex sm:hidden items-center justify-between pb-3 border-b border-base-300/60">
