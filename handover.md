@@ -1034,6 +1034,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - `/admin/dashboard` (`1536x900`): `65.94px` clean clearance between Sidebar brand text (`right=181.06`) and `<` collapse button (`left=247`), crisp KPI contrast (`#B45D00`) over Liquid Glass.
 - **Build & Unit Tests**: 15/15 passed (`npm test -- --run`), `vite build` completed cleanly in 2.65s.
 
+## 41. Clean Hero Stage (No Orange Bar / No Stat Stack) & 88 KB Mock Data Bundle Cleanup (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Changes Applied**:
+  1. **Removed Top Orange Announcement Bar (`App.jsx`, `siteCustomizerDefaults.js`)**: Unmounted `<AnnouncementBar />` from `AppShell` and set default `announcement.enabled: false` so the floating Apple Liquid Glass Navbar opens cleanly at the top of the viewport.
+  2. **Removed Hero Stat Stack (`HomePage.jsx`)**: Removed `<HeroStatTiles />` (`10+ ปี`, `100+ ครอบครัว`, `6 มิติ`, `฿0`) to simplify Hero density and eliminate invented placeholder metrics above the Interactive Focus Console.
+  3. **Slimmed `src/constants/mockData.js` (~1,098 → 107 lines)**: Replaced bulk mocked catalogs/articles/leads with 1-item minimal render skeletons (`INITIAL_PRODUCTS`, `INITIAL_POSTS`, `INITIAL_INSURANCE_PLANS`), cleared `INITIAL_LEADS = []` so only real database leads appear, and retained `MOCK_USERS` presets needed by demo `RoleSwitcher`.
+- **Measured Verification**:
+  - Client JS bundle reduced from `960.77 kB` (`235.27 kB` gzip) down to `872.40 kB` (`215.87 kB` gzip) — **`-88.37 kB` saved**.
+  - Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.63s.
+
+
 
 
 

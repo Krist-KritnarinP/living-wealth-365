@@ -12,7 +12,6 @@ import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import RoleSwitcher from './components/common/RoleSwitcher';
 import ProtectedRoute from './components/common/ProtectedRoute';
-import AnnouncementBar from './components/common/AnnouncementBar';
 import VisualEditBar from './components/common/VisualEditBar';
 import VisualEditModal from './components/common/VisualEditModal';
 import AmbientBokeh from './components/common/AmbientBokeh';
@@ -70,8 +69,7 @@ function AppShell() {
       {/* Unified Apple Liquid Glass Ambient Bokeh across Public, Customer Account & Admin */}
       <AmbientBokeh />
 
-      {/* Show marketing announcement bar and navbar only on public pages */}
-      {!isDashboard && <AnnouncementBar />}
+      {/* Show marketing navbar only on public pages */}
       {!isDashboard && <Navbar />}
 
       {/* Main Viewport Content */}

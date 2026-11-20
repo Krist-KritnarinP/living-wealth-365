@@ -21,7 +21,6 @@ import ProductCard from '../../components/mutelu/ProductCard';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 import EditableText from '../../components/common/EditableText';
 import HandDrawnUnderline from '../../components/common/HandDrawnUnderline';
-import HeroStatTiles from '../../components/common/HeroStatTiles';
 import HeroInteractiveFocus from '../../components/common/HeroInteractiveFocus';
 import CopyToLineSection from '../../components/common/CopyToLineSection';
 import RevealOnScroll from '../../components/common/RevealOnScroll';
@@ -141,11 +140,6 @@ export default function HomePage() {
               />
             </div>
           </div>
-        </div>
-
-        {/* 📊 Full-Width Liquid Glass Spec Strip (DJI Style) */}
-        <div className="w-full">
-          <HeroStatTiles />
         </div>
 
         {/* 🎛️ Panoramic Liquid Glass Interactive Focus Console */}

@@ -1,8 +1,8 @@
 // Default Curated Content for Living Wealth 365
 export const DEFAULT_SITE_CONTENT = {
-  // 1. Top Announcement Bar
+  // 1. Top Announcement Bar (Disabled by default for clean floating Liquid Glass header)
   announcement: {
-    enabled: true,
+    enabled: false,
     badge: 'NEW 2026',
     text: '✨ สัมผัสสมดุลชีวิต 6 มิติ (Life Map) และพลังงานธรรมชาติ พร้อมปรึกษาฟรีกับ คุณท็อป & คุณจอย',
     link: '#lifemap',
