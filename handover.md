@@ -917,6 +917,19 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - `curl -sI https://livingwealth365.com`: Returns `HTTP/2 308 Permanent Redirect` directly to `https://www.livingwealth365.com/`.
   - DNS resolution verified across global resolvers (`76.76.21.21` & `cname.vercel-dns.com`).
 
+## 33. Real Registration Pipeline Wired to Supabase Database (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Root Cause Analysis**: In `RegisterPage.jsx`, the form submission was previously calling the demo helper `loginAsCustomer` (which only created a mock client session in browser state) instead of invoking the real `register` service (`authApi.register -> POST /api/auth/register`). Consequently, registrations were not persisting to Supabase PostgreSQL.
+- **Implementation**:
+  - Updated `RegisterPage.jsx` to consume `register` from `AuthContext`.
+  - Added async submission flow with `isSubmitting` state, loading spinner, and error handling for HTTP 409 (duplicate username/email).
+  - New user registrations now execute bcrypt password hashing on the backend and persist directly into Supabase's `users` table via Prisma ORM.
+- **Verification**:
+  - Tested `POST /api/auth/register` over live backend: returns HTTP 400 validation error on malformed input with CORS origin allowed.
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.14s.
+
+
 
 
 

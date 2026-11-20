@@ -28,7 +28,7 @@ import {
 } from '../../utils/validation';
 
 export default function RegisterPage() {
-  const { loginAsCustomer } = useAuth();
+  const { register } = useAuth();
   const { t } = useLanguage();
   const { showToast } = useToast();
   const navigate = useNavigate();
@@ -46,6 +46,7 @@ export default function RegisterPage() {
   });
 
   const [fieldErrors, setFieldErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Real-time evaluation ของความแข็งแกร่งของรหัสผ่าน
   const passwordStrength = useMemo(() => {
@@ -65,8 +66,9 @@ export default function RegisterPage() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
 
     // 1. ตรวจสอบข้อมูลทั้งหมดด้วยระบบ Validation
     const errors = validateRegistration(formData);
@@ -83,20 +85,32 @@ export default function RegisterPage() {
       return;
     }
 
-    // 3. ทำการสมัครและเข้าสู่ระบบใน Mock Session
-    loginAsCustomer({
-      username: formData.username.trim().toLowerCase(),
-      name: formData.name.trim(),
-      email: formData.email.trim().toLowerCase(),
-      phone: normalizePhone(formData.phone),
-      birthDate: formData.birthDate || null,
-    });
+    // 3. ทำการสมัครและบันทึกผู้ใช้ลงฐานข้อมูลจริง (Supabase PostgreSQL)
+    setIsSubmitting(true);
+    try {
+      await register({
+        username: formData.username.trim().toLowerCase(),
+        name: formData.name.trim(),
+        email: formData.email.trim().toLowerCase(),
+        phone: normalizePhone(formData.phone),
+        birthDate: formData.birthDate || null,
+        password: formData.password,
+      });
 
-    showToast(
-      `ยินดีต้อนรับคุณ ${formData.name.trim()} (@${formData.username.trim()}) สมัครสมาชิกสำเร็จ!`,
-      'success'
-    );
-    navigate(redirectTarget);
+      showToast(
+        `ยินดีต้อนรับคุณ ${formData.name.trim()} (@${formData.username.trim()}) สมัครสมาชิกสำเร็จ!`,
+        'success'
+      );
+      navigate(redirectTarget);
+    } catch (err) {
+      const errMsg =
+        err?.response?.data?.error ||
+        err?.message ||
+        'เกิดข้อผิดพลาดในการสมัครสมาชิก กรุณาลองใหม่อีกครั้ง';
+      showToast(errMsg, 'error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -435,10 +449,17 @@ export default function RegisterPage() {
           {/* Submit Button */}
           <button
             type="submit"
+            disabled={isSubmitting}
             className="btn btn-primary w-full rounded-xl font-bold gap-2 mt-4 shadow-lg text-base min-h-[48px]"
           >
-            <span>สมัครสมาชิกและเริ่มใช้งาน</span>
-            <ArrowRight className="w-4 h-4" />
+            {isSubmitting ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : (
+              <>
+                <span>สมัครสมาชิกและเริ่มใช้งาน</span>
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
           </button>
         </form>
 
