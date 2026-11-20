@@ -160,36 +160,36 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full px-3 sm:px-6 lg:px-12 xl:px-16 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
+    <header className="w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-10 xl:px-14 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
       <nav
         aria-label="เมนูหลัก"
-        className="zen-surface w-full px-3 sm:px-6 py-2.5 sm:py-3 rounded-2xl shadow-xs flex items-center justify-between border border-base-300/60 transition-all duration-300"
+        className="zen-surface w-full px-3 sm:px-5 py-2.5 rounded-full flex items-center justify-between gap-2 transition-[box-shadow,background-color] duration-300"
       >
         {/* Brand Logo & Identity */}
         <Link
           to={ROUTES.HOME}
-          className="flex items-center gap-2.5 sm:gap-3 group min-w-0 shrink"
+          className="flex items-center gap-2.5 group shrink-0"
           aria-label="Living Wealth 365 หน้าแรก"
         >
           <BrandLogo size="md" className="group-hover:scale-105 transition-transform shrink-0" />
-          <div className="flex flex-col min-w-0 notranslate" translate="no">
-            <span className="text-base sm:text-xl lg:text-2xl font-black tracking-tight text-primary leading-tight truncate notranslate" translate="no">
+          <div className="flex flex-col shrink-0 notranslate" translate="no">
+            <span className="text-base sm:text-lg xl:text-xl font-black tracking-tight text-primary leading-tight whitespace-nowrap notranslate" translate="no">
               Living Wealth <span className="text-secondary notranslate" translate="no">365</span>
             </span>
-            <span className="hidden sm:block text-[10px] sm:text-xs font-semibold tracking-wide zen-muted truncate notranslate" translate="no">
+            <span className="hidden 2xl:block text-[11px] font-semibold tracking-wide zen-muted whitespace-nowrap notranslate" translate="no">
               {content?.brand?.slogan || 'A LIFE WELL PLANNED. A LIFE WELL LIVED.'}
             </span>
           </div>
         </Link>
 
         {/* Desktop Gateway Navigation Links */}
-        <div className="hidden lg:flex items-center gap-1 xl:gap-2">
+        <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 shrink-0">
           <Link
             to={ROUTES.HOME}
-            className={`px-3 py-2 rounded-xl text-sm font-semibold transition-all ${
+            className={`px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-colors ${
               isActive(ROUTES.HOME) && location.pathname === '/'
-                ? 'bg-primary/10 text-primary font-bold shadow-xs'
-                : 'text-base-content/80 hover:bg-base-200/60 hover:text-primary'
+                ? 'bg-primary/12 text-primary font-bold'
+                : 'text-base-content/85 hover:bg-base-200/60 hover:text-primary'
             }`}
           >
             {t('home')}
@@ -200,20 +200,20 @@ export default function Navbar() {
             const isOpen = openDropdown === gw.id;
 
             return (
-              <div key={gw.id} className="relative">
+              <div key={gw.id} className="relative shrink-0">
                 <button
                   type="button"
                   onClick={() => setOpenDropdown(isOpen ? null : gw.id)}
-                  className={`px-3 py-2 rounded-xl text-sm font-semibold flex items-center gap-1.5 transition-all ${
+                  className={`px-3 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
                     hasActiveChild || isOpen
-                      ? 'bg-primary/10 text-primary font-bold shadow-xs'
-                      : 'text-base-content/80 hover:bg-base-200/60 hover:text-primary'
+                      ? 'bg-primary/12 text-primary font-bold'
+                      : 'text-base-content/85 hover:bg-base-200/60 hover:text-primary'
                   }`}
                   aria-expanded={isOpen}
                 >
-                  <gw.icon className="w-4 h-4 opacity-75" />
+                  <gw.icon className="w-4 h-4 opacity-75 shrink-0" />
                   <span>{gw.title}</span>
-                  <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
                 </button>
 
                 {/* Dropdown Menu — High-contrast solid liquid glass */}

@@ -958,6 +958,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
   - Production Build: `vite build` completed cleanly in 1.28s.
 
+## 36. Authentic Apple Liquid Glass Anatomy (Caustic Edge + Cursor Specular Sheen) & Navbar Single-Line Fix (November 20, 2026)
+- **Status**: **Completed & Verified**
+- **Issues Resolved**:
+  - Changing root `html { font-size }` above `100%` scaled all Tailwind `rem` widths/paddings, causing `Navbar` links (`หน้าหลัก`, `Living (วิถีชีวิต)`, etc.) to wrap onto 2 lines and clip the right edge.
+  - Liquid Glass cards needed authentic physical glass anatomy (low-opacity chromatic body, caustic edge inset shadow, spring overshoot curve, and interactive cursor-tracking specular sheen).
+- **Improvements Delivered**:
+  1. **Navbar Single-Line & Floating Pill (`Navbar.jsx`)**: Restored `html { font-size: 100%; }`, added `whitespace-nowrap shrink-0` on all desktop nav items, hid long slogan below `2xl:`, and shaped the floating Navbar into an Apple pill (`rounded-full`).
+  2. **Authentic Apple Liquid Glass (`index.css`, `HeroInteractiveFocus.jsx`, `HomePage.jsx`)**:
+     - Lowered glass body opacity (`0.48` light / `0.52` dark) with `backdrop-filter: blur(20px) saturate(200%)` and dual caustic inset shadows (`--zen-specular`, `--zen-caustic`).
+     - Added `.liquid-glass-interactive` with real-time cursor-tracking radial specular sheen (`--mouse-x`, `--mouse-y`) and Apple spring overshoot physics (`cubic-bezier(0.175, 0.885, 0.32, 1.275)`).
+- **Verification**:
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 2.16s.
+
+
 
 
 

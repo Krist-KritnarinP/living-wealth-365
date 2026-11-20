@@ -46,6 +46,14 @@ export default function HomePage() {
     });
   };
 
+  const handleGlassMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   return (
     <div className="w-full max-w-[1440px] mx-auto space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-8">
       {/* 🌟 1. CINEMATIC HERO STAGE: DJI Showcase × Apple Liquid Glass */}
@@ -176,7 +184,10 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             {/* Gateway 01: Featured Anchor Column (Left 5 cols) */}
-            <div className="lg:col-span-5 zen-surface hover-card-elevate rounded-3xl p-6 sm:p-8 border border-base-300/60 flex flex-col justify-between group min-w-0">
+            <div
+              onMouseMove={handleGlassMove}
+              className="lg:col-span-5 zen-surface liquid-glass-interactive hover-card-elevate rounded-3xl p-6 sm:p-8 flex flex-col justify-between group min-w-0"
+            >
               <div className="space-y-5">
                 <div className="flex items-center justify-between gap-3">
                   <div className="w-11 h-11 rounded-2xl bg-emerald-500/12 text-emerald-600 flex items-center justify-center hover-icon-spin shrink-0">
@@ -258,7 +269,10 @@ export default function HomePage() {
             {/* Right Column: Stacked Editorial Cards 02 & 03 (7 cols) */}
             <div className="lg:col-span-7 flex flex-col gap-6 min-w-0">
               {/* Gateway 02: Learning */}
-              <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-7 border border-base-300/60 flex-1 flex flex-col justify-between group min-w-0">
+              <div
+                onMouseMove={handleGlassMove}
+                className="zen-surface liquid-glass-interactive hover-card-elevate rounded-3xl p-6 sm:p-7 flex-1 flex flex-col justify-between group min-w-0"
+              >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
@@ -340,7 +354,10 @@ export default function HomePage() {
               </div>
 
               {/* Gateway 03: Connecting */}
-              <div className="zen-surface hover-card-elevate rounded-3xl p-6 sm:p-7 border border-secondary/35 flex-1 flex flex-col justify-between group min-w-0">
+              <div
+                onMouseMove={handleGlassMove}
+                className="zen-surface liquid-glass-interactive hover-card-elevate rounded-3xl p-6 sm:p-7 flex-1 flex flex-col justify-between group min-w-0"
+              >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">

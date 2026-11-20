@@ -136,8 +136,19 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleGlassMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    e.currentTarget.style.setProperty('--mouse-x', `${x}%`);
+    e.currentTarget.style.setProperty('--mouse-y', `${y}%`);
+  };
+
   return (
-    <div className="w-full zen-surface rounded-3xl p-5 sm:p-8 lg:p-10 space-y-6 min-w-0">
+    <div
+      onMouseMove={handleGlassMove}
+      className="w-full zen-surface liquid-glass-interactive rounded-3xl p-5 sm:p-8 lg:p-10 space-y-6 min-w-0"
+    >
       {/* Header */}
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300/50 pb-4">
         <div className="flex items-center gap-2.5 min-w-0">
