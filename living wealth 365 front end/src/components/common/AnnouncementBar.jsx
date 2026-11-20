@@ -14,8 +14,8 @@ export default function AnnouncementBar() {
   }
 
   return (
-    <div className="w-full bg-linear-to-r from-amber-600 via-secondary to-amber-700 text-white text-xs sm:text-sm font-medium py-2 px-4 shadow-xs relative z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-3">
+    <div className="w-full bg-linear-to-r from-amber-600 via-secondary to-amber-700 text-white text-xs sm:text-sm font-medium py-2 px-4 sm:px-8 lg:px-12 shadow-xs relative z-50">
+      <div className="w-full flex items-center justify-between gap-3">
         {/* Empty left spacer for perfect centering on desktop */}
         <div className="hidden sm:block w-6 shrink-0" />
 

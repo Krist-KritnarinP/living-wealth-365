@@ -100,7 +100,7 @@ export default function InnerLifePage() {
 
       {/* 2. MINDFULNESS PAUSE & BREATHING TIMER */}
       <section id="mindfulness" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
-        <div className="p-6 sm:p-10 lg:p-12 rounded-3xl zen-surface border border-base-300 shadow-sm max-w-4xl mx-auto text-center space-y-8 relative overflow-hidden">
+        <div className="w-full p-6 sm:p-10 lg:p-12 rounded-3xl zen-surface text-center space-y-8 relative overflow-hidden">
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
               <Sparkles className="w-3.5 h-3.5" />

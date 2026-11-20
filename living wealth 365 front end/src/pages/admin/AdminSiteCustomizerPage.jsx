@@ -1090,7 +1090,7 @@ export default function AdminSiteCustomizerPage() {
         {/* Reset Confirmation Modal */}
         {showResetConfirm && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
-            <div className="zen-surface rounded-3xl border border-error/40 shadow-2xl p-6 sm:p-8 max-w-md w-full space-y-4">
+            <div className="liquid-glass-solid rounded-3xl border border-error/40 shadow-2xl p-6 sm:p-8 max-w-md w-full space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-error/15 text-error flex items-center justify-center">
                 <RotateCcw className="w-6 h-6" />
               </div>

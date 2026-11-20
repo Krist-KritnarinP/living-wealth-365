@@ -67,7 +67,8 @@ function AppShell() {
 
   return (
     <div className="min-h-screen w-full flex flex-col bg-base-100 text-base-content antialiased selection:bg-secondary/30 selection:text-secondary relative">
-      {!isDashboard && <AmbientBokeh />}
+      {/* Unified Apple Liquid Glass Ambient Bokeh across Public, Customer Account & Admin */}
+      <AmbientBokeh />
 
       {/* Show marketing announcement bar and navbar only on public pages */}
       {!isDashboard && <AnnouncementBar />}

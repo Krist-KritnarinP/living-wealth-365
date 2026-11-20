@@ -429,7 +429,7 @@ export default function AdminInsurancePage() {
         {/* Add / Edit Plan Modal */}
         {modalOpen && (
           <div role="dialog" aria-modal="true" className="modal modal-open z-50 animate-fadeIn">
-            <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-2xl p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto">
+            <div className="modal-box rounded-3xl liquid-glass-solid shadow-2xl max-w-2xl p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto">
               <h3 className="text-xl font-black text-primary border-b border-base-300 pb-3">
                 {editingPlan ? 'แก้ไขแผนประกันภัย' : 'เพิ่มแผนประกันภัยใหม่'}
               </h3>

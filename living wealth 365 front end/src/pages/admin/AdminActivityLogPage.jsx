@@ -284,7 +284,7 @@ export default function AdminActivityLogPage() {
         {/* Clear Confirm Modal */}
         {confirmClearOpen && (
           <div className="modal modal-open z-50">
-            <div className="modal-box rounded-3xl zen-surface border border-base-300 p-6 space-y-4 max-w-sm">
+            <div className="modal-box rounded-3xl liquid-glass-solid p-6 space-y-4 max-w-sm">
               <div className="w-12 h-12 rounded-2xl bg-error/15 text-error flex items-center justify-center mx-auto">
                 <AlertTriangle className="w-6 h-6" />
               </div>

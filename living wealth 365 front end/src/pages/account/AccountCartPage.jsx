@@ -82,7 +82,7 @@ export default function AccountCartPage() {
 
   return (
     <DashboardLayout type="customer">
-      <div className="space-y-8 w-full max-w-6xl mx-auto">
+      <div className="space-y-8 w-full">
         {/* Header */}
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-base-300/60 pb-4">
           <div>

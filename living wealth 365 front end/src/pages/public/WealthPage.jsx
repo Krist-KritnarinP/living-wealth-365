@@ -298,7 +298,7 @@ export default function WealthPage() {
       {/* 4. PLAN SELECTION MODAL */}
       {selectedPlanForModal && (
         <div className="modal modal-open z-50">
-          <div className="modal-box rounded-3xl zen-surface border border-base-300 max-w-lg p-6 sm:p-8">
+          <div className="modal-box rounded-3xl liquid-glass-solid max-w-lg p-6 sm:p-8">
             <h3 className="font-black text-xl text-primary">
               สนใจปรึกษาแผน {selectedPlanForModal.name}
             </h3>

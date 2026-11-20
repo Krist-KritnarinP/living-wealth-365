@@ -203,7 +203,7 @@ export default function AboutPage() {
 
       {/* 4. LET'S TALK CONSULTATION FORM */}
       <section id="talk" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
-        <div className="p-6 sm:p-10 lg:p-14 rounded-3xl zen-surface border border-secondary/40 shadow-lg max-w-3xl mx-auto space-y-6">
+        <div className="w-full p-6 sm:p-10 lg:p-14 rounded-3xl zen-surface space-y-6">
           <div className="text-center space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 text-secondary text-xs font-bold tracking-wide">
               <Heart className="w-3.5 h-3.5" />

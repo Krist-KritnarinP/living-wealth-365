@@ -1005,6 +1005,22 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - `320x568`: `0` overflows (`21..299` within `10..310`), `0` overlaps, `horizontalScrollDelta = 0`.
 - **Build & Unit Tests**: 15/15 passed (`npm test -- --run`), `vite build` clean in 1.43s.
 
+## 39. Full-Screen Edge-to-Edge Rollout, Global Liquid Glass Across Customer/Admin Portals & Zero Header Overlap (November 20, 2026)
+- **Status**: **Completed & Verified in Headless Chromium**
+- **Issues Resolved**:
+  1. `"หน้าหลัก"` collided with `"365"` in `Navbar` when logged in (`คุณสมชาย ใจดี`) because the center nav group used `min-w-0` allowing flex shrinkage past its children's bounds.
+  2. `<AmbientBokeh />` was gated off on `/account` and `/admin` routes (`!isDashboard`), and `DashboardLayout` used opaque `bg-base-100`, making Customer and Admin dashboards appear flat/rigid compared to the public site.
+  3. Several `max-w-*` caps (`max-w-[1440px]`, `max-w-7xl`, `max-w-6xl`, `max-w-5xl`, `max-w-4xl`) left unused horizontal margins on wide desktop monitors, violating the 100% edge-to-edge mandate.
+  4. Sidebar header chevron overlapped `"365"` in expanded `DashboardLayout` (`w-72`).
+- **Fixes Applied**:
+  - **100% True Edge-to-Edge (`Navbar`, `AnnouncementBar`, `HomePage`, `AccountCartPage`, `AccountHistoryPage`, `AccountWishlistPage`, `BlogPage`, `JournalPage`, `LifeInsurancePage`, `NonLifeInsurancePage`, `MuteluPage`, `InnerLifePage`, `AboutPage`)**: Removed restrictive page-level `max-w-*` wrappers so every route spans full viewport width.
+  - **Global Ambient Bokeh & Liquid Glass Across `/account` and `/admin` (`App.jsx`, `DashboardLayout.jsx`)**: Enabled `<AmbientBokeh />` globally on all routes, set `DashboardLayout` root to `bg-transparent`, used `BrandLogo collapsed={true} size="sm"` in the expanded sidebar header to clear the collapse chevron, and upgraded all modal dialogs (`WealthPage`, `AdminDashboardPage`, `AdminBlogPage`, `AdminInsurancePage`, `AdminProductsPage`, `AdminActivityLogPage`, `AdminSiteCustomizerPage`) to `.liquid-glass-solid`.
+  - **Navbar Logged-In Verification at `1536x900` (Customer `คุณสมชาย ใจดี`)**: `header nav` spans full `1440px` (`x=48..1488`), `32.53px` clean gap between `Living Wealth 365` (`right=345.32`) and `หน้าหลัก` (`left=377.85`), `0` overlaps, `0` overflows; verified `/account` and `/admin/dashboard` render Ambient Bokeh + Liquid Glass seamlessly.
+- **Verification**:
+  - Frontend Unit Tests: 15/15 passed (`npm test -- --run`).
+  - Production Build: `vite build` completed cleanly in 1.93s.
+
+
 
 
 

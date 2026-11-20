@@ -163,15 +163,15 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="w-full max-w-[1440px] mx-auto px-2.5 sm:px-6 lg:px-10 xl:px-12 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
+    <header className="w-full px-3 sm:px-6 lg:px-8 xl:px-12 py-2.5 sm:py-3 sticky top-0 z-40" ref={navRef}>
       <nav
         aria-label="เมนูหลัก"
-        className="zen-surface w-full px-2.5 sm:px-5 py-2 rounded-full flex items-center justify-between gap-1.5 sm:gap-3 transition-[box-shadow,background-color] duration-300"
+        className="zen-surface w-full px-3 sm:px-5 lg:px-6 py-2 rounded-full flex items-center justify-between gap-3 sm:gap-4 transition-[box-shadow,background-color] duration-300"
       >
         {/* Brand Logo & Identity */}
         <Link
           to={ROUTES.HOME}
-          className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0 min-w-0"
+          className="flex items-center gap-1.5 sm:gap-2.5 group shrink-0"
           aria-label="Living Wealth 365 หน้าแรก"
         >
           <BrandLogo collapsed={true} size="sm" className="sm:hidden shrink-0" />
@@ -181,11 +181,11 @@ export default function Navbar() {
           </span>
         </Link>
 
-        {/* Desktop Gateway Navigation Links (xl: 1280px+) */}
-        <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-1.5 min-w-0">
+        {/* Desktop Gateway Navigation Links (xl: 1280px+) — shrink-0 prevents center links from colliding into Logo */}
+        <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 shrink-0">
           <Link
             to={ROUTES.HOME}
-            className={`px-3 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
+            className={`px-3.5 py-2 rounded-full text-sm font-semibold whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
               isActive(ROUTES.HOME) && location.pathname === '/'
                 ? 'bg-primary/14 text-primary font-bold shadow-xs'
                 : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
@@ -203,7 +203,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={() => setOpenDropdown(isOpen ? null : gw.id)}
-                  className={`px-3 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 cursor-pointer ${
+                  className={`px-3.5 py-2 rounded-full text-sm font-semibold flex items-center gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 cursor-pointer ${
                     hasActiveChild || isOpen
                       ? 'bg-primary/14 text-primary font-bold shadow-xs'
                       : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
@@ -214,7 +214,7 @@ export default function Navbar() {
                   <span>
                     {gw.title}
                     {language === 'th' && (
-                      <span className="hidden min-[1420px]:inline font-medium opacity-80 ml-1">
+                      <span className="hidden 2xl:inline font-medium opacity-80 ml-1">
                         {gw.thaiSub}
                       </span>
                     )}

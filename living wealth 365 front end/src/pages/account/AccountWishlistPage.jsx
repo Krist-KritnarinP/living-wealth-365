@@ -50,7 +50,7 @@ export default function AccountWishlistPage() {
 
         {/* Wishlist Items Grid */}
         {wishlistedProducts.length === 0 ? (
-          <div className="zen-surface rounded-3xl p-12 text-center border border-base-300 max-w-2xl mx-auto space-y-4">
+          <div className="w-full zen-surface rounded-3xl p-12 text-center space-y-4">
             <Heart className="w-12 h-12 text-base-content/40 mx-auto" />
             <h3 className="text-lg font-bold text-primary">
               ยังไม่มีรายการหินมงคลที่บันทึกไว้

@@ -141,10 +141,10 @@ export default function DashboardLayout({ children, type = 'customer' }) {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="min-h-screen w-full flex bg-base-100 text-base-content antialiased">
+    <div className="min-h-screen w-full flex bg-transparent text-base-content antialiased relative z-10">
       {/* 1. DESKTOP COLLAPSIBLE SIDEBAR */}
       <aside
-        className={`hidden lg:flex flex-col border-r border-base-300/60 zen-surface sticky top-0 h-screen transition-all duration-300 z-30 shrink-0 ${
+        className={`hidden lg:flex flex-col border-r border-base-300/60 zen-surface rounded-none sticky top-0 h-screen transition-[width] duration-300 z-30 shrink-0 ${
           collapsed ? 'w-20' : 'w-72'
         }`}
       >
@@ -169,11 +169,11 @@ export default function DashboardLayout({ children, type = 'customer' }) {
           </div>
         ) : (
           /* EXPANDED HEADER: Spacious, no clipping, graceful breathing room */
-          <div className="px-4 py-3.5 flex items-center justify-between border-b border-base-300/60 min-h-[76px]">
-            <Link to={ROUTES.HOME} className="flex items-center gap-3 min-w-0 flex-1 group">
-              <BrandLogo collapsed={false} size="md" className="shrink-0 group-hover:scale-105 transition-transform" />
+          <div className="px-4 py-3.5 flex items-center justify-between gap-2 border-b border-base-300/60 min-h-[76px]">
+            <Link to={ROUTES.HOME} className="flex items-center gap-2.5 min-w-0 flex-1 group">
+              <BrandLogo collapsed={true} size="sm" className="shrink-0 group-hover:scale-105 transition-transform" />
               <div className="flex flex-col leading-tight min-w-0">
-                <span className="font-black text-primary text-base whitespace-nowrap tracking-tight">
+                <span className="font-black text-primary text-sm whitespace-nowrap tracking-tight">
                   Living Wealth <span className="text-secondary">365</span>
                 </span>
                 <span className="text-[10px] font-bold text-secondary uppercase tracking-wider">
@@ -282,7 +282,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
             onClick={() => setMobileDrawerOpen(false)}
           ></div>
 
-          <aside className="relative w-72 max-w-[80vw] h-full zen-surface border-r border-base-300 p-4 flex flex-col justify-between shadow-2xl z-10 animate-fadeIn">
+          <aside className="relative w-72 max-w-[80vw] h-full liquid-glass-solid border-r border-base-300 p-4 flex flex-col justify-between shadow-2xl z-10 animate-pop-in">
             <div>
               <div className="flex items-center justify-between pb-4 border-b border-base-300">
                 <div className="flex items-center gap-2.5">

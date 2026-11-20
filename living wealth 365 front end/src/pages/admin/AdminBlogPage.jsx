@@ -314,7 +314,7 @@ export default function AdminBlogPage() {
         {/* New Post Modal */}
         {modalOpen && (
           <div className="modal modal-open z-50">
-            <div className="modal-box max-w-2xl rounded-3xl zen-surface border border-base-300">
+            <div className="modal-box max-w-2xl rounded-3xl liquid-glass-solid">
               <h3 className="font-bold text-lg text-primary">
                 {editingPost ? 'แก้ไขบทความ / วารสาร' : 'เขียนบทความ / วารสารใหม่'}
               </h3>

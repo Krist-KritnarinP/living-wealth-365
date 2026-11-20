@@ -39,7 +39,7 @@ export default function LifeInsurancePage() {
     <div className="w-full space-y-16 lg:space-y-24 py-8">
       {/* Header Banner */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="w-full rounded-3xl zen-surface border border-base-300 p-8 sm:p-12 lg:p-16 text-center max-w-4xl mx-auto space-y-4">
+        <div className="w-full rounded-3xl zen-surface p-8 sm:p-12 lg:p-16 text-center space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-bold">
             <ShieldCheck className="w-4 h-4 text-secondary" />
             <span>AIA LIFE, HEALTH & WEALTH ADVISORY</span>

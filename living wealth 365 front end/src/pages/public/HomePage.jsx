@@ -55,7 +55,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-8">
+    <div className="w-full space-y-16 sm:space-y-20 lg:space-y-24 py-4 sm:py-8">
       {/* 🌟 1. CINEMATIC HERO STAGE: DJI Showcase × Apple Liquid Glass */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 pt-4 sm:pt-8 space-y-10 sm:space-y-12">
         {/* Centered Hero Statement */}
@@ -144,12 +144,12 @@ export default function HomePage() {
         </div>
 
         {/* 📊 Full-Width Liquid Glass Spec Strip (DJI Style) */}
-        <div className="max-w-5xl mx-auto">
+        <div className="w-full">
           <HeroStatTiles />
         </div>
 
         {/* 🎛️ Panoramic Liquid Glass Interactive Focus Console */}
-        <div className="max-w-6xl mx-auto">
+        <div className="w-full">
           <HeroInteractiveFocus onSelectFocus={handleSelectFocus} />
         </div>
       </section>

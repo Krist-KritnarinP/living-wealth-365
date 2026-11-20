@@ -391,7 +391,7 @@ export default function AdminDashboardPage() {
         {/* 📞 1. Custom Contact & Call Modal */}
         {selectedLeadForCall && (
           <div className="modal modal-open z-50">
-            <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 space-y-5 animate-in fade-in zoom-in-95 duration-150">
+            <div className="modal-box rounded-3xl liquid-glass-solid shadow-2xl max-w-lg p-6 space-y-5 animate-pop-in">
               {/* Header */}
               <div className="flex items-start justify-between border-b border-base-300/60 pb-4">
                 <div className="flex items-center gap-3">
@@ -554,7 +554,7 @@ export default function AdminDashboardPage() {
         {/* 📝 2. Note Edit Modal */}
         {selectedLeadForNote && (
           <div className="modal modal-open z-50">
-            <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-lg p-6 space-y-4">
+            <div className="modal-box rounded-3xl liquid-glass-solid shadow-2xl max-w-lg p-6 space-y-4">
               <div className="flex items-start justify-between border-b border-base-300/50 pb-3">
                 <div>
                   <h3 className="font-black text-lg text-primary">
