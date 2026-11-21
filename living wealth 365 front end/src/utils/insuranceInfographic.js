@@ -17,6 +17,12 @@ export const CATEGORY_GROUPS = [
     badge: 'CRITICAL ILLNESS',
   },
   {
+    id: 'ACCIDENT',
+    title: 'ประกันอุบัติเหตุส่วนบุคคล (AIA PA & Accident Protection)',
+    subtitle: 'คุ้มครองอุบัติเหตุ 24 ชม. ทั่วโลก ค่ารักษาไม่ต้องสำรองจ่าย พร้อมชดเชยรายได้เมื่อบาดเจ็บ',
+    badge: 'ACCIDENT & PA',
+  },
+  {
     id: 'WHOLE_LIFE',
     title: 'ประกันชีวิตตลอดชีพ & ส่งต่อมรดก (Whole Life & Legacy)',
     subtitle: 'สร้างหลักประกันความมั่นคงให้ครอบครัวและส่งมอบความมั่งคั่งสู่ทายาทอย่างชัดเจน',
@@ -247,6 +253,48 @@ const PLAN_INFOGRAPHICS = {
     scores: { medicalShield: 65, criticalIllness: 60, legacyProtection: 95, wealthTaxReturn: 98 },
     personaTags: ['นักลงทุนสินทรัพย์สูง (HNW)', 'กระจายความเสี่ยงสกุลเงิน/ตลาดโลก', 'วางแผนส่งต่อธุรกิจ & มรดก', 'ต้องการเอกสิทธิ์ AIA Prestige'],
   },
+  'aia-pa-personal-accident': {
+    planBadge: 'AIA PA • อุบัติเหตุ 24 ชม. ทั่วโลก',
+    taxDeductionMax: 'ตามเกณฑ์กรมสรรพากร (สัญญาเพิ่มเติม)',
+    entryAge: '15 วัน – 70 ปี (ต่ออายุได้ถึง 75 ปี)',
+    coverageDuration: 'คุ้มครองรายปี ต่ออายุได้ต่อเนื่อง',
+    keyMechanism: 'คุ้มครองอุบัติเหตุ 24 ชม. ค่ารักษาสูงสุด 100,000 บ./ครั้ง ไม่ต้องสำรองจ่าย',
+    kpis: [
+      { label: 'ทุนประกันอุบัติเหตุ', value: '500K – 10 ล้านบาท', hint: 'เลือกแผน PA 2,500 ถึง VIP 32K' },
+      { label: 'ค่ารักษาพยาบาล/ครั้ง', value: 'สูงสุด 100,000 บ.', hint: 'ไม่ต้องสำรองจ่ายด้วย AIA Care Card' },
+      { label: 'ความคุ้มครองพิเศษ', value: 'วันหยุด 2x & มอเตอร์ไซค์', hint: 'พร้อมบริการฉุกเฉิน AIA MediVac' },
+      { label: 'เงื่อนไขการสมัคร', value: 'ไม่ต้องตรวจสุขภาพ', hint: 'รองรับขั้นอาชีพ 1–2 สมัครง่าย' },
+    ],
+    flowSteps: [
+      { step: '01', title: 'เลือกแผนตามไลฟ์สไตล์และงบ', desc: 'ตั้งแต่ PA 2,500 (พื้นฐาน), PA 4,600 (รักษาแสน), PA 7,900 (ทุน 2.2M) จนถึง VIP 32K' },
+      { step: '02', title: 'รับความคุ้มครอง 24 ชม. ทั่วโลก', desc: 'ครอบคลุมทั้งอุบัติเหตุทั่วไป การเดินทาง และขับขี่/โดยสารรถจักรยานยนต์' },
+      { step: '03', title: 'เข้ารักษาไม่ต้องสำรองจ่าย', desc: 'ยื่นบัตรประชาชนคู่กับสิทธิ์ AIA Privilege Care Card ที่ รพ.คู่สัญญาได้ทันที' },
+      { step: '04', title: 'อุ่นใจด้วยบริการฉุกเฉิน', desc: 'มีบริการเคลื่อนย้ายผู้ป่วยฉุกเฉิน AIA MediVac และชดเชยรายวันตามเงื่อนไขแผน' },
+    ],
+    scores: { medicalShield: 86, criticalIllness: 30, legacyProtection: 72, wealthTaxReturn: 45 },
+    personaTags: ['คนวัยทำงาน & เดินทางบ่อย', 'ผู้ขับขี่รถยนต์/รถจักรยานยนต์', 'เสริมค่ารักษา OPD อุบัติเหตุ', 'เริ่มต้นง่ายเบี้ยประหยัด'],
+  },
+  'aia-accident-rider-ai-rcc': {
+    planBadge: 'AIA ACCIDENT RIDER • ชดเชยรายได้อุบัติเหตุ',
+    taxDeductionMax: 'ลดหย่อนหมวดอุบัติเหตุตามสิทธิ์',
+    entryAge: '1 เดือน – 65 ปี',
+    coverageDuration: 'คุ้มครองยาวตามสัญญาหลัก (ถึง 70–80 ปี)',
+    keyMechanism: 'แนบกรมธรรม์หลัก เสริมทุนอุบัติเหตุสูง + เงินชดเชยรายได้รายสัปดาห์',
+    kpis: [
+      { label: 'ทุนคุ้มครองอุบัติเหตุ', value: 'สูงสุด 10 ล้านบาท', hint: 'เสียชีวิต สูญเสียอวัยวะ ทุพพลภาพ' },
+      { label: 'ชดเชยรายได้รายสัปดาห์', value: 'คุ้มครองขณะพักฟื้น', hint: 'เมื่อบาดเจ็บทำงานไม่ได้ชั่วคราว' },
+      { label: 'ขยายความคุ้มครอง RCC', value: 'ฆาตกรรม & จลาจล', hint: 'รวมขับขี่/โดยสารรถจักรยานยนต์' },
+      { label: 'สิทธิ์ลดหย่อนภาษี', value: 'หักลดหย่อนได้', hint: 'ตามหลักเกณฑ์กรมสรรพากร' },
+    ],
+    flowSteps: [
+      { step: '01', title: 'แนบเสริมกับกรมธรรม์หลัก AIA', desc: 'เพิ่มความคุ้มครองอุบัติเหตุวงเงินสูงในอัตราเบี้ยที่คุ้มค่ากว่า' },
+      { step: '02', title: 'คุ้มครองทุพพลภาพและกระดูกแตกหัก', desc: 'ช่วยรับมือเหตุไม่คาดฝันที่กระทบความสามารถในการหารายได้ระยะยาว' },
+      { step: '03', title: 'รับเงินชดเชยรายได้ระหว่างพักฟื้น', desc: 'มีกระแสเงินสดรายสัปดาห์ช่วยพยุงค่าใช้จ่ายครอบครัวระหว่างหยุดงาน' },
+      { step: '04', title: 'คุ้มครองต่อเนื่องระยะยาว', desc: 'ดูแลควบคู่ไปกับสัญญาหลักและสัญญาเพิ่มเติมสุขภาพในเล่มเดียว' },
+    ],
+    scores: { medicalShield: 75, criticalIllness: 35, legacyProtection: 82, wealthTaxReturn: 65 },
+    personaTags: ['เสาหลักครอบครัว', 'ผู้มีกรมธรรม์หลัก AIA อยู่แล้ว', 'อาชีพอิสระ/เจ้าของกิจการ', 'ต้องการชดเชยรายได้ยามบาดเจ็บ'],
+  },
 };
 
 export function getPlanInfographic(plan) {
@@ -258,6 +306,7 @@ export function getPlanInfographic(plan) {
   // Fallback builder for custom plans added via Admin CMS
   const isHealth = plan.category === 'HEALTH';
   const isCI = plan.category === 'CRITICAL_ILLNESS';
+  const isAccident = plan.category === 'ACCIDENT' || plan.category === 'PA';
   const isRetirement = plan.category === 'RETIREMENT';
   const isUnitLinked = plan.category === 'INVESTMENT_LINKED';
 
@@ -290,10 +339,10 @@ export function getPlanInfographic(plan) {
       { step: '03', title: 'คุ้มครองต่อเนื่องและลดหย่อนภาษี', desc: 'รับความคุ้มครองตั้งแต่วันอนุมัติพร้อมสิทธิประโยชน์ทางภาษีประจำปี' },
     ],
     scores: {
-      medicalShield: isHealth ? 95 : isCI ? 70 : 45,
-      criticalIllness: isCI ? 95 : isHealth ? 75 : 40,
-      legacyProtection: isRetirement ? 75 : isUnitLinked ? 85 : 90,
-      wealthTaxReturn: isRetirement || isUnitLinked ? 95 : 70,
+      medicalShield: isHealth ? 95 : isAccident ? 84 : isCI ? 70 : 45,
+      criticalIllness: isCI ? 95 : isHealth ? 75 : isAccident ? 30 : 40,
+      legacyProtection: isRetirement ? 75 : isUnitLinked ? 85 : isAccident ? 72 : 90,
+      wealthTaxReturn: isRetirement || isUnitLinked ? 95 : isAccident ? 50 : 70,
     },
     personaTags: plan.recommendedFor
       ? plan.recommendedFor.split(',').map((s) => s.trim()).filter(Boolean)

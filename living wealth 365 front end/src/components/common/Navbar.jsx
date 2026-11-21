@@ -120,6 +120,13 @@ export default function Navbar() {
           icon: Coins,
         },
         {
+          label: language === 'th' ? 'คัดกรอง & ประมาณการเบี้ย AIA' : 'AIA Plan Finder & Estimator',
+          desc: language === 'th' ? 'แตะเลือกอายุ รายได้ และเป้าหมาย เพื่อดูเบี้ยประมาณการทันที' : 'Tap-only filter to match AIA plans & estimate premiums',
+          path: `${ROUTES.WEALTH}?tab=finder`,
+          icon: Sparkles,
+          badge: '15 วิ',
+        },
+        {
           label: language === 'th' ? 'วางแผนและคำนวณภาษี 2568' : 'Tax Planning & Calculator',
           desc: language === 'th' ? 'คำนวณภาษีเงินได้บุคคลธรรมดาและสิทธิลดหย่อน AIA' : 'Personal income tax engine & tax-saving strategies',
           path: ROUTES.TAX,

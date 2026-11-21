@@ -2,15 +2,28 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { CATEGORY_GROUPS, getPlanInfographic } from '../src/utils/insuranceInfographic.js';
 
-test('CATEGORY_GROUPS defines all 5 AIA Thailand insurance categories', () => {
+test('CATEGORY_GROUPS defines all 6 AIA Thailand insurance categories including ACCIDENT', () => {
   const ids = CATEGORY_GROUPS.map((g) => g.id);
   assert.deepEqual(ids, [
     'HEALTH',
     'CRITICAL_ILLNESS',
+    'ACCIDENT',
     'WHOLE_LIFE',
     'RETIREMENT',
     'INVESTMENT_LINKED',
   ]);
+});
+
+test('getPlanInfographic returns structured KPI & flow steps for official AIA PA Accident plan', () => {
+  const paInfo = getPlanInfographic({
+    slug: 'aia-pa-personal-accident',
+    category: 'ACCIDENT',
+    name: 'AIA PA ประกันอุบัติเหตุส่วนบุคคล',
+  });
+  assert.ok(paInfo);
+  assert.equal(paInfo.kpis.length, 4);
+  assert.equal(paInfo.flowSteps.length, 4);
+  assert.ok(paInfo.planBadge.includes('AIA PA'));
 });
 
 test('getPlanInfographic returns structured KPI & flow steps for official AIA slugs', () => {

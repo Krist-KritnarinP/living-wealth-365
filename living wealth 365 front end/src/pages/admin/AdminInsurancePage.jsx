@@ -520,7 +520,7 @@ export default function AdminInsurancePage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {modalTab === 'form' ? (
                   <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
                   {/* Type */}
                   <div className="flex flex-col gap-1.5 w-full">
                     <label className="text-xs font-bold text-base-content/80">ประเภทประกัน</label>
@@ -529,8 +529,40 @@ export default function AdminInsurancePage() {
                       onChange={(e) => setFormData({ ...formData, type: e.target.value })}
                       className="select select-bordered w-full rounded-xl text-sm bg-base-100"
                     >
-                      <option value="LIFE">ชีวิต, สุขภาพ, โรคร้าย & เกษียณ (Life)</option>
+                      <option value="LIFE">ชีวิต, สุขภาพ, อุบัติเหตุ, โรคร้าย & เกษียณ (AIA)</option>
                       <option value="NON_LIFE">วินาศภัย รถยนต์ & ทรัพย์สิน (Non-Life)</option>
+                    </select>
+                  </div>
+
+                  {/* Category Key */}
+                  <div className="flex flex-col gap-1.5 w-full">
+                    <label className="text-xs font-bold text-base-content/80">รหัสหมวดหมู่ (Filter Key)</label>
+                    <select
+                      value={formData.category}
+                      onChange={(e) => {
+                        const nextCat = e.target.value;
+                        const defaultLabels = {
+                          HEALTH: 'ประกันสุขภาพเหมาจ่าย',
+                          CRITICAL_ILLNESS: 'ประกันโรคร้ายแรง',
+                          ACCIDENT: 'ประกันอุบัติเหตุส่วนบุคคล (AIA PA)',
+                          WHOLE_LIFE: 'ประกันชีวิตตลอดชีพ & ส่งต่อมรดก',
+                          RETIREMENT: 'วางแผนเกษียณ & บำนาญ',
+                          INVESTMENT_LINKED: 'ประกันชีวิตควบการลงทุน (Unit Linked)',
+                        };
+                        setFormData({
+                          ...formData,
+                          category: nextCat,
+                          categoryName: defaultLabels[nextCat] || formData.categoryName,
+                        });
+                      }}
+                      className="select select-bordered w-full rounded-xl text-sm bg-base-100"
+                    >
+                      <option value="HEALTH">HEALTH — สุขภาพเหมาจ่าย</option>
+                      <option value="CRITICAL_ILLNESS">CRITICAL_ILLNESS — โรคร้ายแรง</option>
+                      <option value="ACCIDENT">ACCIDENT — อุบัติเหตุส่วนบุคคล (AIA PA)</option>
+                      <option value="WHOLE_LIFE">WHOLE_LIFE — ตลอดชีพ & มรดก</option>
+                      <option value="RETIREMENT">RETIREMENT — เกษียณ & บำนาญ</option>
+                      <option value="INVESTMENT_LINKED">INVESTMENT_LINKED — Unit Linked</option>
                     </select>
                   </div>
 

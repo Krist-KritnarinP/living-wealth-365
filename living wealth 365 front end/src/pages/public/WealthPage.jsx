@@ -13,10 +13,12 @@ import {
   Umbrella,
   Landmark,
   Layers,
+  SlidersHorizontal,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { ROUTES } from '../../constants/routes';
 import PlanCard from '../../components/insurance/PlanCard';
+import InsurancePlanFinder from '../../components/insurance/InsurancePlanFinder';
 import TaxCalculator from '../../components/tax/TaxCalculator';
 import LeadCaptureForm from '../../components/forms/LeadCaptureForm';
 import { CATEGORY_GROUPS } from '../../utils/insuranceInfographic';
@@ -26,38 +28,41 @@ export default function WealthPage() {
   const location = useLocation();
   const { posts, insurancePlans } = useAuth();
 
-  // Query parameter tab support (?tab=calculator or ?tab=protection or ?tab=architecture)
+  // Query parameter tab support (?tab=finder | ?tab=calculator | ?tab=protection | ?tab=architecture)
   const searchParams = new URLSearchParams(location.search);
   const initialTab = searchParams.get('tab') || 'protection';
-  const [activeTab, setActiveTab] = useState(initialTab === 'calculator' ? 'calculator' : 'protection');
+  const validTabs = ['protection', 'finder', 'calculator', 'architecture'];
+  const [activeTab, setActiveTab] = useState(
+    validTabs.includes(initialTab) ? initialTab : 'protection'
+  );
 
   const [categoryFilter, setCategoryFilter] = useState('ALL');
   const [selectedPlanForModal, setSelectedPlanForModal] = useState(null);
 
   useEffect(() => {
     const tabParam = new URLSearchParams(location.search).get('tab');
-    if (tabParam === 'calculator') {
-      setActiveTab('calculator');
-    } else if (tabParam === 'protection') {
-      setActiveTab('protection');
-    } else if (tabParam === 'architecture') {
-      setActiveTab('architecture');
+    if (tabParam && validTabs.includes(tabParam)) {
+      setActiveTab(tabParam);
     }
   }, [location.search]);
 
   // Filter plans cleanly by AIA categories
   const filteredPlans = insurancePlans.filter((plan) => {
     if (categoryFilter === 'ALL') return true;
+    if (categoryFilter === 'ACCIDENT') {
+      return plan.category === 'ACCIDENT' || plan.category === 'PA';
+    }
     return plan.category === categoryFilter || (categoryFilter === 'NON_LIFE' && plan.type === 'NON_LIFE');
   });
 
-  const knownCategories = CATEGORY_GROUPS.map((g) => g.id);
+  const knownCategories = [...CATEGORY_GROUPS.map((g) => g.id), 'PA'];
   const uncategorizedPlans = insurancePlans.filter((plan) => !knownCategories.includes(plan.category));
 
   const filterTabs = [
     { id: 'ALL', label: 'ทั้งหมด', count: insurancePlans.length },
     { id: 'HEALTH', label: 'สุขภาพเหมาจ่าย', count: insurancePlans.filter((p) => p.category === 'HEALTH').length },
     { id: 'CRITICAL_ILLNESS', label: 'โรคร้ายแรง', count: insurancePlans.filter((p) => p.category === 'CRITICAL_ILLNESS').length },
+    { id: 'ACCIDENT', label: 'อุบัติเหตุ (PA)', count: insurancePlans.filter((p) => p.category === 'ACCIDENT' || p.category === 'PA').length },
     { id: 'WHOLE_LIFE', label: 'ตลอดชีพ & มรดก', count: insurancePlans.filter((p) => p.category === 'WHOLE_LIFE').length },
     { id: 'RETIREMENT', label: 'เกษียณ & บำนาญ', count: insurancePlans.filter((p) => p.category === 'RETIREMENT').length },
     { id: 'INVESTMENT_LINKED', label: 'Unit Linked', count: insurancePlans.filter((p) => p.category === 'INVESTMENT_LINKED').length },
@@ -97,19 +102,31 @@ export default function WealthPage() {
                     : 'btn-outline border-base-300'
                 }`}
               >
-                <ShieldCheck className="w-4 h-4" />
+                <ShieldCheck className="w-4 h-4 shrink-0" />
                 <span>แผนความคุ้มครอง & ประกัน</span>
+              </button>
+
+              <button
+                onClick={() => setActiveTab('finder')}
+                className={`btn btn-md rounded-2xl font-bold px-5 gap-2 transition-all ${
+                  activeTab === 'finder'
+                    ? 'btn-secondary text-secondary-content shadow-xs'
+                    : 'btn-outline border-secondary/60 text-primary hover:bg-secondary/15'
+                }`}
+              >
+                <SlidersHorizontal className="w-4 h-4 shrink-0" />
+                <span>คัดกรอง & ประมาณการเบี้ย AIA</span>
               </button>
 
               <button
                 onClick={() => setActiveTab('calculator')}
                 className={`btn btn-md rounded-2xl font-bold px-5 gap-2 transition-all ${
                   activeTab === 'calculator'
-                    ? 'btn-secondary text-white shadow-xs'
+                    ? 'btn-primary shadow-xs'
                     : 'btn-outline border-base-300'
                 }`}
               >
-                <Calculator className="w-4 h-4" />
+                <Calculator className="w-4 h-4 shrink-0" />
                 <span>เครื่องคำนวณภาษี 2568</span>
               </button>
 
@@ -121,7 +138,7 @@ export default function WealthPage() {
                     : 'btn-outline border-base-300'
                 }`}
               >
-                <Layers className="w-4 h-4" />
+                <Layers className="w-4 h-4 shrink-0" />
                 <span>สถาปัตยกรรม 4 เสาหลัก</span>
               </button>
             </div>
@@ -133,6 +150,31 @@ export default function WealthPage() {
       {/* --- TAB A: PROTECTION & SOLUTIONS --- */}
       {activeTab === 'protection' && (
         <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-8 animate-fadeIn">
+          {/* Quick Callout to Smart Tap-Only Plan Finder */}
+          <div className="zen-surface rounded-3xl p-4 sm:p-5 border border-secondary/40 bg-secondary/8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start sm:items-center gap-3 min-w-0">
+              <div className="w-10 h-10 rounded-2xl bg-secondary text-secondary-content flex items-center justify-center shrink-0 shadow-xs">
+                <SlidersHorizontal className="w-5 h-5" />
+              </div>
+              <div className="min-w-0">
+                <div className="text-sm sm:text-base font-black text-primary leading-snug">
+                  ยังไม่แน่ใจว่าแผนไหนเหมาะกับอายุและงบของคุณ?
+                </div>
+                <p className="text-xs sm:text-sm text-base-content/75 leading-snug mt-0.5">
+                  ลองแตะเลือกอายุ รายได้ และความคุ้มครองที่สนใจใน 15 วินาที เพื่อคัดกรองแผน AIA พร้อมดูเบี้ยประมาณการทันที (ไม่ต้องพิมพ์)
+                </p>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setActiveTab('finder')}
+              className="btn btn-secondary text-secondary-content btn-sm sm:btn-md rounded-2xl font-black px-5 gap-1.5 shrink-0 shadow-xs"
+            >
+              <span>คัดกรอง & ประมาณการเบี้ย</span>
+              <ArrowRight className="w-4 h-4 shrink-0" />
+            </button>
+          </div>
+
           {/* Filter Pills */}
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-base-300/60">
             <div>
@@ -172,7 +214,11 @@ export default function WealthPage() {
           {categoryFilter === 'ALL' ? (
             <div className="space-y-12">
               {CATEGORY_GROUPS.map((group) => {
-                const groupPlans = insurancePlans.filter((p) => p.category === group.id);
+                const groupPlans = insurancePlans.filter((p) =>
+                  group.id === 'ACCIDENT'
+                    ? p.category === 'ACCIDENT' || p.category === 'PA'
+                    : p.category === group.id
+                );
                 if (groupPlans.length === 0) return null;
                 return (
                   <div key={group.id} className="space-y-5">
@@ -239,6 +285,21 @@ export default function WealthPage() {
               ))}
             </div>
           )}
+        </section>
+      )}
+
+      {/* --- TAB A2: SMART AIA PLAN FINDER & ESTIMATOR --- */}
+      {activeTab === 'finder' && (
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fadeIn">
+          <InsurancePlanFinder
+            plans={insurancePlans}
+            onRequestQuote={({ plan, interest, notes }) =>
+              setSelectedPlanForModal({
+                name: interest || plan?.name || 'แผนประกัน AIA',
+                prefillNotes: notes || '',
+              })
+            }
+          />
         </section>
       )}
 
@@ -381,6 +442,7 @@ export default function WealthPage() {
             <div className="mt-4">
               <LeadCaptureForm
                 defaultInterest={selectedPlanForModal.name}
+                defaultNotes={selectedPlanForModal.prefillNotes || ''}
                 onSuccess={() => setSelectedPlanForModal(null)}
               />
             </div>

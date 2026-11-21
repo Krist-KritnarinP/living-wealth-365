@@ -8,6 +8,7 @@ import { normalizePhone, validPhone } from '../../utils/validation';
 
 export default function LeadCaptureForm({
   defaultInterest = 'ประกันสุขภาพเหมาจ่าย AIA',
+  defaultNotes = '',
   selection = null,
   title = 'ขอรับคำปรึกษาและวางแผนฟรี',
   subtitle = 'กรอกข้อมูลเพื่อให้ที่ปรึกษาการเงินติดต่อกลับและวิเคราะห์แผนเฉพาะบุคคล',
@@ -22,7 +23,7 @@ export default function LeadCaptureForm({
     phone: '',
     interest: selection?.name || defaultInterest,
     preferredTime: 'ช่วงบ่าย (13:00 - 17:00)',
-    notes: '',
+    notes: defaultNotes || '',
   });
 
   const [phoneError, setPhoneError] = useState('');
@@ -55,6 +56,12 @@ export default function LeadCaptureForm({
       setFormData((prev) => ({ ...prev, interest: defaultInterest }));
     }
   }, [defaultInterest, selectedItem]);
+
+  useEffect(() => {
+    if (defaultNotes) {
+      setFormData((prev) => ({ ...prev, notes: defaultNotes }));
+    }
+  }, [defaultNotes]);
 
   const handlePhoneChange = (val) => {
     setFormData((prev) => ({ ...prev, phone: val }));

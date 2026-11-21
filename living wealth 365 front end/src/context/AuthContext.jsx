@@ -23,10 +23,11 @@ export function AuthProvider({ children }) {
     return saved ? JSON.parse(saved) : null;
   });
 
-  // Data states (v2 cache keys clear legacy pre-DB mock items cleanly)
+  // Data states (v3 cache key refreshes catalog cleanly with AIA PA & 6 categories)
   const [insurancePlans, setInsurancePlans] = useState(() => {
     localStorage.removeItem('lw365_plans');
-    const saved = localStorage.getItem('lw365_plans_v2');
+    localStorage.removeItem('lw365_plans_v2');
+    const saved = localStorage.getItem('lw365_plans_v3');
     return saved ? JSON.parse(saved) : (INITIAL_INSURANCE_PLANS || []);
   });
   const [posts, setPosts] = useState(() => {
@@ -87,7 +88,7 @@ export function AuthProvider({ children }) {
 
   // Persist insurance plans
   useEffect(() => {
-    localStorage.setItem('lw365_plans_v2', JSON.stringify(insurancePlans));
+    localStorage.setItem('lw365_plans_v3', JSON.stringify(insurancePlans));
   }, [insurancePlans]);
 
   // 🔄 ดึงข้อมูล Live จาก Backend API
