@@ -137,6 +137,7 @@
     margin: 0;
     padding: 0;
     scroll-behavior: smooth;
+    scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
     overflow-x: clip;
   }
   body {
@@ -154,10 +155,6 @@
   header nav {
     --text-xs: 0.875rem;
     --text-sm: 0.9375rem;
-  }
-  .badge {
-    height: auto;
-    min-height: 1.65rem;
   }
   /* High-Contrast QC for Thai legibility over Liquid Glass & Bokeh */
   [data-theme="zen-light"] .text-secondary:not(.btn):not(.badge):not(.bg-primary *) {
@@ -197,33 +194,6 @@
     box-shadow: var(--zen-shadow);
   }
   .zen-muted { color: var(--zen-muted); }
-  :where(.input, .select, .textarea) {
-    background: var(--zen-surface);
-    border: 1px solid var(--zen-field-border);
-    font-size: 0.95rem;
-    min-height: 2.75rem;
-    height: auto;
-  }
-  .btn {
-    min-height: 2.75rem;
-    height: auto;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    box-shadow: none;
-    transition-property: background-color, border-color, color, transform;
-    transition-duration: 150ms;
-    font-size: 0.95rem;
-    white-space: normal;
-    word-break: break-word;
-  }
-  .badge {
-    height: auto;
-    min-height: 1.5rem;
-    white-space: normal;
-    word-break: break-word;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-  }
   .btn:active:not(:disabled) { transform: scale(0.98); }
   @supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
     .zen-surface {
@@ -361,6 +331,56 @@
   .reveal-on-scroll.is-visible {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* DaisyUI v5 emits components inside @layer utilities { @layer daisyui.l1.l2.l3 }.
+ * Placing overrides in @layer utilities { @layer daisyui } beats DaisyUI base/modifier
+ * fixed heights while still letting Tailwind utilities (h-*, p-*, whitespace-nowrap) win. */
+@layer utilities {
+  @layer daisyui {
+    .badge {
+      block-size: auto;
+      min-block-size: var(--size);
+      max-inline-size: 100%;
+      flex-shrink: 1;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+      line-height: 1.35;
+      padding-block: 0.25rem;
+      text-align: center;
+    }
+
+    .btn:not(.btn-circle):not(.btn-square) {
+      block-size: auto;
+      min-block-size: var(--size);
+      max-inline-size: 100%;
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+      line-height: 1.35;
+      padding-block: 0.45rem;
+      box-shadow: none;
+      transition-property: background-color, border-color, color, transform;
+      transition-duration: 150ms;
+    }
+
+    .tab:is(.tabs > .tab) {
+      block-size: auto;
+      min-block-size: var(--tab-height);
+      max-inline-size: 100%;
+      white-space: normal;
+      overflow-wrap: break-word;
+      line-height: 1.35;
+      padding-block: 0.4rem;
+    }
+
+    :where(.input, .select, .textarea) {
+      background: var(--zen-surface);
+      border-color: var(--zen-field-border);
+      min-block-size: var(--size, 2.75rem);
+    }
   }
 }
 

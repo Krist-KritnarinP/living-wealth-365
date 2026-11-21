@@ -8,10 +8,14 @@ export default function RoleSwitcher() {
   const navigate = useNavigate();
 
   return (
-    <aside aria-label="Demo Role Simulator" className="fixed bottom-4 right-4 z-50 zen-surface p-2 rounded-2xl border border-primary/20 shadow-xl flex items-center gap-2 backdrop-blur-md">
-      <div className="flex items-center gap-1.5 px-2 py-1 text-xs font-bold text-primary">
+    <aside
+      aria-label="Demo Role Simulator"
+      className="fixed bottom-[max(0.75rem,env(safe-area-inset-bottom,0px))] right-3 sm:right-4 z-50 max-w-[calc(100vw-1.5rem)] zen-surface p-1.5 sm:p-2 rounded-2xl border border-primary/20 shadow-xl flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 backdrop-blur-md"
+    >
+      <div className="flex items-center gap-1.5 px-1.5 sm:px-2 py-1 text-xs font-bold text-primary shrink-0">
         <span className="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
-        <span>สลับมุมมองทดสอบ:</span>
+        <span className="hidden sm:inline">สลับมุมมองทดสอบ:</span>
+        <span className="sm:hidden">โหมด:</span>
       </div>
 
       <button

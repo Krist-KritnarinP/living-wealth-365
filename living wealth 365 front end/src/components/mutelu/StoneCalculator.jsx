@@ -291,10 +291,10 @@ export default function StoneCalculator({ onSelectStone }) {
   const ElementIcon = currentResult.elementIcon;
 
   return (
-    <div className="w-full relative py-4 sm:py-6">
+    <div className="w-full relative py-4 sm:py-6 overflow-x-clip">
       {/* 🔮 1. DYNAMIC AMBIENT BACKDROP GLOW (ปรับสีเรืองแสงตามวันแบบ Real-Time) */}
       <div
-        className={`absolute -inset-2 sm:-inset-6 rounded-3xl bg-gradient-to-br ${currentResult.auraTheme.backdropGradient} filter blur-3xl opacity-70 transition-all duration-1000 -z-10 animate-pulse-glow pointer-events-none`}
+        className={`absolute inset-0 sm:inset-2 rounded-3xl bg-gradient-to-br ${currentResult.auraTheme.backdropGradient} filter blur-3xl opacity-70 transition-all duration-1000 -z-10 animate-pulse-glow pointer-events-none`}
       />
 
       {/* 🌟 2. COMPACT & BALANCED ZEN GLASS CONTAINER */}
@@ -420,7 +420,7 @@ export default function StoneCalculator({ onSelectStone }) {
               </div>
 
               {/* Sacred Colors Display */}
-              <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-base-100/80 dark:bg-base-200/60 border border-base-300/40">
+              <div className="flex flex-wrap items-center gap-2.5 p-2.5 rounded-xl bg-base-100/80 dark:bg-base-200/60 border border-base-300/40">
                 <span className="text-xs font-bold text-base-content/70 shrink-0">โทนสีมงคลประจำวัน:</span>
                 <div className="flex items-center gap-1.5 flex-wrap">
                   {currentResult.colorDots.map((dot, idx) => (
@@ -512,7 +512,7 @@ export default function StoneCalculator({ onSelectStone }) {
 
               {/* Genuine product thumbnail badge (ถ้ามีภาพสินค้าจริง) */}
               {matchedProduct && (
-                <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-base-100/90 dark:bg-base-200/80 border border-base-300/50 shadow-xs max-w-xs">
+                <div className="flex items-center gap-2.5 px-3 py-1.5 rounded-xl bg-base-100/90 dark:bg-base-200/80 border border-base-300/50 shadow-xs max-w-full sm:max-w-xs min-w-0">
                   {matchedProduct.imageUrl && (
                     <img
                       src={resolveAssetUrl(matchedProduct.imageUrl)}
@@ -520,7 +520,7 @@ export default function StoneCalculator({ onSelectStone }) {
                       className="w-9 h-9 rounded-lg object-cover border border-base-300 shrink-0"
                     />
                   )}
-                  <div className="text-left leading-tight truncate">
+                  <div className="text-left leading-tight min-w-0 flex-1">
                     <div className="text-[11px] font-bold text-base-content/85 truncate">
                       {matchedProduct.name}
                     </div>
@@ -544,7 +544,7 @@ export default function StoneCalculator({ onSelectStone }) {
               <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-20 animate-shimmer-sweep pointer-events-none" />
 
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform group-hover:rotate-45" />
-              <span className="truncate max-w-[85%] text-center">
+              <span className="text-center leading-snug">
                 ปรึกษาและบูชาหินมงคลสำหรับคนเกิด{selectedDay}
               </span>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform group-hover:translate-x-1.5" />

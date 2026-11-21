@@ -247,7 +247,7 @@ export default function HeroInteractiveFocus({ onSelectFocus }) {
         >
           <div className="space-y-3.5">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <span className="badge badge-secondary font-bold text-xs sm:text-sm px-3 py-1">
+              <span className="badge badge-secondary font-bold text-xs sm:text-sm px-3 py-1.5 rounded-xl text-left leading-snug">
                 {currentRec.tag}
               </span>
               <div className="flex items-center gap-1.5 text-sm text-base-content/80">

@@ -90,7 +90,7 @@ export default function EarthEnergyPage() {
       </section>
 
       {/* 2. STONE CALCULATOR & 3D VISUALIZER */}
-      <section id="calculator" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24">
+      <section id="calculator" className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 scroll-mt-24 overflow-x-clip">
         <StoneCalculator onSelectStone={handleSelectCalculatedStone} />
       </section>
 

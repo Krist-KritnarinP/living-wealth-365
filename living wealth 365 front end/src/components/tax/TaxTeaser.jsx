@@ -65,7 +65,7 @@ export default function TaxTeaser() {
           {/* Interactive Controls */}
           <div className="space-y-4 p-5 rounded-2xl bg-base-200/50 border border-base-300/40">
             <div>
-              <div className="flex items-center justify-between mb-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <label className="text-xs font-bold text-primary">
                   เงินเดือนเฉลี่ย (บาท/เดือน):
                 </label>
@@ -106,11 +106,11 @@ export default function TaxTeaser() {
             </div>
 
             {/* Bonus Selector */}
-            <div className="flex items-center justify-between pt-2 border-t border-base-300/40 text-xs">
+            <div className="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-base-300/40 text-xs">
               <span className="font-semibold text-base-content/80">
                 โบนัสประมาณการ (เดือน):
               </span>
-              <div className="flex items-center gap-1">
+              <div className="flex flex-wrap items-center gap-1.5">
                 {[0, 1, 2, 3, 4].map((m) => (
                   <button
                     key={m}

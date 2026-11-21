@@ -333,15 +333,20 @@ export default function AdminInsurancePage() {
         </div>
 
         {/* Plans Table */}
-        <div className="zen-surface rounded-3xl p-6 border border-base-300/60 shadow-xs overflow-x-auto">
-          <table className="table table-zebra w-full text-xs sm:text-sm">
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label="ตารางรายการแผนประกัน AIA"
+          className="zen-surface rounded-3xl p-4 sm:p-5 border border-base-300/60 shadow-xs overflow-x-auto"
+        >
+          <table className="table table-zebra table-sm w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
                 <th className="min-w-[200px]">แผนประกันภัย</th>
-                <th className="whitespace-nowrap">หมวดหมู่</th>
-                <th className="whitespace-nowrap">วงเงินคุ้มครอง</th>
-                <th className="whitespace-nowrap">ราคาเริ่มต้น</th>
-                <th className="whitespace-nowrap text-center min-w-[130px]">สถานะ</th>
+                <th>หมวดหมู่</th>
+                <th>วงเงินคุ้มครอง</th>
+                <th>ราคาเริ่มต้น</th>
+                <th className="text-center whitespace-nowrap">สถานะ</th>
                 <th className="text-right whitespace-nowrap">การจัดการ</th>
               </tr>
             </thead>
@@ -355,10 +360,10 @@ export default function AdminInsurancePage() {
               ) : (
                 filteredPlans.map((plan) => (
                   <tr key={plan.id} className="hover:bg-base-200/50">
-                    <td>
-                      <div className="flex items-center gap-3">
+                    <td className="max-w-[260px]">
+                      <div className="flex items-center gap-2.5 min-w-0">
                         {plan.imageUrl ? (
-                          <div className="w-12 h-12 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
+                          <div className="w-11 h-11 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
                             <FramedImage
                               src={plan.imageUrl}
                               alt={plan.name}
@@ -367,19 +372,19 @@ export default function AdminInsurancePage() {
                             />
                           </div>
                         ) : (
-                          <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
-                            <ShieldCheck className="w-6 h-6" />
+                          <div className="w-11 h-11 rounded-xl bg-primary/10 border border-primary/20 text-primary flex items-center justify-center shrink-0">
+                            <ShieldCheck className="w-5 h-5" />
                           </div>
                         )}
-                        <div className="min-w-0">
-                          <div className="font-bold text-primary flex items-center gap-2">
-                            <span className="truncate">{plan.name}</span>
+                        <div className="min-w-0 flex-1">
+                          <div className="font-bold text-primary flex flex-wrap items-center gap-1.5">
+                            <span className="leading-snug">{plan.name}</span>
                             {plan.brochureUrl && (
                               <a
                                 href={resolveAssetUrl(plan.brochureUrl)}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="badge badge-secondary badge-outline text-[10px] font-bold py-1 px-2 gap-1 shrink-0 hover:bg-secondary hover:text-white transition-colors"
+                                className="badge badge-secondary badge-outline text-[10px] font-bold py-0.5 px-1.5 gap-1 shrink-0 hover:bg-secondary hover:text-white transition-colors"
                                 title="คลิกเพื่อเปิดดูไฟล์โบรชัวร์ PDF"
                               >
                                 <FileText className="w-3 h-3" />
@@ -388,22 +393,22 @@ export default function AdminInsurancePage() {
                             )}
                           </div>
                           {plan.tagline && (
-                            <div className="text-xs text-base-content/60 line-clamp-1 max-w-sm mt-0.5">
+                            <div className="text-xs text-base-content/60 line-clamp-1 mt-0.5">
                               {plan.tagline}
                             </div>
                           )}
                         </div>
                       </div>
                     </td>
-                    <td className="whitespace-nowrap">
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80 whitespace-nowrap">
+                    <td>
+                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-base-200/80 border border-base-300 text-base-content/80">
                         {plan.categoryName}
                       </span>
                     </td>
-                    <td className="whitespace-nowrap font-bold text-primary">
+                    <td className="font-bold text-primary max-w-[160px] leading-snug">
                       {plan.coverageAmount || '-'}
                     </td>
-                    <td className="whitespace-nowrap font-black text-secondary">
+                    <td className="font-black text-secondary max-w-[130px] leading-snug">
                       {plan.startingPrice || '-'}
                     </td>
                     <td className="whitespace-nowrap text-center">
