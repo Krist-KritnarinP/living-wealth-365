@@ -121,10 +121,10 @@ export default function Navbar() {
         },
         {
           label: language === 'th' ? 'คัดกรอง & ประมาณการเบี้ย AIA' : 'AIA Plan Finder & Estimator',
-          desc: language === 'th' ? 'แตะเลือกอายุ รายได้ และเป้าหมาย เพื่อดูเบี้ยประมาณการทันที' : 'Tap-only filter to match AIA plans & estimate premiums',
+          desc: language === 'th' ? 'เลือกช่วงอายุ รายได้ และเป้าหมาย เพื่อประเมินเบี้ยและค้นหาแผนที่เหมาะกับคุณ' : 'Match AIA plans and estimate premiums by age, income & goals',
           path: `${ROUTES.WEALTH}?tab=finder`,
           icon: Sparkles,
-          badge: '15 วิ',
+          badge: 'Finder',
         },
         {
           label: language === 'th' ? 'วางแผนและคำนวณภาษี 2568' : 'Tax Planning & Calculator',

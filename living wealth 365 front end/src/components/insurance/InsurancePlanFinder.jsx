@@ -108,7 +108,7 @@ export default function InsurancePlanFinder({ plans = [], onRequestQuote }) {
         <div className="space-y-1.5 min-w-0">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary/15 border border-secondary/35 text-primary text-xs font-black tracking-wide">
             <SlidersHorizontal className="w-3.5 h-3.5 text-secondary shrink-0" />
-            <span>SMART AIA PLAN FINDER • แตะเลือกไม่ต้องพิมพ์</span>
+            <span>AIA PLAN FINDER • ค้นหาแผนที่ใช่สำหรับคุณ</span>
           </div>
           <h2 className="text-2xl sm:text-3xl font-black text-primary leading-tight">
             คัดกรองแผนประกัน AIA & ประมาณการเบี้ยเบื้องต้น
@@ -607,7 +607,7 @@ export default function InsurancePlanFinder({ plans = [], onRequestQuote }) {
                 อยากได้ตารางเบี้ยจริง AIA แบบรวมหลายแผนในงบเดียว?
               </h3>
               <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
-                ส่งตัวเลือกที่คุณเพิ่งแตะให้ Admin A คำนวณเบี้ยจริงรายปีพร้อมเทียบแผนให้ฟรี ไม่ต้องพิมพ์ข้อมูลซ้ำ
+                ส่งสรุปความต้องการนี้ให้ Admin A ช่วยคำนวณเบี้ยจริงรายปีและเปรียบเทียบแผนที่คุ้มค่าที่สุดให้ฟรี
               </p>
             </div>
             <button
