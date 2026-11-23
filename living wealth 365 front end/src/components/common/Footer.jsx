@@ -86,6 +86,15 @@ export default function Footer() {
                   3D Gemstone Visualizer (ผลึกแร่ธาตุเสมือนจริง)
                 </Link>
               </li>
+              <li>
+                <Link
+                  to={ROUTES.WORKSHOPS}
+                  className="hover:text-primary transition-colors flex items-center gap-1.5"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                  Workshops: เวิร์กชอปองค์กร & กลุ่มเล็ก
+                </Link>
+              </li>
             </ul>
           </div>
 

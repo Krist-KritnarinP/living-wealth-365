@@ -22,7 +22,8 @@ import {
   Feather,
   Info,
   Calculator,
-  ShoppingBag
+  ShoppingBag,
+  Presentation,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
@@ -271,6 +272,27 @@ export default function Navbar() {
               </div>
             );
           })}
+
+          {/* 4th Top-Level Menu: Workshops & Experiences */}
+          <Link
+            to={ROUTES.WORKSHOPS}
+            onClick={() => setOpenDropdown(null)}
+            className={`px-2.5 2xl:px-3.5 py-2 rounded-full text-sm font-semibold flex items-center gap-1 2xl:gap-1.5 whitespace-nowrap shrink-0 transition-[background-color,color,transform] duration-200 ${
+              isActive(ROUTES.WORKSHOPS)
+                ? 'bg-primary/14 text-primary font-bold shadow-xs'
+                : 'text-base-content/85 hover:bg-white/40 hover:text-primary'
+            }`}
+          >
+            <Presentation className="w-4 h-4 opacity-75 shrink-0" />
+            <span>
+              Workshops
+              {language === 'th' && (
+                <span className="hidden 2xl:inline font-medium opacity-80 ml-1">
+                  (เวิร์กชอป)
+                </span>
+              )}
+            </span>
+          </Link>
         </div>
 
         {/* Action Items */}
@@ -444,6 +466,20 @@ export default function Navbar() {
             }`}
           >
             {t('home')}
+          </Link>
+
+          {/* Workshops Direct Link */}
+          <Link
+            to={ROUTES.WORKSHOPS}
+            onClick={() => setMobileMenuOpen(false)}
+            className={`px-4 py-2.5 rounded-xl text-base font-semibold transition-all flex items-center justify-between ${
+              isActive(ROUTES.WORKSHOPS) ? 'bg-primary text-white font-bold' : 'text-base-content/80 hover:bg-base-200'
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              <Presentation className="w-4 h-4" />
+              <span>Workshops {language === 'th' ? '(เวิร์กชอปองค์กร & กลุ่มเล็ก)' : ''}</span>
+            </span>
           </Link>
 
           {/* Gateways Breakdown */}

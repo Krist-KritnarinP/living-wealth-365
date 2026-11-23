@@ -258,8 +258,8 @@ export default function LeadCaptureForm({
 
           {/* Notes */}
           <div className="form-control">
-            <label className="label py-1">
-              <span className="label-text text-sm font-bold text-base-content">
+            <label className="label py-1 whitespace-normal">
+              <span className="label-text text-sm font-bold text-base-content whitespace-normal leading-snug">
                 รายละเอียดเพิ่มเติมหรือคำถามที่ต้องการสอบถาม (ถ้ามี)
               </span>
             </label>

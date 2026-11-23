@@ -15,6 +15,7 @@ export const ROUTES = {
   PRODUCT_DETAIL: (id = ':id') => `/earth-energy/product/${id}`,
   JOURNAL: '/journal',
   JOURNAL_DETAIL: (slug = ':slug') => `/journal/${slug}`,
+  WORKSHOPS: '/workshops',
   ABOUT: '/about',
 
   // 🔄 Backwards Compatibility & Direct Gateways

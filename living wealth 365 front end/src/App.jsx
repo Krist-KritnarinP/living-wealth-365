@@ -30,6 +30,7 @@ import JournalPage from './pages/public/JournalPage';
 import BlogDetailPage from './pages/public/BlogDetailPage';
 import AboutPage from './pages/public/AboutPage';
 import TaxPlanningPage from './pages/public/TaxPlanningPage';
+import WorkshopsPage from './pages/public/WorkshopsPage';
 
 // Auth & Utility Pages
 import LoginPage from './pages/public/LoginPage';
@@ -91,6 +92,7 @@ function AppShell() {
           <Route path="/journal/:slug" element={<BlogDetailPage />} />
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />
           <Route path={ROUTES.TAX} element={<TaxPlanningPage />} />
+          <Route path={ROUTES.WORKSHOPS} element={<WorkshopsPage />} />
 
           {/* 🔄 Backwards Compatibility & Shortlinks */}
           <Route path="/insurance/life" element={<Navigate to="/wealth?tab=protection" replace />} />

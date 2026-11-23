@@ -1191,6 +1191,21 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
 - **Frontend Markdown Image Support**:
   - Added `![alt](url)` image block rendering to both `src/pages/public/BlogDetailPage.jsx` and `src/components/admin/preview/BlogLivePreview.jsx` so embedded full-page infographics display cleanly on both live public articles and Admin CMS live previews.
 
+## 53. Workshops & Experiences Hub (`/workshops`) + Native `<dialog>` Presentation Mode (November 23, 2026)
+- **Status**: **Completed & Verified (Phase 1)**
+- **New Features Built**:
+  1. **4th Top-Level Navbar Item (`Workshops`)**: Added `/workshops` cleanly to desktop floating Navbar (single-row at `1280px+`, zero collision/overflow), mobile drawer, `routes.js`, `App.jsx`, and `Footer.jsx`.
+  2. **Workshops Showcase Page (`src/pages/public/WorkshopsPage.jsx` & `src/constants/workshopsData.js`)**:
+     - Covers 3 signature tracks (`ทำหินมงคล & แร่ธาตุ`, `ศาสตร์ชีวิต & การเงิน`, `บำบัด สมาธิ & คำปรึกษา`) across 6 curated courses for both **Corporate (20–150+)** and **Small Group / Private (4–12)**.
+     - Interactive audience cards, track/audience filter pills, expandable time agendas, 4-step collaboration flow, and callback inquiry form (`LeadCaptureForm` pre-filled with selected course).
+  3. **1-Click Presentation Mode (`src/components/workshops/WorkshopPresentationModal.jsx`)**:
+     - Built on native HTML `<dialog>` (`showModal()`) with `dialog:modal` / `dialog::backdrop` scroll containment (`overscroll-behavior: contain`) and clean `@media print` PDF export rules in `src/index.css`.
+     - Supports both **Built-in Pitch Deck** (6 overview slides or 3-slide per-course spotlight), **Fullscreen API** (`F` shortcut), keyboard navigation (`← →`, `Esc`), and a **Custom Canva / PowerPoint 16:9 Slide Deck tab** ready for lazy-loaded R2 exported images/PDF in Phase 2.
+- **Verification**:
+  - Vite build clean; 28/28 unit tests pass.
+  - Browser QAQC verified `1280×800` (single-row 5-item Navbar, 0 overflows, Presentation Mode navigation, Canva/PPT tab, per-course spotlight) and `375×812` mobile (`hScrollDetected=false`, mobile menu `Workshops` link, fixed `LeadCaptureForm` label wrap & Presentation Mode vertical fit at 800px height).
+
+
 
 
 
