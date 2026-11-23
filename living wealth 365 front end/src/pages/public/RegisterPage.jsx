@@ -98,7 +98,7 @@ export default function RegisterPage() {
       });
 
       showToast(
-        `ยินดีต้อนรับคุณ ${formData.name.trim()} (@${formData.username.trim()}) สมัครสมาชิกสำเร็จ!`,
+        `สร้างบัญชี @${formData.username.trim()} เรียบร้อยแล้ว`,
         'success'
       );
       navigate(redirectTarget);
@@ -106,7 +106,7 @@ export default function RegisterPage() {
       const errMsg =
         err?.response?.data?.error ||
         err?.message ||
-        'เกิดข้อผิดพลาดในการสมัครสมาชิก กรุณาลองใหม่อีกครั้ง';
+        'ไม่สามารถสร้างบัญชีได้ในขณะนี้ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง';
       showToast(errMsg, 'error');
     } finally {
       setIsSubmitting(false);
@@ -125,7 +125,7 @@ export default function RegisterPage() {
             สมัครสมาชิก Living Wealth 365
           </h1>
           <p className="text-sm text-base-content/70 max-w-md mx-auto">
-            สร้างบัญชีส่วนตัวเพื่อติดตามสถานะคำปรึกษา บันทึกสินค้ามงคล และคำนวณหินเสริมดวงชะตา
+            สร้างบัญชีส่วนตัวเพื่อติดตามสถานะคำปรึกษา บันทึกแร่ธาตุที่สนใจ และดูผลคำนวณหินประจำวันเกิด
           </p>
         </div>
 

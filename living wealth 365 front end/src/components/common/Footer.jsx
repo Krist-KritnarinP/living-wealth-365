@@ -30,7 +30,7 @@ export default function Footer() {
                 fieldKey="footer.aboutText"
                 label="Footer คำแนะนำแบรนด์"
                 multiline
-                fallback="แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และความมั่นคงทางการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย Admin A & Admin B"
+                fallback="พื้นที่รวบรวมความรู้และเครื่องมือวางแผนชีวิต การเงิน สุขภาพ และแร่ธาตุธรรมชาติ โดย Admin A & Admin B"
               />
             </p>
             <div className="p-3 rounded-xl bg-base-200/50 border border-base-300/40 text-xs text-base-content/70 italic flex items-start gap-2">
@@ -38,7 +38,7 @@ export default function Footer() {
               <EditableText
                 fieldKey="footer.quote"
                 label="Footer คำคม"
-                fallback='"พวกเราไม่ใช่ผู้รู้ที่คอยสั่ง แต่คือเพื่อนร่วมทางที่พร้อมรับฟังและร่วมค้นหาชีวิตที่ใช่"'
+                fallback='"เพื่อนร่วมทางที่พร้อมรับฟังและช่วยวางแผนชีวิตให้เหมาะกับคุณในทุกช่วงวัย"'
               />
             </div>
           </div>

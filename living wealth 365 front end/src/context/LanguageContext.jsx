@@ -35,10 +35,10 @@ export const TRANSLATIONS = {
     dashboard: 'แดชบอร์ด',
     crmPipeline: 'จัดการ Leads (CRM)',
     cmsBlog: 'จัดการบทความ (CMS)',
-    cmsProducts: 'จัดการสินค้าสายมู (CMS)',
+    cmsProducts: 'จัดการสินค้าแร่ธาตุ (CMS)',
     profileOverview: 'ข้อมูลส่วนตัว',
     consultationHistory: 'ประวัติการปรึกษา',
-    savedWishlist: 'ของมงคลที่บันทึกไว้',
+    savedWishlist: 'รายการที่บันทึกไว้',
     backToWebsite: 'กลับสู่หน้าเว็บไซต์',
     adminRole: 'ที่ปรึกษาแอดมิน',
     customerRole: 'ลูกค้าสมาชิก',
@@ -54,8 +54,8 @@ export const TRANSLATIONS = {
     notes: 'บันทึกเพิ่มเติม',
     total: 'ทั้งหมด',
     searchPlaceholder: 'ค้นหา...',
-    confirmDeleteTitle: 'ยืนยันการลบข้อมูล',
-    confirmDeleteMsg: 'คุณแน่ใจหรือไม่ว่าต้องการลบรายการนี้? การกระทำนี้ไม่สามารถย้อนกลับได้',
+    confirmDeleteTitle: 'ลบรายการนี้?',
+    confirmDeleteMsg: 'รายการนี้จะถูกลบถาวรและกู้คืนไม่ได้',
 
     // Status Badges
     statusNew: 'รอดำเนินการ',
@@ -64,15 +64,15 @@ export const TRANSLATIONS = {
     statusCancelled: 'ยกเลิก',
 
     // Toasts
-    leadSuccess: 'ส่งคำขอรับคำปรึกษาสำเร็จ! ที่ปรึกษาจะติดต่อกลับโดยเร็วที่สุด',
-    saveSuccess: 'บันทึกข้อมูลเรียบร้อยแล้ว',
-    deleteSuccess: 'ลบข้อมูลสำเร็จ',
-    statusUpdated: 'อัปเดตสถานะ Lead เรียบร้อยแล้ว',
-    wishlistAdded: 'บันทึกของมงคลลงใน Wishlist แล้ว ❤️',
+    leadSuccess: 'ส่งคำขอรับคำปรึกษาแล้ว ที่ปรึกษาจะติดต่อกลับตามเวลาที่เลือก',
+    saveSuccess: 'บันทึกการเปลี่ยนแปลงแล้ว',
+    deleteSuccess: 'ลบรายการแล้ว',
+    statusUpdated: 'อัปเดตสถานะแล้ว',
+    wishlistAdded: 'บันทึกเข้า Wishlist แล้ว',
     wishlistRemoved: 'นำออกจาก Wishlist แล้ว',
-    linkCopied: 'คัดลอกลิงก์บทความเรียบร้อยแล้ว!',
-    loginSuccess: 'เข้าสู่ระบบสำเร็จ ยินดีต้อนรับครับ',
-    logoutSuccess: 'ออกจากระบบเรียบร้อยแล้ว',
+    linkCopied: 'คัดลอกลิงก์บทความแล้ว',
+    loginSuccess: 'เข้าสู่ระบบแล้ว',
+    logoutSuccess: 'ออกจากระบบแล้ว',
   },
   en: {
     // Navigation & 7 Pillars
@@ -125,8 +125,8 @@ export const TRANSLATIONS = {
     notes: 'Notes',
     total: 'Total',
     searchPlaceholder: 'Search...',
-    confirmDeleteTitle: 'Confirm Deletion',
-    confirmDeleteMsg: 'Are you sure you want to delete this item? This action cannot be undone.',
+    confirmDeleteTitle: 'Delete this item?',
+    confirmDeleteMsg: 'This item will be permanently deleted and cannot be recovered.',
 
     // Status Badges
     statusNew: 'Pending',
@@ -135,15 +135,15 @@ export const TRANSLATIONS = {
     statusCancelled: 'Cancelled',
 
     // Toasts
-    leadSuccess: 'Consultation request submitted! An advisor will reach out shortly.',
-    saveSuccess: 'Changes saved successfully',
-    deleteSuccess: 'Item deleted successfully',
-    statusUpdated: 'Lead status updated successfully',
-    wishlistAdded: 'Item added to your Wishlist ❤️',
-    wishlistRemoved: 'Item removed from Wishlist',
-    linkCopied: 'Article link copied to clipboard!',
-    loginSuccess: 'Signed in successfully. Welcome!',
-    logoutSuccess: 'Signed out successfully',
+    leadSuccess: 'Consultation request sent. An advisor will contact you soon.',
+    saveSuccess: 'Changes saved',
+    deleteSuccess: 'Item deleted',
+    statusUpdated: 'Lead status updated',
+    wishlistAdded: 'Saved to Wishlist',
+    wishlistRemoved: 'Removed from Wishlist',
+    linkCopied: 'Article link copied',
+    loginSuccess: 'Signed in',
+    logoutSuccess: 'Signed out',
   },
 };
 

@@ -123,9 +123,16 @@ export default function CartDrawer() {
                   ยังไม่มีรายการในตะกร้า
                 </p>
                 <p className="text-xs text-base-content/65 max-w-xs">
-                  เลือกชมผลึกแร่ธาตุและชิ้นงานพลังงานธรรมชาติที่คัดสรรโดย Admin B แล้วกดเพิ่มลงตะกร้าได้เลยครับ
+                  เลือกชมแร่ธาตุธรรมชาติและคริสตัลคัดสรรโดย Admin B แล้วเพิ่มรายการที่สนใจลงตะกร้า
                 </p>
               </div>
+              <Link
+                to={ROUTES.EARTH_ENERGY}
+                onClick={closeCart}
+                className="btn btn-primary btn-sm rounded-xl font-bold mt-2"
+              >
+                เลือกชมแร่ธาตุธรรมชาติ
+              </Link>
             </div>
           ) : (
             cartItems.map((item) => (

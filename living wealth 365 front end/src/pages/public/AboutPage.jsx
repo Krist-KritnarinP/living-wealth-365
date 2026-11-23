@@ -38,14 +38,13 @@ export default function AboutPage() {
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.15] tracking-tight">
-              ไม่ใช่ผู้รู้ที่มาสั่งสอน <br />
-              <span className="text-secondary">แต่คือ "เพื่อนร่วมทาง" ของคุณ</span>
+              เพื่อนร่วมทางที่พร้อมรับฟัง <br />
+              <span className="text-secondary">และวางแผนชีวิตไปพร้อมคุณ</span>
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed">
-              Living Wealth 365 ถือกำเนิดขึ้นจากความตั้งใจของ <strong>Admin A & Admin B</strong> สองผู้ร่วมก่อตั้ง
-              ที่มองเห็นว่าผู้คนในปัจจุบันมักแยกเรื่อง "การเงิน" ออกจาก "สุขภาพจิตใจ" เราจึงสร้างแพลตฟอร์มนี้
-              ขึ้นมาเพื่อเป็นสะพานเชื่อมความมั่นคงในโลกกายภาพเข้ากับความสงบในโลกภายใน
+              Living Wealth 365 เริ่มจากความตั้งใจของ <strong>Admin A & Admin B</strong> ที่อยากให้การวางแผนการเงิน
+              และการดูแลสุขภาพกายใจเดินไปด้วยกันได้จริง เราจึงรวมความรู้ประกัน ภาษี สุขภาพ และแร่ธาตุธรรมชาติไว้ในที่เดียว
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -98,8 +97,8 @@ export default function AboutPage() {
               </div>
 
               <p className="text-sm text-base-content/80 leading-relaxed">
-                "ผมเชื่อว่าการวางแผนการเงินไม่ใช่เรื่องของการขายผลิตภัณฑ์ แต่คือการช่วยให้ผู้คนคลายความกังวล
-                และมองเห็นภาพชัดเจนว่าชีวิตที่พวกเขาอยากรักษาไว้ สามารถเกิดขึ้นได้จริงผ่านสถาปัตยกรรมการเงินที่ถูกต้อง"
+                "ผมเชื่อว่าการวางแผนการเงินช่วยให้คนคลายความกังวล และเห็นภาพชัดขึ้นว่าชีวิตที่อยากมีต้องเตรียมตัวอย่างไร
+                ผ่านโครงสร้างการเงินที่เหมาะกับตัวเองจริง ๆ"
               </p>
 
               <div className="space-y-1.5 text-xs text-base-content/70">
@@ -138,8 +137,8 @@ export default function AboutPage() {
               </div>
 
               <p className="text-sm text-base-content/80 leading-relaxed">
-                "ธรรมชาติใช้เวลาเป็นร้อยล้านปีเพื่อตกผลึกเป็นแร่ธาตุที่งดงาม เช่นเดียวกับชีวิตคนเราที่ต้องการเวลาในการเติบโตอย่างมั่นคง
-                Admin B หลงใหลในพลังงานธรรมชาติ วิทยาศาสตร์แร่ธาตุ และการฟื้นฟูสุขภาพองค์รวมให้กายและใจสอดประสานกัน"
+                "ธรรมชาติใช้เวลาหลายล้านปีกว่าจะตกผลึกเป็นแร่ธาตุแต่ละชิ้น ชีวิตคนเราก็ต้องการเวลาและการดูแลอย่างสม่ำเสมอเช่นกัน
+                ดิฉันจึงศึกษาทั้งวิทยาศาสตร์แร่ธาตุและการดูแลสุขภาพองค์รวมเพื่อช่วยให้กายกับใจสมดุล"
               </p>
 
               <div className="space-y-1.5 text-xs text-base-content/70">
@@ -194,7 +193,7 @@ export default function AboutPage() {
               <span className="text-secondary font-black text-2xl">03.</span>
               <h4 className="text-lg font-bold text-primary">Holistic Balance (ความสมดุลองค์รวม)</h4>
               <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed">
-                ความมั่งคั่งต้องเดินเคียงข้างสุขภาพที่ดี และจิตใจที่สงบสุข เพื่อชีวิตที่สมบูรณ์แบบ 365 วัน
+                ความมั่งคั่งเดินเคียงข้างสุขภาพที่ดีและจิตใจที่สงบ เพื่อให้คุณใช้ชีวิตในแต่ละวันได้อย่างมั่นคงและสบายใจ
               </p>
             </div>
           </div>

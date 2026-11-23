@@ -38,9 +38,9 @@ export default function LifePage() {
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed">
-              การวางแผนชีวิตไม่ได้เริ่มต้นที่ตัวเลขหรือผลตอบแทน แต่เริ่มต้นจากการตั้งคำถามว่า
+              การวางแผนชีวิตเริ่มจากคำถามง่าย ๆ ว่า
               <em> "อะไรคือสิ่งที่คุณอยากรักษาไว้มากที่สุด?" </em>
-              เราช่วยคุณจัดระเบียบ 6 มิติของชีวิต เพื่อให้คุณมีเวลา มีความสุข และมีพลังในการใช้ชีวิตทุกๆ 365 วัน
+              เราช่วยคุณสำรวจสมดุลชีวิตทั้ง 6 มิติ เพื่อให้การจัดสรรเวลา สุขภาพ และการเงินสอดคล้องกับสิ่งที่สำคัญกับคุณจริง ๆ
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -71,7 +71,7 @@ export default function LifePage() {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
           <h2 className="text-2xl sm:text-3xl font-black text-primary">
-            3 ขั้นตอนการออกแบบชีวิตก่อนที่ชีวิตจะถูกคนอื่นออกแบบ
+            3 ขั้นตอนวางแผนชีวิตให้ตรงกับสิ่งที่ต้องการ
           </h2>
           <p className="text-sm sm:text-base zen-muted">
             กรอบความคิดที่เราใช้ในการสนทนาและร่วมเดินทางไปกับผู้คนกว่า 100 ครอบครัว

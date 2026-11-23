@@ -122,7 +122,7 @@ export default function AdminProductsPage() {
         details: `สร้างสินค้ามงคลใหม่: ราคา ${formData.price} • หมวดหมู่ ${formData.category}`,
         securityPin: 'AUTO',
       });
-      showToast('เพิ่มสินค้าหินมงคลใหม่สำเร็จ!', 'success');
+      showToast('เพิ่มรายการแร่ธาตุใหม่แล้ว', 'success');
     }
     setFormData({
       name: '',

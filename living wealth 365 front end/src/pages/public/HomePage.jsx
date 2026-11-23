@@ -97,7 +97,7 @@ export default function HomePage() {
               fieldKey="hero.description"
               label="Hero คำบรรยายหลัก"
               multiline
-              fallback="ไม่ใช่เพียงตัวเลขผลตอบแทนในบัญชี แต่คือสุขภาพที่แข็งแรง เวลาที่มีคุณภาพกับคนที่เรารัก และความสงบสุขในจิตใจ Living Wealth 365 คือสะพานเชื่อมระหว่างการวางแผนการเงินที่มั่นคง เข้ากับสุขภาพองค์รวมและพลังงานธรรมชาติ คัดสรรโดย Admin A & Admin B"
+              fallback="ดูแลสุขภาพที่แข็งแรง เวลาอยู่กับคนที่รัก และความสบายใจไปพร้อมกับการวางแผนการเงิน Living Wealth 365 รวมแผนประกัน ภาษี สุขภาพ และแร่ธาตุธรรมชาติไว้ในที่เดียว โดย Admin A & Admin B"
             />
           </p>
 
@@ -171,7 +171,7 @@ export default function HomePage() {
                 <EditableText
                   fieldKey="gateways.sectionTitle"
                   label="หัวข้อหลัก 3 ประตูใหญ่"
-                  fallback="3 ประตูสู่การใช้ชีวิตที่สมบูรณ์แบบ"
+                  fallback="3 เส้นทางดูแลชีวิตและการเงิน"
                 />
               </h2>
             </div>
@@ -510,13 +510,13 @@ export default function HomePage() {
                 <EditableText
                   fieldKey="narrative.titleLine1"
                   label="Narrative คำคมบรรทัด 1"
-                  fallback='"เราไม่ได้มาเป็นผู้รู้ที่คอยสั่งสอน'
+                  fallback='"เริ่มจากการรับฟังชีวิตที่คุณต้องการ'
                 />{' '}
                 <br />
                 <EditableText
                   fieldKey="narrative.titleLine2"
                   label="Narrative คำคมบรรทัด 2 (เน้นสีทอง)"
-                  fallback='แต่พร้อมรับฟังเพื่อค้นหาชีวิตที่ใช่"'
+                  fallback='แล้วค่อยวางแผนการเงินไปพร้อมกัน"'
                   className="text-secondary"
                 />
               </h2>
@@ -526,7 +526,7 @@ export default function HomePage() {
                   fieldKey="narrative.body"
                   label="Narrative เนื้อหาความเชื่อ"
                   multiline
-                  fallback="การมีเงินเยอะแต่สุขภาพทรุดโทรมไม่ใช่ความสำเร็จ และการแสวงหาความสงบแต่ขาดการวางแผนความเสี่ยงก็ทำให้ชีวิตเปราะบาง Admin A และ Admin B เชื่อว่า การวางแผนชีวิตและการเชื่อมโยงกับพลังธรรมชาติสามารถเดินเคียงข้างกันได้อย่างลงตัว"
+                  fallback="Admin A และ Admin B เชื่อว่าความมั่นคงทางการเงินกับสุขภาพกายใจต้องเดินไปด้วยกัน การมีแผนรับมือความเสี่ยงที่รัดกุมช่วยให้คุณมีพื้นที่และเวลาดูแลตัวเองกับคนที่รักได้อย่างเต็มที่"
                 />
               </p>
 
@@ -535,7 +535,7 @@ export default function HomePage() {
                   fieldKey="narrative.boxQuote"
                   label="Narrative กล่องคำคมไฮไลต์"
                   multiline
-                  fallback='"ทุกบทสนทนาเริ่มต้นที่การรับฟัง ไม่มีสคริปต์การขาย ไม่มีแรงกดดัน มีเพียงความตั้งใจที่จะช่วยให้ชีวิตของคุณเบาใจที่สุด"'
+                  fallback='"ทุกบทสนทนาเริ่มต้นจากการรับฟัง เพื่อให้คุณได้แผนที่เข้าใจง่ายและสบายใจที่จะตัดสินใจด้วยตัวเอง"'
                 />
               </div>
 

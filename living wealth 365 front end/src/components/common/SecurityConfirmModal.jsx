@@ -71,10 +71,10 @@ export default function SecurityConfirmModal({
   };
 
   const defaultTitle = isDelete
-    ? 'ยืนยันการลบข้อมูล (Security PIN Required)'
+    ? 'ยืนยันการลบข้อมูลถาวร'
     : isStatus
-    ? 'ยืนยันการเปลี่ยนสถานะ (Security PIN Required)'
-    : 'ยืนยันรหัสความปลอดภัยเพื่อแก้ไข (Security PIN Required)';
+    ? 'ยืนยันการเปลี่ยนสถานะ'
+    : 'ยืนยันรหัสเพื่อแก้ไขข้อมูล';
 
   const defaultConfirmText = isDelete
     ? 'ยืนยันการลบข้อมูลถาวร'
@@ -236,7 +236,7 @@ export default function SecurityConfirmModal({
           </div>
 
           <p className="text-[11px] text-center text-base-content/70">
-            กรุณาพิมพ์ตัวเลข <strong className="text-secondary font-black">{generatedPin}</strong> ด้านบนลงในช่องด้านล่างเพื่อยืนยัน
+            พิมพ์ตัวเลข <strong className="text-secondary font-black">{generatedPin}</strong> ลงในช่องด้านล่างเพื่อยืนยัน
           </p>
 
           {/* Input Box for 4-digit code */}

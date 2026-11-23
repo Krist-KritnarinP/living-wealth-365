@@ -55,9 +55,9 @@ export default function WellbeingPage() {
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed">
-              เป้าหมายไม่ใช่เพียงแค่อยู่ให้นานขึ้น แต่คือการอยู่ด้วยความกระปรี้กระเปร่า มีพลังงานเต็มเปี่ยม
-              และปลอดจากโรคเรื้อรัง เราผสานวิทยาศาสตร์การชะลอวัย การฟื้นฟูเซลล์ และการสร้างบ้านให้เป็น
-              <em> Health Sanctuary </em> เพื่อคืนความอ่อนเยาว์ให้กายและใจ
+              เป้าหมายของการดูแลสุขภาพคือการมีแรงและปลอดจากโรคเรื้อรังไปพร้อมกับอายุที่เพิ่มขึ้น
+              เราจึงรวมหลักวิทยาศาสตร์การชะลอวัย การฟื้นฟูเซลล์ และแนวทางจัดบ้านเป็น
+              <em> Health Sanctuary </em> ที่ทำตามได้จริงทุกวัน
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
@@ -72,7 +72,7 @@ export default function WellbeingPage() {
                 to="/about#talk"
                 className="btn btn-secondary btn-outline btn-md rounded-2xl font-bold px-6 gap-2"
               >
-                <span>ปรึกษาแนวทาง Longevity กับแอดมิน B</span>
+                <span>ปรึกษาแนวทาง Longevity กับ Admin B</span>
               </Link>
             </div>
           </div>
@@ -153,7 +153,7 @@ export default function WellbeingPage() {
             <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-base-100 border border-base-300">
               <span className="text-xs font-bold zen-muted">ระดับ Sanctuary:</span>
               <span className={`text-sm font-black ${checkedCount >= 4 ? 'text-success' : 'text-secondary'}`}>
-                {checkedCount === 5 ? '🌟 สมบูรณ์แบบ' : checkedCount >= 3 ? '🌿 ดีเยี่ยม' : '🌱 เริ่มต้นสร้าง'}
+                {checkedCount === 5 ? 'ครบทั้ง 5 ข้อ' : checkedCount >= 3 ? 'ดีมาก' : 'เริ่มต้นสร้าง'}
               </span>
             </div>
           </div>
@@ -229,7 +229,7 @@ export default function WellbeingPage() {
               บทความและวิทยาศาสตร์ในหมวด Wellbeing
             </h2>
             <p className="text-sm zen-muted mt-1">
-              คำแนะนำด้านการนอน การชะลอวัย และสุขภาพองค์รวมโดยแอดมิน B
+              คำแนะนำด้านการนอน การชะลอวัย และสุขภาพองค์รวมโดย Admin B
             </p>
           </div>
           <Link

@@ -176,7 +176,7 @@ export default function AdminInsurancePage() {
       setEditingPlan(null);
       setPendingTarget(null);
     } catch {
-      showToast('เกิดข้อผิดพลาดในการบันทึกข้อมูล', 'error');
+      showToast('บันทึกข้อมูลไม่สำเร็จ ตรวจสอบการเชื่อมต่อแล้วลองอีกครั้ง', 'error');
     }
   };
 

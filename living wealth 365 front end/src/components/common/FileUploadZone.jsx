@@ -135,7 +135,7 @@ export default function FileUploadZone({
       const msg =
         err.response?.data?.error ||
         err.message ||
-        'เกิดข้อผิดพลาดในการอัปโหลดไฟล์ กรุณาลองใหม่อีกครั้ง';
+        'อัปโหลดไฟล์ไม่สำเร็จ ตรวจสอบขนาดไฟล์และการเชื่อมต่อ แล้วลองอีกครั้ง';
       setErrorMessage(msg);
     } finally {
       setTimeout(() => {

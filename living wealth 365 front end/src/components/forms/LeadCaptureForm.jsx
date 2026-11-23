@@ -78,8 +78,8 @@ export default function LeadCaptureForm({
 
     // 1. ตรวจสอบเบอร์โทรศัพท์ (9-10 หลัก)
     if (!validPhone(formData.phone)) {
-      setPhoneError('กรุณากรอกเบอร์โทรศัพท์ไทย 9–10 หลัก เช่น 0812345678');
-      showToast('กรุณากรอกเบอร์โทรศัพท์ติดต่อให้ถูกต้อง', 'warning');
+      setPhoneError('ระบุเบอร์โทรศัพท์ไทย 9–10 หลัก เช่น 0812345678');
+      showToast('ระบุเบอร์โทรศัพท์ไทย 9–10 หลัก เช่น 0812345678', 'warning');
       return;
     }
 
@@ -97,7 +97,7 @@ export default function LeadCaptureForm({
 
     setTimeout(() => {
       setLoading(false);
-      showToast('ส่งคำขอรับคำปรึกษาสำเร็จ!', 'success');
+      showToast('ส่งคำขอรับคำปรึกษาแล้ว', 'success');
       navigate(
         `${ROUTES.THANK_YOU}?leadId=${encodeURIComponent(newLead.id)}&interest=${encodeURIComponent(
           formData.interest
@@ -136,7 +136,7 @@ export default function LeadCaptureForm({
               </div>
               <div className="min-w-0">
                 <span className="text-xs text-base-content/60 font-medium block">
-                  รายการสินค้า/แผนที่ท่านเลือกไว้:
+                  รายการที่เลือกไว้:
                 </span>
                 <span className="font-bold text-primary text-base block truncate">
                   {selectedItem.name}
@@ -224,10 +224,11 @@ export default function LeadCaptureForm({
               >
                 <option value="ประกันสุขภาพเหมาจ่าย AIA">ประกันสุขภาพเหมาจ่าย AIA</option>
                 <option value="ประกันชีวิตคุ้มครองโรคร้ายแรง">ประกันชีวิตคุ้มครองโรคร้ายแรง</option>
+                <option value="ประกันอุบัติเหตุส่วนบุคคล (AIA PA)">ประกันอุบัติเหตุส่วนบุคคล (AIA PA)</option>
                 <option value="วางแผนเกษียณ & บำนาญตลอดชีพ">วางแผนเกษียณ & บำนาญตลอดชีพ</option>
                 <option value="วางแผนภาษีบุคคลธรรมดา">วางแผนภาษีบุคคลธรรมดา</option>
                 <option value="ประกันวินาศภัย (รถยนต์/อัคคีภัย)">ประกันวินาศภัย (รถยนต์/อัคคีภัย)</option>
-                <option value="หินมงคล & ปรึกษาเสริมดวงชะตา">หินมงคล & ปรึกษาเสริมดวงชะตา</option>
+                <option value="แร่ธาตุธรรมชาติ & คริสตัลคัดสรร">แร่ธาตุธรรมชาติ & คริสตัลคัดสรร</option>
                 {selectedItem && (
                   <option value={selectedItem.name}>{selectedItem.name}</option>
                 )}
@@ -283,7 +284,7 @@ export default function LeadCaptureForm({
               ) : (
                 <>
                   <Send className="w-5 h-5" />
-                  <span>ส่งข้อมูลเพื่อรับคำปรึกษาฟรี</span>
+                  <span>ส่งคำขอรับคำปรึกษาฟรี</span>
                 </>
               )}
             </button>

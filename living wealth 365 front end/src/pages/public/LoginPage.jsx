@@ -33,7 +33,7 @@ export default function LoginPage() {
       setErrorMessage(
         err.response?.data?.error ||
         err.message ||
-        'อีเมล/Username หรือรหัสผ่านไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง'
+        'เข้าสู่ระบบไม่สำเร็จ ตรวจสอบอีเมลหรือชื่อผู้ใช้และรหัสผ่าน แล้วลองอีกครั้ง'
       );
     } finally {
       setLoading(false);
@@ -84,7 +84,7 @@ export default function LoginPage() {
         {/* Quick Demo Switcher Presets */}
         <div className="p-3.5 rounded-2xl bg-base-200/60 border border-base-300 space-y-2">
           <span className="text-xs font-bold text-primary block text-center">
-            ⚡ ทดสอบเข้าสู่ระบบแบบรวดเร็ว (1-Click Login):
+            เข้าสู่ระบบทดลองใช้งาน
           </span>
           <div className="grid grid-cols-2 gap-2">
             <button
@@ -94,7 +94,7 @@ export default function LoginPage() {
               className="btn btn-outline btn-primary btn-sm rounded-xl font-bold gap-1 text-xs"
             >
               {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <User className="w-3.5 h-3.5" />}
-              ลูกค้าสมาชิก
+              เข้าแบบลูกค้า
             </button>
             <button
               type="button"
@@ -103,7 +103,7 @@ export default function LoginPage() {
               className="btn btn-secondary btn-sm text-white rounded-xl font-bold gap-1 text-xs"
             >
               {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Shield className="w-3.5 h-3.5" />}
-              แอดมินที่ปรึกษา
+              เข้าแบบแอดมิน
             </button>
           </div>
         </div>

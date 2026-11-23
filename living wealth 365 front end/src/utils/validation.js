@@ -161,37 +161,37 @@ export function evaluatePasswordStrength(password = '') {
 export function validateRegistration(data) {
   const errors = {};
   if (!data.username?.trim()) {
-    errors.username = 'กรุณากรอกชื่อผู้ใช้ (Username)';
+    errors.username = 'ระบุชื่อผู้ใช้ (Username)';
   } else if (!validUsername(data.username)) {
-    errors.username = 'Username ต้องเป็นภาษาอังกฤษ ตัวเลข หรือ _ (3–30 ตัวอักษร)';
+    errors.username = 'ใช้ตัวอักษรภาษาอังกฤษ ตัวเลข หรือ _ ความยาว 3–30 ตัวอักษร';
   }
 
   if (!data.name?.trim()) {
-    errors.name = 'กรุณากรอกชื่อ-นามสกุล';
+    errors.name = 'ระบุชื่อ-นามสกุล';
   }
 
   if (!data.email?.trim()) {
-    errors.email = 'กรุณากรอกอีเมล';
+    errors.email = 'ระบุอีเมลติดต่อ';
   } else if (!validEmail(data.email)) {
-    errors.email = 'รูปแบบอีเมลไม่ถูกต้อง';
+    errors.email = 'ระบุอีเมลที่มีเครื่องหมาย @ เช่น name@example.com';
   }
 
   if (!data.phone?.trim()) {
-    errors.phone = 'กรุณากรอกเบอร์โทรศัพท์';
+    errors.phone = 'ระบุเบอร์โทรศัพท์ติดต่อ';
   } else if (!validPhone(data.phone)) {
-    errors.phone = 'กรุณากรอกเบอร์โทรศัพท์ไทย 9–10 หลัก เช่น 0812345678';
+    errors.phone = 'ระบุเบอร์โทรศัพท์ไทย 9–10 หลัก เช่น 0812345678';
   }
 
   if (data.birthDate && !validBirthDate(data.birthDate)) {
-    errors.birthDate = 'วันเกิดต้องไม่ใช่วันในอนาคต';
+    errors.birthDate = 'เลือกวันเกิดที่เป็นวันที่ผ่านมาแล้ว';
   }
 
   if (!data.password || data.password.length < 8) {
-    errors.password = 'รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร';
+    errors.password = 'ตั้งรหัสผ่านอย่างน้อย 8 ตัวอักษร';
   }
 
   if (data.password !== data.confirmPassword) {
-    errors.confirmPassword = 'รหัสผ่านทั้งสองช่องไม่ตรงกัน';
+    errors.confirmPassword = 'พิมพ์รหัสผ่านยืนยันให้ตรงกับช่องด้านบน';
   }
 
   return errors;

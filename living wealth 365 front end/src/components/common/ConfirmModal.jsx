@@ -54,7 +54,7 @@ export default function ConfirmModal({
             <h3 id="confirm-modal-title" className="text-lg font-black text-primary leading-tight">
               {title || t('confirmDeleteTitle')}
             </h3>
-            <p className="text-xs text-base-content/60 mt-0.5">Living Wealth 365 Security Gate</p>
+            <p className="text-xs text-base-content/60 mt-0.5">ยืนยันการดำเนินการ</p>
           </div>
         </div>
 

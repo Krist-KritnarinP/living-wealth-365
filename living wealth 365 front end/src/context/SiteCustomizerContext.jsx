@@ -8,7 +8,7 @@ import {
 
 export { DEFAULT_SITE_CONTENT, deepMerge, getByPath, setByPath };
 
-const STORAGE_KEY = 'lw365_site_customizer_v2';
+const STORAGE_KEY = 'lw365_site_customizer_v3';
 
 const SiteCustomizerContext = createContext(null);
 
@@ -16,6 +16,7 @@ export function SiteCustomizerProvider({ children }) {
   // Load custom content from localStorage with fallback to default
   const [content, setContent] = useState(() => {
     try {
+      localStorage.removeItem('lw365_site_customizer_v2');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
         const parsed = JSON.parse(saved);

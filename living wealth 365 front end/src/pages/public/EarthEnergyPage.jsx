@@ -63,11 +63,11 @@ export default function EarthEnergyPage() {
             </h1>
 
             <p className="text-base sm:text-lg lg:text-xl text-base-content/80 leading-relaxed">
-              เราไม่นำเสนอความงมงาย แต่คัดสรรชิ้นงานแร่ธรรมชาติและคริสตัลที่งดงามผ่าน 4 มิติที่จับต้องได้:
-              <strong> วิทยาศาสตร์ฟิสิกส์แร่ธาตุ (SiO₂ Piezoelectricity)</strong>,
-              <strong> ประวัติศาสตร์อารยธรรมโบราณ</strong>,
-              <strong> พลังจักระและการเจริญสติ</strong>,
-              และ <strong>สุนทรียศาสตร์ของธรรมชาติ</strong> คัดสรรโดย Admin A & Admin B
+              เราคัดสรรแร่ธรรมชาติและคริสตัลแท้ผ่าน 4 มุมมองที่ตรวจสอบได้ ได้แก่
+              <strong> โครงสร้างแร่และคุณสมบัติเพียโซอิเล็กทริก (SiO₂)</strong>,
+              <strong> ประวัติศาสตร์แหล่งกำเนิด</strong>,
+              <strong> การใช้ประกอบการเจริญสติ</strong>,
+              และ <strong>ความงดงามตามธรรมชาติ</strong> คัดสรรโดย Admin A & Admin B
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-2">
