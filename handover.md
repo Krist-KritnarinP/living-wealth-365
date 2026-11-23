@@ -1149,6 +1149,38 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
     - Verified insurance plan edit modal switches cleanly to `👁️ ตัวอย่างแบบผู้ชม` displaying the exact public `InsurancePlanDetailPage` layout.
     - Verified product edit modal switches cleanly to `👁️ ตัวอย่างแบบผู้ชม` displaying the exact public `ProductDetailPage` layout.
 
+## 49. DaisyUI v5 Cascade Layer Overflow Fix & Full Mobile/Desktop QAQC (November 21, 2026)
+- **Status**: **Completed & Verified** (`91c8ac2`)
+- **Root Cause**: DaisyUI v5.7.47 emits `.badge`, `.btn`, `.tab`, `.input`, `.select` inside `@layer utilities { @layer daisyui.l1.l2.l3 { ... } }` with fixed `height: var(--size)`. Previous overrides in `@layer base` and `@layer components` in `index.css` were completely defeated by cascade layer precedence, causing multi-line Thai badges (e.g. `แผนแนะนำ: AIA Health Happy / Infinite Care 25 ล้าน` on mobile) to overflow vertically out of their frames.
+- **Fixes Applied**:
+  1. **`index.css`**: Moved component overrides into `@layer utilities { @layer daisyui { ... } }` (`block-size: auto; min-block-size: var(--size); max-inline-size: 100%; white-space: normal; overflow-wrap: break-word;`) for `.badge`, `.btn:not(.btn-circle):not(.btn-square)`, `.tab:is(.tabs > .tab)`, and form fields—beating DaisyUI fixed heights while still letting Tailwind utility classes (`h-*`, `p-*`, `whitespace-nowrap`) win. Added `scroll-padding-bottom` with `env(safe-area-inset-bottom)`.
+  2. **`HeroInteractiveFocus.jsx` & `RoleSwitcher.jsx`**: Polished mobile recommendation badge padding/radius (`rounded-xl py-1.5 px-3 text-left leading-snug`) and made bottom `RoleSwitcher` responsive (`max-w-[calc(100vw-1.5rem)]`, `flex-wrap`, compact mobile label `โหมด:`).
+  3. **Additional QAQC Overflow Fixes**:
+     - `TaxTeaser.jsx`: Added `flex-wrap gap-2` on bonus selector row (`0–4 เดือน`) that previously overflowed 375px viewport by 20px.
+     - `StoneCalculator.jsx` & `EarthEnergyPage.jsx`: Contained animated ambient glow (`inset-0` + `overflow-x-clip`) eliminating 23px horizontal wheel scroll on mobile, and removed CTA `truncate`.
+     - `AdminInsurancePage.jsx`: Compacted table columns and added `tabIndex={0} role="region"` so all 6 columns fit inside `1280px` desktop without clipping (`tableWidth=886px <= cardWidth=928px`).
+- **Verification**: 23/23 unit tests pass; Vite production build clean; browser QAQC verified **0 overflows** across Mobile `375×812` (`/`, `/wealth`, `/earth-energy`, `/earth-energy/product/prod-1`, `/inner-life`, `/blog`, `/about`) and Desktop `1280×800`.
+
+## 50. Official AIA Personal Accident (PA) Plans & Tap-Only AIA Plan Finder / Premium Estimator (November 21–22, 2026)
+- **Status**: **Completed & Verified** (`4de75ce`, `a67655c`)
+- **Database & Catalog Additions (Live PostgreSQL + `seed.js` + `mockData.js`)**:
+  - Upserted 2 official AIA Thailand Accident plans under new 6th category `ACCIDENT` (`ประกันอุบัติเหตุส่วนบุคคล (AIA PA)`), bringing live PostgreSQL catalog to **12 official AIA plans across 6 categories**:
+    1. `aia-pa-personal-accident` — **AIA PA ประกันอุบัติเหตุส่วนบุคคล** (starting 2,500 THB/year, PA 2,500 to VIP 32K, AIA Privilege Care Card, AIA MediVac, official PDF `AIA-PA-Brochure.pdf`).
+    2. `aia-accident-rider-ai-rcc` — **AIA Accident Rider (AI/RCC & ADD/RCC)** (starting 350 THB/month, weekly income indemnity, official PDF `AIA_AI-RCC_ADD-RCC_ADB-RCC_17032021.pdf`).
+  - Updated `insuranceInfographic.js` (`CATEGORY_GROUPS` now 6 categories + bespoke infographics for both PA plans), `AdminInsurancePage.jsx` (category key selector), and bumped `AuthContext.jsx` cache key to `lw365_plans_v3`.
+- **Smart AIA Plan Finder & Preliminary Premium Estimator**:
+  - **`src/utils/insuranceEstimator.js`**: Pure JS engine parsing monthly/yearly/bespoke `startingPrice`, scaling estimated monthly & yearly ranges by gender, age band (`20–29` to `60+`), and coverage tier (keeping PA rates flat across ages per real underwriting), computing recommended 5–10% income budget, tax-deduction potential, match scores, and Admin A Lead handoff notes.
+  - **`src/components/insurance/InsurancePlanFinder.jsx`**: Zero-typing 4-step tap-only interface on `/wealth?tab=finder` (plus quick banner on `/wealth` and shortcut in `Navbar.jsx` under `Learning`) with live KPI cards, "แสดงเฉพาะแผนในงบ" toggle, and 1-click quotation handoff pre-filling `LeadCaptureForm` (`defaultNotes`).
+- **Verification**: 28/28 unit tests pass (added `tests/insuranceEstimator.test.js`, updated `tests/insuranceInfographic.test.js`); clean Vite build; browser QAQC verified all 6 categories, PA detail infographic, live estimator interactions, Lead pre-fill modal, and **0 overflows** across `1280×800` and `375×812`.
+
+## 51. Site-Wide Editorial Copy & UX Microcopy Polish (November 23, 2026)
+- **Status**: **Completed & Verified** (`68ec0b8`)
+- **Ordered 4-Skill Pass Applied Across 23 Files**:
+  1. **Phase 1 — `copy-editing` + `humanizer`**: Removed AI-writing tells (*"ไม่ใช่แค่... แต่คือ..."*, negation lists, inflated claims like *"ไร้รอยต่อ / สมบูรณ์แบบ / ถือกำเนิดขึ้น"*, stock openers, decorative status emojis, and mixed 3rd-person pronouns inside quotes) across `siteCustomizerDefaults.js`, `HomePage.jsx`, `Footer.jsx`, `AboutPage.jsx`, `LifePage.jsx`, `WealthPage.jsx`, `TaxPlanningPage.jsx`, `WellbeingPage.jsx`, `InnerLifePage.jsx`, `EarthEnergyPage.jsx`, and `HeroInteractiveFocus.jsx`. Unified persona naming (`Admin A` / `Admin B`, fixing leftover `"แอดมิน B"`). Bumped `SiteCustomizerContext.jsx` cache key to `lw365_site_customizer_v3`.
+  2. **Phase 2 — `better-writing` + `ux-writing`**: Refined validation errors (`validation.js`, `LeadCaptureForm.jsx`, `LoginPage.jsx`, `RegisterPage.jsx`, `FileUploadZone.jsx`, `AdminInsurancePage.jsx`) to be actionable and non-blaming; added AIA PA option to `LeadCaptureForm`; added clear CTA (`เลือกชมแร่ธาตุธรรมชาติ`) to `CartDrawer.jsx` empty state; replaced `"Are you sure?"` / `"คุณแน่ใจหรือไม่"` confirmation titles with concrete consequence wording (`ConfirmModal.jsx`, `SecurityConfirmModal.jsx`, `LanguageContext.jsx`); removed `!`, `successfully`, and legacy `"สายมู"` jargon from UI toasts and menus.
+- **Verification**: Re-scan confirmed 0 leftover AI tells or persona inconsistencies; Vite build clean (`1.04s`); 28/28 unit tests pass.
+
+
 
 
 
