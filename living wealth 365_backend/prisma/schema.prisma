@@ -191,3 +191,53 @@ model InsurancePlan {
 
   @@map("insurance_plans")
 }
+
+// 7. เวิร์กชอปและกิจกรรมเชิงปฏิบัติการ (Workshops & Experiences)
+model Workshop {
+  id          String             @id @default(uuid())
+  slug        String             @unique
+  track       String             // 'CRYSTAL' | 'LIFE_WEALTH' | 'WELLBEING_THERAPY'
+  trackLabel  String             // เช่น 'ทำหินมงคล & แร่ธาตุ'
+  audiences   Json               @default("[]") // ['CORPORATE', 'SMALL_GROUP']
+  title       String
+  subtitle    String             @db.Text
+  duration    String
+  groupSize   String
+  format      String
+  facilitator String             @default("Admin A & Admin B")
+  imageUrl    String?            @db.Text
+  painPoints  Json               @default("[]") // string[]
+  whatAndHow  Json               @default("[]") // { step, title, detail }[]
+  outcomes    Json               @default("[]") // string[]
+  highlights  Json               @default("[]") // string[]
+  agenda      Json               @default("[]") // { time, topic }[]
+  takeaways   String?            @db.Text
+  credits     Json               @default("[]") // { name, orgType, participants, note }[]
+  slides      Json               @default("[]") // string[] URLs สไลด์ Canva/PPT
+  isActive    Boolean            @default(true)
+  sortOrder   Int                @default(0)
+
+  feedbacks   WorkshopFeedback[]
+
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+
+  @@map("workshops")
+}
+
+// 8. รีวิวและความคิดเห็นจากผู้เข้าร่วมเวิร์กชอป (Workshop Feedbacks)
+model WorkshopFeedback {
+  id         String    @id @default(uuid())
+  workshopId String?
+  workshop   Workshop? @relation(fields: [workshopId], references: [id], onDelete: Cascade)
+  authorName String
+  authorRole String?
+  rating     Int       @default(5)
+  comment    String    @db.Text
+  isApproved Boolean   @default(true) // แสดงทันที แอดมินสามารถซ่อน/ลบได้ใน CMS
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@map("workshop_feedbacks")
+}

@@ -1205,6 +1205,24 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Vite build clean; 28/28 unit tests pass.
   - Browser QAQC verified `1280×800` (single-row 5-item Navbar, 0 overflows, Presentation Mode navigation, Canva/PPT tab, per-course spotlight) and `375×812` mobile (`hScrollDetected=false`, mobile menu `Workshops` link, fixed `LeadCaptureForm` label wrap & Presentation Mode vertical fit at 800px height).
 
+## 54. Workshops Phase 2: PostgreSQL + API + Overview/Detail + Credits + Instant Feedback + Admin CMS (November 23, 2026)
+- **Status**: **Completed & Verified (Full-Stack)**
+- **Backend (`living wealth 365_backend/`)**:
+  - Added Prisma models `Workshop` and `WorkshopFeedback` (`prisma/schema.prisma`), synced via `prisma db push` to live Supabase PostgreSQL.
+  - Created `src/routes/workshops.js` mounted at `/api/workshops`:
+    - Public: `GET /api/workshops`, `GET /api/workshops/:slug`, `GET /api/workshops/feedbacks`, `POST /api/workshops/feedbacks` (Zod-validated, rate-limited via `leadLimiter`, instant publish `isApproved: true`, resolves either UUID `workshopId` or `workshopSlug`).
+    - Admin (`authenticateUser` + `requireAdmin`): `POST/PATCH/DELETE /api/workshops`, `PATCH/DELETE /api/workshops/feedbacks/:id` (hide/unhide/delete).
+  - Created idempotent seed `prisma/seedWorkshops.js` and seeded 4 realistic workshops (`crystal-mineral-crafting`, `life-map-retirement-readiness`, `burnout-recovery-deep-sleep`, `stillness-circle-private-advisory`) with Pain Points, What & How, Outcomes, realistic Thai corporate/group credits, and 6 initial reviews.
+- **Frontend (`living wealth 365 front end/`)**:
+  - Added `workshopsApi` in `src/api.js`, plus routes `/workshops/:slug` and `/admin/cms/workshops` in `src/constants/routes.js`, `src/App.jsx`, and `src/components/common/DashboardLayout.jsx`.
+  - Created modular components in `src/components/workshops/`: `WorkshopJourneySection.jsx` (Pain Point → What & How → Outcomes), `WorkshopCreditsSection.jsx` (corporate & individual credits), and `WorkshopFeedbackSection.jsx` (reviews + instant-publish submission form).
+  - Upgraded `src/pages/public/WorkshopsPage.jsx` (Overview) and created `src/pages/public/WorkshopDetailPage.jsx` (`/workshops/:slug`) with deep-dive sections, Agenda, Credits, Course Feedback, Presentation Mode, and pre-filled Callback Lead Form.
+  - Created `src/pages/admin/AdminWorkshopsPage.jsx` + `src/components/admin/preview/WorkshopLivePreview.jsx` with 2 tabs: Workshop CRUD (including 1-click `QuickFrameModal`, `CoverFramePicker`, Canva/PPT slide URLs, Live Preview) and Feedback moderation (Hide/Unhide/Delete).
+- **Verification**:
+  - 28/28 unit tests pass; `vite build` passes cleanly.
+  - Browser QAQC verified `1280×800` and `375×812` across `/workshops`, `/workshops/crystal-mineral-crafting`, and `/admin/cms/workshops` with 0 horizontal overflow; caught and fixed fallback non-UUID `workshopId` resolution on Detail page feedback submission (verified HTTP 201 + Admin cleanup DELETE 200).
+
+
 
 
 

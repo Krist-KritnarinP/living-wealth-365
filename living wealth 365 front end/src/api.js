@@ -109,6 +109,19 @@ export const wishlistApi = {
   delete: (productId) => api.delete(`/wishlist/${productId}`).then((res) => res.data),
 };
 
+// 🎓 Workshops & Feedbacks APIs
+export const workshopsApi = {
+  getAll: (params) => api.get('/workshops', { params }).then((res) => res.data.workshops),
+  getBySlug: (slug) => api.get(`/workshops/${slug}`).then((res) => res.data.workshop),
+  create: (data) => api.post('/workshops', data).then((res) => res.data.workshop),
+  update: (id, data) => api.patch(`/workshops/${id}`, data).then((res) => res.data.workshop),
+  delete: (id) => api.delete(`/workshops/${id}`).then((res) => res.data),
+  getFeedbacks: (params) => api.get('/workshops/feedbacks', { params }).then((res) => res.data.feedbacks),
+  submitFeedback: (data) => api.post('/workshops/feedbacks', data).then((res) => res.data),
+  updateFeedback: (id, data) => api.patch(`/workshops/feedbacks/${id}`, data).then((res) => res.data.feedback),
+  deleteFeedback: (id) => api.delete(`/workshops/feedbacks/${id}`).then((res) => res.data),
+};
+
 // 📂 File Upload APIs (Images & PDFs)
 export const uploadApi = {
   uploadFile: (file, onProgress) => {

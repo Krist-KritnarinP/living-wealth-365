@@ -31,6 +31,7 @@ import BlogDetailPage from './pages/public/BlogDetailPage';
 import AboutPage from './pages/public/AboutPage';
 import TaxPlanningPage from './pages/public/TaxPlanningPage';
 import WorkshopsPage from './pages/public/WorkshopsPage';
+import WorkshopDetailPage from './pages/public/WorkshopDetailPage';
 
 // Auth & Utility Pages
 import LoginPage from './pages/public/LoginPage';
@@ -49,6 +50,7 @@ import AdminSiteCustomizerPage from './pages/admin/AdminSiteCustomizerPage';
 import AdminInsurancePage from './pages/admin/AdminInsurancePage';
 import AdminBlogPage from './pages/admin/AdminBlogPage';
 import AdminProductsPage from './pages/admin/AdminProductsPage';
+import AdminWorkshopsPage from './pages/admin/AdminWorkshopsPage';
 import AdminActivityLogPage from './pages/admin/AdminActivityLogPage';
 
 // Helper to scroll to top on route change
@@ -93,6 +95,7 @@ function AppShell() {
           <Route path={ROUTES.ABOUT} element={<AboutPage />} />
           <Route path={ROUTES.TAX} element={<TaxPlanningPage />} />
           <Route path={ROUTES.WORKSHOPS} element={<WorkshopsPage />} />
+          <Route path="/workshops/:slug" element={<WorkshopDetailPage />} />
 
           {/* 🔄 Backwards Compatibility & Shortlinks */}
           <Route path="/insurance/life" element={<Navigate to="/wealth?tab=protection" replace />} />
@@ -180,6 +183,14 @@ function AppShell() {
             element={
               <ProtectedRoute requiredRole="ADMIN">
                 <AdminProductsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path={ROUTES.ADMIN_WORKSHOPS}
+            element={
+              <ProtectedRoute requiredRole="ADMIN">
+                <AdminWorkshopsPage />
               </ProtectedRoute>
             }
           />

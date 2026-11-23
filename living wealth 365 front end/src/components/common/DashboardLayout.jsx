@@ -19,6 +19,7 @@ import {
   Sliders,
   History,
   ShoppingBag,
+  Presentation,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useCart } from '../../context/CartContext';
@@ -119,6 +120,13 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       icon: Package,
       badge: products.length,
       badgeColor: 'badge-secondary text-white',
+    },
+    {
+      title: 'จัดการ Workshops (CMS)',
+      path: ROUTES.ADMIN_WORKSHOPS,
+      icon: Presentation,
+      badge: 'New',
+      badgeColor: 'badge-primary text-white font-bold',
     },
     {
       title: 'ปรับแต่งหน้าเว็บ (Site Customizer)',

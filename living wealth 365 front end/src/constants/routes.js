@@ -16,6 +16,7 @@ export const ROUTES = {
   JOURNAL: '/journal',
   JOURNAL_DETAIL: (slug = ':slug') => `/journal/${slug}`,
   WORKSHOPS: '/workshops',
+  WORKSHOP_DETAIL: (slug = ':slug') => `/workshops/${slug}`,
   ABOUT: '/about',
 
   // 🔄 Backwards Compatibility & Direct Gateways
@@ -45,5 +46,6 @@ export const ROUTES = {
   ADMIN_INSURANCE: '/admin/cms/insurance',
   ADMIN_BLOG: '/admin/cms/blog',
   ADMIN_PRODUCTS: '/admin/cms/products',
+  ADMIN_WORKSHOPS: '/admin/cms/workshops',
   ADMIN_ACTIVITY_LOG: '/admin/activity-log',
 };

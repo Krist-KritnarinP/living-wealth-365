@@ -15,6 +15,7 @@ import { postsRouter } from './routes/posts.js';
 import { productsRouter } from './routes/products.js';
 import { wishlistRouter } from './routes/wishlist.js';
 import { insurancePlansRouter } from './routes/insurancePlans.js';
+import { workshopsRouter } from './routes/workshops.js';
 import { uploadRouter } from './routes/upload.js';
 import { errorHandler } from './middleware/errorHandler.js';
 
@@ -70,6 +71,7 @@ app.use('/api/posts', postsRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/wishlist', wishlistRouter);
 app.use('/api/insurance-plans', insurancePlansRouter);
+app.use('/api/workshops', workshopsRouter);
 app.use('/api/upload', uploadRouter);
 
 // Global Error Handler
