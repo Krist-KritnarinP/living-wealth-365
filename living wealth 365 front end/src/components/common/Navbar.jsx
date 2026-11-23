@@ -478,7 +478,7 @@ export default function Navbar() {
           >
             <span className="flex items-center gap-2">
               <Presentation className="w-4 h-4" />
-              <span>Workshops {language === 'th' ? '(เวิร์กชอปองค์กร & กลุ่มเล็ก)' : ''}</span>
+              <span>Workshops {language === 'th' ? '(เวิร์กชอป)' : ''}</span>
             </span>
           </Link>
 

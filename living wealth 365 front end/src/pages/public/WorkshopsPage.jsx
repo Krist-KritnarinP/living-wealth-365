@@ -78,7 +78,7 @@ export default function WorkshopsPage() {
           <div className="max-w-3xl space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
               <Presentation className="w-4 h-4 text-secondary shrink-0" />
-              <span>WORKSHOPS & EXPERIENCES • เวิร์กชอปองค์กรและกลุ่มเล็ก</span>
+              <span>WORKSHOPS & EXPERIENCES</span>
             </div>
 
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-primary leading-[1.15] tracking-tight">

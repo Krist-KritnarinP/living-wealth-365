@@ -92,7 +92,7 @@ export default function Footer() {
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  Workshops: เวิร์กชอปองค์กร & กลุ่มเล็ก
+                  Workshops & Experiences (เวิร์กชอป)
                 </Link>
               </li>
             </ul>
