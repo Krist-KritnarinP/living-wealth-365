@@ -1180,6 +1180,18 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   2. **Phase 2 — `better-writing` + `ux-writing`**: Refined validation errors (`validation.js`, `LeadCaptureForm.jsx`, `LoginPage.jsx`, `RegisterPage.jsx`, `FileUploadZone.jsx`, `AdminInsurancePage.jsx`) to be actionable and non-blaming; added AIA PA option to `LeadCaptureForm`; added clear CTA (`เลือกชมแร่ธาตุธรรมชาติ`) to `CartDrawer.jsx` empty state; replaced `"Are you sure?"` / `"คุณแน่ใจหรือไม่"` confirmation titles with concrete consequence wording (`ConfirmModal.jsx`, `SecurityConfirmModal.jsx`, `LanguageContext.jsx`); removed `!`, `successfully`, and legacy `"สายมู"` jargon from UI toasts and menus.
 - **Verification**: Re-scan confirmed 0 leftover AI tells or persona inconsistencies; Vite build clean (`1.04s`); 28/28 unit tests pass.
 
+## 52. Real Article EP.2 Upload (R2 + PostgreSQL) & Inline Infographic Rendering (November 23, 2026)
+- **Status**: **Completed & Verified**
+- **Published Article**:
+  - **Title**: `วางแผนชีวิตก่อนเกษียณ ตอนที่ 2 : หลังเกษียณ ค่าใช้จ่ายอะไรลดลง และอะไรอาจเพิ่มขึ้น?`
+  - **Slug**: `retirement-planning-ep2-post-retirement-expenses` (`id: 33898601-90d5-4af9-b3c7-3668c8c9f862`)
+  - **Metadata**: `pillar: WEALTH`, `category: วางแผนเกษียณ`, `postType: ARTICLE`, `authorName: Admin A`, `readTime: 4 นาที`, `published: true`
+  - **Cloudflare R2 Cover & Inline Infographic**: `https://pub-10dc92b49894448a9fe11f81ccc1e577.r2.dev/retirement-planning-ep2-infographic-1795413531687-378999.jpg#lwframe=fit:cover;x:50;y:12;zoom:1`
+  - **Content Integrity**: Preserved 100% verbatim original Thai prose with full Infographic embedded inside the article body.
+- **Frontend Markdown Image Support**:
+  - Added `![alt](url)` image block rendering to both `src/pages/public/BlogDetailPage.jsx` and `src/components/admin/preview/BlogLivePreview.jsx` so embedded full-page infographics display cleanly on both live public articles and Admin CMS live previews.
+
+
 
 
 

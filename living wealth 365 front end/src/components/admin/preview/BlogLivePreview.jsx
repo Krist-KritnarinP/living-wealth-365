@@ -100,6 +100,19 @@ export default function BlogLivePreview({ post = {} }) {
         <div className="zen-surface rounded-3xl p-6 sm:p-10 border border-base-300/60 shadow-xs space-y-6 text-base text-base-content/85 leading-relaxed">
           <div className="prose max-w-none space-y-4">
             {content.split('\n\n').map((paragraph, idx) => {
+              const trimmed = paragraph.trim();
+              const imgMatch = trimmed.match(/^!\[([^\]]*)\]\((https?:\/\/[^\s)]+|\/[^\s)]+)\)$/);
+              if (imgMatch) {
+                return (
+                  <figure key={idx} className="my-5 rounded-2xl overflow-hidden border border-base-300/70 bg-base-200/30 shadow-sm">
+                    <img
+                      src={imgMatch[2]}
+                      alt={imgMatch[1] || title}
+                      className="w-full h-auto object-contain mx-auto"
+                    />
+                  </figure>
+                );
+              }
               if (paragraph.startsWith('### ')) {
                 return (
                   <h3 key={idx} className="text-xl sm:text-2xl font-black text-primary pt-3">
