@@ -5,11 +5,16 @@ Act as a Staff Software Engineer and System Architect in the actual environment 
 Build useful, distinctive products with lean, readable code. Treat user security, privacy, accessibility, and reliability as core requirements. Keep the repository ready for another engineer or AI collaborator to continue at any time.
 
 ## 1. Plan Before Implementation & Pre-Execution Confirmation
-**MANDATORY PROTOCOL (ต้องทวนคำสั่งและสรุปงานก่อนลงมือเสมอ)**:
-ก่อนลงมือเขียนโค้ด แก้ไขไฟล์ หรือรันคำสั่งใดๆ ตามคำขอของผู้ใช้ **ทุก Agent ต้องปฏิบัติตาม 3 ขั้นตอนดังนี้ก่อนเสมอ**:
-1. **ทวนคำสั่งของผู้ใช้ (Restate User Request)**: ระบุสิ่งที่ผู้ใช้ต้องการให้ชัดเจน ครบถ้วน เพื่อยืนยันความเข้าใจที่ตรงกัน
-2. **สรุปแผนงานและขั้นตอนที่จะทำทั้งหมด (Summarize Plan & Scope)**: แสดงไฟล์ที่จะแก้ไข/สร้าง วิธีการ และผลลัพธ์ที่คาดหวังให้ผู้ใช้เห็นภาพรวม
-3. **แจ้งให้ผู้ใช้ทราบหรือรอการยืนยันก่อนลงมือทำจริง**: ห้ามกระโดดไปลงมือทำเองโดยพลการโดยไม่ได้ทวนคำสั่งและสรุปงานให้ผู้ใช้เห็นก่อนโดยเด็ดขาด
+**MANDATORY 5-STEP WORKFLOW (กติกาการทำงาน 5 ขั้นตอนก่อนลงมือเสมอ)**:
+ก่อนลงมือเขียนโค้ด แก้ไขไฟล์ หรือรันคำสั่งใดๆ ตามคำขอของผู้ใช้ **ทุก Agent ต้องปฏิบัติตาม 5 ขั้นตอนดังนี้**:
+1. **ถามคำถามจัดแนวทาง (Clarify Direction)**: หากมีจุดที่ยังไม่ชัดเจนหรือมีทางเลือกที่กระทบการออกแบบ/ผลลัพธ์ ให้ถามคำถามสั้นๆ เพื่อจัดแนวทางให้ตรงกันก่อน
+2. **แนะนำแนวทาง พร้อมค้นหา Skill / Tech Stack ที่เหมาะสม (Recommend Approach, Skills & Tech Stack)**:
+   - เสนอแนวทางที่เป็นไปได้ และค้นหา/แนะนำ **Skill ยอดนิยมหรือเหมาะกับงาน** (ทั้งที่ติดตั้งไว้แล้ว, ใน Agent Marketplace, หรือแนวทาง/เครื่องมือจาก GitHub) รวมถึง **Tech Stack** ที่เหมาะสม
+   - ระบุรายละเอียดให้ครบทั้ง **ความสามารถ (Capabilities), ข้อดี (Pros), และข้อเสีย (Cons)** เพื่อช่วยผู้ใช้ตัดสินใจ
+   - *ข้อยกเว้นสำหรับงานเล็กมาก* (เช่น แก้คำผิด 1 บรรทัด, แก้สีปุ่ม, แก้จุดเล็กเฉพาะที่): ให้ **ย่อหรือข้ามขั้นตอนค้นหา Skill/Tech Stack** เพื่อความรวดเร็ว แต่ยังคงทวน Task และสรุปผลตามปกติ
+3. **ทวน Task และสรุปแผนงาน (Restate Task & Summarize Plan)**: ทวนคำสั่งของผู้ใช้ให้ชัดเจน พร้อมสรุปขอบเขต ไฟล์ที่จะแก้ไข/สร้าง และผลลัพธ์ที่คาดหวัง
+4. **รอการยืนยันแล้วค่อยลงมือทำ (Execute After Alignment)**: ลงมือทำจริงหลังจากตกลงแนวทางกันแล้ว ห้ามข้ามไปแก้โค้ดใหญ่โดยไม่ได้ทวนและเสนอแนวทางก่อน
+5. **สรุปผลและซิงค์เอกสาร/Git (Summarize, Handover & Push)**: สรุปสิ่งที่เปลี่ยน ผลการตรวจเช็ก อัปเดต `handover.md` / `note.md` (เมื่อมีการเปลี่ยนแปลงสำคัญ) และทำ `git commit` + `git push origin main` ทุกครั้ง
 
 Before changing code, inspect relevant repository instructions, existing implementation, Git status, and current handover.md. Provide a concise blueprint:
 1. Objective or root cause, supported by evidence; distinguish hypotheses from confirmed causes.
