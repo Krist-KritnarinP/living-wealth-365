@@ -164,7 +164,7 @@ export function AuthProvider({ children }) {
     const token = localStorage.getItem('lw365_token');
     if (currentUser?.role === 'ADMIN' && !token) {
       authApi
-        .login({ identifier: 'admin_lw', password: 'Admin1234!' })
+        .demoSession('ADMIN')
         .then((res) => {
           if (res?.token) {
             localStorage.setItem('lw365_token', res.token);
@@ -225,10 +225,14 @@ export function AuthProvider({ children }) {
   // 1-Click Fast Login Presets (สำหรับทดสอบ)
   const loginAsCustomer = async (customData) => {
     try {
-      const res = await login({ identifier: 'somchai_lw', password: 'Customer1234!' });
-      if (customData) {
-        setCurrentUser((prev) => ({ ...prev, ...customData }));
+      const res = await authApi.demoSession('CUSTOMER');
+      if (res?.token) {
+        localStorage.setItem('lw365_token', res.token);
       }
+      if (res?.user) {
+        setCurrentUser(customData ? { ...res.user, ...customData } : res.user);
+      }
+      await refreshData();
       return res;
     } catch {
       // Fallback
@@ -238,7 +242,14 @@ export function AuthProvider({ children }) {
 
   const loginAsAdmin = async () => {
     try {
-      const res = await login({ identifier: 'admin_lw', password: 'Admin1234!' });
+      const res = await authApi.demoSession('ADMIN');
+      if (res?.token) {
+        localStorage.setItem('lw365_token', res.token);
+      }
+      if (res?.user) {
+        setCurrentUser(res.user);
+      }
+      await refreshData();
       return res;
     } catch {
       // Fallback

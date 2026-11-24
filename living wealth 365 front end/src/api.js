@@ -27,7 +27,8 @@ api.interceptors.response.use(
       error.response?.status === 401 &&
       !originalRequest._retry &&
       originalRequest.url &&
-      !originalRequest.url.includes('/auth/login')
+      !originalRequest.url.includes('/auth/login') &&
+      !originalRequest.url.includes('/auth/demo-session')
     ) {
       try {
         const savedUserStr = localStorage.getItem('lw365_user');
@@ -35,8 +36,8 @@ api.interceptors.response.use(
         if (savedUser?.role === 'ADMIN') {
           originalRequest._retry = true;
           const loginRes = await axios.post(
-            `${api.defaults.baseURL}/auth/login`,
-            { identifier: 'admin_lw', password: 'Admin1234!' },
+            `${api.defaults.baseURL}/auth/demo-session`,
+            { targetRole: 'ADMIN' },
             { timeout: 8000 }
           );
           if (loginRes.data?.token) {
@@ -63,6 +64,7 @@ export const fetchHealth = async () => {
 export const authApi = {
   register: (data) => api.post('/auth/register', data).then((res) => res.data),
   login: (data) => api.post('/auth/login', data).then((res) => res.data),
+  demoSession: (targetRole) => api.post('/auth/demo-session', { targetRole }).then((res) => res.data),
   getMe: () => api.get('/auth/me').then((res) => res.data),
   updateProfile: (data) => api.patch('/auth/profile', data).then((res) => res.data),
   logout: () => api.post('/auth/logout').then((res) => res.data),

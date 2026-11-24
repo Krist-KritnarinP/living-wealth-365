@@ -82,7 +82,7 @@ export default function FileUploadZone({
       let token = localStorage.getItem('lw365_token');
       if (!token) {
         try {
-          const authRes = await authApi.login({ identifier: 'admin_lw', password: 'Admin1234!' });
+          const authRes = await authApi.demoSession('ADMIN');
           if (authRes?.token) {
             localStorage.setItem('lw365_token', authRes.token);
           }

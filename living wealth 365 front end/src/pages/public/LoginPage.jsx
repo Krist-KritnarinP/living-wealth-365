@@ -126,7 +126,7 @@ export default function LoginPage() {
             <input
               type="text"
               required
-              placeholder="เช่น admin_lw หรือ admin@livingwealth365.com"
+              placeholder="กรอกชื่อผู้ใช้หรืออีเมลของคุณ"
               value={identifier}
               onChange={(e) => setIdentifier(e.target.value)}
               className="input input-bordered w-full rounded-xl bg-base-100 text-sm"

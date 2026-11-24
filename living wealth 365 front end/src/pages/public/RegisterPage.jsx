@@ -148,7 +148,7 @@ export default function RegisterPage() {
               required
               autoCapitalize="none"
               spellCheck={false}
-              placeholder="เช่น somchai_lw"
+              placeholder="เช่น your_username"
               value={formData.username}
               onChange={(e) => handleChange('username', e.target.value)}
               className={`input input-bordered w-full rounded-xl bg-base-100 text-sm focus:input-primary ${

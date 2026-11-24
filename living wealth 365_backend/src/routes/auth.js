@@ -154,6 +154,54 @@ authRouter.post('/login', authLimiter, async (req, res) => {
 });
 
 /**
+ * 2.1 POST /api/auth/demo-session
+ * สำหรับปุ่มสลับ Role ทดสอบ (เฉพาะ Development หรือเมื่อไม่อยู่ใน production)
+ * ออก Token ให้บัญชีตัวอย่างโดยตรง โดยไม่ต้องส่งรหัสผ่านผ่าน Frontend
+ */
+authRouter.post('/demo-session', authLimiter, async (req, res) => {
+  try {
+    if (process.env.NODE_ENV === 'production' && !process.env.ALLOW_DEMO_SWITCHER) {
+      return res.status(403).json({ error: 'Demo role simulator is disabled in production' });
+    }
+
+    const { targetRole } = req.body;
+    const roleKey = (targetRole || 'CUSTOMER').toUpperCase() === 'ADMIN' ? 'ADMIN' : 'CUSTOMER';
+
+    const user = await prisma.user.findFirst({
+      where: { role: roleKey },
+      orderBy: { id: 'asc' },
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: `ไม่พบบัญชีทดสอบในบทบาท ${roleKey}` });
+    }
+
+    const token = signToken({
+      id: user.id,
+      username: user.username,
+      role: user.role,
+    });
+
+    res.json({
+      message: `เข้าสู่โหมดทดสอบบทบาท ${roleKey} สำเร็จ`,
+      token,
+      user: {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        phone: user.phone,
+        birthDate: user.birthDate,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    console.error('[Demo Session Error]:', error);
+    res.status(500).json({ error: 'ไม่สามารถสร้างเซสชันทดสอบได้' });
+  }
+});
+
+/**
  * 3. GET /api/auth/me
  * ดึงข้อมูลผู้ใช้งานปัจจุบันผ่าน JWT Token
  */

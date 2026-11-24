@@ -223,7 +223,7 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Added `InsurancePlan` model in `schema.prisma` with fields: `id`, `type` (LIFE / NON_LIFE), `category`, `categoryName`, `name`, `slug`, `tagline`, `coverageAmount`, `startingPrice`, `features` (JSON string array), `recommendedFor`, `description`, `isActive`, `sortOrder`, `createdAt`, `updatedAt`.
   - Executed `npx prisma db push` to generate and apply database tables cleanly.
 - **Comprehensive Database Seeding (`seed.js`)**:
-  - **Admin User**: `admin_lw` (`admin@livingwealth365.com` / `Admin@365Living!`)
+  - **Admin User**: `admin_lw` (Managed via `prisma/seed.js` or environment variables)
   - **Customer User**: `somchai_lw` (`somchai@example.com` / `Customer@123`)
   - **7 Insurance Plans Seeded**:
     1. *AIA Health Happy เหมาเบิ้ลคุ้ม* (HEALTH) - วงเงิน 5-25 ล้านบาท
