@@ -1222,6 +1222,22 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - 28/28 unit tests pass; `vite build` passes cleanly.
   - Browser QAQC verified `1280×800` and `375×812` across `/workshops`, `/workshops/crystal-mineral-crafting`, and `/admin/cms/workshops` with 0 horizontal overflow; caught and fixed fallback non-UUID `workshopId` resolution on Detail page feedback submission (verified HTTP 201 + Admin cleanup DELETE 200).
 
+## 55. Home Page Executive Declutter: 9 Sections → Modular 5-Section Hub (November 24, 2026)
+- **Status**: **Completed & Verified**
+- **Architecture & Component Decomposition (`src/components/home/`)**:
+  - Refactored `src/pages/public/HomePage.jsx` from a 725-line 9-section page down to a lean ~170-line **5-section executive hub** (`-25 KB` JS bundle, drastically reduced scroll fatigue):
+    1. **Clean Hero** — Crisp statement, primary CTA to `/workshops`, secondary CTA to `#lifemap` interactive hub, and 2 trust indicators.
+    2. **`HomePathwaysBento.jsx`** — 4 scannable pathway cards highlighting **Workshops & Experiences**, **Wealth & Protection**, **Earth, Energy & Wellbeing**, and **Journal & Admin A's Notes**.
+    3. **`HomeToolsHub.jsx`** — Unified semantic ARIA tab switcher (`Life Map 6 มิติ` | `คำนวณภาษี 2568` | `ค้นหาแผนประกัน AIA`) consolidating 3 heavy interactive widgets into 1 clean section.
+    4. **`HomeCuratedShowcase.jsx`** — Tabbed showcase (`บทความ & Admin A's Notes` | `แร่ธาตุธรรมชาติคัดสรร`, 3 items each) + compact **Admin A & Admin B Trust Strip** linking to `/about`.
+    5. **`HomeContactHub.jsx`** — Unified side-by-side contact block combining 1-click LINE quick-copy (with Workshops, AIA, Tax, Crystals topics) + `LeadCaptureForm`.
+- **Site Customizer Sync**:
+  - Updated `src/constants/siteCustomizerDefaults.js` for the 4-pathway heading, clean Trust Strip quote, and updated Hero CTA; bumped `SiteCustomizerContext.jsx` cache key to `lw365_site_customizer_v4`.
+- **Verification**:
+  - 28/28 unit tests pass; `vite build` clean (`1.11s`).
+  - Browser QAQC verified Desktop `1280×800` (`4,860px` total height, 0 horizontal overflow) and Mobile `375×812` (0 horizontal overflow, clean 2-row wrapping on all tab bars), and resolved 3 default copy mismatches caught during inspection.
+
+
 
 
 

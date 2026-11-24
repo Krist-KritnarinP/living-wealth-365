@@ -25,13 +25,13 @@ export const DEFAULT_SITE_CONTENT = {
     titleLine1: 'วันนี้... อะไรคือสิ่งที่คุณ',
     titleLine2: 'อยากรักษาไว้มากที่สุด?',
     description:
-      'ดูแลสุขภาพที่แข็งแรง เวลาอยู่กับคนที่รัก และความสบายใจไปพร้อมกับการวางแผนการเงิน Living Wealth 365 รวมแผนประกัน ภาษี สุขภาพ และแร่ธาตุธรรมชาติไว้ในที่เดียว โดย Admin A & Admin B',
-    primaryBtnText: 'สำรวจ Life Map 6 มิติ',
+      'ดูแลสุขภาพที่แข็งแรง เวลาอยู่กับคนที่รัก และความสบายใจไปพร้อมกับการวางแผนการเงิน Living Wealth 365 รวมเวิร์กชอป แผนประกัน AIA ภาษี สุขภาพ และแร่ธาตุธรรมชาติไว้ในที่เดียว โดย Admin A & Admin B',
+    primaryBtnText: 'ลองเครื่องมือวางแผนฟรี',
     primaryBtnLink: '#lifemap',
     secondaryBtnText: 'รู้จัก Admin A & Admin B',
     secondaryBtnLink: '/about',
-    trust1: 'สถาปัตยกรรมการเงิน & ประกัน AIA ได้รับอนุญาต',
-    trust2: 'วิทยาศาสตร์แร่ธาตุ SiO₂ & สุขภาพ Longevity',
+    trust1: 'วางแผนการเงิน & ประกัน AIA โดยที่ปรึกษาที่ได้รับอนุญาต',
+    trust2: 'เวิร์กชอปองค์กร & กลุ่มเล็ก • วิทยาศาสตร์แร่ธาตุ SiO₂',
     imageUrl:
       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&auto=format&fit=crop&q=80',
     imageBadge: 'Fellow Travelers',
@@ -39,11 +39,11 @@ export const DEFAULT_SITE_CONTENT = {
     imageSubtitle: 'Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ',
   },
 
-  // 4. Three Core Gateways
+  // 4. Core Pathways
   gateways: {
-    sectionBadge: 'Three Core Gateways',
-    sectionTitle: '3 เส้นทางดูแลชีวิตและการเงิน',
-    sectionSubtitle: 'เลือกสำรวจตามมิติที่คุณต้องการดูแลในวันนี้',
+    sectionBadge: '4 เส้นทางหลักของ Living Wealth 365',
+    sectionTitle: 'เลือกเรื่องที่คุณต้องการดูแลวันนี้',
+    sectionSubtitle: 'จัดหมวดหมู่ชัดเจนเพื่อให้คุณเข้าถึงข้อมูลและบริการที่ตรงใจได้ทันที',
     living: {
       badge: 'Gateway 01',
       title: 'Living (วิถีชีวิต)',
@@ -78,9 +78,9 @@ export const DEFAULT_SITE_CONTENT = {
 
   // 5. Personal Brand Narrative (Admin A & Admin B)
   narrative: {
-    badge: 'FELLOW TRAVELERS • เพื่อนร่วมทางของคุณ',
-    titleLine1: '"เริ่มจากการรับฟังชีวิตที่คุณต้องการ',
-    titleLine2: 'แล้วค่อยวางแผนการเงินไปพร้อมกัน"',
+    badge: 'ADMIN A & ADMIN B • เพื่อนร่วมทางของคุณ',
+    titleLine1: 'เริ่มจากการรับฟังชีวิตที่คุณต้องการ',
+    titleLine2: 'แล้วค่อยวางแผนการเงินไปพร้อมกัน',
     body: 'Admin A และ Admin B เชื่อว่าความมั่นคงทางการเงินกับสุขภาพกายใจต้องเดินไปด้วยกัน การมีแผนรับมือความเสี่ยงที่รัดกุมช่วยให้คุณมีพื้นที่และเวลาดูแลตัวเองกับคนที่รักได้อย่างเต็มที่',
     boxQuote:
       '"ทุกบทสนทนาเริ่มต้นจากการรับฟัง เพื่อให้คุณได้แผนที่เข้าใจง่ายและสบายใจที่จะตัดสินใจด้วยตัวเอง"',
