@@ -1,102 +1,121 @@
-# living-wealth-365
+# Living Wealth 365
 
-> **A Life Well Planned. A Life Well Lived.**  
-> แพลตฟอร์มการวางแผนชีวิต สุขภาพองค์รวม และสถาปัตยกรรมการเงิน ผสานศาสตร์โลกกายภาพเข้ากับโลกภายใน คัดสรรโดย **Admin A & Admin B**
-
----
-
-## 🌿 ภาพรวมโครงการ (Project Overview)
-
-**Living Wealth 365** คือ Life & Wellbeing Platform ที่ถือกำเนิดขึ้นจากแนวคิดการเชื่อมโยงความมั่นคงทางการเงินเข้ากับสุขภาพกายและจิตใจที่สงบสุข โดยมีผู้ร่วมก่อตั้ง **Admin A (นักวางแผนชีวิตและการเงิน)** และ **Admin B (ผู้คัดสรรพลังงานธรรมชาติและวิถีชีวิต)** ในฐานะ *"เพื่อนร่วมทาง (Fellow Travelers)"* ที่พร้อมรับฟังและร่วมค้นหาชีวิตที่ใช่
-
-ระบบออกแบบภายใต้ **3 Core Gateways** และ **7 Content Pillars**:
-1. **Living (วิถีชีวิต & ธรรมชาติ)**
-   - **Life**: สมดุลชีวิต 6 มิติ (Life Map), การออกแบบเวลา และเป้าหมายชีวิต
-   - **Wellbeing**: วิทยาศาสตร์การชะลอวัย (Longevity), สุขภาพระดับเซลล์ และ Home Health Sanctuary
-   - **Earth & Energy**: แร่ธาตุธรรมชาติ คัดสรรตามหลักธรณีวิทยา ($SiO_2$), ประวัติศาสตร์ และจักระ
-2. **Learning (การเรียนรู้ & การเงิน)**
-   - **Wealth**: สถาปัตยกรรมการเงิน 4 เสาหลัก (ปกป้อง, ฉุกเฉิน, เติบโต, มรดก) และโปรแกรมคำนวณภาษี 2568
-   - **Inner Life**: โลกภายใน, ศิลปะแห่งความเงียบสงบ (The Art of Stillness) และการสังเกตใจตนเอง
-   - **Journal**: วารสารความคิด, Admin A's Notes, Admin B's Journey และการสำรวจความหมายของการใช้ชีวิต
-3. **Connecting (เพื่อนร่วมทาง)**
-   - **About**: ปรัชญาชีวิตของ Admin A & Admin B
-   - **Let's Talk**: ระบบนัดหมายสนทนา 1-on-1 แบบเป็นกันเอง ปราศจากแรงกดดัน
+> **A Life Well Planned. A Life Well Lived.**
+> Full-stack web platform for holistic life planning, personal wealth & tax simulation, wellbeing, and advisor CRM.
 
 ---
 
-## ✨ ฟีเจอร์เด่น (Key Features)
+## Overview
 
-- 🧭 **Interactive Life Map (6 Dimensions)**: เครื่องมือประเมินวงล้อชีวิต 6 มิติ (สุขภาพ, การเงิน, เวลา, ความสัมพันธ์, โลกภายใน, เป้าหมาย) พร้อมกราฟเรดาร์ SVG และบทวิเคราะห์ภาพสะท้อนชีวิตแบบเรียลไทม์
-- 🧮 **Personal Income Tax Calculator (2568)**: คำนวณภาษีเงินได้บุคคลธรรมดา ภ.ง.ด. 90/91 ตามอัตราก้าวหน้า 7 ขั้น พร้อมระบบจำลองลดหย่อนภาษีประกันและกองทุน Thai ESG
-- 💎 **Earth & Energy 3D Visualizer**: คลังแร่ธาตุและคริสตัลธรรมชาติที่แยกมิติชัดเจนระหว่างวิทยาศาสตร์แร่ธาตุ โครงสร้างผลึก ประวัติศาสตร์อารยธรรม และพลังงานจักระ พร้อม 3D Gemstone Orb
-- 🧘 **Mindfulness Pause Timer**: ตัวจับเวลาฝึกสติและลมหายใจ (1, 2, 5 นาที) พร้อมวงแหวนสมาธิและแสงกระเพื่อมผ่อนคลาย
-- 🏡 **Home Health Sanctuary Checklist**: เช็กลิสต์ 5 นิสัยเปลี่ยนบ้านให้เป็นพื้นที่ฟื้นฟูสุขภาพระดับเซลล์และการนอนหลับลึก
-- 🔒 **Advisor CRM & Admin CMS**: แดชบอร์ดติดตามลูกค้า (CRM Pipeline), ระบบจัดการบทความวารสาร 7 เสาหลัก และระบบจัดการแคตตาล็อกแร่ธาตุ
+**Living Wealth 365** is a full-stack application structured around **3 Core Gateways** and **7 Content Pillars**:
 
----
-
-## 🛠️ เทคโนโลยีที่ใช้ (Tech Stack)
-
-### Frontend (`/living wealth 365 front end`)
-- **Core**: React 18 / Pure JavaScript (JSX)
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS + DaisyUI (Zen Glass Theme, Responsive 100%)
-- **Routing**: React Router DOM (v7)
-- **Icons**: Lucide React
-- **Testing**: Node.js Native Test Runner (`node --test`)
-
-### Backend (`/living wealth 365_backend`)
-- **Runtime**: Node.js (ES Modules)
-- **Framework**: Express.js
-- **Database**: MySQL
-- **ORM**: Prisma ORM (v5)
-- **Security & Auth**: JWT, bcryptjs, CORS, Helmet
-- **Uploads**: Multer File Storage
+- **Living**: Life (6-Dimension Life Map & time design), Wellbeing (longevity & Home Health Sanctuary), Earth & Energy (mineral & crystal catalog).
+- **Learning**: Wealth (4-pillar financial architecture & Thai personal income tax calculator), Inner Life (mindfulness & reflection), Journal (editorial notes & stories).
+- **Connecting**: About (advisor philosophy) and Let's Talk (1-on-1 consultation booking & CRM pipeline).
 
 ---
 
-## 🚀 การติดตั้งและเริ่มต้นใช้งาน (Getting Started)
+## Architecture & Repository Structure
 
-### 1. ติดตั้ง Backend
+```text
+.
+├── living wealth 365 front end/   # React 19 + Vite SPA (Tailwind CSS v4, DaisyUI v5)
+├── living wealth 365_backend/     # Express.js REST API + Prisma ORM (PostgreSQL)
+├── render.yaml                    # Render deployment blueprint for backend service
+└── README.md
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| **Frontend** | React 19, Vite 8, React Router v7, Tailwind CSS v4, DaisyUI v5, Axios, Lucide React |
+| **Frontend Tooling** | `oxlint` (linting), Node.js native test runner (`node --test`) |
+| **Backend** | Node.js (ES Modules), Express.js, Zod, Multer, S3-compatible storage (`@aws-sdk/client-s3`) |
+| **Database & ORM** | PostgreSQL (Supabase Pooler + Direct URL), Prisma ORM v5 |
+| **Auth & Security** | JWT (`jsonwebtoken`), `bcryptjs`, Helmet, CORS, `express-rate-limit` |
+
+---
+
+## Key Capabilities
+
+- **Interactive Life Map (6 Dimensions)**: Real-time SVG radar assessment across Health, Wealth, Time, Relationships, Inner Life, and Purpose.
+- **Personal Income Tax Calculator (2568)**: Progressive 7-tier Thai PIT calculation with insurance and Thai ESG deduction simulation.
+- **Earth & Energy Visualizer**: Mineral and crystal catalog separating geological properties, crystal structure, history, and energy notes.
+- **Mindfulness & Wellbeing Tools**: Guided breathing pause timer and Home Health Sanctuary checklist.
+- **Advisor CRM & Admin CMS**: Lead pipeline tracking, 7-pillar journal management, and catalog administration.
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** >= 20
+- **PostgreSQL** database (e.g., Supabase)
+
+### 1. Backend Setup
+
 ```bash
 cd "living wealth 365_backend"
 npm install
+cp .env.example .env
+```
 
-# กำหนดค่า .env (DATABASE_URL, JWT_SECRET, PORT=5001)
-# ดัน schema ขึ้น MySQL
-npx prisma db push
+Update `.env` with your database connection strings (`DATABASE_URL`, `DIRECT_URL`), a strong `JWT_SECRET`, `PORT=5001`, and `CORS_ORIGIN`.
 
-# รัน seed ข้อมูลจำลองชุดใหญ่ (Users, 7 Pillars, Minerals, Insurance, Leads)
-node prisma/seed.js
+```bash
+# Generate Prisma client and sync schema
+npm run prisma:generate
+npm run prisma:push
 
-# เริ่มต้นเซิร์ฟเวอร์
+# Optional: seed local development data
+npm run seed
+
+# Start development server
 npm run dev
 ```
 
-### 2. ติดตั้ง Frontend
+Health check endpoint: `GET /api/health`
+
+### 2. Frontend Setup
+
 ```bash
 cd "living wealth 365 front end"
 npm install
-
-# รัน Unit Tests ตรวจสอบระบบ
-npm test
-
-# เริ่มต้นเซิร์ฟเวอร์สำหรับพัฒนา
 npm run dev
-
-# หรือ Build สำหรับ Production
-npm run build
 ```
 
+### Available Scripts
+
+| Scope | Command | Purpose |
+| :--- | :--- | :--- |
+| Frontend | `npm run dev` | Start Vite dev server |
+| Frontend | `npm run lint` | Run `oxlint` |
+| Frontend | `npm test` | Run unit tests (`node --test tests/*.test.js`) |
+| Frontend | `npm run build` | Production bundle |
+| Backend | `npm run dev` | Start API server with `nodemon` |
+| Backend | `npm start` | Start production API server |
+| Backend | `npm run prisma:studio` | Open Prisma Studio |
+
 ---
 
-## 👤 บัญชีทดสอบในระบบ (Demo Accounts)
+## Deployment
 
-- **ผู้ดูแลระบบ (Admin)**: `admin_lw` / รหัสผ่าน: `Admin1234!`
-- **ลูกค้าสมาชิก (Customer)**: `somchai_lw` / รหัสผ่าน: `Customer1234!`
+- **Backend**: Configured in [`render.yaml`](render.yaml) (Node runtime, Singapore region, health check at `/api/health`). Set `DATABASE_URL`, `DIRECT_URL`, `JWT_SECRET`, and `CORS_ORIGIN` in the hosting environment.
+- **Frontend**: Standard static SPA build (`npm run build` in `living wealth 365 front end/`), deployed with `CORS_ORIGIN` pointing to the production frontend domain.
 
 ---
 
-## 📄 ใบอนุญาต (License)
+## Security & Credentials Policy
 
-ลิขสิทธิ์ © 2026 **Living Wealth 365 by Admin A & Admin B**. สงวนลิขสิทธิ์ทุกประการ.
+- **Never commit credentials, `.env` files, or demo passwords to version control or documentation.**
+- Local test/seed accounts are managed strictly in local development via `living wealth 365_backend/prisma/seed.js` and environment configuration—rotate or override seeded credentials before any staging or production deployment.
+
+---
+
+## License
+
+Copyright © 2026 Living Wealth 365. All rights reserved.
