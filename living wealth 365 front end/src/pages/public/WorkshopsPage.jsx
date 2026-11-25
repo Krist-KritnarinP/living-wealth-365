@@ -189,7 +189,7 @@ export default function WorkshopsPage() {
 
       {/* 2. OVERVIEW JOURNEY: PAIN POINT -> WHAT & HOW -> OUTCOMES */}
       <WorkshopJourneySection
-        eyebrow="WORKSHOP OVERVIEW"
+        eyebrow="ภาพรวมเวิร์กชอป"
         heading="ปัญหาที่เจอ วิธีจัดกิจกรรม และผลลัพธ์ที่ได้จริง"
         painPoints={WORKSHOP_OVERVIEW_JOURNEY.painPoints}
         whatAndHow={WORKSHOP_OVERVIEW_JOURNEY.whatAndHow}
@@ -393,15 +393,15 @@ export default function WorkshopsPage() {
 
       {/* 4. CORPORATE & INDIVIDUAL CREDITS */}
       <WorkshopCreditsSection
-        eyebrow="TRUSTED BY ORGANIZATIONS & GROUPS"
+        eyebrow="องค์กรที่เคยร่วมโครงการ"
         heading="เครดิตองค์กรและกลุ่มผู้เข้าร่วมโครงการ"
-        subtitle="ตัวอย่างองค์กร ทีมงาน และกลุ่มผู้เข้าร่วมที่ไว้วางใจออกแบบกิจกรรมร่วมกับ Admin A & Admin B"
+        subtitle="องค์กร ทีมงาน และกลุ่มผู้เข้าร่วมที่ไว้วางใจออกแบบกิจกรรมร่วมกับ Admin A & Admin B"
         credits={overviewCredits}
       />
 
       {/* 5. PARTICIPANT REVIEWS & FEEDBACK SUBMISSION */}
       <WorkshopFeedbackSection
-        eyebrow="PARTICIPANT FEEDBACK"
+        eyebrow="ความคิดเห็นผู้เข้าร่วม"
         heading="รีวิวและความคิดเห็นจากผู้เคยเข้าร่วม"
         feedbacks={feedbacks}
         workshopsList={workshops}
@@ -413,7 +413,7 @@ export default function WorkshopsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div className="lg:col-span-5 space-y-5">
             <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-secondary">
-              DESIGN YOUR SESSION
+              ออกแบบหลักสูตรสำหรับองค์กรและกลุ่มเล็ก
             </p>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight">
               สนใจจัดเวิร์กชอปสำหรับองค์กรหรือกลุ่มเล็ก?

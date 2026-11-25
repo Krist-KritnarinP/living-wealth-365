@@ -223,7 +223,7 @@ export default function WorkshopDetailPage() {
               </div>
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-secondary">
-                  SESSION FLOW
+                  กำหนดการกิจกรรม
                 </p>
                 <h2 className="text-xl sm:text-2xl font-black text-primary">
                   กำหนดการและลำดับกิจกรรม (Agenda)
@@ -283,15 +283,15 @@ export default function WorkshopDetailPage() {
 
       {/* 4. CREDITS FOR THIS WORKSHOP */}
       <WorkshopCreditsSection
-        eyebrow="CREDITS & PAST SESSIONS"
+        eyebrow="องค์กรที่เคยร่วมโครงการ"
         heading="องค์กรและกลุ่มที่เคยจัดหลักสูตรนี้"
-        subtitle={`ตัวอย่างองค์กรและกลุ่มผู้เข้าร่วมหลักสูตร ${workshop.title}`}
+        subtitle={`องค์กรและกลุ่มผู้เข้าร่วมหลักสูตร ${workshop.title}`}
         credits={credits}
       />
 
       {/* 5. FEEDBACK & REVIEWS FOR THIS WORKSHOP */}
       <WorkshopFeedbackSection
-        eyebrow="COURSE FEEDBACK"
+        eyebrow="ความคิดเห็นผู้เข้าร่วม"
         heading="รีวิวและความคิดเห็นของหลักสูตรนี้"
         feedbacks={feedbacks}
         workshopId={workshop.id}
@@ -304,7 +304,7 @@ export default function WorkshopDetailPage() {
         <div className="max-w-3xl mx-auto space-y-6">
           <div className="text-center space-y-2">
             <p className="text-xs sm:text-sm font-black uppercase tracking-widest text-secondary">
-              INQUIRE THIS WORKSHOP
+              สอบถามรายละเอียดหลักสูตร
             </p>
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
               สนใจจัดหลักสูตร {workshop.title}

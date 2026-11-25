@@ -10,7 +10,7 @@ export default function LeadCaptureForm({
   defaultInterest = 'ประกันสุขภาพเหมาจ่าย AIA',
   defaultNotes = '',
   selection = null,
-  title = 'ขอรับคำปรึกษาและวางแผนฟรี',
+  title = 'นัดหมายปรึกษาเบื้องต้น',
   subtitle = 'กรอกข้อมูลเพื่อให้ที่ปรึกษาการเงินติดต่อกลับและวิเคราะห์แผนเฉพาะบุคคล',
 }) {
   const { currentUser, addLead } = useAuth();
@@ -284,7 +284,7 @@ export default function LeadCaptureForm({
               ) : (
                 <>
                   <Send className="w-5 h-5" />
-                  <span>ส่งคำขอรับคำปรึกษาฟรี</span>
+                  <span>ส่งคำขอรับคำปรึกษา</span>
                 </>
               )}
             </button>

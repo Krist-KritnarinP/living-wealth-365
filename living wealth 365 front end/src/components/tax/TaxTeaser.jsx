@@ -48,12 +48,12 @@ export default function TaxTeaser() {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs sm:text-sm font-black tracking-wide shadow-xs">
               <Calculator className="w-4 h-4 text-secondary shrink-0" />
-              <span>TAX PLANNING ENGINE • โปรแกรมจำลองภาษี 2568</span>
+              <span>โปรแกรมคำนวณภาษีเงินได้บุคคลธรรมดา 2568</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight">
-              รู้ฐานภาษีของคุณใน 10 วินาที <br />
-              <span className="text-secondary">เปลี่ยนภาษีจ่ายทิ้ง เป็นเงินออมและความคุ้มครอง</span>
+              ประเมินฐานภาษีของคุณเบื้องต้น <br />
+              <span className="text-secondary">วางแผนสิทธิลดหย่อนภาษีให้สอดคล้องกับการออมและความคุ้มครอง</span>
             </h2>
 
             <p className="text-sm sm:text-base text-base-content/80 leading-relaxed">
@@ -205,7 +205,7 @@ export default function TaxTeaser() {
                 href="#talk-form"
                 className="btn btn-ghost btn-sm w-full rounded-xl text-xs font-semibold text-base-content/70 hover:text-primary"
               >
-                ปรึกษาการจัดพอร์ตลดหย่อนภาษีกับเรา (ไม่มีค่าใช้จ่าย)
+                ปรึกษาการจัดพอร์ตลดหย่อนภาษีกับที่ปรึกษา
               </a>
             </div>
           </div>

@@ -22,7 +22,7 @@ export const TRANSLATIONS = {
     insuranceLife: 'ประกันชีวิต & สุขภาพ',
     insuranceNonLife: 'ประกันวินาศภัย',
     taxCalculator: 'คำนวณภาษี',
-    mutelu: 'วัตถุมงคลสายมู',
+    mutelu: 'แร่ธาตุและคริสตัลธรรมชาติ',
     blog: 'คลังความรู้ & ภาษี',
     login: 'เข้าสู่ระบบ',
     register: 'สมัครสมาชิก',
@@ -112,7 +112,7 @@ export const TRANSLATIONS = {
     savedWishlist: 'Saved Wishlist',
     backToWebsite: 'Back to Website',
     adminRole: 'Senior Advisor',
-    customerRole: 'VIP Member',
+    customerRole: 'Member Account',
     collapseSidebar: 'Collapse Sidebar',
     expandSidebar: 'Expand Sidebar',
 

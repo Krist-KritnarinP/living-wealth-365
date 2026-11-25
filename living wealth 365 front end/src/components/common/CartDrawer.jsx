@@ -49,7 +49,7 @@ export default function CartDrawer() {
           item.price * item.quantity
         ).toLocaleString()})`
     );
-    return `สวัสดีครับ/ค่ะ สนใจบูชา & สั่งซื้อรายการจาก Living Wealth 365:\n${lines.join(
+    return `สวัสดี Admin B สนใจสั่งซื้อรายการจาก Living Wealth 365:\n${lines.join(
       '\n'
     )}\nยอดรวม: ฿${cartTotal.toLocaleString()}\nรบกวน Admin B แนะนำรายละเอียดและการจัดส่งเพิ่มเติมครับ/ค่ะ`;
   };

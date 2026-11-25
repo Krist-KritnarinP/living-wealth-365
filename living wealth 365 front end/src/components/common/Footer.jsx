@@ -83,7 +83,7 @@ export default function Footer() {
                   className="hover:text-primary transition-colors flex items-center gap-1.5"
                 >
                   <span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
-                  3D Gemstone Visualizer (ผลึกแร่ธาตุเสมือนจริง)
+                  วิเคราะห์แร่ธาตุธรรมชาติประจำวันเกิด
                 </Link>
               </li>
               <li>
@@ -181,7 +181,7 @@ export default function Footer() {
                   className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2 shadow-xs"
                 >
                   <HeartHandshake className="w-4 h-4" />
-                  นัดหมายพูดคุยกับ {content?.brand?.adminAName || 'Admin A'} & {content?.brand?.adminBName || 'Admin B'} (ฟรี)
+                  นัดหมายปรึกษา {content?.brand?.adminAName || 'Admin A'} &amp; {content?.brand?.adminBName || 'Admin B'}
                 </Link>
               </div>
             </div>

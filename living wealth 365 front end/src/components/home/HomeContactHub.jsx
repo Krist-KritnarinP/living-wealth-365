@@ -67,18 +67,18 @@ export default function HomeContactHub({
           <div className="space-y-4">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-success/10 border border-success/25 text-success text-xs font-black tracking-wide">
               <MessageCircle className="w-4 h-4 shrink-0" />
-              <span>คุยด่วนทาง LINE • ปรึกษาฟรี</span>
+              <span>ช่องทางติดต่อผ่าน LINE Official</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-black text-primary leading-tight">
-              สะดวกทัก LINE?
+              ติดต่อผ่าน LINE Official
               <br />
-              <span className="text-secondary">คัดลอกข้อความส่งได้ใน 1 คลิก</span>
+              <span className="text-secondary">คัดลอกข้อความเพื่อเริ่มต้นสนทนาได้ทันที</span>
             </h2>
 
             <p className="text-sm sm:text-base text-base-content/80 leading-relaxed">
-              เลือกเรื่องที่ต้องการปรึกษา แล้วกดคัดลอกข้อความไปวางใน LINE เพื่อคุยกับ{' '}
-              <strong>{currentTopic.advisor}</strong> ได้ทันที ไม่มีพนักงานโทรตื๊อ
+              เลือกหัวข้อที่ต้องการปรึกษา แล้วคัดลอกข้อความไปวางใน LINE เพื่อพูดคุยกับ{' '}
+              <strong>{currentTopic.advisor}</strong> โดยตรง ไม่มีค่าใช้จ่ายในการปรึกษาเบื้องต้น
             </p>
 
             <div className="flex flex-wrap gap-2 pt-1">

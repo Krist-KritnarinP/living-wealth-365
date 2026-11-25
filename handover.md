@@ -1237,6 +1237,23 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - 28/28 unit tests pass; `vite build` clean (`1.11s`).
   - Browser QAQC verified Desktop `1280×800` (`4,860px` total height, 0 horizontal overflow) and Mobile `375×812` (0 horizontal overflow, clean 2-row wrapping on all tab bars), and resolved 3 default copy mismatches caught during inspection.
 
+## 56. Site-Wide Formal Copy Audit, Brand-Leak Cleanup & Emoji Removal (November 25, 2026)
+- **Status**: **Completed & Verified (Frontend + Backend Seed Updated)**
+- **Full-Site Language & Tone Upgrade (Categories 1–5 Approved)**:
+  1. **Formal Thai Tone (No Slang/Casual Phrases)**: Removed informal/salesy terms across 27+ files (`สายมู`, `โทรตื๊อ`, `สะดวกทัก LINE`, `10 วิ/10 วินาที`, `ภาษีจ่ายทิ้ง`, `บูชา`, `กดรูปหัวใจ`, `ลอยๆ`, `เงินจม`, `อินกับ`, `หัวโล่ง`).
+  2. **Removed Over-Explanatory / Defensive Copy**: Replaced defensive lines (`ไม่มีการเร่งรัดขาย`, `ไม่ยัดเยียดการขาย`, `ไม่กดดันขาย`) and excessive `"ฟรี"` / `"VIP"` / `"เหนือระดับ"` repetition with calm, neutral advisory copy.
+  3. **Removed Unnecessary System/English Jargon**: Replaced `TAX PLANNING ENGINE`, `3D Visualizer`, `LINE CONSULTATION HELPER`, `Life Map Architecture`, `Home Health Sanctuary`, `WORKSHOP SPOTLIGHT`, `SESSION FLOW`, `PARTICIPANT FEEDBACK`, `DESIGN YOUR SESSION`, `Cohort #4`, `Private Circle #7` with clear Thai headings suitable for all ages.
+  4. **Fixed Brand-Rule Violations & Production Polish**:
+     - Removed leaked real nicknames `Admin A (Top)` / `Admin B (Joy)` from `src/utils/activityLogger.js` → `Admin A` / `Admin B`.
+     - Replaced Thai `"แอดมิน"` in `LoginPage.jsx` and `RoleSwitcher.jsx` → `Admin`.
+     - Hid developer `RoleSwitcher` automatically in production builds (`if (import.meta.env.PROD) return null;`).
+  5. **Removed Cartoon Emojis from Public UI**: Cleaned emojis (`🔬`, `✨`, `🏛️`, `📜`, `💎`, `❤️`, `🛡️`, `📈`, `🧘‍♀️`, `🧭`, `📖`, `🔍`, `💡`, `📋`) from badges, tabs, buttons, and labels so the Lucide icon system stays consistent.
+  6. **Cache & DB Seed Sync**: Bumped `SiteCustomizerContext.jsx` cache key to `lw365_site_customizer_v5` and updated `living wealth 365_backend/prisma/seedWorkshops.js` to upsert both workshops and existing seeded reviews cleanly. *(Note: Run `cd "living wealth 365_backend" && node prisma/seedWorkshops.js` when Supabase PostgreSQL network connectivity is active to update live DB workshop/review rows.)*
+- **Verification**:
+  - Automated grep sweep confirmed **0 leftover matches** across `living wealth 365 front end/src`.
+  - 28/28 unit tests pass; `vite build` passes cleanly.
+
+
 
 
 

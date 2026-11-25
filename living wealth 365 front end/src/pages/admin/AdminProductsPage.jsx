@@ -230,7 +230,7 @@ export default function AdminProductsPage() {
               <tr className="border-b border-base-300 text-base-content/70">
                 <th className="min-w-[200px]">รูปภาพ & ชื่อสินค้า</th>
                 <th className="whitespace-nowrap">มิติ & สูตรแร่</th>
-                <th className="whitespace-nowrap">ราคาบูชา</th>
+                <th className="whitespace-nowrap">ราคา</th>
                 <th className="whitespace-nowrap">เหมาะกับวันเกิด</th>
                 <th className="whitespace-nowrap text-center min-w-[130px]">สถานะแสดงผล</th>
                 <th className="text-right whitespace-nowrap">การจัดการ</th>
@@ -400,7 +400,7 @@ export default function AdminProductsPage() {
                   </div>
 
                   <div className="flex flex-col gap-1.5 w-full">
-                    <label className="text-xs font-bold text-base-content/80">ราคาบูชา (บาท)</label>
+                    <label className="text-xs font-bold text-base-content/80">ราคา (บาท)</label>
                     <input
                       type="text"
                       required

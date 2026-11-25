@@ -178,7 +178,7 @@ export default function LifePage() {
             พร้อมออกแบบชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?
           </h2>
           <p className="text-sm sm:text-base text-base-content/80 max-w-xl mx-auto leading-relaxed">
-            ไม่มีข้อผูกมัด ไม่มีการเร่งรัดขายผลิตภัณฑ์ มีเพียงบทสนทนาที่จริงใจเพื่อช่วยให้คุณเห็นภาพชีวิตตนเองชัดเจนที่สุด
+            ให้คำปรึกษาอย่างเป็นกลาง เพื่อช่วยให้คุณเห็นภาพรวมแผนชีวิตและการเงินของตนเองชัดเจนที่สุด
           </p>
           <div className="flex justify-center">
             <Link

@@ -76,7 +76,7 @@ export default function AccountDashboardPage() {
             </div>
             <div>
               <div className="text-xs font-semibold text-base-content/60">{t('status')}</div>
-              <div className="text-lg font-black text-primary">AIA VIP Customer</div>
+              <div className="text-lg font-black text-primary">สมาชิก Living Wealth 365</div>
             </div>
           </div>
 
@@ -162,7 +162,7 @@ export default function AccountDashboardPage() {
 
               <div className="form-control">
                 <label className="label py-1">
-                  <span className="label-text text-xs font-bold">วันเดือนปีเกิด (สำหรับคำนวณสายมู)</span>
+                  <span className="label-text text-xs font-bold">วันเดือนปีเกิด (สำหรับวิเคราะห์แร่ธาตุประจำวันเกิด)</span>
                 </label>
                 <input
                   type="date"

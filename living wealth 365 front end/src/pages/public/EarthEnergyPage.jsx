@@ -22,10 +22,10 @@ export default function EarthEnergyPage() {
 
   const aspectFilters = [
     { id: 'ALL', label: 'ทั้งหมด' },
-    { id: 'SCIENCE', label: '🔬 วิทยาศาสตร์แร่ธาตุ' },
-    { id: 'CHAKRA_ENERGY', label: '✨ จักระ & สมาธิ' },
-    { id: 'HISTORY', label: '🏛️ ประวัติศาสตร์ 6,000 ปี' },
-    { id: 'CULTURE', label: '📜 วัฒนธรรมและความเชื่อ' },
+    { id: 'SCIENCE', label: 'วิทยาศาสตร์แร่ธาตุ' },
+    { id: 'CHAKRA_ENERGY', label: 'จักระ & สมาธิ' },
+    { id: 'HISTORY', label: 'ประวัติศาสตร์ 6,000 ปี' },
+    { id: 'CULTURE', label: 'วัฒนธรรมและความเชื่อ' },
   ];
 
   const filteredProducts = products.filter((p) => {
@@ -75,7 +75,7 @@ export default function EarthEnergyPage() {
                 href="#calculator"
                 className="btn btn-primary btn-md rounded-2xl font-bold px-6 shadow-xs gap-2"
               >
-                <span>ค้นหาแร่ธาตุคู่บารมี (3D Visualizer)</span>
+                <span>วิเคราะห์แร่ธาตุประจำวันเกิด</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
@@ -102,7 +102,7 @@ export default function EarthEnergyPage() {
               คลังแร่ธาตุและคริสตัลคัดสรรพิเศษ ({filteredProducts.length})
             </h2>
             <p className="text-sm zen-muted mt-0.5">
-              กดรูปหัวใจ ❤️ เพื่อบันทึกเข้า Wishlist หรือเลือกดูตามมิติที่สนใจ
+              บันทึกรายการที่สนใจ หรือเลือกดูตามมิติข้อมูลแร่ธาตุ
             </p>
           </div>
 

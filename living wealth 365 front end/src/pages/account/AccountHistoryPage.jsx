@@ -38,7 +38,7 @@ export default function AccountHistoryPage() {
               ยังไม่มีประวัติการส่งคำขอคำปรึกษา
             </h3>
             <p className="text-sm text-base-content/70">
-              คุณสามารถเลือกแผนประกันชีวิต สุขภาพ หรือบูชาหินมงคล เพื่อส่งคำขอให้ที่ปรึกษาติดต่อกลับได้ทันที
+              คุณสามารถเลือกแผนประกันชีวิต สุขภาพ หรือสอบถามชิ้นงานแร่ธรรมชาติ เพื่อส่งคำขอให้ที่ปรึกษาติดต่อกลับได้ทันที
             </p>
             <Link to={ROUTES.INSURANCE_LIFE} className="btn btn-primary btn-sm rounded-xl font-bold">
               ดูแผนประกัน AIA

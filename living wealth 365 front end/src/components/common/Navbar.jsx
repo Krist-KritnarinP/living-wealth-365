@@ -101,7 +101,7 @@ export default function Navbar() {
         },
         {
           label: language === 'th' ? 'Earth & Energy (แร่ธาตุธรรมชาติ)' : 'Earth & Energy (Minerals)',
-          desc: language === 'th' ? 'วิทยาศาสตร์ผลึก หินคัดสรร และพลังงานจักระ' : 'Mineralogy, curated crystals & 3D visualizer',
+          desc: language === 'th' ? 'วิทยาศาสตร์ผลึก หินคัดสรร และพลังงานจักระ' : 'Mineralogy, curated crystals & natural stones',
           path: ROUTES.EARTH_ENERGY,
           icon: Gem,
           badge: '3D Orb',
@@ -129,7 +129,7 @@ export default function Navbar() {
         },
         {
           label: language === 'th' ? 'วางแผนและคำนวณภาษี 2568' : 'Tax Planning & Calculator',
-          desc: language === 'th' ? 'คำนวณภาษีเงินได้บุคคลธรรมดาและสิทธิลดหย่อน AIA' : 'Personal income tax engine & tax-saving strategies',
+          desc: language === 'th' ? 'คำนวณภาษีเงินได้บุคคลธรรมดาและสิทธิลดหย่อน AIA' : 'Personal income tax calculator & tax-saving strategies',
           path: ROUTES.TAX,
           icon: Calculator,
         },
@@ -531,7 +531,6 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="px-4 py-2 rounded-xl text-sm font-semibold hover:bg-base-200 flex items-center gap-2"
                   >
-                    <span>📋</span>
                     <span>{t('consultationHistory')}</span>
                   </Link>
                   <Link

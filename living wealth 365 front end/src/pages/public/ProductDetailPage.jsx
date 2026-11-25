@@ -76,7 +76,7 @@ export default function ProductDetailPage() {
   const handleLineOrder = () => {
     if (!product) return;
     const priceFormatted = typeof product.price === 'number' ? product.price.toLocaleString() : product.price;
-    const text = `สวัสดีครับ/ค่ะ สนใจบูชา & สอบถามข้อมูลแร่ธาตุคัดสรร:\n\n• ชิ้นงาน: ${product.name}\n• รหัสสินค้า: ${product.id}\n• จำนวน: ${quantity} ชิ้น\n• ราคาโดยประมาณ: ฿${priceFormatted}\n\nรบกวน Admin B แนะนำขนาดข้อมือและขั้นตอนการจัดส่งให้ด้วยครับ/ค่ะ`;
+    const text = `สวัสดี Admin B สนใจสั่งซื้อและสอบถามข้อมูลแร่ธาตุคัดสรร:\n\n• ชิ้นงาน: ${product.name}\n• รหัสสินค้า: ${product.id}\n• จำนวน: ${quantity} ชิ้น\n• ราคาโดยประมาณ: ฿${priceFormatted}\n\nรบกวนแนะนำขนาดข้อมือและขั้นตอนการจัดส่งเพิ่มเติม`;
     const lineUrl = `https://line.me/R/ti/p/@livingwealth365?text=${encodeURIComponent(text)}`;
     window.open(lineUrl, '_blank', 'noopener,noreferrer');
   };
@@ -116,15 +116,15 @@ export default function ProductDetailPage() {
   const getAspectBadge = (aspect) => {
     switch (aspect) {
       case 'SCIENCE':
-        return { label: '🔬 วิทยาศาสตร์ & โครงสร้างแร่', color: 'badge-info' };
+        return { label: 'วิทยาศาสตร์ & โครงสร้างแร่', color: 'badge-info' };
       case 'HISTORY':
-        return { label: '🏛️ อารยธรรม & ประวัติศาสตร์', color: 'badge-neutral' };
+        return { label: 'อารยธรรม & ประวัติศาสตร์', color: 'badge-neutral' };
       case 'CHAKRA_ENERGY':
-        return { label: '✨ จักระ & การเจริญสติ', color: 'badge-secondary' };
+        return { label: 'จักระ & การเจริญสติ', color: 'badge-secondary' };
       case 'CULTURE':
-        return { label: '📜 วัฒนธรรม & จิตวิญญาณ', color: 'badge-accent' };
+        return { label: 'วัฒนธรรม & จิตวิญญาณ', color: 'badge-accent' };
       default:
-        return { label: '💎 คัดสรรเฉพาะบุคคล', color: 'badge-secondary' };
+        return { label: 'คัดสรรเฉพาะบุคคล', color: 'badge-secondary' };
     }
   };
 
@@ -221,7 +221,7 @@ export default function ProductDetailPage() {
                 <div className="p-4 rounded-2xl bg-base-200/60 border border-base-300/60 flex flex-wrap items-baseline justify-between gap-2">
                   <div>
                     <span className="text-xs font-semibold text-base-content/65 block">
-                      ราคาบูชาและครอบครอง (รวมภาษีมูลค่าเพิ่ม):
+                      ราคา (รวมภาษีมูลค่าเพิ่ม):
                     </span>
                     <span className="text-2xl sm:text-3xl font-black text-secondary">
                       ฿{typeof product.price === 'number' ? product.price.toLocaleString() : product.price}
@@ -334,7 +334,7 @@ export default function ProductDetailPage() {
                     className="btn btn-secondary btn-outline btn-md rounded-2xl font-bold gap-2 hover:btn-secondary hover:text-white"
                   >
                     <MessageCircle className="w-4 h-4" />
-                    <span>สั่งซื้อ & บูชาผ่าน LINE</span>
+                    <span>สั่งซื้อผ่าน LINE Official</span>
                   </button>
                 </div>
 

@@ -8,35 +8,35 @@ export default function CopyToLineSection() {
   const topics = [
     {
       id: 'INSURANCE',
-      label: '🛡️ ประกันสุขภาพ & โรคร้าย',
+      label: 'ประกันสุขภาพ & โรคร้ายแรง',
       advisor: 'Admin A',
-      message: `สวัสดีครับ/ค่ะ Admin A
-ผม/ดิฉันได้เข้าชมเว็บไซต์ Living Wealth 365 และสนใจปรึกษาเรื่องการวางแผนประกันสุขภาพเหมาจ่าย / คุ้มครองโรคร้ายแรง
-อยากขอคำแนะนำเบื้องต้นเพื่อเปรียบเทียบแผนที่เหมาะสมกับช่วงอายุและงบประมาณครับ/ค่ะ`,
+      message: `สวัสดี Admin A
+ได้เข้าชมเว็บไซต์ Living Wealth 365 และสนใจปรึกษาเรื่องการวางแผนประกันสุขภาพเหมาจ่าย / คุ้มครองโรคร้ายแรง
+ต้องการขอคำแนะนำเบื้องต้นเพื่อเปรียบเทียบแผนที่เหมาะสมกับช่วงอายุและงบประมาณ`,
     },
     {
       id: 'TAX',
-      label: '📈 วางแผนภาษี & เกษียณ',
+      label: 'วางแผนภาษี & เกษียณ',
       advisor: 'Admin A',
-      message: `สวัสดีครับ/ค่ะ Admin A
-ผม/ดิฉันสนใจปรึกษาเรื่องการบริหารภาษีเงินได้บุคคลธรรมดา และการวางแผนพอร์ตเกษียณบำนาญผ่าน Living Wealth 365
-อยากขอคำแนะนำเพื่อเตรียมลดหย่อนภาษีให้คุ้มค่าที่สุดครับ/ค่ะ`,
+      message: `สวัสดี Admin A
+สนใจปรึกษาเรื่องการบริหารภาษีเงินได้บุคคลธรรมดา และการวางแผนพอร์ตเกษียณบำนาญผ่าน Living Wealth 365
+ต้องการขอคำแนะนำเพื่อวางแผนสิทธิลดหย่อนภาษีให้เหมาะสม`,
     },
     {
       id: 'ENERGY',
-      label: '💎 คริสตัล & พลังธรรมชาติ',
+      label: 'คริสตัล & แร่ธรรมชาติ',
       advisor: 'Admin B',
-      message: `สวัสดีค่ะ Admin B
+      message: `สวัสดี Admin B
 สนใจปรึกษาเรื่องการเลือกแร่ธาตุและคริสตัลธรรมชาติแท้ตามหลักจักระและวันเกิด ผ่าน Living Wealth 365
-อยากขอคำแนะนำหินมงคลชิ้นงานคัดสรรที่เหมาะสมกับพลังงานประจำตัวค่ะ`,
+ต้องการขอคำแนะนำชิ้นงานคัดสรรที่เหมาะสม`,
     },
     {
       id: 'LIFEMAP',
-      label: '🧘‍♀️ สมดุลชีวิต 6 มิติ',
+      label: 'สมดุลชีวิต 6 มิติ',
       advisor: 'Admin A & Admin B',
-      message: `สวัสดีครับ/ค่ะ Admin A & Admin B
-ผม/ดิฉันสนใจพูดคุยประเมินสมดุลชีวิต 6 มิติ (Life Map Architecture) กับ Living Wealth 365
-อยากนัดหมายเวลาเพื่อสนทนาและร่วมออกแบบแนวทางชีวิตครับ/ค่ะ`,
+      message: `สวัสดี Admin A & Admin B
+สนใจนัดหมายพูดคุยเพื่อประเมินสมดุลชีวิต 6 มิติ กับ Living Wealth 365
+ต้องการนัดหมายเวลาเพื่อสนทนาและร่วมวางแนวทางชีวิต`,
     },
   ];
 
@@ -58,16 +58,16 @@ export default function CopyToLineSection() {
         <div className="lg:col-span-5 space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-black tracking-wide shadow-xs">
             <Sparkles className="w-3.5 h-3.5 text-secondary shrink-0" />
-            <span>LINE CONSULTATION HELPER</span>
+            <span>ช่องทางติดต่อผ่าน LINE</span>
           </div>
 
           <h3 className="text-2xl sm:text-3xl font-black text-primary leading-tight">
-            สะดวกคุยทาง LINE?<br />
-            <span className="text-secondary">เราเตรียมข้อความให้พร้อมส่งใน 1 คลิก</span>
+            ติดต่อผ่าน LINE Official<br />
+            <span className="text-secondary">คัดลอกข้อความเพื่อเริ่มสนทนาได้ทันที</span>
           </h3>
 
           <p className="text-sm sm:text-base text-base-content/80 leading-relaxed">
-            ไม่ต้องกังวลว่าจะเริ่มต้นถามอย่างไร เพียงเลือกเรื่องที่คุณสนใจ แล้วกดคัดลอกข้อความนำไปส่งใน LINE ของ <strong>Admin A & Admin B</strong> ได้ทันที ปรึกษาฟรี ไม่มีพนักงานโทรตื๊อ
+            เลือกหัวข้อที่ต้องการปรึกษา แล้วคัดลอกข้อความนำไปส่งใน LINE ของ <strong>Admin A & Admin B</strong> โดยตรง ไม่มีค่าใช้จ่ายในการปรึกษาเบื้องต้น
           </p>
 
           <div className="space-y-2 pt-2">
@@ -126,7 +126,7 @@ export default function CopyToLineSection() {
                 className="btn btn-sm sm:btn-md rounded-xl font-bold gap-2 bg-[#06C755] hover:bg-[#05b34c] text-white border-0 shadow-xs cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>เปิด LINE ทักหาที่ปรึกษา</span>
+                <span>ส่งข้อความทาง LINE</span>
               </a>
             </div>
           </div>

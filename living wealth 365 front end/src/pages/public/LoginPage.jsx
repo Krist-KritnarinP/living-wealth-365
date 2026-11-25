@@ -103,7 +103,7 @@ export default function LoginPage() {
               className="btn btn-secondary btn-sm text-white rounded-xl font-bold gap-1 text-xs"
             >
               {loading ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Shield className="w-3.5 h-3.5" />}
-              เข้าแบบแอดมิน
+              เข้าสู่ระบบ Admin
             </button>
           </div>
         </div>

@@ -14,7 +14,7 @@ const TOOL_TABS = [
   {
     id: 'tax',
     label: 'คำนวณภาษี 2568',
-    shortDesc: 'รู้ฐานภาษีและสิทธิลดหย่อนใน 10 วิ',
+    shortDesc: 'ประเมินฐานภาษีและสิทธิลดหย่อนเบื้องต้น',
     icon: Calculator,
   },
   {
@@ -37,13 +37,13 @@ export default function HomeToolsHub({ plans = [], onRequestQuote }) {
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
         <div className="space-y-1.5 max-w-2xl">
           <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-secondary block">
-            INTERACTIVE TOOLS • ลองใช้งานฟรี
+            เครื่องมือประเมินและวางแผนเบื้องต้น
           </span>
           <h2 className="editorial-display text-2xl sm:text-3xl lg:text-4xl font-bold text-primary">
             เครื่องมือช่วยวางแผนชีวิตและการเงิน
           </h2>
           <p className="text-sm sm:text-base text-base-content/75">
-            สลับเลือกเครื่องมือที่ต้องการลองคำนวณหรือประเมินตัวเองได้ทันทีในจุดเดียว
+            เลือกเครื่องมือที่ต้องการเพื่อประเมินสมดุลชีวิต คำนวณภาษี หรือค้นหาแผนประกันที่เหมาะสม
           </p>
         </div>
 

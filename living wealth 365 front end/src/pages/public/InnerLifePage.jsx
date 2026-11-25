@@ -175,7 +175,7 @@ export default function InnerLifePage() {
                 {formatTime(secondsRemaining)}
               </span>
               <span className="text-xs font-semibold text-secondary">
-                {secondsRemaining === 0 ? '✨ สดชื่นและสงบ' : isTimerRunning ? 'กำลังหายใจเข้า-ออก' : 'กดเริ่มเมื่อพร้อม'}
+                {secondsRemaining === 0 ? 'เสร็จสิ้นรอบการฝึกหายใจ' : isTimerRunning ? 'กำลังหายใจเข้า-ออก' : 'กดเริ่มเมื่อพร้อม'}
               </span>
             </div>
           </div>

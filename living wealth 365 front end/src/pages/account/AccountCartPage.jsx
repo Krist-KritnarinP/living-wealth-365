@@ -36,7 +36,7 @@ export default function AccountCartPage() {
           item.price * item.quantity
         ).toLocaleString()})`
     );
-    return `รายการสั่งซื้อ/บูชาจากตะกร้า:\n${lines.join(
+    return `รายการสั่งซื้อจากตะกร้า:\n${lines.join(
       '\n'
     )}\nยอดรวม: ฿${cartTotal.toLocaleString()}`;
   };
@@ -66,7 +66,7 @@ export default function AccountCartPage() {
 
   const handleSendToLine = async () => {
     if (cartItems.length === 0) return;
-    const text = `สวัสดีครับ/ค่ะ สนใจบูชา & สั่งซื้อรายการจาก Living Wealth 365:\n${buildOrderSummary()}\nรบกวน Admin B แนะนำรายละเอียดและการจัดส่งครับ/ค่ะ`;
+    const text = `สวัสดี Admin B สนใจสั่งซื้อรายการจาก Living Wealth 365:\n${buildOrderSummary()}\nรบกวนแนะนำรายละเอียดและการจัดส่งเพิ่มเติม`;
     try {
       await navigator.clipboard.writeText(text);
       showToast('คัดลอกสรุปออเดอร์แล้ว กำลังเปิด LINE...', 'success');

@@ -4,9 +4,9 @@ export const DEFAULT_SITE_CONTENT = {
   announcement: {
     enabled: false,
     badge: 'NEW 2026',
-    text: '✨ สัมผัสสมดุลชีวิต 6 มิติ (Life Map) และพลังงานธรรมชาติ พร้อมปรึกษาฟรีกับ Admin A & Admin B',
+    text: 'ประเมินสมดุลชีวิต 6 มิติ (Life Map) และศึกษาข้อมูลแร่ธาตุธรรมชาติ พร้อมนัดหมายปรึกษา Admin A & Admin B',
     link: '#lifemap',
-    linkText: 'สำรวจเลย →',
+    linkText: 'สำรวจเพิ่มเติม',
   },
 
   // 2. Brand Identity & Founders
@@ -26,7 +26,7 @@ export const DEFAULT_SITE_CONTENT = {
     titleLine2: 'อยากรักษาไว้มากที่สุด?',
     description:
       'ดูแลสุขภาพที่แข็งแรง เวลาอยู่กับคนที่รัก และความสบายใจไปพร้อมกับการวางแผนการเงิน Living Wealth 365 รวมเวิร์กชอป แผนประกัน AIA ภาษี สุขภาพ และแร่ธาตุธรรมชาติไว้ในที่เดียว โดย Admin A & Admin B',
-    primaryBtnText: 'ลองเครื่องมือวางแผนฟรี',
+    primaryBtnText: 'เครื่องมือประเมินและวางแผน',
     primaryBtnLink: '#lifemap',
     secondaryBtnText: 'รู้จัก Admin A & Admin B',
     secondaryBtnLink: '/about',
@@ -34,7 +34,7 @@ export const DEFAULT_SITE_CONTENT = {
     trust2: 'เวิร์กชอปองค์กร & กลุ่มเล็ก • วิทยาศาสตร์แร่ธาตุ SiO₂',
     imageUrl:
       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1000&auto=format&fit=crop&q=80',
-    imageBadge: 'Fellow Travelers',
+    imageBadge: 'ที่ปรึกษาคู่คิด',
     imageTitle: 'สุขภาพดี • การเงินมั่นคง • จิตใจสงบสุข',
     imageSubtitle: 'Admin A & Admin B พร้อมร่วมค้นหาชีวิตที่ใช่ที่สุดสำหรับคุณ',
   },
@@ -48,18 +48,18 @@ export const DEFAULT_SITE_CONTENT = {
       badge: 'Gateway 01',
       title: 'Living (วิถีชีวิต)',
       desc: 'การสร้างสมดุลชีวิต 6 มิติ (Life Map), วิทยาศาสตร์การชะลอวัยระดับเซลล์ (Longevity), และแร่ธาตุธรรมชาติคัดสรรตามหลักธรณีวิทยาและพลังจักระ',
-      point1: 'Life: การออกแบบเวลา & เกษียณสำราญ',
-      point2: 'Wellbeing: Home Health Sanctuary',
-      point3: 'Earth & Energy: ผลึกแร่ธาตุ & 3D Visualizer',
+      point1: 'Life: การออกแบบเวลา & เกษียณอย่างมั่นคง',
+      point2: 'Wellbeing: การจัดสภาพแวดล้อมบ้านเพื่อการพักผ่อน',
+      point3: 'Earth & Energy: โครงสร้างแร่ธาตุธรรมชาติ',
       btnText: 'สำรวจหมวด Living',
       link: '/life',
     },
     learning: {
       badge: 'Gateway 02',
       title: 'Learning (การเรียนรู้)',
-      desc: 'สถาปัตยกรรมการเงิน 4 เสาหลัก, การคำนวณและวางแผนภาษีเชิงรุก 2568, และโลกภายใน (Inner Life) เพื่อคืนความเงียบสงบให้จิตใจ',
-      point1: 'Wealth: แผนประกันเหมาจ่าย & ภาษี 2568',
-      point2: 'Inner Life: ศิลปะแห่งความเงียบสงบ (Stillness)',
+      desc: 'โครงสร้างการเงิน 4 เสาหลัก การคำนวณและวางแผนภาษี 2568 และแนวทางการดูแลจิตใจอย่างเป็นระบบ',
+      point1: 'Wealth: แผนประกันสุขภาพ & วางแผนภาษี 2568',
+      point2: 'Inner Life: การฝึกสติและความสงบภายใน',
       point3: "Journal: บันทึกความคิดของ Admin A & Admin B",
       btnText: 'สำรวจหมวด Learning',
       link: '/wealth',
@@ -67,11 +67,11 @@ export const DEFAULT_SITE_CONTENT = {
     connecting: {
       badge: 'Gateway 03',
       title: 'Connecting (เพื่อนร่วมทาง)',
-      desc: "ทำความรู้จัก Admin A & Admin B และนัดพูดคุยแบบเป็นกันเอง (Let's Talk) เพื่อแลกเปลี่ยนมุมมองและวางแผนชีวิตให้เหมาะกับคุณ",
+      desc: 'ทำความรู้จัก Admin A & Admin B และนัดหมายสนทนาเพื่อแลกเปลี่ยนมุมมองและวางแผนชีวิตอย่างเป็นกลาง',
       point1: 'About: จุดเริ่มต้นของ Living Wealth 365',
-      point2: 'Fellow Travelers: ปรัชญาไม่ตัดสิน',
-      point3: "Let's Talk: นัดหมายพูดคุยฟรี 1-on-1",
-      btnText: 'รู้จักเรา & นัดหมายพูดคุย',
+      point2: 'แนวทางการให้คำปรึกษาอย่างเป็นกลาง',
+      point3: 'นัดหมายปรึกษาส่วนตัว 1 ต่อ 1',
+      btnText: 'รู้จักเรา & นัดหมายสนทนา',
       link: '/about',
     },
   },
@@ -97,13 +97,13 @@ export const DEFAULT_SITE_CONTENT = {
     badge: 'Earth & Energy Curation',
     title: 'แร่ธาตุธรรมชาติ คัดสรรตามหลักวิทยาศาสตร์และจักระ',
     subtitle: 'ผลึกธรรมชาติแท้ โครงสร้าง SiO₂ และคุณสมบัติเพียโซอิเล็กทริกเพื่อความสงบมั่นคง',
-    btnText: 'เปิด 3D Visualizer & คลังแร่ทั้งหมด',
+    btnText: 'ชมคลังแร่ธาตุทั้งหมด',
     btnLink: '/earth-energy',
   },
 
   // 7. Journal Section Header
   journal: {
-    badge: 'Reflections & Knowledge Hub',
+    badge: 'คลังความรู้และบทความ',
     title: "วารสารความคิดและ Admin A's Notes",
     subtitle: 'บทความคัดสรรเพื่อช่วยให้คุณวางแผนชีวิต บริหารภาษี และดูแลสุขภาพ',
     btnText: 'อ่านวารสารทั้งหมด',
@@ -112,11 +112,11 @@ export const DEFAULT_SITE_CONTENT = {
 
   // 8. Lead Capture / Let's Talk Section
   leadForm: {
-    badge: '1-ON-1 CONFIDENTIAL CONSULTATION',
-    title: 'พร้อมเริ่มต้นสร้างชีวิตที่คุณอยากรักษาไว้แล้วหรือยัง?',
+    badge: 'การให้คำปรึกษาแบบส่วนตัว',
+    title: 'พร้อมเริ่มต้นวางแผนชีวิตและการเงินแล้วหรือยัง?',
     subtitle:
-      'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)',
-    ctaButtonText: 'ส่งข้อมูลเพื่อให้นัดหมายติดต่อกลับ',
+      'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางชีวิตและการเงินที่เหมาะสมกับคุณโดยเฉพาะ',
+    ctaButtonText: 'ส่งคำขอรับคำปรึกษา',
     successTitle: 'รับข้อมูลเรียบร้อยแล้ว',
     successMessage:
       'ขอบคุณที่ไว้วางใจ Admin A & Admin B จะติดต่อกลับเพื่อนัดหมายเวลาที่สะดวกโดยเร็วที่สุดครับ',

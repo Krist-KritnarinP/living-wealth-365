@@ -23,7 +23,7 @@ export default function AccountWishlistPage() {
     const newLead = addLead({
       name: currentUser?.name || 'ลูกค้าสมาชิก',
       phone: currentUser?.phone || '081-234-5678',
-      interest: `บูชาหินมงคลจาก Wishlist: ${product.name} (฿${product.price})`,
+      interest: `สอบถามชิ้นงานแร่ธรรมชาติจากรายการที่สนใจ: ${product.name} (฿${product.price})`,
       preferredTime: 'ช่วงบ่าย (13:00 - 17:00)',
       notes: 'ส่งคำขอจากหน้า Wishlist ส่วนตัว',
     });
@@ -44,7 +44,7 @@ export default function AccountWishlistPage() {
             {t('savedWishlist')} ({wishlistedProducts.length})
           </h1>
           <p className="text-sm text-base-content/70">
-            วัตถุมงคลและหินนำโชคที่คุณเคยกดหัวใจ ❤️ ไว้ สามารถกดสั่งบูชาได้ทันที
+            รายการแร่ธาตุธรรมชาติและคริสตัลที่คุณบันทึกไว้ สามารถสอบถามหรือสั่งซื้อได้ทันที
           </p>
         </div>
 
@@ -53,13 +53,13 @@ export default function AccountWishlistPage() {
           <div className="w-full zen-surface rounded-3xl p-12 text-center space-y-4">
             <Heart className="w-12 h-12 text-base-content/40 mx-auto" />
             <h3 className="text-lg font-bold text-primary">
-              ยังไม่มีรายการหินมงคลที่บันทึกไว้
+              ยังไม่มีรายการแร่ธรรมชาติที่บันทึกไว้
             </h3>
             <p className="text-sm text-base-content/70">
-              คุณสามารถเข้าไปเลือกชมหินมงคลและกดหัวใจ ❤️ เพื่อบันทึกมาไว้ดูภายหลังได้
+              คุณสามารถเลือกชมคลังแร่ธาตุธรรมชาติและบันทึกรายการที่สนใจไว้ดูภายหลังได้
             </p>
-            <Link to={ROUTES.MUTELU} className="btn btn-secondary btn-sm text-white rounded-xl font-bold">
-              ไปชมแคตตาล็อกสายมู
+            <Link to={ROUTES.EARTH_ENERGY} className="btn btn-secondary btn-sm text-white rounded-xl font-bold">
+              ชมคลังแร่ธาตุและคริสตัล
             </Link>
           </div>
         ) : (
@@ -110,7 +110,7 @@ export default function AccountWishlistPage() {
                     className="btn btn-secondary btn-sm text-white w-full rounded-xl font-bold gap-2"
                   >
                     <Send className="w-4 h-4" />
-                    <span>ปรึกษาและสั่งบูชาชิ้นนี้</span>
+                    <span>สอบถามและสั่งซื้อชิ้นงานนี้</span>
                   </button>
                 </div>
               </div>

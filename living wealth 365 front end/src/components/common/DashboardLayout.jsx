@@ -185,7 +185,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
                   Living Wealth <span className="text-secondary">365</span>
                 </span>
                 <span className="text-[10px] font-bold text-secondary uppercase tracking-wider">
-                  {type === 'admin' ? 'Advisor CRM' : 'VIP Member'}
+                  {type === 'admin' ? 'Advisor CRM' : 'Member Account'}
                 </span>
               </div>
             </Link>

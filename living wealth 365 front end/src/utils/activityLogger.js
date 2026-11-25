@@ -10,7 +10,7 @@ const INITIAL_LOGS = [
   {
     id: 'log-1',
     timestamp: new Date(Date.now() - 1000 * 60 * 25).toISOString(),
-    adminName: 'Admin A (Top)',
+    adminName: 'Admin A',
     adminEmail: 'admin-a@livingwealth365.com',
     actionType: 'UPDATE',
     entityType: 'INSURANCE_PLAN',
@@ -21,7 +21,7 @@ const INITIAL_LOGS = [
   {
     id: 'log-2',
     timestamp: new Date(Date.now() - 1000 * 60 * 90).toISOString(),
-    adminName: 'Admin B (Joy)',
+    adminName: 'Admin B',
     adminEmail: 'admin-b@livingwealth365.com',
     actionType: 'STATUS_CHANGE',
     entityType: 'INSURANCE_PLAN',
@@ -32,7 +32,7 @@ const INITIAL_LOGS = [
   {
     id: 'log-3',
     timestamp: new Date(Date.now() - 1000 * 60 * 180).toISOString(),
-    adminName: 'Admin A (Top)',
+    adminName: 'Admin A',
     adminEmail: 'admin-a@livingwealth365.com',
     actionType: 'CREATE',
     entityType: 'POST',

@@ -7,6 +7,9 @@ export default function RoleSwitcher() {
   const { currentUser, loginAsCustomer, loginAsAdmin, logout } = useAuth();
   const navigate = useNavigate();
 
+  // Hide developer role switcher in production builds
+  if (import.meta.env.PROD) return null;
+
   return (
     <aside
       aria-label="Demo Role Simulator"
@@ -54,10 +57,10 @@ export default function RoleSwitcher() {
         className={`btn btn-xs rounded-xl ${
           currentUser?.role === 'ADMIN' ? 'btn-secondary text-white' : 'btn-ghost'
         }`}
-        title="สลับเป็นมุมมองแอดมิน/ที่ปรึกษา"
+        title="สลับเป็นมุมมอง Admin"
       >
         <Shield className="w-3.5 h-3.5" />
-        แอดมิน
+        Admin
       </button>
 
       {currentUser && (

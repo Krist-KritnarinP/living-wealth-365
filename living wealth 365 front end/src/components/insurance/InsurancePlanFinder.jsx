@@ -607,7 +607,7 @@ export default function InsurancePlanFinder({ plans = [], onRequestQuote }) {
                 อยากได้ตารางเบี้ยจริง AIA แบบรวมหลายแผนในงบเดียว?
               </h3>
               <p className="text-xs sm:text-sm text-white/85 leading-relaxed">
-                ส่งสรุปความต้องการนี้ให้ Admin A ช่วยคำนวณเบี้ยจริงรายปีและเปรียบเทียบแผนที่คุ้มค่าที่สุดให้ฟรี
+                ส่งสรุปความต้องการนี้ให้ Admin A ช่วยคำนวณเบี้ยประกันรายปีและเปรียบเทียบแผนที่เหมาะสมที่สุด
               </p>
             </div>
             <button

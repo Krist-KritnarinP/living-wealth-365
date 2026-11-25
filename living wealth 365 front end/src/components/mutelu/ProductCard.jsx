@@ -48,15 +48,15 @@ export default function ProductCard({ product, onSelectForLead }) {
   const getAspectBadge = (aspect) => {
     switch (aspect) {
       case 'SCIENCE':
-        return { label: '🔬 วิทย์ & แร่ธาตุ', color: 'badge-info' };
+        return { label: 'วิทย์ & แร่ธาตุ', color: 'badge-info' };
       case 'HISTORY':
-        return { label: '🏛️ ประวัติศาสตร์', color: 'badge-neutral' };
+        return { label: 'ประวัติศาสตร์', color: 'badge-neutral' };
       case 'CHAKRA_ENERGY':
-        return { label: '✨ พลังจักระ', color: 'badge-secondary' };
+        return { label: 'พลังจักระ', color: 'badge-secondary' };
       case 'CULTURE':
-        return { label: '📜 วัฒนธรรม', color: 'badge-accent' };
+        return { label: 'วัฒนธรรม', color: 'badge-accent' };
       default:
-        return { label: '💎 คัดสรรพิเศษ', color: 'badge-secondary' };
+        return { label: 'คัดสรรพิเศษ', color: 'badge-secondary' };
     }
   };
 
@@ -90,7 +90,7 @@ export default function ProductCard({ product, onSelectForLead }) {
           type="button"
           onClick={handleWishlistClick}
           className="btn btn-circle btn-sm absolute top-3 right-3 bg-base-100/80 backdrop-blur-md border border-base-300 hover:scale-110 transition-transform shadow-xs z-10"
-          title={isWishlisted ? 'ลบออกจากสิ่งที่สนใจ' : '❤️ บันทึกไว้ดูทีหลัง'}
+          title={isWishlisted ? 'ลบออกจากรายการที่สนใจ' : 'บันทึกรายการที่สนใจ'}
         >
           <Heart
             className={`w-4 h-4 transition-colors ${
@@ -172,7 +172,7 @@ export default function ProductCard({ product, onSelectForLead }) {
             type="button"
             onClick={() => onSelectForLead && onSelectForLead(product)}
             className="btn btn-secondary btn-outline btn-sm rounded-xl font-bold gap-1.5 hover:btn-secondary hover:text-white shrink-0"
-            title="ปรึกษา & บูชาชิ้นงาน"
+            title="สอบถามรายละเอียดชิ้นงาน"
           >
             <Send className="w-3.5 h-3.5 shrink-0" />
             <span className="sm:hidden lg:inline">ปรึกษา</span>

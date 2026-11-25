@@ -149,7 +149,7 @@ export function computeStorageStats({ posts = [], products = [], insurancePlans 
 
   // Status badge based on threshold
   let status = 'HEALTHY'; // < 70%
-  let statusText = 'อยู่ในเกณฑ์ปลอดภัย (ฟรี 100%)';
+  let statusText = 'อยู่ในเกณฑ์ปลอดภัย';
   let statusColor = 'badge-success text-white';
   let progressColor = 'progress-success';
 

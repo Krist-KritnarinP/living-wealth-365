@@ -478,7 +478,7 @@ export default function StoneCalculator({ onSelectStone }) {
                   className="w-28 h-28 sm:w-36 sm:h-36 rounded-full shadow-xl relative overflow-hidden transition-all duration-700 animate-float-gem border border-white/50 cursor-pointer group"
                   style={{ background: currentResult.auraTheme.gemOrbGradient }}
                   onClick={() => onSelectStone && onSelectStone(currentResult.recommendedStone)}
-                  title={`คลิกเพื่อบูชา ${currentResult.recommendedStone}`}
+                  title={`สอบถามข้อมูล ${currentResult.recommendedStone}`}
                 >
                   {/* High-Gloss Specular Highlight Arc on Top Left */}
                   <div className="absolute top-1.5 left-2 w-16 h-8 rounded-[50%] bg-gradient-to-b from-white/80 via-white/30 to-transparent -rotate-30 filter blur-[0.5px] pointer-events-none" />
@@ -525,7 +525,7 @@ export default function StoneCalculator({ onSelectStone }) {
                       {matchedProduct.name}
                     </div>
                     <div className="text-[11px] font-black text-secondary">
-                      ราคาบูชา ฿{matchedProduct.price || currentResult.price}
+                      ราคา ฿{matchedProduct.price || currentResult.price}
                     </div>
                   </div>
                 </div>
@@ -545,7 +545,7 @@ export default function StoneCalculator({ onSelectStone }) {
 
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform group-hover:rotate-45" />
               <span className="text-center leading-snug">
-                ปรึกษาและบูชาหินมงคลสำหรับคนเกิด{selectedDay}
+                สอบถามและปรึกษาการเลือกแร่ธรรมชาติสำหรับคนเกิด{selectedDay}
               </span>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform group-hover:translate-x-1.5" />
             </button>

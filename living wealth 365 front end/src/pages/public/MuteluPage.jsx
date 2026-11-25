@@ -29,14 +29,14 @@ export default function MuteluPage() {
 
   const handleSelectProduct = (prod) => {
     setSelectedProduct(prod);
-    setSelectedInterest(`บูชาหินมงคล: ${prod.name} (฿${prod.price})`);
+    setSelectedInterest(`สอบถามชิ้นงานแร่ธาตุ: ${prod.name} (฿${prod.price})`);
     const formEl = document.getElementById('consult-form');
     if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleSelectCalculatedStone = (stoneName) => {
-    setSelectedProduct({ name: `หินมงคลตามวันเกิด: ${stoneName}` });
-    setSelectedInterest(`บูชาหินมงคลตามวันเกิด: ${stoneName}`);
+    setSelectedProduct({ name: `แร่ธาตุประจำวันเกิด: ${stoneName}` });
+    setSelectedInterest(`สอบถามแร่ธาตุประจำวันเกิด: ${stoneName}`);
     const formEl = document.getElementById('consult-form');
     if (formEl) formEl.scrollIntoView({ behavior: 'smooth' });
   };
@@ -73,7 +73,7 @@ export default function MuteluPage() {
               รายการหินมงคลทั้งหมด ({filteredProducts.length})
             </h2>
             <p className="text-sm text-base-content/70">
-              กดรูปหัวใจ ❤️ เพื่อบันทึกไว้ใน Wishlist หรือกดบูชาเพื่อส่งข้อมูลปรึกษา
+              บันทึกรายการที่สนใจ หรือเลือกชิ้นงานเพื่อสอบถามรายละเอียดเพิ่มเติม
             </p>
           </div>
 
@@ -113,8 +113,8 @@ export default function MuteluPage() {
         <LeadCaptureForm
           selection={selectedProduct}
           defaultInterest={selectedInterest}
-          title="สนใจบูชาหินมงคลหรือสอบถามรายละเอียด"
-          subtitle="แจ้งขนาดข้อมือ หรือขอคำแนะนำการเลือกหินมงคลเฉพาะบุคคลจากผู้เชี่ยวชาญได้ฟรี"
+          title="สอบถามรายละเอียดหรือสั่งซื้อชิ้นงานแร่ธรรมชาติ"
+          subtitle="แจ้งขนาดข้อมือ หรือขอคำแนะนำการเลือกแร่ธรรมชาติเฉพาะบุคคลจากที่ปรึกษา"
         />
       </section>
     </div>

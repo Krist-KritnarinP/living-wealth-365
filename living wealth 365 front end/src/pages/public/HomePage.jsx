@@ -119,7 +119,7 @@ export default function HomePage() {
               <EditableText
                 fieldKey="hero.primaryBtnText"
                 label="ข้อความปุ่มรอง Hero"
-                fallback="ลองเครื่องมือวางแผนฟรี"
+                fallback="เครื่องมือประเมินและวางแผน"
               />
             </a>
           </div>
@@ -176,7 +176,7 @@ export default function HomePage() {
         }
         subtitle={
           content?.leadForm?.subtitle ||
-          'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางที่เหมาะกับคุณโดยเฉพาะ (ไม่มีค่าใช้จ่าย)'
+          'Admin A & Admin B พร้อมรับฟังและร่วมออกแบบแนวทางที่เหมาะสมกับคุณโดยเฉพาะ'
         }
       />
     </div>

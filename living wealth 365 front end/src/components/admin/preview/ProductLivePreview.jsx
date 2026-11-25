@@ -103,7 +103,7 @@ export default function ProductLivePreview({ product = {} }) {
               <div className="p-3.5 rounded-2xl bg-base-200/60 border border-base-300/60 flex items-baseline justify-between gap-2">
                 <div>
                   <span className="text-[11px] font-semibold text-base-content/65 block">
-                    ราคาบูชาและครอบครอง:
+                    ราคา:
                   </span>
                   <span className="text-2xl font-black text-secondary">
                     ฿{typeof price === 'number' ? price.toLocaleString() : price}

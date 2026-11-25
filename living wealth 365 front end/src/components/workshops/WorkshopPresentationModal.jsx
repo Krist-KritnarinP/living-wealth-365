@@ -41,7 +41,7 @@ export default function WorkshopPresentationModal({
     ? [
         {
           id: `${focusedWorkshop.id}-cover`,
-          kicker: `WORKSHOP SPOTLIGHT • ${focusedWorkshop.trackLabel}`,
+          kicker: `ภาพรวมหลักสูตร • ${focusedWorkshop.trackLabel}`,
           title: focusedWorkshop.title,
           subtitle: focusedWorkshop.subtitle,
           points: focusedWorkshop.highlights,
@@ -55,7 +55,7 @@ export default function WorkshopPresentationModal({
         },
         {
           id: `${focusedWorkshop.id}-agenda`,
-          kicker: 'AGENDA & FLOW • กำหนดการกิจกรรม',
+          kicker: 'กำหนดการกิจกรรม',
           title: `โครงสร้างเวลาและกิจกรรม: ${focusedWorkshop.title}`,
           subtitle: `ระยะเวลา ${focusedWorkshop.duration} • ดูแลโดย ${focusedWorkshop.facilitator}`,
           points: focusedWorkshop.agenda.map((item) => `${item.time} — ${item.topic}`),

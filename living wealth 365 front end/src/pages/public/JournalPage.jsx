@@ -36,10 +36,10 @@ export default function JournalPage() {
 
   const types = [
     { id: 'ALL', label: 'ทุกรูปแบบ' },
-    { id: 'TOPS_NOTES', label: "⭐ Admin A's Notes" },
-    { id: 'JOURNEY', label: "🧭 Admin B's Journey" },
-    { id: 'ARTICLE', label: '📖 บทความวิชาการ' },
-    { id: 'EXPLORING', label: '🔍 การสำรวจร่วมกัน' },
+    { id: 'TOPS_NOTES', label: "Admin A's Notes" },
+    { id: 'JOURNEY', label: "Admin B's Journey" },
+    { id: 'ARTICLE', label: 'บทความวิชาการ' },
+    { id: 'EXPLORING', label: 'การสำรวจร่วมกัน' },
   ];
 
   const filteredPosts = posts.filter((post) => {

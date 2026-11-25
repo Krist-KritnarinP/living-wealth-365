@@ -146,7 +146,7 @@ export default function LifeMapTeaser({ standalone = false }) {
 
   // Helper for score grade badge
   const getScoreGrade = (val) => {
-    if (val >= 9) return { label: 'ยอดเยี่ยม ✨', bg: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' };
+    if (val >= 9) return { label: 'ยอดเยี่ยม', bg: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/30' };
     if (val >= 7) return { label: 'มั่นคงดี', bg: 'bg-blue-500/15 text-blue-600 dark:text-blue-400 border-blue-500/30' };
     if (val >= 5) return { label: 'ปานกลาง', bg: 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border-amber-500/30' };
     return { label: 'ต้องฟื้นฟู', bg: 'bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30' };
@@ -629,7 +629,7 @@ export default function LifeMapTeaser({ standalone = false }) {
 
             <div className="p-3.5 rounded-xl bg-base-200/60 border border-base-300/40 text-xs text-base-content/80 transition-all duration-300">
               <span className="font-bold text-primary block mb-1">
-                💡 ข้อสังเกตจาก Admin A & Admin B สำหรับมิติ {lowest.name} ({scores[lowest.id]}/10):
+                ข้อสังเกตจาก Admin A &amp; Admin B สำหรับมิติ {lowest.name} ({scores[lowest.id]}/10):
               </span>
               <span>{lowest.tips}</span>
             </div>

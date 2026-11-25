@@ -143,7 +143,7 @@ export default function WellbeingPage() {
                 <span>INTERACTIVE TOOL • สำรวจพื้นที่สุขภาพที่บ้าน</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-primary">
-                Home Health Sanctuary: เช็กลิสต์ 5 นิสัยเปลี่ยนบ้านให้เป็นที่ฟื้นฟู
+                การจัดสภาพแวดล้อมบ้านเพื่อการพักผ่อน: เช็กลิสต์ 5 นิสัยฟื้นฟูร่างกายในทุกวัน
               </h2>
               <p className="text-sm text-base-content/75 mt-1">
                 คลิกเพื่อสำรวจว่าบ้านของคุณพร้อมเป็นแหล่งชาร์จพลังงานระดับเซลล์แล้วหรือยัง ({checkedCount}/5 ผ่านเกณฑ์)
