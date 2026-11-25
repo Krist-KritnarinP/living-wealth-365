@@ -121,7 +121,7 @@ export default function HeroStatTiles() {
               <p className="text-sm sm:text-base font-bold text-base-content leading-snug group-hover:text-primary transition-colors">
                 {item.label}
               </p>
-              <p className="text-xs sm:text-sm text-base-content/70 leading-snug mt-0.5 break-words">
+              <p className="text-xs sm:text-sm text-base-content/70 leading-snug mt-0.5 wrap-break-word">
                 {item.sub}
               </p>
             </div>

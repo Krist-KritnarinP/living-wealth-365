@@ -22,7 +22,7 @@ export default function ThankYouPage() {
         <div className="absolute top-0 right-0 w-36 h-36 bg-success/10 rounded-full blur-3xl pointer-events-none"></div>
 
         {/* Success Icon */}
-        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-success/20 text-success mx-auto flex items-center justify-center shadow-inner">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-success/20 text-success mx-auto flex items-center justify-center inset-shadow-sm">
           <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12" />
         </div>
 

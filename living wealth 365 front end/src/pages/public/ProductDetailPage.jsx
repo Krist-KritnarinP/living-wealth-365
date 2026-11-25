@@ -165,7 +165,7 @@ export default function ProductDetailPage() {
 
       {/* 2. MAIN HERO PRODUCT SHOWCASE */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="zen-surface rounded-[2rem] border border-base-300/60 p-6 sm:p-10 lg:p-12 shadow-sm overflow-hidden">
+        <div className="zen-surface rounded-4xl border border-base-300/60 p-6 sm:p-10 lg:p-12 shadow-sm overflow-hidden">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Image Column */}
             <div className="lg:col-span-6 space-y-4">
@@ -177,7 +177,7 @@ export default function ProductDetailPage() {
                   className="w-full h-full object-cover"
                   fallback="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1000&auto=format&fit=crop&q=80"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
 
                 {/* Floating Badges */}
                 <div className="absolute top-4 left-4 flex flex-wrap gap-2 max-w-[85%]">
@@ -213,7 +213,7 @@ export default function ProductDetailPage() {
                   <span>PILLAR 5: EARTH & ENERGY CURATION • คลังผลึกแร่คัดสรร</span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight break-words [overflow-wrap:anywhere]">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-primary leading-tight wrap-anywhere">
                   {product.name}
                 </h1>
 
@@ -233,7 +233,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Description */}
-                <p className="text-sm sm:text-base text-base-content/80 leading-relaxed break-words [overflow-wrap:anywhere]">
+                <p className="text-sm sm:text-base text-base-content/80 leading-relaxed wrap-anywhere">
                   {product.description}
                 </p>
 
@@ -245,7 +245,7 @@ export default function ProductDetailPage() {
                         <Atom className="w-4 h-4 text-info shrink-0" />
                         <span>สูตรโครงสร้างแร่ (Formula)</span>
                       </div>
-                      <p className="text-xs font-mono font-semibold text-base-content/85 break-words">
+                      <p className="text-xs font-mono font-semibold text-base-content/85 wrap-break-word">
                         {product.mineralFormula}
                       </p>
                     </div>
@@ -257,7 +257,7 @@ export default function ProductDetailPage() {
                         <Sparkles className="w-4 h-4 shrink-0" />
                         <span>จักระและคลื่นพลังงาน (Chakra)</span>
                       </div>
-                      <p className="text-xs font-semibold text-base-content/85 break-words">
+                      <p className="text-xs font-semibold text-base-content/85 wrap-break-word">
                         {product.chakra}
                       </p>
                     </div>
@@ -269,7 +269,7 @@ export default function ProductDetailPage() {
                         <Calendar className="w-4 h-4 text-secondary shrink-0" />
                         <span>ความสอดคล้องตามวันเกิด</span>
                       </div>
-                      <p className="text-xs font-semibold text-base-content/85 break-words">
+                      <p className="text-xs font-semibold text-base-content/85 wrap-break-word">
                         {product.dayOfWeek}
                       </p>
                     </div>
@@ -281,7 +281,7 @@ export default function ProductDetailPage() {
                         <Layers className="w-4 h-4 text-emerald-600 shrink-0" />
                         <span>ขนาดและลักษณะเฉพาะ</span>
                       </div>
-                      <p className="text-xs font-semibold text-base-content/85 break-words">
+                      <p className="text-xs font-semibold text-base-content/85 wrap-break-word">
                         {product.stoneType}
                       </p>
                     </div>

@@ -459,7 +459,7 @@ export default function TaxCalculator({ hideHeader = false }) {
         {/* ========================================================= */}
         <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
           {/* Main Calculation Card */}
-          <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-primary/20 shadow-xl space-y-6 relative overflow-hidden bg-gradient-to-b from-primary/5 via-transparent to-transparent">
+          <div className="zen-surface rounded-3xl p-6 sm:p-8 border border-primary/20 shadow-xl space-y-6 relative overflow-hidden bg-linear-to-b from-primary/5 via-transparent to-transparent">
             <div className="space-y-1">
               <span className="text-xs font-bold text-secondary uppercase tracking-wider flex items-center gap-1">
                 <Sparkles className="w-3.5 h-3.5" />
@@ -575,7 +575,7 @@ export default function TaxCalculator({ hideHeader = false }) {
                 >
                   <div className="flex items-center gap-2">
                     <span className="w-12">{item.rateLabel}</span>
-                    <span className="text-[11px] truncate max-w-[140px] sm:max-w-none">
+                    <span className="text-[11px] truncate max-w-35 sm:max-w-none">
                       {item.title}
                     </span>
                   </div>
@@ -591,7 +591,7 @@ export default function TaxCalculator({ hideHeader = false }) {
 
       {/* 🤝 Consultation Lead Capture Modal */}
       {showConsultModal && (
-        <div role="dialog" aria-modal="true" className="modal modal-open z-50 animate-fadeIn">
+        <div role="dialog" aria-modal="true" className="modal modal-open z-50 animate-fade-in">
           <div className="modal-box rounded-3xl zen-surface border border-base-300 shadow-2xl max-w-xl p-6 sm:p-8 space-y-4">
             <div className="flex items-center justify-between border-b border-base-300 pb-3">
               <div className="flex items-center gap-2 text-primary font-black text-lg">

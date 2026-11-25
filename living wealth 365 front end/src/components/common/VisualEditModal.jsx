@@ -49,7 +49,7 @@ export default function VisualEditModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in">
       {/* Backdrop click to close */}
       <div className="absolute inset-0" onClick={closeEditModal} />
 

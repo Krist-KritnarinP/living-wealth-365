@@ -49,7 +49,7 @@ export default function ProductLivePreview({ product = {} }) {
         </div>
 
         {/* Product Showcase Card */}
-        <div className="zen-surface rounded-[2rem] border border-base-300/60 p-6 sm:p-8 shadow-sm">
+        <div className="zen-surface rounded-4xl border border-base-300/60 p-6 sm:p-8 shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Image Column */}
             <div className="lg:col-span-6 space-y-3">
@@ -66,7 +66,7 @@ export default function ProductLivePreview({ product = {} }) {
                     ไม่มีรูปภาพสินค้า
                   </div>
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-linear-to-t from-slate-950/40 via-transparent to-transparent pointer-events-none" />
 
                 <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                   <span className="badge badge-secondary text-[11px] font-bold shadow-xs">
@@ -96,7 +96,7 @@ export default function ProductLivePreview({ product = {} }) {
                 <span>PILLAR 5: EARTH & ENERGY CURATION</span>
               </div>
 
-              <h1 className="text-2xl sm:text-3xl font-black text-primary leading-tight break-words [overflow-wrap:anywhere]">
+              <h1 className="text-2xl sm:text-3xl font-black text-primary leading-tight wrap-anywhere">
                 {name}
               </h1>
 
@@ -114,7 +114,7 @@ export default function ProductLivePreview({ product = {} }) {
                 </span>
               </div>
 
-              <p className="text-xs sm:text-sm text-base-content/80 leading-relaxed break-words [overflow-wrap:anywhere]">
+              <p className="text-xs sm:text-sm text-base-content/80 leading-relaxed wrap-anywhere">
                 {description}
               </p>
 

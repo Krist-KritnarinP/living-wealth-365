@@ -150,7 +150,7 @@ export default function CartDrawer() {
                 />
 
                 <div className="flex-1 min-w-0 space-y-1">
-                  <p className="text-xs sm:text-sm font-bold text-primary leading-snug break-words">
+                  <p className="text-xs sm:text-sm font-bold text-primary leading-snug wrap-break-word">
                     {item.name}
                   </p>
                   <p className="text-xs font-extrabold text-secondary">

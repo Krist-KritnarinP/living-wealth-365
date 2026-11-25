@@ -118,7 +118,7 @@ export default function AdminDashboardPage() {
                 <span>สะสมในระบบ</span>
               </span>
             </div>
-            <div className="w-13 h-13 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+            <div className="w-13 h-13 rounded-2xl bg-primary/10 text-primary flex items-center justify-center inset-shadow-sm group-hover:scale-105 transition-transform">
               <FileText className="w-6 h-6" />
             </div>
           </div>
@@ -137,7 +137,7 @@ export default function AdminDashboardPage() {
                 <span>รอติดต่อกลับ</span>
               </span>
             </div>
-            <div className="w-13 h-13 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+            <div className="w-13 h-13 rounded-2xl bg-amber-500/15 text-amber-500 flex items-center justify-center inset-shadow-sm group-hover:scale-105 transition-transform">
               <Clock className="w-6 h-6" />
             </div>
           </div>
@@ -156,7 +156,7 @@ export default function AdminDashboardPage() {
                 <span>กำลังคุยแผน</span>
               </span>
             </div>
-            <div className="w-13 h-13 rounded-2xl bg-sky-500/15 text-sky-500 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+            <div className="w-13 h-13 rounded-2xl bg-sky-500/15 text-sky-500 flex items-center justify-center inset-shadow-sm group-hover:scale-105 transition-transform">
               <PhoneCall className="w-6 h-6" />
             </div>
           </div>
@@ -175,7 +175,7 @@ export default function AdminDashboardPage() {
                 <span>สำเร็จเรียบร้อย</span>
               </span>
             </div>
-            <div className="w-13 h-13 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center shadow-inner group-hover:scale-105 transition-transform">
+            <div className="w-13 h-13 rounded-2xl bg-emerald-500/15 text-emerald-500 flex items-center justify-center inset-shadow-sm group-hover:scale-105 transition-transform">
               <Shield className="w-6 h-6" />
             </div>
           </div>
@@ -395,7 +395,7 @@ export default function AdminDashboardPage() {
               {/* Header */}
               <div className="flex items-start justify-between border-b border-base-300/60 pb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-inner">
+                  <div className="w-12 h-12 rounded-2xl bg-primary/10 text-primary flex items-center justify-center shrink-0 inset-shadow-sm">
                     <PhoneCall className="w-6 h-6" />
                   </div>
                   <div>

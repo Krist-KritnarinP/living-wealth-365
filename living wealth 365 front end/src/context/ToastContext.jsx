@@ -49,7 +49,7 @@ export function ToastProvider({ children }) {
               <div
                 key={toast.id}
                 role="status"
-                className={`alert ${alertClass} shadow-xl rounded-2xl flex items-center justify-between gap-3 pointer-events-auto border border-base-100/20 backdrop-blur-md transition-all duration-300 animate-fadeIn`}
+                className={`alert ${alertClass} shadow-xl rounded-2xl flex items-center justify-between gap-3 pointer-events-auto border border-base-100/20 backdrop-blur-md transition-all duration-300 animate-fade-in`}
               >
                 <div className="flex items-center gap-2.5 text-sm font-bold">
                   <Icon className="w-5 h-5 shrink-0" />

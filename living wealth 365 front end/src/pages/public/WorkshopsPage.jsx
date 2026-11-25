@@ -287,7 +287,7 @@ export default function WorkshopsPage() {
                         alt={ws.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent" />
                       <div className="absolute top-4 left-4 flex flex-wrap gap-2">
                         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-base-100/90 text-primary text-xs font-black shadow-xs">
                           <TrackIcon className="w-3.5 h-3.5 text-secondary shrink-0" />

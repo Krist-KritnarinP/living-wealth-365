@@ -110,14 +110,14 @@ export default function SecurityConfirmModal({
     <div
       role="dialog"
       aria-modal="true"
-      className="modal modal-open z-[100] animate-fadeIn backdrop-blur-sm"
+      className="modal modal-open z-100 animate-fade-in backdrop-blur-sm"
     >
       <div className="modal-box rounded-3xl liquid-glass-solid border border-base-300 shadow-2xl max-w-lg p-6 sm:p-8 space-y-5">
         {/* Modal Header */}
         <div className="flex items-start justify-between gap-3 border-b border-base-300/60 pb-4">
           <div className="flex items-center gap-3">
             <div
-              className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 shadow-inner ${iconBgClass}`}
+              className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 inset-shadow-sm ${iconBgClass}`}
             >
               {isDelete ? (
                 <ShieldAlert className="w-6 h-6 animate-pulse" />
@@ -182,7 +182,7 @@ export default function SecurityConfirmModal({
                   className="flex items-center justify-between pb-1.5 border-b border-base-300/40 last:border-0 last:pb-0"
                 >
                   <span className="text-base-content/65 font-medium">{item.label}:</span>
-                  <span className="font-bold text-primary truncate max-w-[200px]">
+                  <span className="font-bold text-primary truncate max-w-50">
                     {item.value || '-'}
                   </span>
                 </div>
@@ -224,7 +224,7 @@ export default function SecurityConfirmModal({
           </div>
 
           {/* Big Code Display */}
-          <div className="flex items-center justify-center gap-3 py-2 bg-base-100 rounded-xl border border-secondary/30 shadow-inner">
+          <div className="flex items-center justify-center gap-3 py-2 bg-base-100 rounded-xl border border-secondary/30 inset-shadow-sm">
             {generatedPin.split('').map((digit, idx) => (
               <span
                 key={idx}
@@ -268,13 +268,13 @@ export default function SecurityConfirmModal({
             />
 
             {isMatch && (
-              <div className="text-center text-xs font-bold text-success flex items-center justify-center gap-1 pt-1 animate-fadeIn">
+              <div className="text-center text-xs font-bold text-success flex items-center justify-center gap-1 pt-1 animate-fade-in">
                 <CheckCircle2 className="w-3.5 h-3.5" />
                 <span>รหัสความปลอดภัยถูกต้องเรียบร้อย</span>
               </div>
             )}
             {hasError && !isMatch && (
-              <div className="text-center text-xs font-bold text-error pt-1 animate-fadeIn">
+              <div className="text-center text-xs font-bold text-error pt-1 animate-fade-in">
                 รหัสไม่ถูกต้อง กรุณากรอก {generatedPin} ให้ตรงกัน
               </div>
             )}

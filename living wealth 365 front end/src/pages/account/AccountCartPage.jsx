@@ -151,7 +151,7 @@ export default function AccountCartPage() {
                         {item.category}
                       </span>
                     )}
-                    <h3 className="text-base sm:text-lg font-bold text-primary leading-snug break-words">
+                    <h3 className="text-base sm:text-lg font-bold text-primary leading-snug wrap-break-word">
                       {item.name}
                     </h3>
                     <p className="text-sm text-base-content/65">

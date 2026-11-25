@@ -105,7 +105,7 @@ export default function ProductCard({ product, onSelectForLead }) {
         <div className="min-w-0">
           <div className="flex items-start justify-between gap-2 min-w-0">
             <Link to={detailUrl} className="block flex-1 min-w-0">
-              <h4 className="text-base sm:text-lg font-black text-primary leading-snug group-hover:text-secondary transition-colors break-words [overflow-wrap:anywhere]">
+              <h4 className="text-base sm:text-lg font-black text-primary leading-snug group-hover:text-secondary transition-colors wrap-anywhere">
                 {product.name}
               </h4>
             </Link>
@@ -136,7 +136,7 @@ export default function ProductCard({ product, onSelectForLead }) {
             </div>
           )}
 
-          <p className="text-xs sm:text-sm text-base-content/75 mt-2.5 line-clamp-2 leading-relaxed break-words [overflow-wrap:anywhere]">
+          <p className="text-xs sm:text-sm text-base-content/75 mt-2.5 line-clamp-2 leading-relaxed wrap-anywhere">
             {product.description}
           </p>
 

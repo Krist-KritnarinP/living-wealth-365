@@ -26,7 +26,7 @@ export function flyToCart({
   // Create flying avatar / particle
   const flying = document.createElement('div');
   flying.className =
-    'fixed pointer-events-none rounded-full overflow-hidden shadow-2xl z-[99999] border-2 border-secondary bg-white flex items-center justify-center';
+    'fixed pointer-events-none rounded-full overflow-hidden shadow-2xl z-99999 border-2 border-secondary bg-white flex items-center justify-center';
   flying.style.width = '48px';
   flying.style.height = '48px';
   flying.style.left = `${sourceRect.left + sourceRect.width / 2 - 24}px`;

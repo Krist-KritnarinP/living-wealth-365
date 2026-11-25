@@ -148,7 +148,7 @@ export default function WealthPage() {
       {/* 2. TAB CONTENT */}
       {/* --- TAB A: PROTECTION & SOLUTIONS --- */}
       {activeTab === 'protection' && (
-        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-8 animate-fadeIn">
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-8 animate-fade-in">
           {/* Quick Callout to Smart Tap-Only Plan Finder */}
           <div className="zen-surface rounded-3xl p-4 sm:p-5 border border-secondary/40 bg-secondary/8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-start sm:items-center gap-3 min-w-0">
@@ -289,7 +289,7 @@ export default function WealthPage() {
 
       {/* --- TAB A2: SMART AIA PLAN FINDER & ESTIMATOR --- */}
       {activeTab === 'finder' && (
-        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fadeIn">
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fade-in">
           <InsurancePlanFinder
             plans={insurancePlans}
             onRequestQuote={({ plan, interest, notes }) =>
@@ -304,14 +304,14 @@ export default function WealthPage() {
 
       {/* --- TAB B: EMBEDDED TAX CALCULATOR --- */}
       {activeTab === 'calculator' && (
-        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fadeIn">
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fade-in">
           <TaxCalculator hideHeader={false} />
         </section>
       )}
 
       {/* --- TAB C: 4 PILLARS OF WEALTH ARCHITECTURE --- */}
       {activeTab === 'architecture' && (
-        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-12 animate-fadeIn">
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-12 animate-fade-in">
           <div className="text-center max-w-2xl mx-auto space-y-3">
             <h2 className="text-2xl sm:text-3xl font-black text-primary">
               สถาปัตยกรรมการเงิน 4 เสาหลัก (Financial Architecture)

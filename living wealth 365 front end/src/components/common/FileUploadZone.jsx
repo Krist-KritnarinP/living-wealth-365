@@ -222,7 +222,7 @@ export default function FileUploadZone({
 
       {/* Manual URL Input (Optional fallback) */}
       {showManualUrl && (
-        <div className="flex items-center gap-2 mb-1 animate-fadeIn">
+        <div className="flex items-center gap-2 mb-1 animate-fade-in">
           <input
             type="url"
             placeholder={

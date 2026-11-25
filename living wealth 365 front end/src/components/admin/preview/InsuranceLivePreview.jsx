@@ -61,10 +61,10 @@ export default function InsuranceLivePreview({ plan = {} }) {
         </div>
 
         {/* Hero Banner Showcase */}
-        <div className="zen-surface rounded-[2rem] overflow-hidden border border-base-300/60 shadow-lg">
+        <div className="zen-surface rounded-4xl overflow-hidden border border-base-300/60 shadow-lg">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Cover Side */}
-            <div className="lg:col-span-5 relative min-h-[260px] bg-base-200 overflow-hidden">
+            <div className="lg:col-span-5 relative min-h-65 bg-base-200 overflow-hidden">
               {imageUrl ? (
                 <FramedImage
                   src={imageUrl}
@@ -77,7 +77,7 @@ export default function InsuranceLivePreview({ plan = {} }) {
                   ไม่มีรูปภาพปก
                 </div>
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950/75 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-white text-xs font-bold">
                 <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30">
                   {categoryName}
@@ -100,12 +100,12 @@ export default function InsuranceLivePreview({ plan = {} }) {
                   </span>
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl font-black text-primary leading-snug break-words [overflow-wrap:anywhere]">
+                <h1 className="text-2xl sm:text-3xl font-black text-primary leading-snug wrap-anywhere">
                   {name}
                 </h1>
 
                 {tagline && (
-                  <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed break-words [overflow-wrap:anywhere]">
+                  <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed wrap-anywhere">
                     {tagline}
                   </p>
                 )}
@@ -117,7 +117,7 @@ export default function InsuranceLivePreview({ plan = {} }) {
                   <span className="text-[11px] font-semibold text-base-content/65 block">
                     วงเงินความคุ้มครอง:
                   </span>
-                  <span className="text-base font-black text-primary block break-words">
+                  <span className="text-base font-black text-primary block wrap-break-word">
                     {coverageAmount}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ export default function InsuranceLivePreview({ plan = {} }) {
                   <span className="text-[11px] font-bold text-amber-900 dark:text-amber-200 block">
                     เบี้ยเริ่มต้นโดยประมาณ:
                   </span>
-                  <span className="text-base font-black text-amber-900 dark:text-amber-300 block break-words">
+                  <span className="text-base font-black text-amber-900 dark:text-amber-300 block wrap-break-word">
                     {startingPrice}
                   </span>
                 </div>
@@ -146,7 +146,7 @@ export default function InsuranceLivePreview({ plan = {} }) {
             {featuresList.map((feat, idx) => (
               <li key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm">
                 <CheckCircle2 className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                <span className="flex-1 break-words leading-relaxed text-base-content/85">
+                <span className="flex-1 wrap-break-word leading-relaxed text-base-content/85">
                   {feat}
                 </span>
               </li>

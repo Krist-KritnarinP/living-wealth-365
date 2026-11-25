@@ -33,18 +33,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(239, 68, 68, 0.4)',
       backdropGradient: 'from-red-500/25 via-amber-500/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-red-500/15 via-amber-500/10 to-rose-950/10 dark:from-red-950/50 dark:via-amber-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-red-500/15 via-amber-500/10 to-rose-950/10 dark:from-red-950/50 dark:via-amber-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-red-600 via-rose-500 to-amber-500 text-white shadow-lg shadow-red-500/40 ring-2 ring-amber-300 scale-105',
+        'bg-linear-to-r from-red-600 via-rose-500 to-amber-500 text-white shadow-lg shadow-red-500/40 ring-2 ring-amber-300 scale-105',
       btnInactive: 'hover:border-red-400 hover:text-red-500 hover:shadow-md hover:shadow-red-500/20',
       cardBorder: 'border-red-500/40 shadow-2xl shadow-red-500/20',
       badgeClass:
-        'bg-gradient-to-r from-red-500/20 to-amber-500/20 text-red-600 dark:text-red-300 border-red-500/30',
+        'bg-linear-to-r from-red-500/20 to-amber-500/20 text-red-600 dark:text-red-300 border-red-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #FEF08A 0%, #F59E0B 35%, #DC2626 75%, #7F1D1D 100%)',
       gemInnerLight: '#FEF08A',
       ctaGradient:
-        'bg-gradient-to-r from-red-600 via-amber-500 to-rose-600 shadow-xl shadow-red-500/40 text-white hover:shadow-red-500/60',
+        'bg-linear-to-r from-red-600 via-amber-500 to-rose-600 shadow-xl shadow-red-500/40 text-white hover:shadow-red-500/60',
       textAccent: 'text-red-500',
       haloRing: 'border-amber-400/50',
     },
@@ -66,18 +66,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(245, 158, 11, 0.4)',
       backdropGradient: 'from-amber-400/25 via-yellow-300/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-amber-400/15 via-yellow-300/10 to-amber-950/10 dark:from-amber-950/50 dark:via-yellow-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-amber-400/15 via-yellow-300/10 to-amber-950/10 dark:from-amber-950/50 dark:via-yellow-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 text-stone-900 font-black shadow-lg shadow-amber-500/40 ring-2 ring-yellow-300 scale-105',
+        'bg-linear-to-r from-amber-500 via-yellow-400 to-amber-600 text-stone-900 font-black shadow-lg shadow-amber-500/40 ring-2 ring-yellow-300 scale-105',
       btnInactive: 'hover:border-amber-400 hover:text-amber-600 hover:shadow-md hover:shadow-amber-500/20',
       cardBorder: 'border-amber-500/40 shadow-2xl shadow-amber-500/20',
       badgeClass:
-        'bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-700 dark:text-amber-300 border-amber-500/30',
+        'bg-linear-to-r from-amber-500/20 to-yellow-500/20 text-amber-700 dark:text-amber-300 border-amber-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #FFFBEB 0%, #F59E0B 40%, #B45309 75%, #451A03 100%)',
       gemInnerLight: '#FFFBEB',
       ctaGradient:
-        'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-600 shadow-xl shadow-amber-500/40 text-stone-950 font-black hover:shadow-amber-500/60',
+        'bg-linear-to-r from-amber-500 via-yellow-400 to-amber-600 shadow-xl shadow-amber-500/40 text-stone-950 font-black hover:shadow-amber-500/60',
       textAccent: 'text-amber-500',
       haloRing: 'border-yellow-300/60',
     },
@@ -99,18 +99,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(236, 72, 153, 0.4)',
       backdropGradient: 'from-pink-500/25 via-rose-400/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-pink-500/15 via-rose-400/10 to-fuchsia-950/10 dark:from-pink-950/50 dark:via-rose-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-pink-500/15 via-rose-400/10 to-fuchsia-950/10 dark:from-pink-950/50 dark:via-rose-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-pink-600 via-rose-500 to-fuchsia-600 text-white shadow-lg shadow-pink-500/40 ring-2 ring-pink-300 scale-105',
+        'bg-linear-to-r from-pink-600 via-rose-500 to-fuchsia-600 text-white shadow-lg shadow-pink-500/40 ring-2 ring-pink-300 scale-105',
       btnInactive: 'hover:border-pink-400 hover:text-pink-500 hover:shadow-md hover:shadow-pink-500/20',
       cardBorder: 'border-pink-500/40 shadow-2xl shadow-pink-500/20',
       badgeClass:
-        'bg-gradient-to-r from-pink-500/20 to-rose-500/20 text-pink-700 dark:text-pink-300 border-pink-500/30',
+        'bg-linear-to-r from-pink-500/20 to-rose-500/20 text-pink-700 dark:text-pink-300 border-pink-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #FDF2F8 0%, #F472B6 40%, #DB2777 75%, #831843 100%)',
       gemInnerLight: '#FDF2F8',
       ctaGradient:
-        'bg-gradient-to-r from-pink-600 via-rose-500 to-fuchsia-600 shadow-xl shadow-pink-500/40 text-white hover:shadow-pink-500/60',
+        'bg-linear-to-r from-pink-600 via-rose-500 to-fuchsia-600 shadow-xl shadow-pink-500/40 text-white hover:shadow-pink-500/60',
       textAccent: 'text-pink-500',
       haloRing: 'border-pink-300/60',
     },
@@ -132,18 +132,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(16, 185, 129, 0.4)',
       backdropGradient: 'from-emerald-500/25 via-teal-400/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-emerald-500/15 via-teal-400/10 to-emerald-950/10 dark:from-emerald-950/50 dark:via-teal-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-emerald-500/15 via-teal-400/10 to-emerald-950/10 dark:from-emerald-950/50 dark:via-teal-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-emerald-600 via-teal-500 to-green-600 text-white shadow-lg shadow-emerald-500/40 ring-2 ring-emerald-300 scale-105',
+        'bg-linear-to-r from-emerald-600 via-teal-500 to-green-600 text-white shadow-lg shadow-emerald-500/40 ring-2 ring-emerald-300 scale-105',
       btnInactive: 'hover:border-emerald-400 hover:text-emerald-500 hover:shadow-md hover:shadow-emerald-500/20',
       cardBorder: 'border-emerald-500/40 shadow-2xl shadow-emerald-500/20',
       badgeClass:
-        'bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/30',
+        'bg-linear-to-r from-emerald-500/20 to-teal-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #ECFDF5 0%, #10B981 40%, #065F46 75%, #022C22 100%)',
       gemInnerLight: '#ECFDF5',
       ctaGradient:
-        'bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-700 shadow-xl shadow-emerald-500/40 text-white hover:shadow-emerald-500/60',
+        'bg-linear-to-r from-emerald-600 via-teal-500 to-emerald-700 shadow-xl shadow-emerald-500/40 text-white hover:shadow-emerald-500/60',
       textAccent: 'text-emerald-500',
       haloRing: 'border-emerald-300/60',
     },
@@ -165,18 +165,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(249, 115, 22, 0.4)',
       backdropGradient: 'from-orange-500/25 via-amber-400/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-orange-500/15 via-amber-400/10 to-amber-950/10 dark:from-orange-950/50 dark:via-amber-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-orange-500/15 via-amber-400/10 to-amber-950/10 dark:from-orange-950/50 dark:via-amber-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 text-white shadow-lg shadow-orange-500/40 ring-2 ring-orange-300 scale-105',
+        'bg-linear-to-r from-orange-500 via-amber-500 to-yellow-500 text-white shadow-lg shadow-orange-500/40 ring-2 ring-orange-300 scale-105',
       btnInactive: 'hover:border-orange-400 hover:text-orange-500 hover:shadow-md hover:shadow-orange-500/20',
       cardBorder: 'border-orange-500/40 shadow-2xl shadow-orange-500/20',
       badgeClass:
-        'bg-gradient-to-r from-orange-500/20 to-amber-500/20 text-orange-700 dark:text-orange-300 border-orange-500/30',
+        'bg-linear-to-r from-orange-500/20 to-amber-500/20 text-orange-700 dark:text-orange-300 border-orange-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #FFF7ED 0%, #F97316 40%, #C2410C 75%, #7C2D12 100%)',
       gemInnerLight: '#FFF7ED',
       ctaGradient:
-        'bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 shadow-xl shadow-orange-500/40 text-white hover:shadow-orange-500/60',
+        'bg-linear-to-r from-orange-500 via-amber-500 to-orange-600 shadow-xl shadow-orange-500/40 text-white hover:shadow-orange-500/60',
       textAccent: 'text-orange-500',
       haloRing: 'border-orange-300/60',
     },
@@ -198,18 +198,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(14, 165, 233, 0.4)',
       backdropGradient: 'from-sky-400/25 via-blue-500/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-sky-500/15 via-blue-400/10 to-indigo-950/10 dark:from-sky-950/50 dark:via-blue-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-sky-500/15 via-blue-400/10 to-indigo-950/10 dark:from-sky-950/50 dark:via-blue-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 text-white shadow-lg shadow-sky-500/40 ring-2 ring-sky-300 scale-105',
+        'bg-linear-to-r from-sky-500 via-blue-600 to-indigo-600 text-white shadow-lg shadow-sky-500/40 ring-2 ring-sky-300 scale-105',
       btnInactive: 'hover:border-sky-400 hover:text-sky-500 hover:shadow-md hover:shadow-sky-500/20',
       cardBorder: 'border-sky-500/40 shadow-2xl shadow-sky-500/20',
       badgeClass:
-        'bg-gradient-to-r from-sky-500/20 to-blue-500/20 text-sky-700 dark:text-sky-300 border-sky-500/30',
+        'bg-linear-to-r from-sky-500/20 to-blue-500/20 text-sky-700 dark:text-sky-300 border-sky-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #F0F9FF 0%, #0284C7 40%, #1E40AF 75%, #0F172A 100%)',
       gemInnerLight: '#F0F9FF',
       ctaGradient:
-        'bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 shadow-xl shadow-sky-500/40 text-white hover:shadow-sky-500/60',
+        'bg-linear-to-r from-sky-500 via-blue-600 to-indigo-600 shadow-xl shadow-sky-500/40 text-white hover:shadow-sky-500/60',
       textAccent: 'text-sky-500',
       haloRing: 'border-sky-300/60',
     },
@@ -231,18 +231,18 @@ const DAYS_DATA = [
       primaryGlow: 'rgba(147, 51, 234, 0.4)',
       backdropGradient: 'from-purple-600/25 via-violet-500/20 to-transparent',
       cardBgGradient:
-        'bg-gradient-to-br from-purple-600/15 via-violet-500/10 to-indigo-950/10 dark:from-purple-950/50 dark:via-violet-950/30 dark:to-stone-950',
+        'bg-linear-to-br from-purple-600/15 via-violet-500/10 to-indigo-950/10 dark:from-purple-950/50 dark:via-violet-950/30 dark:to-stone-950',
       btnActive:
-        'bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-700 text-white shadow-lg shadow-purple-500/40 ring-2 ring-purple-300 scale-105',
+        'bg-linear-to-r from-purple-600 via-violet-600 to-indigo-700 text-white shadow-lg shadow-purple-500/40 ring-2 ring-purple-300 scale-105',
       btnInactive: 'hover:border-purple-400 hover:text-purple-500 hover:shadow-md hover:shadow-purple-500/20',
       cardBorder: 'border-purple-500/40 shadow-2xl shadow-purple-500/20',
       badgeClass:
-        'bg-gradient-to-r from-purple-500/20 to-violet-500/20 text-purple-700 dark:text-purple-300 border-purple-500/30',
+        'bg-linear-to-r from-purple-500/20 to-violet-500/20 text-purple-700 dark:text-purple-300 border-purple-500/30',
       gemOrbGradient:
         'radial-gradient(circle at 35% 35%, #FAF5FF 0%, #9333EA 40%, #581C87 75%, #2E1065 100%)',
       gemInnerLight: '#FAF5FF',
       ctaGradient:
-        'bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-700 shadow-xl shadow-purple-500/40 text-white hover:shadow-purple-500/60',
+        'bg-linear-to-r from-purple-600 via-violet-600 to-indigo-700 shadow-xl shadow-purple-500/40 text-white hover:shadow-purple-500/60',
       textAccent: 'text-purple-500',
       haloRing: 'border-purple-300/60',
     },
@@ -294,7 +294,7 @@ export default function StoneCalculator({ onSelectStone }) {
     <div className="w-full relative py-4 sm:py-6 overflow-x-clip">
       {/* 🔮 1. DYNAMIC AMBIENT BACKDROP GLOW (ปรับสีเรืองแสงตามวันแบบ Real-Time) */}
       <div
-        className={`absolute inset-0 sm:inset-2 rounded-3xl bg-gradient-to-br ${currentResult.auraTheme.backdropGradient} filter blur-3xl opacity-70 transition-all duration-1000 -z-10 animate-pulse-glow pointer-events-none`}
+        className={`absolute inset-0 sm:inset-2 rounded-3xl bg-linear-to-br ${currentResult.auraTheme.backdropGradient} blur-3xl opacity-70 transition-all duration-1000 -z-10 animate-pulse-glow pointer-events-none`}
       />
 
       {/* 🌟 2. COMPACT & BALANCED ZEN GLASS CONTAINER */}
@@ -319,7 +319,7 @@ export default function StoneCalculator({ onSelectStone }) {
           <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-primary tracking-tight">
             เลือกวันเกิดของคุณ เพื่อค้นพบ{' '}
             <span
-              className={`bg-clip-text text-transparent bg-gradient-to-r ${currentResult.auraTheme.textAccent.replace(
+              className={`bg-clip-text text-transparent bg-linear-to-r ${currentResult.auraTheme.textAccent.replace(
                 'text-',
                 'from-'
               )} to-amber-500 transition-colors duration-700`}
@@ -373,11 +373,11 @@ export default function StoneCalculator({ onSelectStone }) {
 
         {/* 💎 4. CALCULATION RESULT CARD (กระชับพอดีตา + พื้นหลังไล่สีตามธีม) */}
         <div
-          className={`rounded-2xl p-4 sm:p-6 border border-white/30 dark:border-white/10 bg-base-100/60 dark:bg-base-900/40 backdrop-blur-md shadow-lg relative overflow-hidden transition-all duration-700`}
+          className={`rounded-2xl p-4 sm:p-6 border border-white/30 dark:border-white/10 bg-base-100/60 dark:bg-base-200/60 backdrop-blur-md shadow-lg relative overflow-hidden transition-all duration-700`}
         >
           {/* Subtle interior ambient glow */}
           <div
-            className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none filter blur-2xl opacity-20 -z-10 transition-all duration-700"
+            className="absolute -top-12 -right-12 w-48 h-48 rounded-full pointer-events-none blur-2xl opacity-20 -z-10 transition-all duration-700"
             style={{ backgroundColor: currentResult.colorDots[0] }}
           />
 
@@ -411,7 +411,7 @@ export default function StoneCalculator({ onSelectStone }) {
                   <Sparkles className="w-3 h-3 text-secondary" />
                   หินมงคลคู่บารมีที่แนะนำเป็นพิเศษ:
                 </span>
-                <h3 className="text-xl sm:text-2xl font-black text-primary leading-snug break-words">
+                <h3 className="text-xl sm:text-2xl font-black text-primary leading-snug wrap-break-word">
                   {currentResult.recommendedStone}
                 </h3>
                 <p className="text-xs font-semibold text-secondary">
@@ -437,7 +437,7 @@ export default function StoneCalculator({ onSelectStone }) {
               {/* Power and Benefits */}
               <div className="space-y-1">
                 <span className="text-[11px] font-bold text-base-content/60">พลังมงคล & พุทธคุณ:</span>
-                <p className="text-xs sm:text-sm text-base-content/85 leading-relaxed bg-base-100/80 dark:bg-base-200/60 p-3 rounded-xl border border-base-300/40 break-words">
+                <p className="text-xs sm:text-sm text-base-content/85 leading-relaxed bg-base-100/80 dark:bg-base-200/60 p-3 rounded-xl border border-base-300/40 wrap-break-word">
                   {currentResult.power}
                 </p>
               </div>
@@ -469,7 +469,7 @@ export default function StoneCalculator({ onSelectStone }) {
 
                 {/* Pulsing Colored Aura Flare behind Sphere */}
                 <div
-                  className="absolute inset-4 rounded-full filter blur-xl opacity-75 animate-pulse-glow transition-all duration-700 -z-10"
+                  className="absolute inset-4 rounded-full blur-xl opacity-75 animate-pulse-glow transition-all duration-700 -z-10"
                   style={{ backgroundColor: currentResult.auraTheme.primaryGlow }}
                 />
 
@@ -481,10 +481,10 @@ export default function StoneCalculator({ onSelectStone }) {
                   title={`สอบถามข้อมูล ${currentResult.recommendedStone}`}
                 >
                   {/* High-Gloss Specular Highlight Arc on Top Left */}
-                  <div className="absolute top-1.5 left-2 w-16 h-8 rounded-[50%] bg-gradient-to-b from-white/80 via-white/30 to-transparent -rotate-30 filter blur-[0.5px] pointer-events-none" />
+                  <div className="absolute top-1.5 left-2 w-16 h-8 rounded-full bg-linear-to-b from-white/80 via-white/30 to-transparent -rotate-30 blur-[0.5px] pointer-events-none" />
 
                   {/* Secondary Bottom Reflection */}
-                  <div className="absolute bottom-1.5 right-3 w-10 h-5 rounded-[50%] bg-white/25 rotate-20 filter blur-[1px] pointer-events-none" />
+                  <div className="absolute bottom-1.5 right-3 w-10 h-5 rounded-full bg-white/25 rotate-20 blur-[1px] pointer-events-none" />
 
                   {/* Center Sparkling Star Accent */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -492,7 +492,7 @@ export default function StoneCalculator({ onSelectStone }) {
                   </div>
 
                   {/* Shimmer light sweep across sphere */}
-                  <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -skew-x-20 animate-shimmer-sweep pointer-events-none" />
+                  <div className="absolute inset-0 w-1/2 h-full bg-linear-to-r from-transparent via-white/30 to-transparent -skew-x-20 animate-shimmer-sweep pointer-events-none" />
                 </div>
 
                 {/* Floating Twinkling Stars around the orb */}
@@ -538,10 +538,10 @@ export default function StoneCalculator({ onSelectStone }) {
             <button
               onClick={() => onSelectStone && onSelectStone(currentResult.recommendedStone)}
               type="button"
-              className={`relative overflow-hidden group btn btn-md sm:btn-lg w-full rounded-xl font-black text-xs sm:text-sm md:text-base transition-all duration-300 transform hover:scale-[1.01] active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 border-none px-4 py-3 ${currentResult.auraTheme.ctaGradient}`}
+              className={`relative overflow-hidden group btn btn-md sm:btn-lg w-full rounded-xl font-black text-xs sm:text-sm md:text-base transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] cursor-pointer flex items-center justify-center gap-2 border-none px-4 py-3 ${currentResult.auraTheme.ctaGradient}`}
             >
               {/* Continuous Light Streak Shimmer Sweep */}
-              <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -skew-x-20 animate-shimmer-sweep pointer-events-none" />
+              <div className="absolute inset-0 w-1/2 h-full bg-linear-to-r from-transparent via-white/40 to-transparent -skew-x-20 animate-shimmer-sweep pointer-events-none" />
 
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 transition-transform group-hover:rotate-45" />
               <span className="text-center leading-snug">

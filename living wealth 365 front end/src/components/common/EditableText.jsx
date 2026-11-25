@@ -54,7 +54,7 @@ export default function EditableText({
     <Component
       onClick={handleClick}
       title={`คลิกเพื่อแก้ไข: ${label}`}
-      className={`relative inline-block border-b-2 border-dashed border-amber-500/80 hover:bg-amber-500/15 hover:border-amber-400 rounded px-1 -mx-1 cursor-pointer transition-all duration-200 group/editable ${className}`}
+      className={`relative inline-block border-b-2 border-dashed border-amber-500/80 hover:bg-amber-500/15 hover:border-amber-400 rounded-sm px-1 -mx-1 cursor-pointer transition-all duration-200 group/editable ${className}`}
       {...props}
     >
       {value}

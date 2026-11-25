@@ -103,14 +103,14 @@ export default function BlogPage() {
 
       {/* 🧮 2. TAB: TAX CALCULATOR FEATURE */}
       {activeTab === 'calculator' && (
-        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fadeIn">
+        <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 animate-fade-in">
           <TaxCalculator hideHeader={false} />
         </section>
       )}
 
       {/* 📰 3. TAB: KNOWLEDGE ARTICLES */}
       {activeTab === 'articles' && (
-        <div className="space-y-8 animate-fadeIn">
+        <div className="space-y-8 animate-fade-in">
           {/* Search & Categories Section */}
           <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 space-y-6">
             {/* Search Bar */}
@@ -145,7 +145,7 @@ export default function BlogPage() {
             </div>
 
             {/* 💡 Cross-Feature Tax Banner */}
-            <div className="zen-surface rounded-2xl p-4 sm:p-6 border border-primary/20 bg-gradient-to-r from-primary/5 via-secondary/10 to-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto shadow-xs">
+            <div className="zen-surface rounded-2xl p-4 sm:p-6 border border-primary/20 bg-linear-to-r from-primary/5 via-secondary/10 to-primary/5 flex flex-col sm:flex-row items-center justify-between gap-4 max-w-5xl mx-auto shadow-xs">
               <div className="flex items-center gap-3.5">
                 <div className="w-11 h-11 rounded-2xl bg-primary text-white flex items-center justify-center shrink-0 shadow-md">
                   <Calculator className="w-5 h-5 text-secondary" />

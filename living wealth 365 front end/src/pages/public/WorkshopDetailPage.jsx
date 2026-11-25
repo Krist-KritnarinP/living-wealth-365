@@ -117,7 +117,7 @@ export default function WorkshopDetailPage() {
         <div className="rounded-3xl zen-surface border border-base-300/60 overflow-hidden shadow-xs">
           <div className="grid grid-cols-1 lg:grid-cols-12">
             {/* Cover Image */}
-            <div className="lg:col-span-5 relative min-h-[260px] sm:min-h-[340px] lg:min-h-full">
+            <div className="lg:col-span-5 relative min-h-65 sm:min-h-85 lg:min-h-full">
               <FramedImage
                 src={workshop.imageUrl}
                 alt={workshop.title}

@@ -137,10 +137,10 @@ export default function InsurancePlanDetailPage() {
 
       {/* 2. HERO PRESENTATION BANNER WITH RELATABLE COVER PHOTO */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="zen-surface rounded-[2rem] overflow-hidden border border-base-300/60 shadow-lg">
+        <div className="zen-surface rounded-4xl overflow-hidden border border-base-300/60 shadow-lg">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
             {/* Cover Photo Side */}
-            <div className="lg:col-span-5 relative min-h-[260px] sm:min-h-[340px] lg:min-h-[420px] bg-base-200 overflow-hidden">
+            <div className="lg:col-span-5 relative min-h-65 sm:min-h-85 lg:min-h-105 bg-base-200 overflow-hidden">
               {plan.imageUrl && (
                 <img
                   src={resolveAssetUrl(plan.imageUrl)}
@@ -148,7 +148,7 @@ export default function InsurancePlanDetailPage() {
                   className="w-full h-full object-cover"
                 />
               )}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-900/25 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-slate-950/75 via-slate-900/25 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 flex flex-wrap items-end justify-between gap-2 text-white">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-xs font-bold">
                   <Sparkles className="w-3.5 h-3.5 text-amber-300" />
@@ -326,7 +326,7 @@ export default function InsurancePlanDetailPage() {
                     </div>
                     <div className="w-full h-3 rounded-full bg-base-200 overflow-hidden border border-base-300/40">
                       <div
-                        className={`h-full rounded-full bg-gradient-to-r ${bar.barClass}`}
+                        className={`h-full rounded-full bg-linear-to-r ${bar.barClass}`}
                         style={{ width: `${Math.min(100, Math.max(0, bar.value))}%` }}
                       />
                     </div>
@@ -430,7 +430,7 @@ export default function InsurancePlanDetailPage() {
 
               {resolvedPdfUrl && !resolvedPdfUrl.includes('aia.co.th') && showInlinePdf && (
                 <div className="pt-3">
-                  <div className="w-full h-[520px] rounded-2xl overflow-hidden border border-base-300 bg-base-100">
+                  <div className="w-full h-130 rounded-2xl overflow-hidden border border-base-300 bg-base-100">
                     <iframe
                       title={`AIA Brochure - ${plan.name}`}
                       src={resolvedPdfUrl}

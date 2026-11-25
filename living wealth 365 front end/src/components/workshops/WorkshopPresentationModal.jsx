@@ -239,7 +239,7 @@ export default function WorkshopPresentationModal({
         </div>
 
         {/* Main 16:9 Presentation Stage */}
-        <div className="flex-1 overflow-y-auto p-5 sm:p-8 lg:p-10 flex items-start justify-center bg-gradient-to-br from-base-100 via-base-100 to-primary/5">
+        <div className="flex-1 overflow-y-auto p-5 sm:p-8 lg:p-10 flex items-start justify-center bg-linear-to-br from-base-100 via-base-100 to-primary/5">
           {deckMode === 'custom' ? (
             hasCustomSlides ? (
               <div className="w-full max-w-5xl space-y-3">

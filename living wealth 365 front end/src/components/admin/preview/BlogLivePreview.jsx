@@ -46,7 +46,7 @@ export default function BlogLivePreview({ post = {} }) {
             <span>PILLAR: {pillar}</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl font-black text-primary leading-tight break-words [overflow-wrap:anywhere]">
+          <h1 className="text-2xl sm:text-4xl font-black text-primary leading-tight wrap-anywhere">
             {title}
           </h1>
 

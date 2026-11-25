@@ -101,7 +101,7 @@ export default function BlogDetailPage() {
               'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80'
             )}
             alt={post.title}
-            className="w-full max-h-[780px] object-contain"
+            className="w-full max-h-195 object-contain"
             onError={(e) => {
               e.currentTarget.src =
                 'https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1200&auto=format&fit=crop&q=80';

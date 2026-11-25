@@ -208,11 +208,11 @@ export default function AdminActivityLogPage() {
               <thead>
                 <tr className="bg-base-200/50 text-base-content/80 text-[11px] uppercase font-black">
                   <th className="py-3.5 pl-6 min-w-[150px]">วัน-เวลา</th>
-                  <th className="min-w-[160px]">ผู้ดำเนินการ (Admin)</th>
+                  <th className="min-w-40">ผู้ดำเนินการ (Admin)</th>
                   <th className="min-w-[130px]">ประเภท Action</th>
-                  <th className="min-w-[220px]">เป้าหมาย / รายการ</th>
-                  <th className="min-w-[240px]">รายละเอียด</th>
-                  <th className="text-right pr-6 min-w-[100px]">รหัส PIN</th>
+                  <th className="min-w-55">เป้าหมาย / รายการ</th>
+                  <th className="min-w-60">รายละเอียด</th>
+                  <th className="text-right pr-6 min-w-25">รหัส PIN</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-base-300/40">

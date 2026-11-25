@@ -226,7 +226,7 @@ export default function AdminBlogPage() {
           <table className="table table-zebra w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
-                <th className="min-w-[200px]">รูปภาพ & หัวข้อบทความ</th>
+                <th className="min-w-50">รูปภาพ & หัวข้อบทความ</th>
                 <th className="whitespace-nowrap">เสาหลัก & รูปแบบ</th>
                 <th className="whitespace-nowrap">ผู้เขียน</th>
                 <th className="whitespace-nowrap">วันที่เผยแพร่</th>
@@ -345,7 +345,7 @@ export default function AdminBlogPage() {
 
         {/* New Post Modal */}
         {modalOpen && (
-          <div className="modal modal-open z-[60]" role="dialog" aria-modal="true">
+          <div className="modal modal-open z-60" role="dialog" aria-modal="true">
             <div className={`modal-box rounded-3xl liquid-glass-solid max-h-[90vh] overflow-y-auto p-6 sm:p-8 transition-all duration-300 ${
               modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
             }`}>

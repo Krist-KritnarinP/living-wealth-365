@@ -159,7 +159,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
         {/* Sidebar Header with Brand Logo */}
         {collapsed ? (
           /* COLLAPSED HEADER: Perfect Center Alignment */
-          <div className="py-4 px-2 flex flex-col items-center justify-center border-b border-base-300/60 min-h-[76px] gap-2">
+          <div className="py-4 px-2 flex flex-col items-center justify-center border-b border-base-300/60 min-h-19 gap-2">
             <Link
               to={ROUTES.HOME}
               className="flex items-center justify-center p-1 hover:scale-105 transition-transform"
@@ -177,7 +177,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
           </div>
         ) : (
           /* EXPANDED HEADER: Spacious, no clipping, graceful breathing room */
-          <div className="px-4 py-3.5 flex items-center justify-between gap-2 border-b border-base-300/60 min-h-[76px]">
+          <div className="px-4 py-3.5 flex items-center justify-between gap-2 border-b border-base-300/60 min-h-19">
             <Link to={ROUTES.HOME} className="flex items-center gap-2.5 min-w-0 flex-1 group">
               <BrandLogo collapsed={true} size="sm" className="shrink-0 group-hover:scale-105 transition-transform" />
               <div className="flex flex-col leading-tight min-w-0">
@@ -363,7 +363,7 @@ export default function DashboardLayout({ children, type = 'customer' }) {
       {/* 3. MAIN DASHBOARD CONTENT AREA */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="sticky top-0 z-20 zen-surface border-b border-base-300/60 px-4 sm:px-8 py-3 flex items-center justify-between min-h-[64px]">
+        <header className="sticky top-0 z-20 zen-surface border-b border-base-300/60 px-4 sm:px-8 py-3 flex items-center justify-between min-h-16">
           <div className="flex items-center gap-3">
             {/* Mobile menu trigger */}
             <button

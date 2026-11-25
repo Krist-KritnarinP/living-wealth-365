@@ -1253,6 +1253,28 @@ npm start     # Runs on http://localhost:5001 (Health check: /api/health)
   - Automated grep sweep confirmed **0 leftover matches** across `living wealth 365 front end/src`.
   - 28/28 unit tests pass; `vite build` passes cleanly.
 
+## 57. Full Tailwind CSS v4 Standardization (November 25, 2026)
+- **Status**: **Completed, Verified & Pushed**
+- **CSS-First Theme & Custom Variant (`living wealth 365 front end/src/index.css`)**:
+  - Added `@custom-variant dark (&:where([data-theme="zen-dark"], [data-theme="zen-dark"] *));` so all 64 `dark:*` utilities activate properly with the Zen Dark theme toggle.
+  - Moved `--font-sans` into `@theme` to hook natively into Tailwind v4's `--default-font-family`.
+  - Registered all custom animations (`--animate-pop-in`, `--animate-fade-in`, `--animate-shimmer-sweep`, `--animate-pulse-glow`, `--animate-float-gem`, `--animate-sparkle-twinkle`, `--animate-twinkle`, `--animate-aura-spin-slow`, `--animate-spin-slow`, `--animate-spin-reverse-slow`, `--animate-cart-pulse`) and `@keyframes` natively inside `@theme`, plus `@utility animate-draw-line`, while preserving DaisyUI v5 `@layer utilities { @layer daisyui { ... } }` cascade rules and `prefers-reduced-motion` support.
+  - Removed unused Vite template file `src/App.css`.
+- **Utility Migrations Across 38 Frontend Files**:
+  - `bg-gradient-to-*` → `bg-linear-to-*` (43 hits)
+  - `break-words [overflow-wrap:anywhere]` → `wrap-anywhere` (14 hits) & standalone `break-words` → `wrap-break-word` (14 hits)
+  - Deprecated `shadow-inner` → `inset-shadow-sm` (8 hits) & bare `rounded` → `rounded-sm` (1 hit)
+  - `rounded-[2rem]` → `rounded-4xl` (4 hits) & `rounded-[50%]` → `rounded-full` (2 hits)
+  - Dynamic integer z-index `z-[60]` / `z-[70]` / `z-[100]` / `z-[99999]` → `z-60` / `z-70` / `z-100` / `z-99999` (7 hits)
+  - Dynamic spacing scale for exact 4px multiples (`min-h-[48px]` → `min-h-12`, `min-h-[64px]` → `min-h-16`, `min-h-[76px]` → `min-h-19`, `min-w-[200px]` → `min-w-50`, `max-h-[780px]` → `max-h-195`, etc.)
+  - Removed redundant v2/v3 `filter` / `transform` utility flags & fixed invalid `dark:bg-base-900/40` → `dark:bg-base-200/60` in `StoneCalculator.jsx`
+  - Normalized `animate-fadeIn` → `animate-fade-in` across 15 usages so modal/section fade-in animations run natively.
+- **Verification**:
+  - Zero leftover Tailwind v3 legacy utilities across `src/`.
+  - `npm run lint` (`oxlint`): **0 errors** across 113 files.
+  - `npm test`: **28/28 pass**.
+  - `npm run build` (`vite build` + `@tailwindcss/vite` 4.3.3): clean in ~964ms; compiled CSS verified to contain `data-theme="zen-dark"`, `wrap-anywhere`, `bg-linear-to-*`, `inset-shadow-sm`, `rounded-4xl`, `animate-fade-in`, `animate-draw-line`, and `z-60`.
+
 
 
 

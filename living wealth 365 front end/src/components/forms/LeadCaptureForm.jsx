@@ -129,7 +129,7 @@ export default function LeadCaptureForm({
 
         {/* Selected Product Summary Box (เมื่อเลือกหินมงคลหรือแผนเฉพาะ) */}
         {selectedItem && (
-          <div className="p-4 rounded-2xl bg-secondary/15 border border-secondary/30 flex items-center justify-between gap-3 text-sm animate-fadeIn">
+          <div className="p-4 rounded-2xl bg-secondary/15 border border-secondary/30 flex items-center justify-between gap-3 text-sm animate-fade-in">
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-10 rounded-xl bg-secondary/20 text-secondary flex items-center justify-center shrink-0">
                 <Sparkles className="w-5 h-5" />
@@ -277,7 +277,7 @@ export default function LeadCaptureForm({
             <button
               type="submit"
               disabled={loading}
-              className="btn btn-primary w-full text-base sm:text-lg font-bold rounded-xl shadow-md py-3 h-auto gap-2 min-h-[48px]"
+              className="btn btn-primary w-full text-base sm:text-lg font-bold rounded-xl shadow-md py-3 h-auto gap-2 min-h-12"
             >
               {loading ? (
                 <span className="loading loading-spinner"></span>

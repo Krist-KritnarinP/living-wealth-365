@@ -450,7 +450,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="btn btn-primary w-full rounded-xl font-bold gap-2 mt-4 shadow-lg text-base min-h-[48px]"
+            className="btn btn-primary w-full rounded-xl font-bold gap-2 mt-4 shadow-lg text-base min-h-12"
           >
             {isSubmitting ? (
               <span className="loading loading-spinner loading-sm"></span>

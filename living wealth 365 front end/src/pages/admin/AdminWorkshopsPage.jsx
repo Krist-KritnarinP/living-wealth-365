@@ -548,7 +548,7 @@ export default function AdminWorkshopsPage() {
 
       {/* WORKSHOP EDITOR MODAL */}
       {modalOpen && (
-        <div className="modal modal-open z-[60]" role="dialog" aria-modal="true">
+        <div className="modal modal-open z-60" role="dialog" aria-modal="true">
           <div className="modal-box max-w-4xl w-full rounded-3xl liquid-glass-solid p-6 space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between border-b border-base-300/60 pb-3">
               <h2 className="text-xl font-black text-primary">

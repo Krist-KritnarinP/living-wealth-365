@@ -119,7 +119,7 @@ export default function VisualEditBar() {
           </div>
 
           {isVisualEditMode && (
-            <div className="p-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-[11px] text-amber-900 dark:text-amber-200 flex items-center gap-1.5 animate-fadeIn">
+            <div className="p-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-[11px] text-amber-900 dark:text-amber-200 flex items-center gap-1.5 animate-fade-in">
               <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
               <span>
                 เลื่อนเมาส์ไปชี้ข้อความที่มีเส้นประสีส้ม แล้วคลิกเพื่อแก้ไขข้อความได้ทันที!

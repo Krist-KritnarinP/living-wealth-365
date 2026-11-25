@@ -342,7 +342,7 @@ export default function AdminInsurancePage() {
           <table className="table table-zebra table-sm w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
-                <th className="min-w-[200px]">แผนประกันภัย</th>
+                <th className="min-w-50">แผนประกันภัย</th>
                 <th>หมวดหมู่</th>
                 <th>วงเงินคุ้มครอง</th>
                 <th>ราคาเริ่มต้น</th>
@@ -360,7 +360,7 @@ export default function AdminInsurancePage() {
               ) : (
                 filteredPlans.map((plan) => (
                   <tr key={plan.id} className="hover:bg-base-200/50">
-                    <td className="max-w-[260px]">
+                    <td className="max-w-65">
                       <div className="flex items-center gap-2.5 min-w-0">
                         {plan.imageUrl ? (
                           <div className="w-11 h-11 rounded-xl overflow-hidden bg-base-200 border border-base-300 shrink-0">
@@ -405,7 +405,7 @@ export default function AdminInsurancePage() {
                         {plan.categoryName}
                       </span>
                     </td>
-                    <td className="font-bold text-primary max-w-[160px] leading-snug">
+                    <td className="font-bold text-primary max-w-40 leading-snug">
                       {plan.coverageAmount || '-'}
                     </td>
                     <td className="font-black text-secondary max-w-[130px] leading-snug">
@@ -473,7 +473,7 @@ export default function AdminInsurancePage() {
 
         {/* Add / Edit Plan Modal */}
         {modalOpen && (
-          <div role="dialog" aria-modal="true" className="modal modal-open z-[60] animate-fadeIn">
+          <div role="dialog" aria-modal="true" className="modal modal-open z-60 animate-fade-in">
             <div className={`modal-box rounded-3xl liquid-glass-solid shadow-2xl p-6 sm:p-8 space-y-5 max-h-[90vh] overflow-y-auto transition-all duration-300 ${
               modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
             }`}>

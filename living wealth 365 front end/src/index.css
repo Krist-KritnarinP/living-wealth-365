@@ -10,8 +10,11 @@
  */
 @import "tailwindcss";
 @plugin "daisyui" { themes: false; }
+@custom-variant dark (&:where([data-theme="zen-dark"], [data-theme="zen-dark"] *));
 
 @theme {
+  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
+
   --text-xs: 0.9375rem;    /* 15px */
   --text-sm: 1.0625rem;    /* 17px */
   --text-base: 1.1875rem;  /* 19px */
@@ -21,6 +24,81 @@
   --text-3xl: 2.25rem;     /* 36px */
   --text-4xl: 2.75rem;     /* 44px */
   --text-5xl: 3.375rem;    /* 54px */
+
+  --animate-pop-in: pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-shimmer-sweep: shimmer-sweep 2.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-pulse-glow: pulse-glow 3.5s infinite ease-in-out;
+  --animate-float-gem: float-gem 4.5s infinite ease-in-out;
+  --animate-sparkle-twinkle: sparkle-twinkle 2s infinite ease-in-out;
+  --animate-twinkle: sparkle-twinkle 2.4s infinite ease-in-out;
+  --animate-aura-spin-slow: aura-spin-slow 18s infinite linear;
+  --animate-spin-slow: spin 12s linear infinite;
+  --animate-spin-reverse-slow: spin-reverse 18s linear infinite;
+  --animate-cart-pulse: cart-pulse 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  @keyframes draw-svg-line {
+    0% {
+      stroke-dashoffset: 220;
+      opacity: 0.2;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+      opacity: 1;
+    }
+  }
+
+  @keyframes pop-in {
+    0% { transform: scale(0.95); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes fade-in {
+    0% { opacity: 0; transform: translateY(4px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes shimmer-sweep {
+    0% { transform: translateX(-150%) skewX(-20deg); }
+    50%, 100% { transform: translateX(250%) skewX(-20deg); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.55; }
+    50% { transform: scale(1.15); opacity: 0.95; }
+  }
+
+  @keyframes float-gem {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
+  }
+
+  @keyframes sparkle-twinkle {
+    0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.3; }
+    50% { transform: scale(1.3) rotate(90deg); opacity: 1; }
+  }
+
+  @keyframes aura-spin-slow {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.08); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  @keyframes spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+
+  @keyframes cart-pulse {
+    0% { transform: scale(1); }
+    25% { transform: scale(1.35); filter: drop-shadow(0 0 10px rgba(255, 181, 59, 0.85)); }
+    50% { transform: scale(0.92); }
+    75% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
 }
 
 @plugin "daisyui/theme" {
@@ -122,7 +200,6 @@
 }
 
 :root {
-  --font-sans: 'Plus Jakarta Sans', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, sans-serif;
   --fluid-ease: cubic-bezier(0.25, 1, 0.5, 1);
   --spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -287,35 +364,6 @@
     transform: scale(1.14) rotate(5deg);
   }
 
-  @keyframes draw-svg-line {
-    0% {
-      stroke-dashoffset: 220;
-      opacity: 0.2;
-    }
-    40% {
-      opacity: 1;
-    }
-    100% {
-      stroke-dashoffset: 0;
-      opacity: 1;
-    }
-  }
-
-  .animate-draw-line {
-    stroke-dasharray: 220;
-    stroke-dashoffset: 220;
-    animation: draw-svg-line 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
-  }
-
-  @keyframes pop-in {
-    0% { transform: scale(0.95); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-
-  .animate-pop-in {
-    animation: pop-in 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
   /*  Apple / DJI Sleek Modern Display Sans & Scroll Reveal */
   .editorial-display {
     font-family: var(--font-sans);
@@ -384,6 +432,12 @@
   }
 }
 
+@utility animate-draw-line {
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: draw-svg-line 1.4s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .hover-card-elevate,
@@ -395,7 +449,17 @@
     opacity: 1;
     transform: none;
   }
-  .animate-pop-in {
+  .animate-pop-in,
+  .animate-fade-in,
+  .animate-shimmer-sweep,
+  .animate-pulse-glow,
+  .animate-float-gem,
+  .animate-sparkle-twinkle,
+  .animate-twinkle,
+  .animate-aura-spin-slow,
+  .animate-spin-slow,
+  .animate-spin-reverse-slow,
+  .animate-cart-pulse {
     animation: none;
   }
   .animate-draw-line {
@@ -455,66 +519,6 @@ body {
   user-select: auto;
 }
 
-/* ✨ Cosmic Auspicious Stone FX & Shimmer Animations */
-@keyframes shimmer-sweep {
-  0% { transform: translateX(-150%) skewX(-20deg); }
-  50%, 100% { transform: translateX(250%) skewX(-20deg); }
-}
-
-@keyframes pulse-glow {
-  0%, 100% { transform: scale(1); opacity: 0.55; }
-  50% { transform: scale(1.15); opacity: 0.95; }
-}
-
-@keyframes float-gem {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(3deg); }
-}
-
-@keyframes sparkle-twinkle {
-  0%, 100% { transform: scale(0.6) rotate(0deg); opacity: 0.3; }
-  50% { transform: scale(1.3) rotate(90deg); opacity: 1; }
-}
-
-@keyframes aura-spin-slow {
-  0% { transform: rotate(0deg) scale(1); }
-  50% { transform: rotate(180deg) scale(1.08); }
-  100% { transform: rotate(360deg) scale(1); }
-}
-
-.animate-shimmer-sweep {
-  animation: shimmer-sweep 2.8s infinite cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 3.5s infinite ease-in-out;
-}
-
-.animate-float-gem {
-  animation: float-gem 4.5s infinite ease-in-out;
-}
-
-.animate-sparkle-twinkle {
-  animation: sparkle-twinkle 2s infinite ease-in-out;
-}
-
-.animate-aura-spin-slow {
-  animation: aura-spin-slow 18s infinite linear;
-}
-
-/* 🛒 Shopping Cart Warp Bounce & Pulse */
-@keyframes cart-pulse {
-  0% { transform: scale(1); }
-  25% { transform: scale(1.35); filter: drop-shadow(0 0 10px rgba(255, 181, 59, 0.85)); }
-  50% { transform: scale(0.92); }
-  75% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-.animate-cart-pulse {
-  animation: cart-pulse 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
 /* Native <dialog> scroll containment (prevents background scroll under modal) */
 dialog:modal {
   overscroll-behavior: contain;
@@ -528,8 +532,7 @@ dialog::backdrop {
 @media print {
   header,
   footer,
-  aside[aria-label="Demo Role Simulator"],
-  .print\:hidden {
+  aside[aria-label="Demo Role Simulator"] {
     display: none !important;
   }
   body {

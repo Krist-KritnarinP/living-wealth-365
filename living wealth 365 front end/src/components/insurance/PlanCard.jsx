@@ -38,7 +38,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
               e.currentTarget.style.display = 'none';
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/35 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-950/35 via-transparent to-transparent" />
           {plan.brochureUrl && (
             <div className="absolute bottom-3 right-4">
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/95 text-primary shadow-xs text-xs font-bold">
@@ -66,12 +66,12 @@ export default function PlanCard({ plan, onSelectPlan }) {
         {/* Plan Title & Tagline */}
         <div className="space-y-1.5 min-w-0">
           <Link to={detailPath} className="block min-w-0">
-            <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors leading-snug break-words [overflow-wrap:anywhere]">
+            <h3 className="text-xl sm:text-2xl font-black text-primary group-hover:text-secondary transition-colors leading-snug wrap-anywhere">
               {plan.name}
             </h3>
           </Link>
           {plan.tagline && (
-            <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed break-words [overflow-wrap:anywhere] line-clamp-2">
+            <p className="text-xs sm:text-sm text-base-content/75 leading-relaxed wrap-anywhere line-clamp-2">
               {plan.tagline}
             </p>
           )}
@@ -83,7 +83,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
             <span className="text-[11px] font-semibold text-base-content/65 block">
               วงเงินความคุ้มครอง:
             </span>
-            <span className="text-base sm:text-lg font-black text-primary break-words [overflow-wrap:anywhere]">
+            <span className="text-base sm:text-lg font-black text-primary wrap-anywhere">
               {plan.coverageAmount}
             </span>
           </div>
@@ -98,7 +98,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
             {featuresList.slice(0, 3).map((feat, idx) => (
               <li key={idx} className="flex items-start gap-2.5 min-w-0">
                 <CheckCircle2 className="w-4 h-4 text-success shrink-0 mt-0.5" />
-                <span className="flex-1 min-w-0 break-words [overflow-wrap:anywhere] leading-relaxed">
+                <span className="flex-1 min-w-0 wrap-anywhere leading-relaxed">
                   {feat}
                 </span>
               </li>
@@ -110,7 +110,7 @@ export default function PlanCard({ plan, onSelectPlan }) {
         {plan.recommendedFor && (
           <div className="flex items-start gap-1.5 text-xs text-base-content/65 pt-2 border-t border-base-300/40 min-w-0">
             <Users className="w-3.5 h-3.5 text-secondary shrink-0 mt-0.5" />
-            <span className="flex-1 min-w-0 break-words [overflow-wrap:anywhere] leading-relaxed">
+            <span className="flex-1 min-w-0 wrap-anywhere leading-relaxed">
               เหมาะสำหรับ: {plan.recommendedFor}
             </span>
           </div>

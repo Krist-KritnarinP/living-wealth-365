@@ -228,7 +228,7 @@ export default function AdminProductsPage() {
           <table className="table table-zebra w-full text-xs sm:text-sm">
             <thead>
               <tr className="border-b border-base-300 text-base-content/70">
-                <th className="min-w-[200px]">รูปภาพ & ชื่อสินค้า</th>
+                <th className="min-w-50">รูปภาพ & ชื่อสินค้า</th>
                 <th className="whitespace-nowrap">มิติ & สูตรแร่</th>
                 <th className="whitespace-nowrap">ราคา</th>
                 <th className="whitespace-nowrap">เหมาะกับวันเกิด</th>
@@ -340,7 +340,7 @@ export default function AdminProductsPage() {
 
         {/* New Product Modal */}
         {modalOpen && (
-          <div role="dialog" aria-modal="true" className="modal modal-open z-[60]">
+          <div role="dialog" aria-modal="true" className="modal modal-open z-60">
             <div className={`modal-box rounded-3xl liquid-glass-solid max-h-[90vh] overflow-y-auto p-6 sm:p-8 space-y-4 transition-all duration-300 ${
               modalTab === 'preview' ? 'max-w-4xl' : 'max-w-2xl'
             }`}>

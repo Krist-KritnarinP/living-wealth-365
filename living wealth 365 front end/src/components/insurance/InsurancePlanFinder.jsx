@@ -459,7 +459,7 @@ export default function InsurancePlanFinder({ plans = [], onRequestQuote }) {
                       {/* Thumbnail */}
                       <Link
                         to={`/wealth/plan/${plan.slug || plan.id}`}
-                        className="w-full sm:w-36 h-40 sm:h-auto sm:min-h-[140px] rounded-2xl overflow-hidden bg-base-200 border border-base-300/50 shrink-0 block"
+                        className="w-full sm:w-36 h-40 sm:h-auto sm:min-h-35 rounded-2xl overflow-hidden bg-base-200 border border-base-300/50 shrink-0 block"
                       >
                         <FramedImage
                           src={plan.imageUrl}
